@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+option java_package = "pe.com.pex";
+option java_multiple_files = true;
+
+message UserPreference {
+
+  string token = 1;
+  int32 id = 2;
+  string username = 3;
+
+
+}

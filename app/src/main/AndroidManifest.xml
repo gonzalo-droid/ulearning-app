@@ -7,7 +7,7 @@
 
     <application
         android:allowBackup="true"
-        android:name=".app.AndroidApplication"
+        android:name=".core.AndroidApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="U-Leaning"
         android:roundIcon="@mipmap/ic_launcher_round"
