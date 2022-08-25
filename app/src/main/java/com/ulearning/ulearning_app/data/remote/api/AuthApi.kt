@@ -1,6 +1,5 @@
 package com.ulearning.ulearning_app.data.remote.api
 
-import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
 import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
 import retrofit2.Response

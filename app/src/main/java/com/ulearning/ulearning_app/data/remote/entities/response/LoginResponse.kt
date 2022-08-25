@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class LoginResponse(
-    @SerializedName("username")  val userName: String,
+    @SerializedName("token")  val token: String,
+    @SerializedName("expired_at")  val expiredDate: String
 ) : Serializable
 

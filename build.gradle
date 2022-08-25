@@ -11,6 +11,7 @@ buildscript {
     ext {
         versions = [
 
+                splash                : "1.0.0-beta02",
                 recyclerview          : "1.2.1",
                 recyclerviewSelection          : "1.1.0",
 
@@ -47,6 +48,7 @@ buildscript {
         ]
 
         common = [
+                splash           : "androidx.core:core-splashscreen:$versions.splash",
                 androidCore      : "androidx.core:core-ktx:$versions.androidCore",
                 appCompat        : "androidx.appcompat:appcompat:$versions.appCompat",
                 material         : "com.google.android.material:material:$versions.material",

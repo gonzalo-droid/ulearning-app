@@ -70,5 +70,4 @@ object NetworkModule {
     fun provideConnection(@ApplicationContext appContext: Context): ConnectionUtils =
         ConnectionUtilsImpl(appContext)
 
-
 }

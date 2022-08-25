@@ -1,12 +1,15 @@
-package com.ulearning.ulearning_app.presentation.splash
+package com.ulearning.ulearning_app.presentation.feature.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.ulearning.ulearning_app.R
+import dagger.hilt.android.AndroidEntryPoint
 
-class SplashActivity : AppCompatActivity() {
+
+@AndroidEntryPoint
+class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContentView(R.layout.activity_login)
     }
 }

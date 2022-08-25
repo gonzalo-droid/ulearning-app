@@ -1,4 +1,4 @@
-package com.ulearning.ulearning_app.presentation.courses
+package com.ulearning.ulearning_app.presentation.feature.courses
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

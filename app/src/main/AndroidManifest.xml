@@ -12,21 +12,29 @@
         android:label="U-Leaning"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Ulearning_app">
+        android:theme="@style/Theme.Ulearning.App">
         <activity
-            android:name=".presentation.splash.SplashActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.auth.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.HomeActivity"
-            android:exported="true">
+            android:name="com.ulearning.ulearning_app.presentation.feature.splash.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.App.Starting">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity
+            android:name="com.ulearning.ulearning_app.presentation.feature.auth.LoginActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".presentation.HomeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
