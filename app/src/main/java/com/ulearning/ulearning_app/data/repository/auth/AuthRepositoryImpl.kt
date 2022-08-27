@@ -1,12 +1,10 @@
 package com.ulearning.ulearning_app.data.repository.auth
 
-import android.util.Log
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Either.Left
 import com.ulearning.ulearning_app.core.functional.Either.Right
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.dataStore.config.DataStoreConfig
-import com.ulearning.ulearning_app.data.mapper.AuthMapper
 import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
 import com.ulearning.ulearning_app.data.remote.service.AuthService
@@ -28,9 +26,7 @@ class AuthRepositoryImpl
             is Right -> {
                 val loginResponse: LoginResponse = response.b
 
-                Log.d("AuthRepo", loginResponse.token)
-
-                return if (loginResponse.token.isEmpty()) {
+                return if (loginResponse.token.isNotEmpty()) {
                     dataStore.saveToken(token = loginResponse.token)
                     Right(true)
                 } else {
