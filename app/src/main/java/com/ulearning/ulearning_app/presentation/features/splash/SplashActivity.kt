@@ -1,4 +1,4 @@
-package com.ulearning.ulearning_app.presentation.feature.splash
+package com.ulearning.ulearning_app.presentation.features.splash
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -7,7 +7,7 @@ import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.startNewActivityClearStack
 import com.ulearning.ulearning_app.databinding.ActivitySplashBinding
 import com.ulearning.ulearning_app.presentation.base.BaseActivity
-import com.ulearning.ulearning_app.presentation.feature.auth.LoginActivity
+import com.ulearning.ulearning_app.presentation.features.auth.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 

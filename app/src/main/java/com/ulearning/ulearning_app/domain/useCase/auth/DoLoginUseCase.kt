@@ -8,7 +8,7 @@ import javax.inject.Inject
 class DoLoginUseCase
 @Inject constructor(private val authRepository: AuthRepository) : BaseUseCase<Boolean, DoLoginUseCase.Params>() {
 
-    override suspend fun run(params: Params) = authRepository.login(params.username, params.password)
+    override suspend fun run(params: Params) = authRepository.login(params.email, params.password)
 
-    data class Params(val username: String, val password: String)
+    data class Params(val email: String, val password: String)
 }

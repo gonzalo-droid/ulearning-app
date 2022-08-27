@@ -39,14 +39,14 @@ android {
     productFlavors {
         dev {
             dimension 'versionFlavor'
-            buildConfigField 'String', 'BASE_URL', '"https://sandbox.api.ulearning.com.pe"'
+            buildConfigField 'String', 'BASE_URL', '"https://sandbox.api.ulearning.com.pe/api/"'
             buildConfigField 'boolean', 'IS_SHOW_LOG', 'true'
             buildConfigField 'boolean', 'DEBUG', 'true'
         }
 
         prod {
             dimension 'versionFlavor'
-            buildConfigField 'String', 'BASE_URL', '"https://api.ulearning.com.pe"'
+            buildConfigField 'String', 'BASE_URL', '"https://api.ulearning.com.pe/api/"'
             buildConfigField 'boolean', 'IS_SHOW_LOG', 'false'
             buildConfigField 'boolean', 'DEBUG', 'false'
         }

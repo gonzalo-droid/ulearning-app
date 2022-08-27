@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.data.repository.auth
 
+import android.util.Log
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Either.Left
 import com.ulearning.ulearning_app.core.functional.Either.Right
@@ -15,18 +16,20 @@ import javax.inject.Inject
 class AuthRepositoryImpl
 @Inject constructor(
     private val service: AuthService,
-    private val mapper: AuthMapper,
     private val dataStore: DataStoreConfig
 ) : AuthRepository {
 
     override suspend fun login(
-        username: String,
+        email: String,
         password: String
     ): Either<Failure, Boolean> {
         return when (val response =
-            service.login(LoginRequest(userName = username, password = password))) {
+            service.login(LoginRequest(email = email, password = password))) {
             is Right -> {
-                val loginResponse : LoginResponse = response.b
+                val loginResponse: LoginResponse = response.b
+
+                Log.d("AuthRepo", loginResponse.token)
+
                 return if (loginResponse.token.isEmpty()) {
                     dataStore.saveToken(token = loginResponse.token)
                     Right(true)

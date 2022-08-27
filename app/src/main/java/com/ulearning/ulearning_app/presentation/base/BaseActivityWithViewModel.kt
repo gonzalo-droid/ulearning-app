@@ -12,9 +12,11 @@ abstract class BaseActivityWithViewModel<VBinding : ViewDataBinding, ViewModelTy
     BaseActivity<VBinding>() {
 
     protected abstract val viewModel: ViewModelType
+
     protected abstract val dataBindingViewModel: Int
 
     private var loadingDialog: LoadingDialog? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()

@@ -6,7 +6,7 @@ import com.ulearning.ulearning_app.core.functional.Failure
 interface AuthRepository {
 
     suspend fun login(
-        username: String,
+        email: String,
         password: String,
     ): Either<Failure, Boolean>
 }

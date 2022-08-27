@@ -14,13 +14,6 @@ import javax.inject.Singleton
 import javax.net.ssl.SSLException
 import javax.net.ssl.SSLHandshakeException
 
-/**
- * Network handler
- *
- * @property networkUtils
- * @constructor Create empty Network handler
- */
-
 @Singleton
 class NetworkHandler
 @Inject constructor(val networkUtils: ConnectionUtils) {
@@ -41,7 +34,10 @@ class NetworkHandler
                             response.body()?.let {
                                 return@withContext Either.Right(it)
                             } ?: return@withContext Either.Left(
-                                getErrorMessageFromServer(response.code(), response.errorBody()?.string())
+                                getErrorMessageFromServer(
+                                    response.code(),
+                                    response.errorBody()?.string()
+                                )
                             )
 
                         } else return@withContext Either.Left(
@@ -69,11 +65,7 @@ class NetworkHandler
                     withContext(Dispatchers.IO) {
                         val response = retrofitCall.invoke()
                         if (response.isSuccessful && response.body() != null) {
-                            if(response.body()!!.success){
-                                return@withContext Either.Right(response.body()!!.data)
-                            }else{
-                                return@withContext Either.Left(Failure.DefaultError(message = response.body()!!.message))
-                            }
+                            return@withContext Either.Right(response.body()!!.data)
                         } else {
                             return@withContext Either.Left(
                                 getErrorMessageFromServer(

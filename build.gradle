@@ -11,7 +11,7 @@ buildscript {
     ext {
         versions = [
 
-                splash                : "1.0.0-beta02",
+                splash                : "1.0.0",
                 recyclerview          : "1.2.1",
                 recyclerviewSelection          : "1.1.0",
 

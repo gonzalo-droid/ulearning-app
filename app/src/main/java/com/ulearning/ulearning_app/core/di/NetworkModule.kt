@@ -11,6 +11,10 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import com.ulearning.ulearning_app.BuildConfig
+import com.ulearning.ulearning_app.data.remote.api.AuthApi
+import com.ulearning.ulearning_app.data.remote.network.NetworkHandler
+import com.ulearning.ulearning_app.data.remote.service.AuthService
+import com.ulearning.ulearning_app.data.remote.service.AuthServiceImpl
 import com.ulearning.ulearning_app.data.remote.utils.ConnectionUtils
 import com.ulearning.ulearning_app.data.remote.utils.ConnectionUtilsImpl
 import com.ulearning.ulearning_app.data.remote.utils.SupportInterceptor
@@ -69,5 +73,20 @@ object NetworkModule {
     @Singleton
     fun provideConnection(@ApplicationContext appContext: Context): ConnectionUtils =
         ConnectionUtilsImpl(appContext)
+
+
+    @Provides
+    @Singleton
+    fun provideAuthApi(
+        retrofit: Retrofit
+    ): AuthApi = retrofit.create(AuthApi::class.java)
+
+
+    @Provides
+    @Singleton
+    fun provideAuthService(
+        authApi: AuthApi,
+        networkHandler: NetworkHandler
+    ): AuthService = AuthServiceImpl(authApi, networkHandler)
 
 }
