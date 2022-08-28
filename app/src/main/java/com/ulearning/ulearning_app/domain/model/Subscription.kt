@@ -1,0 +1,32 @@
+package com.ulearning.ulearning_app.domain.model
+
+data class Subscription(
+    var amount: Int = 0,
+    var billing: Any = Any(),
+    var billing_id: Any = Any(),
+    var course: Course = Course(),
+    var course_id: Int = 0,
+    var deleted_at: Any = Any(),
+    var finished_at: Any = Any(),
+    var group: Group = Group(),
+    var group_id: Int = 0,
+    var has_certificate: Boolean = false,
+    var has_degree: Boolean = false,
+    var has_record: Boolean = false,
+    var id: Int = 0,
+    var is_finished: Boolean = false,
+    var last_connection_at: Any = Any(),
+    var next_payment_date: Any = Any(),
+    var purchased_certificate: Boolean = false,
+    var purchased_record: Boolean = false,
+    var rating: Any = Any(),
+    var registered_at: Any = Any(),
+    var registered_by: Int = 0,
+    var status: String = "",
+    var suspended_at: Any = Any(),
+    var suspended_by: Any = Any(),
+    var time_session: Int = 0,
+    var type: String = "",
+    var user: User = User(),
+    var user_id: Int = 0
+)

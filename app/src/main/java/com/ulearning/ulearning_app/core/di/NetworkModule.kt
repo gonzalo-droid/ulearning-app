@@ -12,9 +12,12 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import com.ulearning.ulearning_app.BuildConfig
 import com.ulearning.ulearning_app.data.remote.api.AuthApi
+import com.ulearning.ulearning_app.data.remote.api.CourseApi
 import com.ulearning.ulearning_app.data.remote.network.NetworkHandler
 import com.ulearning.ulearning_app.data.remote.service.AuthService
 import com.ulearning.ulearning_app.data.remote.service.AuthServiceImpl
+import com.ulearning.ulearning_app.data.remote.service.CourseService
+import com.ulearning.ulearning_app.data.remote.service.CourseServiceImpl
 import com.ulearning.ulearning_app.data.remote.utils.ConnectionUtils
 import com.ulearning.ulearning_app.data.remote.utils.ConnectionUtilsImpl
 import com.ulearning.ulearning_app.data.remote.utils.SupportInterceptor
@@ -88,5 +91,20 @@ object NetworkModule {
         authApi: AuthApi,
         networkHandler: NetworkHandler
     ): AuthService = AuthServiceImpl(authApi, networkHandler)
+
+
+    @Provides
+    @Singleton
+    fun provideCourseApi(
+        retrofit: Retrofit
+    ): CourseApi = retrofit.create(CourseApi::class.java)
+
+
+    @Provides
+    @Singleton
+    fun provideCourseService(
+        authApi: CourseApi,
+        networkHandler: NetworkHandler
+    ): CourseService = CourseServiceImpl(authApi, networkHandler)
 
 }

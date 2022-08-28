@@ -1,10 +1,8 @@
 package com.ulearning.ulearning_app.presentation.features.home.viewModel
 
 import com.ulearning.ulearning_app.core.functional.Failure
-import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.useCase.auth.DoLoginUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
-import com.ulearning.ulearning_app.presentation.features.auth.LoginState
 import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import com.ulearning.ulearning_app.presentation.features.home.HomeEvent
 import com.ulearning.ulearning_app.presentation.features.home.HomeState

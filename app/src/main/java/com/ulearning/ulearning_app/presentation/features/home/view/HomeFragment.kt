@@ -9,7 +9,6 @@ import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.databinding.FragmentHomeBinding
-import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
 import com.ulearning.ulearning_app.presentation.features.home.HomeEvent
 import com.ulearning.ulearning_app.presentation.features.home.HomeReducer
