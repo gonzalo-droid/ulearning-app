@@ -22,7 +22,7 @@ buildscript {
                 legacySupport        : "1.0.0",
                 livedata             : '2.4.1',
                 viewmodel            : '2.4.1',
-                navigation           : '2.4.1',
+                navigation           : '2.5.1',
                 runtime              : '2.4.1',
 
                 hilt                 : '2.41',
@@ -87,6 +87,10 @@ buildscript {
                 //NAVIGATION
                 navigationUi      : "androidx.navigation:navigation-ui-ktx:$versions.navigation",
                 navigationFragment: "androidx.navigation:navigation-fragment-ktx:$versions.navigation",
+
+                navigationSupport : "androidx.navigation:navigation-dynamic-features-fragment:$versions.navigation",
+
+                navigationTest    : "androidx.navigation:navigation-testing::$versions.navigation",
         ]
 
         daggerHilt = [

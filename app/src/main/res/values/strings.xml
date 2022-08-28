@@ -21,4 +21,15 @@
     <string name="data_success">Información correcta</string>
     <string name="login_fail">Credenciales incorrectas</string>
 
+    <string name="home_title">Inicio</string>
+    <string name="course_title">Cursos</string>
+    <string name="profile_title">Perfil</string>
+
+    <string name="continue_learning">Continua aprendiendo</string>
+    <string name="see_more">ver más</string>
+    <string name="my_courses">Mis cursos</string>
+
+    <string name="home_welcome_msg">Hola,</string>
+
+
 </resources>

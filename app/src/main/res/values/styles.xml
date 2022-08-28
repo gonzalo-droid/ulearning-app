@@ -2,4 +2,127 @@
 <resources>
 
     <style name="welcomeText">Te damos la Bienvenida</style>
+
+    <style name="readex_light">
+        <item name="fontFamily">@font/readex_light</item>
+        <item name="android:fontFamily">@font/readex_light</item>
+    </style>
+
+
+    <style name="readex_regular">
+        <item name="fontFamily">@font/readex_regular</item>
+        <item name="android:fontFamily">@font/readex_regular</item>
+    </style>
+
+    <style name="readex_semibold">
+        <item name="fontFamily">@font/readex_semibold</item>
+        <item name="android:fontFamily">@font/readex_semibold</item>
+    </style>
+
+    <style name="readex_medium">
+        <item name="fontFamily">@font/readex_medium</item>
+        <item name="android:fontFamily">@font/readex_medium</item>
+    </style>
+
+    <style name="readex_bold">
+        <item name="fontFamily">@font/readex_bold</item>
+        <item name="android:fontFamily">@font/readex_bold</item>
+    </style>
+    
+    <style name="readex_11_semibold" parent="readex_semibold">
+        <item name="android:textSize">@dimen/text11</item>
+    </style>
+
+    <style name="readex_16_semibold" parent="readex_semibold">
+        <item name="android:textSize">@dimen/text16</item>
+    </style>
+
+    <style name="readex_10_regular" parent="readex_regular">
+        <item name="android:textSize">@dimen/text10</item>
+    </style>
+
+    <style name="readex_11_regular" parent="readex_regular">
+        <item name="android:textSize">@dimen/text11</item>
+    </style>
+
+    <style name="readex_12_regular" parent="readex_regular">
+        <item name="android:textSize">@dimen/text12</item>
+    </style>
+    <style name="readex_13_regular" parent="readex_regular">
+        <item name="android:textSize">@dimen/text13</item>
+    </style>
+    <style name="readex_14_regular" parent="readex_regular">
+        <item name="android:textSize">@dimen/text14</item>
+    </style>
+
+    <style name="readex_16_regular" parent="readex_regular">
+        <item name="android:textSize">@dimen/text16</item>
+    </style>
+
+    <style name="readex_14_medium" parent="readex_medium">
+        <item name="android:textSize">@dimen/text14</item>
+    </style>
+
+    <style name="readex_16_medium" parent="readex_medium">
+        <item name="android:textSize">@dimen/text16</item>
+    </style>
+
+    <style name="readex_19_medium" parent="readex_medium">
+        <item name="android:textSize">@dimen/text19</item>
+    </style>
+
+
+    <style name="readex_20_medium" parent="readex_medium">
+        <item name="android:textSize">@dimen/text20</item>
+    </style>
+    <style name="readex_14_bold" parent="readex_bold">
+        <item name="android:textSize">@dimen/text14</item>
+    </style>
+    <style name="readex_20_bold" parent="readex_bold">
+        <item name="android:textSize">@dimen/text20</item>
+    </style>
+
+    <style name="readex_24_bold" parent="readex_bold">
+        <item name="android:textSize">@dimen/text24</item>
+    </style>
+
+    <style name="readex_34_bold" parent="readex_bold">
+        <item name="android:textSize">@dimen/text34</item>
+    </style>
+
+
+    <style name="readex_20_regular" parent="readex_regular">
+        <item name="android:textSize">@dimen/text20</item>
+    </style>
+    <style name="readex_26_regular" parent="readex_regular">
+        <item name="android:textSize">@dimen/text26</item>
+    </style>
+    <style name="readex_24_semibold">
+        <item name="fontFamily">@font/readex_semibold</item>
+        <item name="android:textSize">@dimen/text24</item>
+    </style>
+
+    <style name="readex_26_semibold">
+        <item name="fontFamily">@font/readex_semibold</item>
+        <item name="android:textSize">@dimen/text26</item>
+    </style>
+
+
+    <style name="readex_27_semibold">
+        <item name="fontFamily">@font/readex_semibold</item>
+        <item name="android:textSize">@dimen/text27</item>
+    </style>
+
+
+    <style name="readex_12_light" parent="readex_light">
+        <item name="android:textSize">@dimen/text12</item>
+    </style>
+
+    <style name="readex_14_light" parent="readex_light">
+        <item name="android:textSize">@dimen/text14</item>
+    </style>
+
+    <style name="readex_20_light" parent="readex_light">
+        <item name="android:textSize">@dimen/text20</item>
+    </style>
 </resources>

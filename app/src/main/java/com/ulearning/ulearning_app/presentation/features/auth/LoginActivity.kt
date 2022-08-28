@@ -2,14 +2,13 @@ package com.ulearning.ulearning_app.presentation.features.auth
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.google.android.material.snackbar.Snackbar
 import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.extensions.startNewActivity
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.databinding.ActivityLoginBinding
-import com.ulearning.ulearning_app.presentation.HomeActivity
+import com.ulearning.ulearning_app.presentation.features.home.view.HomeActivity
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
