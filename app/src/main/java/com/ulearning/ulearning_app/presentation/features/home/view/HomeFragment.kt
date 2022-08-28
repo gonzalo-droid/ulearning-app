@@ -1,24 +1,23 @@
 package com.ulearning.ulearning_app.presentation.features.home.view
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.activity.viewModels
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
-import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
+import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.functional.Failure
-import com.ulearning.ulearning_app.databinding.ActivityHomeBinding
 import com.ulearning.ulearning_app.databinding.FragmentHomeBinding
+import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
+import com.ulearning.ulearning_app.presentation.features.home.HomeEvent
 import com.ulearning.ulearning_app.presentation.features.home.HomeReducer
 import com.ulearning.ulearning_app.presentation.features.home.HomeViewState
-import com.ulearning.ulearning_app.presentation.features.home.viewModel.CourseViewModel
+import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseAdapter
+import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseRecentlyAdapter
 import com.ulearning.ulearning_app.presentation.features.home.viewModel.HomeViewModel
+import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -33,26 +32,100 @@ class HomeFragment :
 
     override val dataBindingViewModel = BR.loginViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private lateinit var courseRecentlyRecycler: RecyclerView
+
+    private lateinit var courseRecycler: RecyclerView
+
+    private lateinit var courseAdapter: CourseAdapter
+
+    private lateinit var courseRecentlyAdapter: CourseRecentlyAdapter
+
+    private var courseList: List<Course> = arrayListOf()
+
+    private var courseRecentlyList: List<Course> = arrayListOf()
+
+
+    override fun onViewIsCreated(view: View) {
+
         HomeReducer.instance(viewState = this)
+
         observeUiStates()
+
+        courseRecycler = binding.courseRecycler
+
+        courseRecentlyRecycler = binding.courseRecentlyRecycler
+
+        courseRecycler.layoutManager = LinearLayoutManager(requireActivity())
+
+        courseRecentlyRecycler.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+
+
     }
 
     private fun observeUiStates() {
+        viewModel.setEvent(HomeEvent.RecentlyCoursesHomeClicked)
+        viewModel.setEvent(HomeEvent.CoursesHomeClicked)
+
+        viewModel.apply {
+            lifecycleScopeCreate(activity = requireActivity(), method = {
+                state.collect { state ->
+                    HomeReducer.selectState(state)
+                }
+            })
+
+            lifecycleScopeCreate(activity = requireActivity(), method = {
+                effect.collect { effect ->
+                    HomeReducer.selectEffect(effect)
+                }
+            })
+        }
 
     }
 
     override fun messageFailure(failure: Failure) {
-        TODO("Not yet implemented")
+        closeLoadingDialog()
+
+        val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
+
+        showSnackBar(binding.root, getString(messageDesign.idMessage))
     }
 
     override fun loading() {
-        TODO("Not yet implemented")
+        showLoadingDialog()
     }
 
-    override fun homeActivity() {
-        TODO("Not yet implemented")
+    override fun detailCourseActivity() {
+
     }
+
+    override fun courseRecentlyList(courses: List<Course>) {
+        closeLoadingDialog()
+
+        courseRecentlyList = arrayListOf(
+            Course(id = 0, name = "", category = ""),
+            Course(id = 0, name = "", category = ""),
+            Course(id = 0, name = "", category = ""))
+                    //courses
+
+        courseRecentlyAdapter = CourseRecentlyAdapter(courses = courseRecentlyList)
+
+        courseRecentlyRecycler.adapter = courseRecentlyAdapter
+
+    }
+
+    override fun  courseList(courses: List<Course>) {
+        closeLoadingDialog()
+
+        courseList = arrayListOf(
+            Course(id = 0, name = "", category = ""),
+            Course(id = 0, name = "", category = ""),
+            Course(id = 0, name = "", category = "")
+        )//courses
+
+        courseAdapter = CourseAdapter(courses = courseList)
+
+        courseRecycler.adapter = courseAdapter
+    }
+
 
 }

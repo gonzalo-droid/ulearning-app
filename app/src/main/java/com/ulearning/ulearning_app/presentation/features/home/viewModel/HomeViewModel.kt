@@ -1,8 +1,10 @@
 package com.ulearning.ulearning_app.presentation.features.home.viewModel
 
 import com.ulearning.ulearning_app.core.functional.Failure
+import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.useCase.auth.DoLoginUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
+import com.ulearning.ulearning_app.presentation.features.auth.LoginState
 import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import com.ulearning.ulearning_app.presentation.features.home.HomeEvent
 import com.ulearning.ulearning_app.presentation.features.home.HomeState
@@ -30,26 +32,31 @@ class HomeViewModel
     }
 
     private fun listCoursesHome() {
-
+        setState { HomeState.Loading }
+        handleCourse(arrayListOf())
     }
 
     private fun listRecentlyCourses() {
-
+        handleCourseRecently(arrayListOf())
     }
 
     private fun goCourses() {
 
     }
-
-
-
-    private fun handleFailure(failure: Failure) {
-        setEffect { HomeEffect.ShowMessageFailure(failure = failure) }
+    private fun doLogin() {
 
     }
 
-    private fun handleSuccess(success: Boolean) {
-        setState { HomeState.LoginSuccess(success = success) }
+    private fun handleFailure(failure: Failure) {
+        setEffect { HomeEffect.ShowMessageFailure(failure = failure) }
+    }
+
+    private fun handleCourse(courses: List<Course>) {
+        setState { HomeState.CourseList(courses = courses) }
+    }
+
+    private fun handleCourseRecently(courses: List<Course>) {
+        setState { HomeState.CourseRecentlyList(courses = courses) }
     }
 
     companion object Events {

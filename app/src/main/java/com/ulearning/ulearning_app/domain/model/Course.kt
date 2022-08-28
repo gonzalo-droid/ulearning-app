@@ -4,5 +4,6 @@ import java.io.Serializable
 
 data class Course(
     val id:Int,
-    val name:String
+    val name:String,
+    val category:String
 ): Serializable
