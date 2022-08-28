@@ -82,7 +82,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@={loginViewModel.email}"/>
+                    android:text="@={loginViewModel.user.email}"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -101,7 +101,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:text="@={loginViewModel.password}"/>
+                    android:text="@={loginViewModel.user.password}"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

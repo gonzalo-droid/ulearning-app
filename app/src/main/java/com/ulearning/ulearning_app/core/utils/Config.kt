@@ -46,4 +46,9 @@ object Config {
     const val DECIMAL_FORMAT_FOUR = "###,##0.00"
 
     const val CONSUMPTION_FILTER_PUT = "consumptionFilter"
+
+    const val EMAIL_REGEX =
+        "[ _A-Za-z0-9-]+(\\.[ _A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,4})"
+    const val ALPHA_NUMERIC_REGEX =
+        "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{8,}$"
 }

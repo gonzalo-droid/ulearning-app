@@ -3,6 +3,7 @@ package com.ulearning.ulearning_app.presentation.features.auth
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.useCase.auth.DoLoginUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
+import com.ulearning.ulearning_app.presentation.model.entity.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
@@ -13,16 +14,18 @@ class LoginViewModel
     private val doLoginUseCase: DoLoginUseCase
 ) : BaseViewModel<LoginEvent, LoginState, LoginEffect>() {
 
-    val email = MutableStateFlow("")
-    val password = MutableStateFlow("")
+    val user = User()
 
+    /*val email = MutableStateFlow("")
+    val password = MutableStateFlow("")
+*/
     override fun createInitialState(): LoginState {
         return LoginState.Idle
     }
 
     override fun handleEvent(event: LoginEvent) {
         when (event) {
-            LoginEvent.LoginClicked -> doLogin()
+            LoginEvent.LoginClicked -> verifyLogin()
             LoginEvent.RecoveredPasswordClicked -> goRecoveryPassword()
         }
     }
@@ -31,11 +34,32 @@ class LoginViewModel
 
     }
 
+    private fun verifyLogin() {
+
+        user.verifyLogin().let {
+
+            if (it.first) {
+
+                doLogin()
+
+            } else {
+                setEffect { LoginEffect.ShowMessageFailure(failure = it.second!!) }
+            }
+        }
+
+    }
+
     private fun doLogin() {
-        setState {  LoginState.Loading }
-        doLoginUseCase(DoLoginUseCase.Params(email = email.value, password = password.value)) {
+        setState { LoginState.Loading }
+        doLoginUseCase(
+            DoLoginUseCase.Params(
+                email = user.email,
+                password = user.password
+            )
+        ) {
             it.either(::handleFailure, ::handleLogin)
         }
+
     }
 
     private fun handleFailure(failure: Failure) {

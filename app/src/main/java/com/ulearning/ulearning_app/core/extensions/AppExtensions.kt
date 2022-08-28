@@ -16,6 +16,7 @@ import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import android.util.Base64
+import com.ulearning.ulearning_app.core.utils.Config
 
 
 @SuppressLint("SimpleDateFormat")
@@ -57,6 +58,10 @@ infix fun Double.decimalFormat(format: String): String = DecimalFormat(format).f
 
 infix fun Int.decimalFormat(format: String): String = DecimalFormat(format).format(this)
 
+
+fun String.isMail(): Boolean = this.matches(Regex(Config.EMAIL_REGEX))
+
+fun String.isAlphaNumeric(): Boolean = this.matches(Regex(Config.ALPHA_NUMERIC_REGEX))
 
 fun lifecycleScopeCreate(activity: Activity, method: suspend () -> Unit) =
     (activity as AppCompatActivity).lifecycleScope.launch {

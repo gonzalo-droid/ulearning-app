@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.data.repository.auth
 
+import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Either.Left
 import com.ulearning.ulearning_app.core.functional.Either.Right
@@ -30,10 +31,10 @@ class AuthRepositoryImpl
                     dataStore.saveToken(token = loginResponse.token)
                     Right(true)
                 } else {
-                    Left(Failure.DefaultError("Credenciales incorrectas"))
+                    Left(Failure.DefaultError(R.string.error_user_message))
                 }
             }
-            is Left -> Left(response.a)
+            is Left -> Left(Failure.DefaultError(R.string.error_user_message)) //Left(response.a)
         }
     }
 }

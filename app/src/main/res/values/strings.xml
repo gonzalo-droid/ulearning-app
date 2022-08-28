@@ -7,6 +7,18 @@
     <string name="email">email</string>
     <string name="password">contraseña</string>
 
+    <string name="error_user_message">Error, inténtelo nuevamente</string>
 
+    <string name="error_no_internet">Sin conexión a internet</string>
+
+    <string name="error_server">Error en el servidor</string>
+
+    <string name="fail">fail</string>
+    <string name="success">success</string>
+
+    <string name="email_fail">Email incorrecto</string>
+    <string name="password_fail">Contraseña incorrecto</string>
+    <string name="data_success">Información correcta</string>
+    <string name="login_fail">Credenciales incorrectas</string>
 
 </resources>

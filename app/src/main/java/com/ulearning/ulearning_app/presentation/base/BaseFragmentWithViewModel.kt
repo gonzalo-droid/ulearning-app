@@ -9,7 +9,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ulearning.ulearning_app.core.functional.Failure
-import com.ulearning.ulearning_app.presentation.model.MessageFailure
+import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
+import com.ulearning.ulearning_app.presentation.utils.BindingUtil
 
 /**
  * This base fragment help us to reduce boiler plate code and automatize task like observe always to forceLogOut live data.
@@ -62,39 +63,8 @@ abstract class BaseFragmentWithViewModel<ViewDataBindingClass : ViewDataBinding,
 
     }
 
-    open fun getUseCaseFailureFromBase(failure: Failure) : MessageFailure {
+    open fun getUseCaseFailureFromBase(failure: Failure) : MessageDesign {
 
-        return when (failure) {
-            is Failure.UnauthorizedOrForbidden ->  MessageFailure(
-                userMessage = "Log out",
-                message = failure.message)
-            is Failure.None -> MessageFailure(
-                userMessage = "Log out",
-                message = "None")
-            is Failure.NetworkConnectionLostSuddenly -> MessageFailure(
-                userMessage = "Log out",
-                message = "Connection lost suddenly. Check the wifi or mobile data.")
-            is Failure.NoNetworkDetected -> MessageFailure(
-                userMessage = "Sin conexión a internet",
-                message ="No network detected")
-            is Failure.SSLError -> MessageFailure(
-                userMessage = "Error de red",
-                message ="WARNING: SSL Exception")
-            is Failure.TimeOut -> MessageFailure(
-                userMessage = "Error de red",
-                message ="Time out.")
-            is Failure.ServerBodyError -> MessageFailure(
-                userMessage = "Error del servidor",
-                message = failure.message)
-            is Failure.DataToDomainMapperFailure -> MessageFailure(
-                userMessage = "Error al procesar la información",
-                message = "Data to domain mapper failure: ${failure.mapperException}")
-            is Failure.ServiceUncaughtFailure -> MessageFailure(
-                userMessage = "Log out",
-                message =failure.uncaughtFailureMessage)
-            is Failure.DefaultError -> MessageFailure(
-                userMessage = failure.message?:"Error",
-                message = failure.message?:"Error")
-        }
+        return BindingUtil.reducerFailure(failure)
     }
 }

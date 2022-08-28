@@ -1,11 +1,9 @@
 package com.ulearning.ulearning_app.presentation.features.auth
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import com.google.android.material.snackbar.Snackbar
 import com.ulearning.ulearning_app.BR
-import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.extensions.startNewActivity
@@ -13,9 +11,8 @@ import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.databinding.ActivityLoginBinding
 import com.ulearning.ulearning_app.presentation.HomeActivity
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
-import com.ulearning.ulearning_app.presentation.model.MessageFailure
+import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -53,8 +50,10 @@ class LoginActivity : BaseActivityWithViewModel<ActivityLoginBinding, LoginViewM
 
     override fun messageFailure(failure: Failure) {
         closeLoadingDialog()
-        val message: MessageFailure = getUseCaseFailureFromBase(failure)
-        Snackbar.make(binding.layout, message.userMessage, Snackbar.LENGTH_SHORT).show()
+        val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
+
+        showSnackBar(binding.root, getString(messageDesign.idMessage))
+
     }
 
     override fun loading() {
@@ -64,5 +63,6 @@ class LoginActivity : BaseActivityWithViewModel<ActivityLoginBinding, LoginViewM
     override fun homeActivity() {
         closeLoadingDialog()
         startNewActivity<HomeActivity>()
+        finish()
     }
 }
