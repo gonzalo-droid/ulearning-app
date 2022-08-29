@@ -1,7 +1,9 @@
 package com.ulearning.ulearning_app.presentation.features.home.viewModel
 
 import com.ulearning.ulearning_app.core.functional.Failure
+import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.useCase.auth.DoLoginUseCase
+import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursesSubscriptionUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import com.ulearning.ulearning_app.presentation.features.home.HomeEvent
@@ -13,8 +15,11 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel
 @Inject constructor(
-    private val doLoginUseCase: DoLoginUseCase
+    private val getCoursesSubscriptionUseCase: GetCoursesSubscriptionUseCase
 ) : BaseViewModel<HomeEvent, HomeState, HomeEffect>() {
+
+    private val isFinished = true
+    private val page = 1
 
     override fun createInitialState(): HomeState {
         return HomeState.Idle
@@ -31,17 +36,25 @@ class HomeViewModel
 
     private fun listCoursesHome() {
         setState { HomeState.Loading }
-        handleCourse(arrayListOf())
+
+        getCoursesSubscriptionUseCase(
+            GetCoursesSubscriptionUseCase.Params(page = page, isFinished = isFinished)
+        ) {
+            it.either(::handleFailure, ::handleCourseRecently)
+        }
     }
 
     private fun listRecentlyCourses() {
-        handleCourseRecently(arrayListOf())
+        setState { HomeState.Loading }
+
+        getCoursesSubscriptionUseCase(
+            GetCoursesSubscriptionUseCase.Params(page = page, isFinished = !isFinished)
+        ) {
+            it.either(::handleFailure, ::handleCourseRecently)
+        }
     }
 
     private fun goCourses() {
-
-    }
-    private fun doLogin() {
 
     }
 
@@ -49,11 +62,11 @@ class HomeViewModel
         setEffect { HomeEffect.ShowMessageFailure(failure = failure) }
     }
 
-    private fun handleCourse(courses: List<Course>) {
+    private fun handleCourse(courses: List<Subscription>) {
         setState { HomeState.CourseList(courses = courses) }
     }
 
-    private fun handleCourseRecently(courses: List<Course>) {
+    private fun handleCourseRecently(courses: List<Subscription>) {
         setState { HomeState.CourseRecentlyList(courses = courses) }
     }
 

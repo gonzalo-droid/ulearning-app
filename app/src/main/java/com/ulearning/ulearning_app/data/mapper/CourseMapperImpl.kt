@@ -12,31 +12,27 @@ class CourseMapperImpl : CourseMapper {
         return data.map {
             Subscription(
                 course = Course(
-                    category = Category(
-                        card_image = CardImage(
-                            originalUrl = it.course.category.cardImage.originalUrl,
-                            previewUrl = it.course.category.cardImage.previewUrl,
-                        ),
-                        color = it.course.category.color,
-                        description = it.course.category.description,
-                        id = it.course.category.id,
-                        name = it.course.category.name,
-                        type = it.course.category.type
-                    ),
-                    categoryId = it.course.categoryId,
-                    descriptionLarge = it.course.descriptionLarge,
-                    descriptionShort = it.course.descriptionShort,
-                    mainImage = MainImage(
-                        originalUrl = it.course.mainImage.originalUrl,
-                        previewUrl = it.course.mainImage.previewUrl,
-                    ),
-                    title = it.course.title,
-                    id = it.course.id,
+                    category = if(it.course!!.category != null) Category(
+                        color = it.course!!.category!!.color,
+                        description = it.course!!.category!!.description,
+                        id = it.course!!.category!!.id,
+                        name = it.course!!.category!!.name,
+                        type = it.course!!.category!!.type
+                    )else null,
+                    categoryId = it.course!!.categoryId,
+                    descriptionLarge = it.course!!.descriptionLarge,
+                    descriptionShort = it.course!!.descriptionShort,
+                    mainImage = if(it.course!!.mainImage != null) MainImage(
+                        originalUrl = it.course!!.mainImage!!.originalUrl!!,
+                        previewUrl = it.course!!.mainImage!!.previewUrl!!,
+                    ) else null,
+                    title = it.course!!.title,
+                    id = it.course!!.id,
                 ),
                 course_id = it.courseId,
                 group = Group(
-                    id = it.group.id,
-                    name = it.group.name,
+                    id = it.group!!.id,
+                    name = it.group!!.name,
                 ),
                 group_id = it.groupId,
             )

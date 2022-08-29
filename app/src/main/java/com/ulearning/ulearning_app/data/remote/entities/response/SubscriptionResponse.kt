@@ -5,59 +5,59 @@ import com.google.gson.annotations.SerializedName
 
 data class SubscriptionResponse(
     @SerializedName("amount")
-    var amount: Int = 0,
+    var amount: Int?= 0,
     @SerializedName("billing")
-    var billing: Any = Any(),
+    var billing: Any?= null,
     @SerializedName("billing_id")
-    var billingId: Any = Any(),
+    var billingId: Any?= null,
     @SerializedName("course")
-    var course: CourseResponse = CourseResponse(),
+    var course: CourseResponse?= null,
     @SerializedName("course_id")
-    var courseId: Int = 0,
+    var courseId: Int?= 0,
     @SerializedName("deleted_at")
-    var deletedAt: Any = Any(),
+    var deletedAt: Any?= null,
     @SerializedName("finished_at")
-    var finishedAt: Any = Any(),
+    var finishedAt: Any?= null,
     @SerializedName("group")
-    var group: GroupResponse = GroupResponse(),
+    var group: GroupResponse?= null,
     @SerializedName("group_id")
-    var groupId: Int = 0,
+    var groupId: Int?= 0,
     @SerializedName("has_certificate")
-    var hasCertificate: Boolean = false,
+    var hasCertificate: Boolean?= false,
     @SerializedName("has_degree")
-    var hasDegree: Boolean = false,
+    var hasDegree: Boolean?= false,
     @SerializedName("has_record")
-    var hasRecord: Boolean = false,
+    var hasRecord: Boolean?= false,
     @SerializedName("id")
-    var id: Int = 0,
+    var id: Int?= 0,
     @SerializedName("is_finished")
-    var isFinished: Boolean = false,
+    var isFinished: Boolean?= false,
     @SerializedName("last_connection_at")
-    var lastConnectionAt: Any = Any(),
+    var lastConnectionAt: Any?= null,
     @SerializedName("next_payment_date")
-    var nextPaymentDate: Any = Any(),
+    var nextPaymentDate: Any?= null,
     @SerializedName("purchased_certificate")
-    var purchasedCertificate: Boolean = false,
+    var purchasedCertificate: Boolean?= false,
     @SerializedName("purchased_record")
-    var purchasedRecord: Boolean = false,
+    var purchasedRecord: Boolean?= false,
     @SerializedName("rating")
-    var rating: Any = Any(),
+    var rating: Any?= null,
     @SerializedName("registered_at")
-    var registeredAt: Any = Any(),
+    var registeredAt: Any?= null,
     @SerializedName("registered_by")
-    var registeredBy: Int = 0,
+    var registeredBy: Int?= 0,
     @SerializedName("status")
-    var status: String = "",
+    var status: String?= "",
     @SerializedName("suspended_at")
-    var suspendedAt: Any = Any(),
+    var suspendedAt: Any?= null,
     @SerializedName("suspended_by")
-    var suspendedBy: Any = Any(),
+    var suspendedBy: Any?= null,
     @SerializedName("time_session")
-    var timeSession: Int = 0,
+    var timeSession: Int?= 0,
     @SerializedName("type")
-    var type: String = "",
+    var type: String?= "",
     @SerializedName("user")
-    var userResponse: UserResponse = UserResponse(),
+    var userResponse: UserResponse?= null,
     @SerializedName("user_id")
-    var userId: Int = 0
+    var userId: Int?= 0
 )

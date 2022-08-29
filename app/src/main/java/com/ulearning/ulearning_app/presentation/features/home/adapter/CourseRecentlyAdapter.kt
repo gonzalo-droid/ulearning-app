@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.databinding.ListCoursesRecentlyItemBinding
+import com.ulearning.ulearning_app.domain.model.Subscription
 
 class CourseRecentlyAdapter constructor(
-    private val courses: List<Course>
+    private val courses: List<Subscription>
 ) : RecyclerView.Adapter<CourseRecentlyAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -30,7 +31,7 @@ class CourseRecentlyAdapter constructor(
         val binding = ListCoursesRecentlyItemBinding.bind(view)
 
 
-        fun bind(model: Course, position: Int) {
+        fun bind(model: Subscription, position: Int) {
 
 
         }

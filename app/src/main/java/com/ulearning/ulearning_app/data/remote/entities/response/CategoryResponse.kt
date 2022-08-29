@@ -10,7 +10,7 @@ data class CategoryResponse(
     @SerializedName("color")
     var color: String = "",
     @SerializedName("description")
-    var description: Any = Any(),
+    var description: String ="",
     @SerializedName("id")
     var id: Int = 0,
     @SerializedName("name")

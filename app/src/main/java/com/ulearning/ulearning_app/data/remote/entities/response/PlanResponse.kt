@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName
 
 data class PlanResponse(
     @SerializedName("id")
-    var id: Int = 0,
+    var id: Int?= 0,
     @SerializedName("next_renovation_at")
-    var nextRenovationAt: Any = Any(),
+    var nextRenovationAt: Any?= null,
     @SerializedName("type")
-    var type: String = "",
+    var type: String?= "",
     @SerializedName("user_id")
-    var userId: Int = 0
+    var userId: Int?= 0
 )

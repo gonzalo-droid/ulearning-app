@@ -1,10 +1,8 @@
 package com.ulearning.ulearning_app.data.remote.entities.response
 
 
-import kotlinx.serialization.SerialName
-import com.google.gson.SerializedName
+import com.google.gson.annotations.SerializedName
 
-@Serializable
 data class SecondaryImage(
     @SerializedName("collection_name")
     var collectionName: String = "",

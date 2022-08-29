@@ -10,12 +10,15 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Query
 
 interface CourseApi {
 
     @GET("subscriptions")
     suspend fun subscription(
         @Header(SettingRemote.AUTHORIZATION) token: String,
-        @Body request: SubscriptionRequest
+        @Query("per_page") perPage: Int,
+        @Query("page") page: Int,
+        @Query("is_finished") isFinished: Boolean,
     ): Response<BaseResponse<List<SubscriptionResponse>>>
 }

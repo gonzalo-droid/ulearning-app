@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.presentation.utils
 
+import android.util.Log
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
@@ -30,9 +31,11 @@ class BindingUtil {
                     .idMessage(R.string.error_no_internet)
                     .state(R.string.fail).build()
 
-                is Failure.TimeOut -> MessageDesign.Builder()
-                    .idMessage(R.string.error_server)
-                    .state(R.string.fail).build()
+                is Failure.TimeOut -> {
+                    MessageDesign.Builder()
+                        .idMessage(R.string.error_server)
+                        .state(R.string.fail).build()
+                }
 
                 is Failure.ServerBodyError -> MessageDesign.Builder()
                     .idMessage(R.string.error_user_message)
@@ -42,9 +45,12 @@ class BindingUtil {
                     .idMessage(R.string.error_user_message)
                     .state(R.string.fail).build()
 
-                is Failure.ServiceUncaughtFailure -> MessageDesign.Builder()
-                    .idMessage(R.string.error_server)
-                    .state(R.string.fail).build()
+                is Failure.ServiceUncaughtFailure -> {
+                    Log.d("Error serve", failure.uncaughtFailureMessage)
+                    MessageDesign.Builder()
+                        .idMessage(R.string.error_server)
+                        .state(R.string.fail).build()
+                }
 
                 is Failure.DefaultError -> MessageDesign.Builder()
                     .idMessage(failure.idMessage)

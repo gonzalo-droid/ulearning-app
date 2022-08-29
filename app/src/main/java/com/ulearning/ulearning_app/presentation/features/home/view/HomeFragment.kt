@@ -9,6 +9,7 @@ import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.databinding.FragmentHomeBinding
+import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
 import com.ulearning.ulearning_app.presentation.features.home.HomeEvent
 import com.ulearning.ulearning_app.presentation.features.home.HomeReducer
@@ -39,9 +40,9 @@ class HomeFragment :
 
     private lateinit var courseRecentlyAdapter: CourseRecentlyAdapter
 
-    private var courseList: List<Course> = arrayListOf()
+    private var courseList: List<Subscription> = arrayListOf()
 
-    private var courseRecentlyList: List<Course> = arrayListOf()
+    private var courseRecentlyList: List<Subscription> = arrayListOf()
 
 
     override fun onViewIsCreated(view: View) {
@@ -97,14 +98,10 @@ class HomeFragment :
 
     }
 
-    override fun courseRecentlyList(courses: List<Course>) {
+    override fun courseRecentlyList(courses: List<Subscription>) {
         closeLoadingDialog()
 
-        courseRecentlyList = arrayListOf(
-            Course(id = 0, name = "", category = ""),
-            Course(id = 0, name = "", category = ""),
-            Course(id = 0, name = "", category = ""))
-                    //courses
+        courseRecentlyList = courses
 
         courseRecentlyAdapter = CourseRecentlyAdapter(courses = courseRecentlyList)
 
@@ -112,14 +109,10 @@ class HomeFragment :
 
     }
 
-    override fun  courseList(courses: List<Course>) {
+    override fun  courseList(courses: List<Subscription>) {
         closeLoadingDialog()
 
-        courseList = arrayListOf(
-            Course(id = 0, name = "", category = ""),
-            Course(id = 0, name = "", category = ""),
-            Course(id = 0, name = "", category = "")
-        )//courses
+        courseList = courses
 
         courseAdapter = CourseAdapter(courses = courseList)
 

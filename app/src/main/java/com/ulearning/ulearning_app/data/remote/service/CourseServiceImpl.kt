@@ -14,13 +14,26 @@ import javax.inject.Singleton
 
 @Singleton
 class CourseServiceImpl
-    @Inject constructor(
-        private val courseApi: CourseApi,
-        private val networkHandler: NetworkHandler
-    ) : CourseService {
+@Inject constructor(
+    private val courseApi: CourseApi,
+    private val networkHandler: NetworkHandler
+) : CourseService {
 
-    override suspend fun subscriptions(token :String, body: SubscriptionRequest): Either<Failure, List<SubscriptionResponse>> {
-        return networkHandler.callServiceBase { courseApi.subscription(token, body) }
+    override suspend fun subscriptions(
+        token: String,
+        perPage: Int,
+        page: Int,
+        isFinished: Boolean,
+    ):
+            Either<Failure, List<SubscriptionResponse>> {
+        return networkHandler.callServiceBaseList {
+            courseApi.subscription(
+                token,
+                perPage,
+                page,
+                isFinished
+            )
+        }
     }
 
 }

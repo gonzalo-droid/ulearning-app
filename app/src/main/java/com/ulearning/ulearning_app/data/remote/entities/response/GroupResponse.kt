@@ -5,33 +5,33 @@ import com.google.gson.annotations.SerializedName
 
 data class GroupResponse(
     @SerializedName("course")
-    var course: Any = Any(),
+    var course: Any?= null,
     @SerializedName("course_id")
-    var courseId: Int = 0,
+    var courseId: Int?= 0,
     @SerializedName("date_start")
-    var dateStart: String = "",
+    var dateStart: String?= "",
     @SerializedName("date_until")
-    var dateUntil: String = "",
+    var dateUntil: String?= "",
     @SerializedName("id")
-    var id: Int = 0,
+    var id: Int?= 0,
     @SerializedName("is_suspended")
-    var isSuspended: Boolean = false,
+    var isSuspended: Boolean?= false,
     @SerializedName("is_unlimited")
-    var isUnlimited: Boolean = false,
+    var isUnlimited: Boolean?= false,
     @SerializedName("members_count")
-    var membersCount: Int = 0,
+    var membersCount: Int?= 0,
     @SerializedName("name")
-    var name: String = "",
+    var name: String?= "",
     @SerializedName("schedules")
-    var schedules: Any = Any(),
+    var schedules: Any?= null,
     @SerializedName("students_count")
-    var studentsCount: Int = 0,
+    var studentsCount: Int?= 0,
     @SerializedName("suspended_at")
-    var suspendedAt: Any = Any(),
+    var suspendedAt: Any?= null,
     @SerializedName("teachers")
-    var teachers: Any = Any(),
+    var teachers: Any?= null,
     @SerializedName("teachers_count")
-    var teachersCount: Int = 0,
+    var teachersCount: Int?= 0,
     @SerializedName("vacancies")
-    var vacancies: Int = 0
+    var vacancies: Int?= 0
 )
