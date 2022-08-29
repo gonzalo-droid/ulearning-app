@@ -107,6 +107,7 @@ tools:context=".presentation.features.home.view.HomeFragment">
             android:text="@string/see_more"
             android:textAppearance="@style/readex_12_light"
             android:textColor="@color/blue"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/myCourseText"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
             app:layout_constraintTop_toTopOf="@+id/myCourseText" />

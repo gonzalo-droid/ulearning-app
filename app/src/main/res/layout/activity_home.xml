@@ -20,7 +20,6 @@
             android:layout_marginStart="@dimen/dimen0"
             android:layout_marginEnd="@dimen/dimen0"
             android:background="?android:attr/windowBackground"
-            app:itemBackground="@drawable/bottom_nav_line_selector"
             app:itemIconTint="@color/bottom_nav_selector"
             app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -6,10 +6,12 @@
         android:icon="@drawable/ic_home"
         android:title="@string/home_title" />
 
+    <!--
     <item
         android:id="@+id/navigation_course"
         android:icon="@drawable/ic_course"
         android:title="@string/course_title" />
+        -->
 
     <item
         android:id="@+id/navigation_profile"
