@@ -7,27 +7,64 @@
     android:paddingEnd="@dimen/dimen10"
     tools:ignore="RtlSymmetry">
 
+
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView5"
         android:layout_width="@dimen/dimen200"
-        android:layout_height="@dimen/dimen100"
+        android:layout_height="match_parent"
+        style="?attr/materialCardViewElevatedStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <!-- Media -->
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen190"
-                android:contentDescription="curso"
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/dimen200"
+                android:layout_height="@dimen/dimen100"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/course_test" />
+                app:srcCompat="@drawable/course_test"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-        </LinearLayout>
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progress_snack_bar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:max="100"
+                android:progress="30"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                app:layout_constraintVertical_bias="0.0"
+                app:trackColor="@color/green" />
+
+            <LinearLayout
+                android:id="@+id/titleLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                android:padding="@dimen/dimen10">
+
+                <!-- Title, secondary and supporting text -->
+                <TextView
+                    android:id="@+id/titleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre del curso"
+                    android:textAppearance="@style/readex_10_regular"
+                    android:textColor="@color/blue" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 

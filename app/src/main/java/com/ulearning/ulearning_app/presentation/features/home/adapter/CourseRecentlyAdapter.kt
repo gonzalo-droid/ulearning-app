@@ -33,6 +33,9 @@ class CourseRecentlyAdapter constructor(
 
         fun bind(model: Subscription, position: Int) {
 
+            //binding.progressSnackBar.progress  = model.course!!.category!!.name
+
+            binding.titleText.text  = model.course!!.title
 
         }
 

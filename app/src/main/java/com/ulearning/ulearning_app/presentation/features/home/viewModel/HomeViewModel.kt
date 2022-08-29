@@ -38,9 +38,9 @@ class HomeViewModel
         setState { HomeState.Loading }
 
         getCoursesSubscriptionUseCase(
-            GetCoursesSubscriptionUseCase.Params(page = page, isFinished = isFinished)
+            GetCoursesSubscriptionUseCase.Params(page = page, isFinished = !isFinished)
         ) {
-            it.either(::handleFailure, ::handleCourseRecently)
+            it.either(::handleFailure, ::handleCourse)
         }
     }
 

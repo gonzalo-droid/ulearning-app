@@ -65,7 +65,7 @@ tools:context=".presentation.features.home.view.HomeFragment">
             android:text="Juan Francisco" />
 
         <TextView
-            android:id="@+id/textView92"
+            android:id="@+id/continueLearningText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -74,18 +74,7 @@ tools:context=".presentation.features.home.view.HomeFragment">
             app:layout_constraintStart_toStartOf="@+id/guideline27"
             app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
-        <TextView
-            android:id="@+id/seeMoreTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_rounded_outline"
-            android:paddingHorizontal="@dimen/dimen8"
-            android:text="@string/see_more"
-            android:textAppearance="@style/readex_12_light"
-            android:textColor="@color/blue"
-            app:layout_constraintBottom_toBottomOf="@+id/textView92"
-            app:layout_constraintEnd_toStartOf="@+id/guideline28"
-            app:layout_constraintTop_toTopOf="@+id/textView92" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/courseRecentlyRecycler"
@@ -96,7 +85,7 @@ tools:context=".presentation.features.home.view.HomeFragment">
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
-            app:layout_constraintTop_toBottomOf="@+id/textView92"
+            app:layout_constraintTop_toBottomOf="@+id/continueLearningText"
             tools:listitem="@layout/list_courses_recently_item" />
 
         <TextView
@@ -108,6 +97,20 @@ tools:context=".presentation.features.home.view.HomeFragment">
             android:textAppearance="@style/readex_16_regular"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
             app:layout_constraintTop_toBottomOf="@+id/courseRecentlyRecycler" />
+
+        <TextView
+            android:id="@+id/seeMoreTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rounded_outline"
+            android:paddingHorizontal="@dimen/dimen8"
+            android:text="@string/see_more"
+            android:textAppearance="@style/readex_12_light"
+            android:textColor="@color/blue"
+            app:layout_constraintBottom_toBottomOf="@+id/myCourseText"
+            app:layout_constraintEnd_toStartOf="@+id/guideline28"
+            app:layout_constraintTop_toTopOf="@+id/myCourseText" />
+        
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/courseRecycler"

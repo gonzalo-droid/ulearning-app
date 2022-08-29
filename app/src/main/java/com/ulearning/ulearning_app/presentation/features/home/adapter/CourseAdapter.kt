@@ -33,6 +33,9 @@ class CourseAdapter constructor(
 
         fun bind(model: Subscription, position: Int) {
 
+            binding.categoryText.text  = model.course!!.category!!.name
+
+            binding.titleText.text  = model.course!!.title
 
         }
 
