@@ -5,6 +5,7 @@ import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.remote.api.AuthApi
 import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.ProfileResponse
 import com.ulearning.ulearning_app.data.remote.network.NetworkHandler
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -18,6 +19,10 @@ class AuthServiceImpl
 
     override suspend fun login(body: LoginRequest): Either<Failure, LoginResponse> {
         return networkHandler.callService { authApi.login(body) }
+    }
+
+    override suspend fun profile(token: String): Either<Failure, ProfileResponse> {
+        return networkHandler.callServiceBase { authApi.profile(token) }
     }
 
 }

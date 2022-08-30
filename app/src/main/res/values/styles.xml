@@ -125,4 +125,12 @@
     <style name="readex_20_light" parent="readex_light">
         <item name="android:textSize">@dimen/text20</item>
     </style>
+
+    <style name="subtitle1_regular" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/readex_regular</item>
+        <item name="android:fontFamily">@font/readex_regular</item>
+        <item name="android:textSize">@dimen/text18</item>
+    </style>
+
+
 </resources>

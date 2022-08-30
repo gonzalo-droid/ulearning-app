@@ -5,17 +5,17 @@ import com.google.gson.annotations.SerializedName
 
 data class ProfileResponse(
     @SerializedName("address")
-    val address: Any? = Any(),
+    val address: String? = "",
     @SerializedName("avatar")
-    val avatar: Any? = Any(),
+    val avatar: Any? = null,
     @SerializedName("country")
-    val country: Any? = Any(),
+    val country: Any? = null,
     @SerializedName("country_id")
-    val countryId: Any? = Any(),
+    val countryId: Int? = 0,
     @SerializedName("date_of_birth")
-    val dateOfBirth: Any? = Any(),
+    val dateOfBirth: String? = "",
     @SerializedName("document_number")
-    val documentNumber: Any? = Any(),
+    val documentNumber: String? = "",
     @SerializedName("document_type")
     val documentType: String? = "",
     @SerializedName("email")
@@ -31,17 +31,17 @@ data class ProfileResponse(
     @SerializedName("name")
     val name: String? = "",
     @SerializedName("permissions")
-    val permissions: List<String?>? = listOf(),
+    val permissions: List<String?>? = arrayListOf(),
     @SerializedName("phone")
-    val phone: Any? = Any(),
+    val phone: String? = "",
     @SerializedName("phone_code")
-    val phoneCode: Any? = Any(),
+    val phoneCode: String? = "",
     @SerializedName("plan")
-    val plan: Any? = Any(),
+    val plan: Any? = null,
     @SerializedName("role")
     val role: String? = "",
     @SerializedName("second_last_name")
-    val secondLastName: Any? = Any(),
+    val secondLastName: String? = "",
     @SerializedName("suspended_at")
-    val suspendedAt: Any? = Any()
+    val suspendedAt: String? = ""
 )

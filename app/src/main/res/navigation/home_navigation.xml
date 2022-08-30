@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.ulearning.ulearning_app.presentation.features.home.view.ProfileFragment"
+        android:name="com.ulearning.ulearning_app.presentation.features.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 

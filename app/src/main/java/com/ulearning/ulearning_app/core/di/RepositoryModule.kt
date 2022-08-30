@@ -35,8 +35,9 @@ object RepositoryModule {
     @Singleton
     fun provideAuthRepository(
         service: AuthService,
+        mapper: AuthMapper,
         dataStore: DataStoreConfig
-    ): AuthRepository = AuthRepositoryImpl(service, dataStore)
+    ): AuthRepository = AuthRepositoryImpl(service, mapper, dataStore)
 
     @Provides
     @Singleton

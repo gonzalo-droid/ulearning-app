@@ -3,6 +3,7 @@ package com.ulearning.ulearning_app.data.remote.api
 import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
 import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.ProfileResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.SubscriptionResponse
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
 import retrofit2.Response
@@ -17,8 +18,8 @@ interface AuthApi {
     ): Response<LoginResponse>
 
     @GET("profile")
-    suspend fun subscription(
+    suspend fun profile(
         @Header(SettingRemote.AUTHORIZATION) token: String,
-    ): Response<BaseResponse<List<SubscriptionResponse>>>
+    ): Response<BaseResponse<ProfileResponse>>
     
 }
