@@ -16,9 +16,6 @@ class LoginViewModel
 
     val user = User()
 
-    /*val email = MutableStateFlow("")
-    val password = MutableStateFlow("")
-*/
     override fun createInitialState(): LoginState {
         return LoginState.Idle
     }

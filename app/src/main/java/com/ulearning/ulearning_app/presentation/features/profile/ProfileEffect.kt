@@ -7,5 +7,7 @@ sealed class ProfileEffect : UiEffect {
 
     object ShowSuccess : ProfileEffect()
 
+    object Logout : ProfileEffect()
+
     data class ShowMessageFailure constructor(val failure: Failure) : ProfileEffect()
 }

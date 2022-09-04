@@ -24,6 +24,7 @@ object ProfileReducer {
     fun selectEffect(effect: ProfileEffect) {
         when (effect) {
             is ProfileEffect.ShowMessageFailure -> viewState.messageFailure(effect.failure)
+            is ProfileEffect.Logout -> viewState.logout()
             else -> {}
         }
     }

@@ -29,6 +29,9 @@ class CourseMapperImpl : CourseMapper {
                     title = it.course!!.title,
                     id = it.course!!.id,
                 ),
+                user = User(
+                    name = it.userResponse!!.name,
+                ),
                 course_id = it.courseId,
                 group = Group(
                     id = it.group!!.id,

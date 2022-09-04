@@ -4,6 +4,7 @@ import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
+import com.ulearning.ulearning_app.domain.useCase.auth.DoLogoutUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.GetProfileUseCase
 import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursesSubscriptionUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
@@ -13,7 +14,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel
 @Inject constructor(
-    private val getProfileUseCase: GetProfileUseCase
+    private val getProfileUseCase: GetProfileUseCase,
+    private val doLogoutUseCase: DoLogoutUseCase,
 ) : BaseViewModel<ProfileEvent, ProfileState, ProfileEffect>() {
 
     override fun createInitialState(): ProfileState {
@@ -23,7 +25,17 @@ class ProfileViewModel
     override fun handleEvent(event: ProfileEvent) {
         when (event) {
             ProfileEvent.DataProfileClicked -> getProfile()
+            ProfileEvent.OnLogoutClick -> logout()
+        }
+    }
 
+    private fun logout() {
+        setState { ProfileState.Loading }
+
+        doLogoutUseCase(
+            BaseUseCase.None()
+        ) {
+            it.either(::handleFailure, ::handleLogout)
         }
     }
 
@@ -46,9 +58,14 @@ class ProfileViewModel
         setState { ProfileState.DatProfile(data = data) }
     }
 
+    private fun handleLogout(value : Boolean) {
+        setEffect { ProfileEffect.Logout }
+    }
 
 
     companion object Events {
         val dataProfileClicked = ProfileEvent.DataProfileClicked
+        val onLogoutClick = ProfileEvent.OnLogoutClick
+
     }
 }

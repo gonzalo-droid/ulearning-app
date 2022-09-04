@@ -52,4 +52,16 @@ class AuthRepositoryImpl
             is Left -> Left(Failure.DefaultError(R.string.error_user_message))
         }
     }
+
+    override suspend fun logout(): Either<Failure, Boolean> {
+
+        dataStore.saveUserName("")
+        dataStore.saveToken("")
+
+        return if (dataStore.token().isEmpty()) {
+            Right(true)
+        } else {
+            Left(Failure.DefaultError(R.string.error_user_message))
+        }
+    }
 }

@@ -43,5 +43,7 @@
 
     <string name="document_type">Tipo de documento</string>
 
+    <string name="logout">Cerrar sesión</string>
+
 
 </resources>

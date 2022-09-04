@@ -11,4 +11,6 @@ interface ProfileViewState {
     fun loading()
 
     fun getProfile(data : Profile)
+
+    fun logout()
 }

@@ -62,7 +62,7 @@ tools:context=".presentation.features.home.view.HomeFragment">
             android:textAppearance="@style/readex_26_semibold"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
             app:layout_constraintTop_toBottomOf="@+id/textView83"
-            android:text="Juan Francisco" />
+            android:text="Estudiante" />
 
         <TextView
             android:id="@+id/continueLearningText"

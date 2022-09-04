@@ -8,7 +8,6 @@ import java.io.Serializable
 
 
 open class User constructor(
-    var id: Int = -1,
     var email: String = "",
     var password: String = "",
     var name: String = "",

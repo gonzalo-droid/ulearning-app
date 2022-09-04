@@ -7,4 +7,6 @@ sealed class ProfileEvent : UiEvent {
 
     object DataProfileClicked : ProfileEvent()
 
+    object OnLogoutClick : ProfileEvent()
+
 }

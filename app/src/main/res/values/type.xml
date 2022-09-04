@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Title1" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/readex_bold</item>
+        <item name="android:fontFamily">@font/readex_bold</item>
+        <item name="android:textSize">@dimen/text28</item>
+    </style>
+
+    <style name="Title2" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/readex_bold</item>
+        <item name="android:fontFamily">@font/readex_bold</item>
+        <item name="android:textSize">@dimen/text24</item>
+    </style>
+
+    <style name="Title3" parent="TextAppearance.MaterialComponents.Headline6">
+
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text20</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+    <style name="Title3_semiBold" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/readex_semibold</item>
+        <item name="android:fontFamily">@font/readex_semibold</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text20</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+
+    <style name="Title5" parent="TextAppearance.MaterialComponents.Headline5">
+
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text18</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+
+
+    <style name="Subtitle3" parent="TextAppearance.MaterialComponents.Subtitle2">
+
+    </style>
+
+    <style name="body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/readex_regular</item>
+        <item name="android:fontFamily">@font/readex_regular</item>
+        <item name="android:textSize">@dimen/text16</item>
+    </style>
+
+    <style name="body1_medium">
+        <item name="fontFamily">@font/readex_medium</item>
+        <item name="android:fontFamily">@font/readex_medium</item>
+        <item name="android:textSize">@dimen/text16</item>
+    </style>
+
+    <style name="body2">
+        <item name="fontFamily">@font/readex_regular</item>
+        <item name="android:textSize">@dimen/text14</item>
+    </style>
+
+    <style name="body3" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/readex_regular</item>
+        <item name="android:fontFamily">@font/readex_regular</item>
+        <item name="android:textSize">@dimen/text13</item>
+    </style>
+
+    <style name="body4" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/readex_regular</item>
+        <item name="android:fontFamily">@font/readex_regular</item>
+        <item name="android:textSize">@dimen/text12</item>
+    </style>
+
+    <style name="body5" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/readex_bold</item>
+        <item name="android:fontFamily">@font/readex_bold</item>
+        <item name="android:textSize">@dimen/text12</item>
+    </style>
+
+    <style name="title5_semibold" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/readex_semibold</item>
+        <item name="android:fontFamily">@font/readex_semibold</item>
+        <item name="android:textSize">@dimen/text23</item>
+    </style>
+
+    <style name="tittle5_regular" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/readex_regular</item>
+        <item name="android:fontFamily">@font/readex_regular</item>
+        <item name="android:textSize">@dimen/text23</item>
+    </style>
+
+    <style name="tittle6_semiBold" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/readex_semibold</item>
+        <item name="android:fontFamily">@font/readex_semibold</item>
+        <item name="android:textSize">@dimen/text18</item>
+    </style>
+
+    <style name="subtitle1_bold" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/readex_bold</item>
+        <item name="android:fontFamily">@font/readex_bold</item>
+        <item name="android:textSize">@dimen/text18</item>
+    </style>
+
+
+    <style name="subtitle1_regular" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/readex_regular</item>
+        <item name="android:fontFamily">@font/readex_regular</item>
+        <item name="android:textSize">@dimen/text18</item>
+    </style>
+
+
+
+    <style name="subtitle3" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="fontFamily">@font/readex_semibold</item>
+        <item name="android:fontFamily">@font/readex_semibold</item>
+        <item name="android:textSize">@dimen/text14</item>
+    </style>
+
+
+    <style name="caption2" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/readex_semibold</item>
+        <item name="android:fontFamily">@font/readex_semibold</item>
+        <item name="android:textSize">@dimen/text11</item>
+    </style>
+
+
+
+</resources>

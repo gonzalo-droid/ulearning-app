@@ -30,6 +30,7 @@
         android:layout_marginVertical="@dimen/dimen3"
         android:layout_marginEnd="@dimen/dimen4"
         android:elevation="@dimen/dimen1"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView2">
@@ -41,7 +42,8 @@
             android:layout_gravity="center"
             android:src="@drawable/ic_setting"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription"
+            />
     </com.google.android.material.card.MaterialCardView>
 
 

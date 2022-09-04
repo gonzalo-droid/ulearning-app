@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="@dimen/dimen4"
-        android:text="Gonzalo LG"
+        android:text="Estudiante"
         android:textAppearance="@style/readex_24_semibold"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"

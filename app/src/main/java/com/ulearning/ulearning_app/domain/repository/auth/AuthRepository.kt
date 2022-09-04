@@ -12,4 +12,6 @@ interface AuthRepository {
     ): Either<Failure, Boolean>
 
     suspend fun profile(): Either<Failure, Profile>
+
+    suspend fun logout(): Either<Failure, Boolean>
 }

@@ -103,6 +103,9 @@ class HomeFragment :
 
         courseRecentlyList = courses
 
+        val userName = courses.first().user?.name
+        binding.tvUserName.text = userName
+
         courseRecentlyAdapter = CourseRecentlyAdapter(courses = courseRecentlyList)
 
         courseRecentlyRecycler.adapter = courseRecentlyAdapter
