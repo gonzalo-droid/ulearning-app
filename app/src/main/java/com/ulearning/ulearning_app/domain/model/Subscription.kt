@@ -1,5 +1,7 @@
 package com.ulearning.ulearning_app.domain.model
 
+import java.io.Serializable
+
 data class Subscription(
     var amount: Int?= 0,
     var billing: Any?= null,
@@ -29,4 +31,4 @@ data class Subscription(
     var type: String?= "",
     var user: User?= null,
     var user_id: Int?= 0
-)
+)  : Serializable

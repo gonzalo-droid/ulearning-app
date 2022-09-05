@@ -108,6 +108,19 @@ dependencies {
     implementation retrofit.gson
     implementation retrofit.okhttpInterceptor
 
+    // img
+    implementation others.fresco
+    // For animated GIF support
+    implementation 'com.facebook.fresco:animated-gif:2.6.0'
+
+    // For WebP support, including animated WebP
+    implementation 'com.facebook.fresco:animated-webp:2.6.0'
+    implementation 'com.facebook.fresco:webpsupport:2.6.0'
+
+    // For WebP support, without animations
+    implementation 'com.facebook.fresco:webpsupport:2.6.0'
+
+
     //HILT
     implementation daggerHilt.hilt
     implementation 'androidx.preference:preference:1.1.1'

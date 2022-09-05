@@ -9,7 +9,8 @@ import com.ulearning.ulearning_app.databinding.ListCoursesItemBinding
 import com.ulearning.ulearning_app.domain.model.Subscription
 
 class CourseAdapter constructor(
-    private val courses: List<Subscription>
+    private val courses: List<Subscription>,
+    private val onClickListener: (Subscription) -> Unit
 ) : RecyclerView.Adapter<CourseAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -20,7 +21,7 @@ class CourseAdapter constructor(
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.bind(courses[position], position)
+        holder.bind(courses[position], onClickListener)
     }
 
     override fun getItemCount(): Int = courses.size
@@ -31,11 +32,15 @@ class CourseAdapter constructor(
         val binding = ListCoursesItemBinding.bind(view)
 
 
-        fun bind(model: Subscription, position: Int) {
+        fun bind(model: Subscription, onClickListener: (Subscription) -> Unit) {
 
             binding.categoryText.text  = model.course!!.category!!.name
 
             binding.titleText.text  = model.course!!.title
+
+            itemView.setOnClickListener {
+                onClickListener(model)
+            }
 
         }
 

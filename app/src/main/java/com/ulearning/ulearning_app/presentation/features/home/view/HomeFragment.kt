@@ -1,10 +1,13 @@
 package com.ulearning.ulearning_app.presentation.features.home.view
 
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
+import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.functional.Failure
@@ -117,10 +120,23 @@ class HomeFragment :
 
         courseList = courses
 
-        courseAdapter = CourseAdapter(courses = courseList)
+        courseAdapter = CourseAdapter(courses = courseList) {
+                model -> onItemSelected(model)
+        }
 
         courseRecycler.adapter = courseAdapter
     }
 
+    private fun onItemSelected(model: Subscription){
+        navigate(HomeFragmentDirections.actionNavigationHomeToDetailCourseFragment())
 
+        findNavController().navigate(
+            R.id.action_navigation_home_to_detailCourseFragment,
+            //HomeFragmentDirections.actionNavigationHomeToDetailCourseFragment(),
+            Bundle().apply {
+                putSerializable("SUBSCRIPTION_PUT", model)
+            }
+        )
+
+    }
 }
