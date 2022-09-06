@@ -31,6 +31,9 @@ class DetailCourseFragment :
 
     private fun observeUiStates() {
 
+        data = requireArguments().getSerializable(Config.DATA_VALIDATED_DOCUMENT_PUT) as ValidatedDocument
+
+
     }
 
     override fun messageFailure(failure: Failure) {

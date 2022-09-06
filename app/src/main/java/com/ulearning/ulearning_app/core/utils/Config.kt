@@ -51,4 +51,7 @@ object Config {
         "[ _A-Za-z0-9-]+(\\.[ _A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,4})"
     const val ALPHA_NUMERIC_REGEX =
         "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{8,}$"
+
+
+    const val SUBSCRIPTION_PUT = "subcription"
 }
