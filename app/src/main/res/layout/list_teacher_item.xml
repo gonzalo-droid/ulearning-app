@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingEnd="@dimen/dimen10"
+    tools:ignore="RtlSymmetry">
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView5"
+        android:layout_width="@dimen/dimen200"
+        android:layout_height="@dimen/dimen70"
+        style="?attr/materialCardViewElevatedStyle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- Media -->
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/dimen50"
+                android:layout_height="@dimen/dimen50"
+                android:layout_marginLeft="@dimen/dimen5"
+                android:layout_marginTop="@dimen/dimen5"
+                android:scaleType="centerCrop"
+                android:src="@drawable/logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:shapeAppearanceOverlay="@style/circleShapeAppearance" />
+
+
+            <TextView
+                android:id="@+id/nameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Juan Luis"
+                android:textAppearance="@style/readex_12_regular"
+                android:textColor="@color/blue"
+                android:layout_marginLeft="@dimen/dimen5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+            <TextView
+                android:id="@+id/roleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profesor principal"
+                android:textAppearance="@style/readex_10_light"
+                android:textColor="@color/blue"
+                app:layout_constraintStart_toStartOf="@+id/nameText"
+                app:layout_constraintTop_toBottomOf="@+id/nameText"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

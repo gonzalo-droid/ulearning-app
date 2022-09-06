@@ -113,6 +113,13 @@
         <item name="android:textSize">@dimen/text27</item>
     </style>
 
+    <style name="readex_11_light" parent="readex_light">
+        <item name="android:textSize">@dimen/text11</item>
+    </style>
+
+    <style name="readex_10_light" parent="readex_light">
+        <item name="android:textSize">@dimen/text10</item>
+    </style>
 
     <style name="readex_12_light" parent="readex_light">
         <item name="android:textSize">@dimen/text12</item>

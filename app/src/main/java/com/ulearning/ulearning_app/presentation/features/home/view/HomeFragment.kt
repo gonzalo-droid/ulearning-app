@@ -128,7 +128,7 @@ class HomeFragment :
     }
 
     private fun onItemSelected(model: Subscription){
-        navigate(HomeFragmentDirections.actionNavigationHomeToDetailCourseFragment())
+//        navigate(HomeFragmentDirections.actionNavigationHomeToDetailCourseFragment())
 
         findNavController().navigate(
             R.id.action_navigation_home_to_detailCourseFragment,
