@@ -13,7 +13,7 @@ data class Group(
     var schedules: Any?= null,
     var students_count: Int?= 0,
     var suspended_at: Any?= null,
-    var teachers: Any?= null,
+    var teachers: List<Teacher>?= arrayListOf(),
     var teachers_count: Int?= 0,
     var vacancies: Int?= 0
 )

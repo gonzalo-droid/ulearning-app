@@ -11,6 +11,7 @@ import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.functional.Failure
+import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.FragmentHomeBinding
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
@@ -109,7 +110,9 @@ class HomeFragment :
         val userName = courses.first().user?.name
         binding.tvUserName.text = userName
 
-        courseRecentlyAdapter = CourseRecentlyAdapter(courses = courseRecentlyList)
+        courseRecentlyAdapter = CourseRecentlyAdapter(courses = courseRecentlyList){
+                model -> onItemSelected(model)
+        }
 
         courseRecentlyRecycler.adapter = courseRecentlyAdapter
 
@@ -133,7 +136,7 @@ class HomeFragment :
             R.id.action_navigation_home_to_detailCourseFragment,
             //HomeFragmentDirections.actionNavigationHomeToDetailCourseFragment(),
             Bundle().apply {
-                putSerializable("SUBSCRIPTION_PUT", model)
+                putSerializable(Config.SUBSCRIPTION_PUT, model)
             }
         )
 

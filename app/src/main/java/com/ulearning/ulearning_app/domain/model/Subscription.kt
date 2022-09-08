@@ -31,4 +31,10 @@ data class Subscription(
     var type: String?= "",
     var user: User?= null,
     var user_id: Int?= 0
-)  : Serializable
+)  : Serializable {
+
+    fun getTime() : String {
+        return this.course!!.formatAsynchronousHour()
+    }
+
+}

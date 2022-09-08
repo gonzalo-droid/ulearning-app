@@ -1,5 +1,7 @@
 package com.ulearning.ulearning_app.domain.model
 
+import java.io.Serializable
+
 data class Course(
     var amount: Int?= 0,
     var asynchronousHour: String?= "",
@@ -45,4 +47,24 @@ data class Course(
     var synchronousHour: String?= "",
     var target: String?= "",
     var title: String?= ""
-)
+) : Serializable {
+
+    fun formatAsynchronousHour() : String {
+        return  "${this.asynchronousHour.toString()} hr"
+    }
+
+    fun formatModality() : String {
+        return when (this.modality) {
+            "virtual" -> "Virtual"
+            "onsite" -> "En sitio"
+            "blend" -> "Semipresencial"
+            "recorded" -> "Grabado"
+            "online" -> "Virtual"
+            "self_learning" -> "Autoaprendizaje"
+            "teacher" -> "Con docente"
+            "platform" -> "En Plataforma"
+            "lms" -> "LMS"
+            else -> ""
+        }
+    }
+}
