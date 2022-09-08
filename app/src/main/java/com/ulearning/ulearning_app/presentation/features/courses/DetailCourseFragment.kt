@@ -6,14 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.core.extensions.dataBinding
+import com.ulearning.ulearning_app.core.extensions.html
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.FragmentDetailCourseBinding
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
-import com.ulearning.ulearning_app.presentation.features.home.HomeReducer
-import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseAdapter
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -90,7 +89,7 @@ class DetailCourseFragment :
 
             topBarInclude.title = data.course!!.title
             titleText.text = data.course!!.title
-            descriptionText.text = data.course!!.descriptionShort
+            descriptionText.text = data.course!!.descriptionShort!!.html()
             timeText.text = data.course!!.formatAsynchronousHour()
             modalityText.text = data.course!!.formatModality()
             topicText.text = data.course!!.lessonsCount.toString()

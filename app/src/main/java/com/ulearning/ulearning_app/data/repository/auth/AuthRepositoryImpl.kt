@@ -64,4 +64,12 @@ class AuthRepositoryImpl
             Left(Failure.DefaultError(R.string.error_user_message))
         }
     }
+
+    override suspend fun session(): Either<Failure, Boolean> {
+        return if(dataStore.token().isNotEmpty()){
+            Right(true)
+        }else {
+            Right(false)
+        }
+    }
 }

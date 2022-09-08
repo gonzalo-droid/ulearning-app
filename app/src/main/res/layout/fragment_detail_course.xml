@@ -26,8 +26,8 @@
             app:title="Curso" />
 
         <ScrollView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:fillViewport="true"
             app:layout_constrainedHeight="true"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -41,7 +41,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/dimen16"
                 tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp">
+                tools:layout_editor_absoluteY="0dp"
+                android:layout_marginBottom="@dimen/dimen40">
 
 
                 <androidx.constraintlayout.widget.Guideline
@@ -258,6 +259,57 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/topicBtn"
+                    style="?attr/materialCardViewElevatedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen8"
+                    android:elevation="@dimen/dimen1"
+                    app:layout_constraintTop_toBottomOf="@+id/sectionTopicLayout"
+                    android:onClick="@{()->detailCourseViewModel.setEvent(detailCourseViewModel.Events.goToTopic)}"
+                    app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
+                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/minimumBalanceBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textView140"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="@dimen/dimen14"
+                            android:paddingStart="@dimen/dimen10"
+                            android:paddingTop="@dimen/dimen10"
+                            android:paddingBottom="@dimen/dimen10"
+                            android:text="Temario"
+                            android:textAppearance="@style/readex_16_regular"
+                            android:textColor="@color/gray2"
+                            app:drawableStartCompat="@drawable/ic_topic"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/arrowImage"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/arrowImage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/dimen10"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:srcCompat="@drawable/ic_arrow_right" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
                 <TextView
                     android:id="@+id/teacherTitle"
                     android:layout_width="wrap_content"
@@ -265,7 +317,7 @@
                     android:layout_marginTop="@dimen/dimen15"
                     android:text="Nuestros docentes"
                     android:textAppearance="@style/readex_14_regular"
-                    app:layout_constraintTop_toBottomOf="@+id/sectionTopicLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/topicBtn"
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"/>
@@ -282,6 +334,64 @@
                     app:layout_constraintTop_toBottomOf="@+id/teacherTitle"
                     tools:listitem="@layout/list_teacher_item" />
 
+
+
+
+                <TextView
+                    android:id="@+id/commentText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen15"
+                    android:text="Mi valoración del curso"
+                    android:textAppearance="@style/readex_14_regular"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler"
+                    app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine"/>
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_marginTop="@dimen/dimen15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@+id/rightGuideLine"
+                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
+                    app:layout_constraintTop_toBottomOf="@+id/commentText" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/commentInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen20"
+                    android:hint="Ingresa tu comentario"
+                    app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
+                    app:layout_constraintTop_toBottomOf="@+id/ratingBar">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <Button
+                    android:id="@+id/sendBtnd"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen17"
+                    android:layout_marginBottom="@dimen/dimen100"
+                    android:text="Enviar comentario"
+                    android:onClick="@{()->detailCourseViewModel.setEvent(detailCourseViewModel.Events.sendComment)}"
+                    style="@style/Widget.Material3.Button"
+                    app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
+                    app:layout_constraintTop_toBottomOf="@+id/commentInput"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:ignore="HardcodedText" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

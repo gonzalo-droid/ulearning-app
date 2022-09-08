@@ -5,9 +5,9 @@ import com.ulearning.ulearning_app.presentation.base.UiEffect
 
 sealed class DetailCourseEffect : UiEffect {
 
-    object ShowSuccess : DetailCourseEffect()
-
     object Logout : DetailCourseEffect()
+
+    object ShowTopic : DetailCourseEffect()
 
     data class ShowMessageFailure constructor(val failure: Failure) : DetailCourseEffect()
 }

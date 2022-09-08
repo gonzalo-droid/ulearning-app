@@ -98,10 +98,6 @@ class HomeFragment :
         showLoadingDialog()
     }
 
-    override fun detailCourseActivity() {
-
-    }
-
     override fun courseRecentlyList(courses: List<Subscription>) {
         closeLoadingDialog()
 

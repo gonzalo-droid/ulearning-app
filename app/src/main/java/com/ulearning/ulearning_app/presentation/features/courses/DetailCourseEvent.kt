@@ -7,4 +7,8 @@ sealed class DetailCourseEvent : UiEvent {
 
     object DataDetailCourseClicked : DetailCourseEvent()
 
+    object GoToTopic : DetailCourseEvent()
+
+    object SendComment : DetailCourseEvent()
+
 }

@@ -27,10 +27,8 @@ class HomeViewModel
 
     override fun handleEvent(event: HomeEvent) {
         when (event) {
-            HomeEvent.GoToCoursesClicked -> goCourses()
             HomeEvent.RecentlyCoursesHomeClicked -> listRecentlyCourses()
             HomeEvent.CoursesHomeClicked -> listCoursesHome()
-
         }
     }
 
@@ -54,9 +52,6 @@ class HomeViewModel
         }
     }
 
-    private fun goCourses() {
-
-    }
 
     private fun handleFailure(failure: Failure) {
         setEffect { HomeEffect.ShowMessageFailure(failure = failure) }
@@ -71,6 +66,5 @@ class HomeViewModel
     }
 
     companion object Events {
-        val goToCoursesClicked = HomeEvent.GoToCoursesClicked
     }
 }

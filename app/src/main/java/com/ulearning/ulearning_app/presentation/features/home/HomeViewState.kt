@@ -9,8 +9,6 @@ interface HomeViewState {
 
     fun loading()
 
-    fun detailCourseActivity()
-
     fun courseList(courses : List<Subscription>)
 
     fun courseRecentlyList(courses : List<Subscription>)

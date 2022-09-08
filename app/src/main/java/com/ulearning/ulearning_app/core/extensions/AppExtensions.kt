@@ -3,6 +3,8 @@ package com.ulearning.ulearning_app.core.extensions
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Build
+import android.text.Html
+import android.text.Spanned
 import android.util.Base64.DEFAULT
 import android.util.Base64.encodeToString
 import androidx.appcompat.app.AppCompatActivity
@@ -40,6 +42,14 @@ fun String.encode(): String {
         this.toByteArray(charset("UTF-8")),
         android.util.Base64.DEFAULT
     )
+}
+
+fun String.html() : Spanned {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Html.fromHtml(this, Html.FROM_HTML_MODE_COMPACT)
+    } else {
+        Html.fromHtml(this)
+    }
 }
 
 fun String.decode(): String {

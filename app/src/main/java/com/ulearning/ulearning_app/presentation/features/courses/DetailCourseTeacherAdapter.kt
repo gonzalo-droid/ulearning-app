@@ -35,7 +35,7 @@ class DetailCourseTeacherAdapter constructor(
 
             binding.nameText.text  = "${model.firstName} ${model.lastName}"
 
-            binding.roleText.text  = model.subtype
+            binding.roleText.text  = model.formatSubtype()
 
 
         }

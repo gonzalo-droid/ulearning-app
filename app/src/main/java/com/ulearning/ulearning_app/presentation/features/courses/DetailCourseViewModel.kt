@@ -19,7 +19,12 @@ class DetailCourseViewModel
     override fun handleEvent(event: DetailCourseEvent) {
         when (event) {
             DetailCourseEvent.DataDetailCourseClicked -> getDetailCourse()
+            DetailCourseEvent.GoToTopic -> goTopic()
         }
+    }
+
+    private fun goTopic() {
+        setEffect { DetailCourseEffect.ShowTopic }
     }
 
 
@@ -35,13 +40,9 @@ class DetailCourseViewModel
         setState { DetailCourseState.DataDetailCourse(data = data) }
     }
 
-    private fun handleLogout(value : Boolean) {
-        setEffect { DetailCourseEffect.Logout }
-    }
-
 
     companion object Events {
-        val dataDetailCourseClicked = DetailCourseEvent.DataDetailCourseClicked
-
+        val goToTopic = DetailCourseEvent.GoToTopic
+        val sendComment = DetailCourseEvent.SendComment
     }
 }

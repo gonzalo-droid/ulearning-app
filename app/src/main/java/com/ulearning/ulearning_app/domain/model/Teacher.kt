@@ -9,6 +9,17 @@ data class Teacher(
     val lastName: String? = "",
     val subtype: String? = "",
     val type: String? = ""
-)  : Serializable {
+) : Serializable {
 
+    fun formatSubtype(): String {
+        return when (this.subtype) {
+            "tutor" -> "Tutor"
+            "instructor" -> "Instructor"
+            "facilitator" -> "Facilitador"
+            "academic_tutor" -> "Tutor académico"
+            "umbrella_tutor" -> "Tutor sombrilla"
+            "administrative_tutor" -> "Tutor administrativo"
+            else -> ""
+        }
+    }
 }
