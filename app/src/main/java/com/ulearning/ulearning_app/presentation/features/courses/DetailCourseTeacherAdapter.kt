@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.R
-import com.ulearning.ulearning_app.databinding.ListTeacherItemBinding
+import com.ulearning.ulearning_app.databinding.ItemTeacherBinding
 import com.ulearning.ulearning_app.domain.model.Teacher
 
 class DetailCourseTeacherAdapter constructor(
@@ -15,7 +15,7 @@ class DetailCourseTeacherAdapter constructor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         return CustomViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.list_teacher_item, parent, false)
+                .inflate(R.layout.item_teacher, parent, false)
         )
     }
 
@@ -28,7 +28,7 @@ class DetailCourseTeacherAdapter constructor(
 
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
 
-        val binding = ListTeacherItemBinding.bind(view)
+        val binding = ItemTeacherBinding.bind(view)
 
 
         fun bind(model: Teacher) {

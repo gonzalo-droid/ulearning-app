@@ -332,7 +332,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
                     app:layout_constraintTop_toBottomOf="@+id/teacherTitle"
-                    tools:listitem="@layout/list_teacher_item" />
+                    tools:listitem="@layout/item_teacher" />
 
 
 
