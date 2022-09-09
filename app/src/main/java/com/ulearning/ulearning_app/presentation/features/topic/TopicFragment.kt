@@ -8,10 +8,13 @@ import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.functional.Failure
+import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.FragmentTopicBinding
+import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.model.Topic
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
+import com.ulearning.ulearning_app.presentation.features.courses.DetailCourseTeacherAdapter
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,11 +30,13 @@ class TopicFragment :
 
     override val dataBindingViewModel = BR.topicViewModel
 
-    private lateinit var subscription: Subscription
-
     private lateinit var recycler: RecyclerView
 
     private lateinit var adapter: TopicAdapter
+
+    private var courseId: Int = 0
+
+    private lateinit var course : Course
 
     override fun onViewIsCreated(view: View) {
 
@@ -43,13 +48,22 @@ class TopicFragment :
 
         recycler = binding.recycler
 
-        recycler.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        recycler.layoutManager = LinearLayoutManager(requireActivity())
 
         observeUiStates()
     }
 
     private fun observeUiStates() {
 
+        courseId = requireArguments().getInt(Config.COURSE_ID_PUT)
+
+        course = requireArguments().getSerializable(Config.COURSE) as Course
+
+        binding.topBarInclude.title = course.title
+
+        viewModel.courseId = courseId
+
+        viewModel.setEvent(TopicEvent.GoToTopic)
 
         viewModel.apply {
             lifecycleScopeCreate(activity = requireActivity(), method = {
@@ -80,6 +94,24 @@ class TopicFragment :
     }
 
     override fun getTopics(topics: List<Topic>) {
-        TODO("Not yet implemented")
+
+        closeLoadingDialog()
+
+        val mutableTopics : MutableList<Topic> = mutableListOf()
+
+
+        topics.forEach {
+
+            mutableTopics.add(it)
+
+            it.children!!.reversed().forEach { child ->
+                mutableTopics.add(child)
+            }
+        }
+
+
+        adapter = TopicAdapter(topics = mutableTopics)
+
+        recycler.adapter = adapter
     }
 }

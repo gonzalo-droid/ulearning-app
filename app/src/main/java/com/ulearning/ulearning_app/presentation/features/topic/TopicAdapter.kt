@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.topic
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,10 +33,12 @@ class TopicAdapter constructor(
 
 
         fun bind(model: Topic) {
-
+            Log.d("TOPIC", model.parentId.toString())
             binding.titleText.text  = model.title
 
-        }
+            val icon = if( model.parentId == null ) R.drawable.ic_flag  else R.drawable.ic_check_circle
 
+            binding.topicImage.setImageResource(icon)
+        }
     }
 }

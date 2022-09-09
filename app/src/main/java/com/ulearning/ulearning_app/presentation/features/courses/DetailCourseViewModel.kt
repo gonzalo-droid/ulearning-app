@@ -20,6 +20,7 @@ class DetailCourseViewModel
         when (event) {
             DetailCourseEvent.DataDetailCourseClicked -> getDetailCourse()
             DetailCourseEvent.GoToTopic -> goTopic()
+            DetailCourseEvent.SendComment -> {}
         }
     }
 

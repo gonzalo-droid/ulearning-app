@@ -28,5 +28,7 @@ class SettingRemote {
         const val IMAGE_JPG = "image/jpg"
         const val REGION_APP = "es_PE"
         const val SYMBOL_MILLIONS = ","
+
+        const val COURSE_ID = "course_id"
     }
 }

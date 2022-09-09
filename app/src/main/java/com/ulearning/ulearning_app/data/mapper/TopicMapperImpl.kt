@@ -15,7 +15,7 @@ class TopicMapperImpl : TopicMapper {
                 courseId = it.courseId,
                 id = it.id,
                 order = it.order,
-                parentId = it.order,
+                parentId = it.parentId,
                 title = it.title,
                 type = it.type,
             )

@@ -1,16 +1,20 @@
 package com.ulearning.ulearning_app.presentation.features.courses
 
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
+import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.html
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.FragmentDetailCourseBinding
+import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
@@ -35,6 +39,10 @@ class DetailCourseFragment :
 
     private lateinit var adapter: DetailCourseTeacherAdapter
 
+    private var courseId: Int = 0
+
+    private lateinit var course : Course
+
     override fun onViewIsCreated(view: View) {
 
         DetailCourseReducer.instance(viewState = this)
@@ -45,7 +53,8 @@ class DetailCourseFragment :
 
         recycler = binding.recycler
 
-        recycler.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        recycler.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
 
         observeUiStates()
     }
@@ -53,6 +62,10 @@ class DetailCourseFragment :
     private fun observeUiStates() {
 
         subscription = requireArguments().getSerializable(Config.SUBSCRIPTION_PUT) as Subscription
+
+        courseId = subscription.course_id!!
+
+        course = subscription.course!!
 
         setDetailCourse(subscription)
 
@@ -84,8 +97,20 @@ class DetailCourseFragment :
         showLoadingDialog()
     }
 
+    override fun goTopic() {
+
+        findNavController().navigate(
+            R.id.action_detailCourseFragment_to_topicFragment,
+            Bundle().apply {
+                putInt(Config.COURSE_ID_PUT, courseId)
+                putSerializable(Config.COURSE, course)
+            }
+        )
+
+    }
+
     private fun setDetailCourse(data: Subscription) {
-        with(binding){
+        with(binding) {
 
             topBarInclude.title = data.course!!.title
             titleText.text = data.course!!.title
@@ -98,10 +123,5 @@ class DetailCourseFragment :
 
             recycler.adapter = adapter
         }
-    }
-
-
-    override fun getDataDetailCourse(data: Subscription) {
-
     }
 }

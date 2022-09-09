@@ -8,16 +8,13 @@ import com.ulearning.ulearning_app.data.remote.entities.response.SubscriptionRes
 import com.ulearning.ulearning_app.data.remote.entities.response.TopicResponse
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface TopicApi {
 
-    @GET("topics_preview")
+    @GET("topics_preview/{${SettingRemote.COURSE_ID}}")
     suspend fun topics(
         @Header(SettingRemote.AUTHORIZATION) token: String,
-        @Query("course_id") course_id: Int,
+        @Path(SettingRemote.COURSE_ID) courseId: Int,
     ): Response<BaseResponse<List<TopicResponse>>>
 }

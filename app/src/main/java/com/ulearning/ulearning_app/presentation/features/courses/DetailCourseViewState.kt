@@ -9,5 +9,5 @@ interface DetailCourseViewState {
 
     fun loading()
 
-    fun getDataDetailCourse(data : Subscription)
+    fun goTopic()
 }

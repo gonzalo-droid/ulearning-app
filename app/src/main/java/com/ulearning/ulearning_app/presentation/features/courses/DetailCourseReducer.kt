@@ -15,16 +15,14 @@ object DetailCourseReducer {
 
             is DetailCourseState.Loading -> viewState.loading()
 
-            is DetailCourseState.DataDetailCourse -> {
-                viewState.getDataDetailCourse(data = state.data)
-            }
+            is DetailCourseState.DataDetailCourse -> {}
         }
     }
 
     fun selectEffect(effect: DetailCourseEffect) {
         when (effect) {
             is DetailCourseEffect.ShowMessageFailure -> viewState.messageFailure(effect.failure)
-            else -> {}
+            is DetailCourseEffect.ShowTopic -> viewState.goTopic()
         }
     }
 }

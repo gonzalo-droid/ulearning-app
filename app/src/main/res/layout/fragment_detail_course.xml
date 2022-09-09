@@ -27,22 +27,23 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:fillViewport="true"
             app:layout_constrainedHeight="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/topBarInclude">
+            app:layout_constraintTop_toBottomOf="@+id/topBarInclude"
+            app:layout_constraintVertical_bias="0.0">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/dimen16"
+                android:layout_marginBottom="@dimen/dimen40"
                 tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp"
-                android:layout_marginBottom="@dimen/dimen40">
+                tools:layout_editor_absoluteY="0dp">
 
 
                 <androidx.constraintlayout.widget.Guideline
@@ -112,12 +113,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dimen10"
-                        tools:text="24hr"
                         android:textAppearance="@style/readex_16_medium"
                         android:textColor="@color/blue"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imageView3"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="24hr" />
 
                     <TextView
                         android:id="@+id/descriptionTimeText"
@@ -169,12 +170,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dimen10"
-                        tools:text="Virtual"
                         android:textAppearance="@style/readex_16_medium"
                         android:textColor="@color/blue"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/modalityImage"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Virtual" />
 
                     <TextView
                         android:id="@+id/descriptionmodalityText"
@@ -199,7 +200,6 @@
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -228,12 +228,12 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dimen10"
-                        tools:text="4"
                         android:textAppearance="@style/readex_16_medium"
                         android:textColor="@color/blue"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/topicImage"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="4" />
 
                     <TextView
                         android:id="@+id/descriptiontopicText"
@@ -267,10 +267,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen8"
                     android:elevation="@dimen/dimen1"
-                    app:layout_constraintTop_toBottomOf="@+id/sectionTopicLayout"
                     android:onClick="@{()->detailCourseViewModel.setEvent(detailCourseViewModel.Events.goToTopic)}"
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
-                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine">
+                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
+                    app:layout_constraintTop_toBottomOf="@+id/sectionTopicLayout">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/minimumBalanceBtn"
@@ -300,10 +300,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/dimen10"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:srcCompat="@drawable/ic_arrow_right" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -317,10 +317,10 @@
                     android:layout_marginTop="@dimen/dimen15"
                     android:text="Nuestros docentes"
                     android:textAppearance="@style/readex_14_regular"
-                    app:layout_constraintTop_toBottomOf="@+id/topicBtn"
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine"/>
+                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
+                    app:layout_constraintTop_toBottomOf="@+id/topicBtn" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler"
@@ -335,8 +335,6 @@
                     tools:listitem="@layout/item_teacher" />
 
 
-
-
                 <TextView
                     android:id="@+id/commentText"
                     android:layout_width="wrap_content"
@@ -344,16 +342,18 @@
                     android:layout_marginTop="@dimen/dimen15"
                     android:text="Mi valoración del curso"
                     android:textAppearance="@style/readex_14_regular"
-                    app:layout_constraintTop_toBottomOf="@+id/recycler"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine"/>
+                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
+                    app:layout_constraintTop_toBottomOf="@+id/recycler" />
 
                 <RatingBar
                     android:id="@+id/ratingBar"
-                    android:layout_marginTop="@dimen/dimen15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen15"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toStartOf="@+id/rightGuideLine"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
                     app:layout_constraintTop_toBottomOf="@+id/commentText" />
@@ -364,6 +364,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen20"
                     android:hint="Ingresa tu comentario"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
@@ -371,26 +372,26 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        />
+                        android:layout_height="wrap_content" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
 
                 <Button
                     android:id="@+id/sendBtnd"
+                    style="@style/Widget.Material3.Button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen17"
                     android:layout_marginBottom="@dimen/dimen100"
-                    android:text="Enviar comentario"
                     android:onClick="@{()->detailCourseViewModel.setEvent(detailCourseViewModel.Events.sendComment)}"
-                    style="@style/Widget.Material3.Button"
+                    android:text="Enviar comentario"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
                     app:layout_constraintTop_toBottomOf="@+id/commentInput"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     tools:ignore="HardcodedText" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

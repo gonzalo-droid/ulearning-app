@@ -53,5 +53,7 @@ object Config {
         "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{8,}$"
 
 
-    const val SUBSCRIPTION_PUT = "subcription"
+    const val SUBSCRIPTION_PUT = "subscription"
+    const val COURSE_ID_PUT = "courseId"
+    const val COURSE = "course"
 }

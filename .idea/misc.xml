@@ -10,8 +10,10 @@
         <entry key="app/src/main/res/drawable/bg_rounded_outline.xml" value="0.1635" />
         <entry key="app/src/main/res/drawable/bottom_nav_line_selector.xml" value="0.246" />
         <entry key="app/src/main/res/drawable/ic_baseline_android_24.xml" value="0.256" />
+        <entry key="app/src/main/res/drawable/ic_check_circle.xml" value="0.1805" />
         <entry key="app/src/main/res/drawable/ic_close.xml" value="0.261" />
         <entry key="app/src/main/res/drawable/ic_course.xml" value="0.261" />
+        <entry key="app/src/main/res/drawable/ic_flag.xml" value="0.1805" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.256" />
         <entry key="app/src/main/res/drawable/ic_modality.xml" value="0.338" />
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.2335" />
