@@ -88,7 +88,6 @@ class HomeFragment :
     }
 
     override fun messageFailure(failure: Failure) {
-        //closeLoadingDialog()
 
         closeShimmer()
 
@@ -100,13 +99,11 @@ class HomeFragment :
     override fun loading() {
         with(binding){
             successLayout.isVisible = false
-            includeLoading.loadingLayout.isVisible = true
+            loadingLayout.isVisible = true
         }
-        //showLoadingDialog()
     }
 
     override fun courseRecentlyList(courses: List<Subscription>) {
-        //closeLoadingDialog()
 
         closeShimmer()
         courseRecentlyList = courses
@@ -123,7 +120,6 @@ class HomeFragment :
     }
 
     override fun  courseList(courses: List<Subscription>) {
-        //closeLoadingDialog()
 
         closeShimmer()
 
@@ -139,7 +135,7 @@ class HomeFragment :
     private fun closeShimmer() {
         with(binding){
             successLayout.isVisible = true
-            includeLoading.loadingLayout.isVisible = false
+            loadingLayout.isVisible = false
         }
     }
 

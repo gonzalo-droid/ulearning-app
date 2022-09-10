@@ -1,6 +1,7 @@
 package com.ulearning.ulearning_app.presentation.features.courses
 
 import android.view.View
+import androidx.core.view.ViewCompat.setOnApplyWindowInsetsListener
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -66,7 +67,7 @@ class DetailCourseFragment :
 
         subscription = requireArguments().getSerializable(Config.SUBSCRIPTION_PUT) as Subscription
 
-        viewModel.courseId = subscription.course_id!!
+        viewModel.courseId = subscription?.course_id!!
 
         setDetailCourse(subscription)
 
@@ -104,7 +105,7 @@ class DetailCourseFragment :
 
         closeLoadingDialog()
 
-        val mutableTopics : MutableList<Topic> = mutableListOf()
+        val mutableTopics: MutableList<Topic> = mutableListOf()
 
 
         topics.forEach {
@@ -135,16 +136,14 @@ class DetailCourseFragment :
 
     private fun setDetailCourse(data: Subscription) {
         with(binding) {
+            topBarInclude.title = data.course?.title
+            titleText.text = data.course?.title
 
-            topBarInclude.title = data.course!!.title
-            titleText.text = data.course!!.title
-            descriptionText.text = data.course!!.descriptionShort!!.html()
-            timeText.text = data.course!!.formatAsynchronousHour()
-            modalityText.text = data.course!!.formatModality()
-            topicText.text = data.course!!.lessonsCount.toString()
-
-            adapter = DetailCourseTeacherAdapter(teachers = data.group!!.teachers!!)
-
+            descriptionText.text = data.course?.descriptionShort?.html()
+            timeText.text = data.course?.formatAsynchronousHour()
+            modalityText.text = data.course?.formatModality()
+            topicText.text = data.course?.lessonsCount.toString()
+            adapter = DetailCourseTeacherAdapter(teachers = data.group?.teachers?: arrayListOf())
             recycler.adapter = adapter
         }
     }

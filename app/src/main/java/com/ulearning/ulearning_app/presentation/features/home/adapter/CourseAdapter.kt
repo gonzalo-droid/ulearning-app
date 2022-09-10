@@ -34,9 +34,9 @@ class CourseAdapter constructor(
 
         fun bind(model: Subscription, onClickListener: (Subscription) -> Unit) {
 
-            binding.categoryText.text  = model.course!!.category!!.name
+            binding.categoryText.text  = model.course?.category?.name
 
-            binding.titleText.text  = model.course!!.title
+            binding.titleText.text  = model.course?.title
 
             itemView.setOnClickListener {
                 onClickListener(model)

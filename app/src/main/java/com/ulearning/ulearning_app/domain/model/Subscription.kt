@@ -34,7 +34,7 @@ data class Subscription(
 )  : Serializable {
 
     fun getTime() : String {
-        return this.course!!.formatAsynchronousHour()
+        return this.course?.formatAsynchronousHour() ?: ""
     }
 
 }

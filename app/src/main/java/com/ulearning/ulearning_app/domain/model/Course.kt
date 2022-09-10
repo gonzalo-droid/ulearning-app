@@ -14,7 +14,7 @@ data class Course(
     var couponId: Any?= null,
     var currency: String?= "",
     var descriptionLarge: String?= "",
-    var descriptionShort: String?= "",
+    var descriptionShort: String? = "",
     var discount: Any?= null,
     var duration: String?= "",
     var externalId: String?= "",

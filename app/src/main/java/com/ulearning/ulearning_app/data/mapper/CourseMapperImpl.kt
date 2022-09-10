@@ -13,42 +13,42 @@ class CourseMapperImpl : CourseMapper {
         return data.map {
             Subscription(
                 course = Course(
-                    category = if (it.course!!.category != null) Category(
-                        color = it.course!!.category!!.color,
-                        description = it.course!!.category!!.description,
-                        id = it.course!!.category!!.id,
-                        name = it.course!!.category!!.name,
-                        type = it.course!!.category!!.type
+                    category = if (it.course?.category != null) Category(
+                        color = it.course?.category?.color,
+                        description = it.course?.category?.description,
+                        id = it.course?.category?.id,
+                        name = it.course?.category?.name,
+                        type = it.course?.category?.type
                     ) else null,
-                    categoryId = it.course!!.categoryId,
-                    descriptionLarge = it.course!!.descriptionLarge,
-                    descriptionShort = it.course!!.descriptionShort,
-                    mainImage = if (it.course!!.mainImage != null) MainImage(
-                        originalUrl = it.course!!.mainImage!!.originalUrl!!,
-                        previewUrl = it.course!!.mainImage!!.previewUrl!!,
+                    categoryId = it.course?.categoryId,
+                    descriptionLarge = it.course?.descriptionLarge,
+                    descriptionShort = it.course?.descriptionShort,
+                    mainImage = if (it.course?.mainImage != null) MainImage(
+                        originalUrl = it.course?.mainImage?.originalUrl,
+                        previewUrl = it.course?.mainImage?.previewUrl,
                     ) else null,
-                    title = it.course!!.title,
-                    id = it.course!!.id,
-                    lessonsCount = it.course!!.lessonsCount,
-                    modality = it.course!!.modality,
-                    asynchronousHour = it.course!!.asynchronousHour,
+                    title = it.course?.title,
+                    id = it.course?.id,
+                    lessonsCount = it.course?.lessonsCount,
+                    modality = it.course?.modality,
+                    asynchronousHour = it.course?.asynchronousHour,
                 ),
                 user = User(
-                    name = it.userResponse!!.name,
+                    name = it.userResponse?.name,
                 ),
                 course_id = it.courseId,
                 group = Group(
-                    id = it.group!!.id,
-                    name = it.group!!.name,
-                    teachers = if(!it.group!!.teachers.isNullOrEmpty()) listTeacherToDomain(it.group!!.teachers!!) else arrayListOf(),
+                    id = it.group?.id,
+                    name = it.group?.name,
+                    teachers = if(!it.group?.teachers.isNullOrEmpty()) listTeacherToDomain(it.group?.teachers) else arrayListOf(),
                 ),
                 group_id = it.groupId,
             )
         }
     }
 
-    private fun listTeacherToDomain(data: List<TeacherResponse>): List<Teacher> {
-        return data.map {
+    private fun listTeacherToDomain(data: List<TeacherResponse>?): List<Teacher>? {
+        return data?.map {
             Teacher(
                 avatar = it.avatar,
                 firstName = it.firstName,

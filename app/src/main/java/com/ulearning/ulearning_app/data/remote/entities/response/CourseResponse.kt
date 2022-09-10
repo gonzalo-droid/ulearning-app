@@ -28,7 +28,7 @@ data class CourseResponse(
     @SerializedName("description_large")
     var descriptionLarge: String?= "",
     @SerializedName("description_short")
-    var descriptionShort: String?= "",
+    var descriptionShort: String? = "",
     @SerializedName("discount")
     var discount: Any?= Any(),
     @SerializedName("duration")
