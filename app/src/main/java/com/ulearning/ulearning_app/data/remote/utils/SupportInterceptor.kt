@@ -15,7 +15,6 @@ class SupportInterceptor @Inject constructor(): Interceptor {
         request = request.newBuilder()
             .addHeader("Content-Type", SettingRemote.CONTENT_TYPE_JSON)
             .addHeader("Accept", SettingRemote.ACCEPT_JSON)
-            .addHeader(SettingRemote.HEADER_AUTH_KEY, SettingRemote.HEADER_AUTH_VALUE)
             .build()
         return chain.proceed(request)
     }

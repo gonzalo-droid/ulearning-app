@@ -6,9 +6,11 @@ plugins {
     id 'androidx.navigation.safeargs'
     id 'org.jlleitschuh.gradle.ktlint'
     id "com.google.protobuf" version "0.8.18"
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
-def versionNumber = 1
+def versionNumber = 2
 def typeBuild = "QA"
 
 android {
@@ -20,7 +22,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 33
         versionCode versionNumber
-        versionName "1.0.0-${versionNumber}A:${typeBuild}"
+        versionName "1.0.${versionNumber}A:${typeBuild}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -46,7 +48,7 @@ android {
 
         prod {
             dimension 'versionFlavor'
-            buildConfigField 'String', 'BASE_URL', '"https://api.ulearning.com.pe/api/"'
+            buildConfigField 'String', 'BASE_URL', '"https://sandbox.api.ulearning.com.pe/api/"'
             buildConfigField 'boolean', 'IS_SHOW_LOG', 'false'
             buildConfigField 'boolean', 'DEBUG', 'false'
         }
