@@ -43,7 +43,6 @@ class HomeViewModel
     }
 
     private fun listRecentlyCourses() {
-        setState { HomeState.Loading }
 
         getCoursesSubscriptionUseCase(
             GetCoursesSubscriptionUseCase.Params(page = page, isFinished = !isFinished)

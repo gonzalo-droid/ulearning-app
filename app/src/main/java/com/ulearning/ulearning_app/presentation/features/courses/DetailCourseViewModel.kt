@@ -2,15 +2,20 @@ package com.ulearning.ulearning_app.presentation.features.courses
 
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Subscription
+import com.ulearning.ulearning_app.domain.model.Topic
+import com.ulearning.ulearning_app.domain.useCase.topic.GetTopicUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
+import com.ulearning.ulearning_app.presentation.features.topic.TopicState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailCourseViewModel
 @Inject constructor(
-
+    private val getTopicUseCase: GetTopicUseCase
 ) : BaseViewModel<DetailCourseEvent, DetailCourseState, DetailCourseEffect>() {
+
+    var courseId = 0
 
     override fun createInitialState(): DetailCourseState {
         return DetailCourseState.Idle
@@ -19,15 +24,20 @@ class DetailCourseViewModel
     override fun handleEvent(event: DetailCourseEvent) {
         when (event) {
             DetailCourseEvent.DataDetailCourseClicked -> getDetailCourse()
-            DetailCourseEvent.GoToTopic -> goTopic()
+            DetailCourseEvent.GoToTopic -> getTopic()
             DetailCourseEvent.SendComment -> {}
         }
     }
 
-    private fun goTopic() {
-        setEffect { DetailCourseEffect.ShowTopic }
-    }
+    private fun getTopic() {
+        setState { DetailCourseState.Loading }
 
+        getTopicUseCase(
+            GetTopicUseCase.Params(courseId = courseId)
+        ) {
+            it.either(::handleFailure, ::handleTopics)
+        }
+    }
 
     private fun getDetailCourse() {
         setState { DetailCourseState.Loading }
@@ -37,8 +47,8 @@ class DetailCourseViewModel
         setEffect { DetailCourseEffect.ShowMessageFailure(failure = failure) }
     }
 
-    private fun handleDetailCourse(data: Subscription) {
-        setState { DetailCourseState.DataDetailCourse(data = data) }
+    private fun handleTopics(topics: List<Topic>) {
+        setState { DetailCourseState.ListTopic(topics = topics) }
     }
 
 

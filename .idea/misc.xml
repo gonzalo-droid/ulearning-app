@@ -29,15 +29,20 @@
         <entry key="app/src/main/res/layout/dialog_fragment_loading.xml" value="0.3359375" />
         <entry key="app/src/main/res/layout/fragment_course.xml" value="0.2947916666666667" />
         <entry key="app/src/main/res/layout/fragment_courses.xml" value="0.20677083333333332" />
-        <entry key="app/src/main/res/layout/fragment_detail_course.xml" value="0.3359375" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3359375" />
+        <entry key="app/src/main/res/layout/fragment_detail_course.xml" value="0.363855421686747" />
+        <entry key="app/src/main/res/layout/fragment_detail_course_v2.xml" value="0.34791666666666665" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1875" />
+        <entry key="app/src/main/res/layout/fragment_home_loading.xml" value="0.34791666666666665" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_topic.xml" value="0.5" />
         <entry key="app/src/main/res/layout/home_top_bar.xml" value="0.33489583333333334" />
         <entry key="app/src/main/res/layout/include_profile_header.xml" value="0.3359375" />
-        <entry key="app/src/main/res/layout/item_topic.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/item_courses.xml" value="0.34791666666666665" />
+        <entry key="app/src/main/res/layout/item_courses_loading.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/item_topic.xml" value="0.5" />
         <entry key="app/src/main/res/layout/list_courses_item.xml" value="0.33489583333333334" />
-        <entry key="app/src/main/res/layout/list_courses_recently_item.xml" value="0.55" />
+        <entry key="app/src/main/res/layout/list_courses_recently_item.xml" value="0.34791666666666665" />
+        <entry key="app/src/main/res/layout/list_courses_recently_item_loading.xml" value="0.22870370370370371" />
         <entry key="app/src/main/res/layout/list_teacher_item.xml" value="0.67" />
         <entry key="app/src/main/res/layout/top_bar_simple.xml" value="0.3359375" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.31927083333333334" />

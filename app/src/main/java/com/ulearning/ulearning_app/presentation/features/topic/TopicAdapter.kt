@@ -21,7 +21,7 @@ class TopicAdapter constructor(
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.bind(topics[position])
+        holder.bind(topics[position], position)
     }
 
     override fun getItemCount(): Int = topics.size
@@ -32,9 +32,11 @@ class TopicAdapter constructor(
         val binding = ItemTopicBinding.bind(view)
 
 
-        fun bind(model: Topic) {
-            Log.d("TOPIC", model.parentId.toString())
+        fun bind(model: Topic, position : Int) {
+
             binding.titleText.text  = model.title
+
+            binding.dividerTopic.visibility = if((position+1) == itemCount) View.INVISIBLE else View.VISIBLE
 
             val icon = if( model.parentId == null ) R.drawable.ic_flag  else R.drawable.ic_check_circle
 

@@ -28,8 +28,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingBottom="@dimen/dimen40"
+            android:fillViewport="true"
             app:layout_constrainedHeight="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -132,15 +131,16 @@
                         app:layout_constraintStart_toStartOf="@+id/timeText"
                         app:layout_constraintTop_toBottomOf="@+id/timeText" />
 
-                    <com.google.android.material.divider.MaterialDivider
+                    <View
                         android:id="@+id/dividerTime"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="1dp"
                         android:layout_marginTop="@dimen/dimen10"
-                        app:dividerColor="@color/divider_color_soft"
+                        android:background="@color/divider_color_soft"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/descriptionTimeText" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -178,7 +178,7 @@
                         tools:text="Virtual" />
 
                     <TextView
-                        android:id="@+id/descriptionModalityText"
+                        android:id="@+id/descriptionmodalityText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:drawablePadding="@dimen/dimen14"
@@ -188,16 +188,15 @@
                         app:layout_constraintStart_toStartOf="@+id/modalityText"
                         app:layout_constraintTop_toBottomOf="@+id/modalityText" />
 
-
-                    <com.google.android.material.divider.MaterialDivider
-                        android:id="@+id/dividerModality"
+                    <View
+                        android:id="@+id/dividarModality"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="1dp"
                         android:layout_marginTop="@dimen/dimen10"
-                        app:dividerColor="@color/divider_color_soft"
+                        android:background="@color/divider_color_soft"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/descriptionModalityText" />
+                        app:layout_constraintTop_toBottomOf="@+id/descriptionmodalityText" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -237,7 +236,7 @@
                         tools:text="4" />
 
                     <TextView
-                        android:id="@+id/descriptionTopicText"
+                        android:id="@+id/descriptiontopicText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:drawablePadding="@dimen/dimen14"
@@ -247,18 +246,69 @@
                         app:layout_constraintStart_toStartOf="@+id/topicText"
                         app:layout_constraintTop_toBottomOf="@+id/topicText" />
 
-                    <com.google.android.material.divider.MaterialDivider
-                        android:id="@+id/dividerTopic"
+                    <View
+                        android:id="@+id/dividarTopic"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="1dp"
                         android:layout_marginTop="@dimen/dimen10"
-                        app:dividerColor="@color/divider_color_soft"
+                        android:background="@color/divider_color_soft"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/descriptionTopicText" />
+                        app:layout_constraintTop_toBottomOf="@+id/descriptiontopicText" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/topicBtn"
+                    style="?attr/materialCardViewElevatedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen8"
+                    android:elevation="@dimen/dimen1"
+                    android:onClick="@{()->detailCourseViewModel.setEvent(detailCourseViewModel.Events.goToTopic)}"
+                    app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
+                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
+                    app:layout_constraintTop_toBottomOf="@+id/sectionTopicLayout">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/minimumBalanceBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textView140"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="@dimen/dimen14"
+                            android:paddingStart="@dimen/dimen10"
+                            android:paddingTop="@dimen/dimen10"
+                            android:paddingBottom="@dimen/dimen10"
+                            android:text="Temario"
+                            android:textAppearance="@style/readex_16_regular"
+                            android:textColor="@color/gray2"
+                            app:drawableStartCompat="@drawable/ic_topic"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/arrowImage"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/arrowImage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/dimen10"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_arrow_right" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
 
 
                 <TextView
@@ -271,7 +321,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
-                    app:layout_constraintTop_toBottomOf="@+id/sectionTopicLayout" />
+                    app:layout_constraintTop_toBottomOf="@+id/topicBtn" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler"
@@ -287,52 +337,59 @@
 
 
                 <TextView
-                    android:id="@+id/topicTitle"
+                    android:id="@+id/commentText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen15"
-                    android:text="Temario"
+                    android:text="Mi valoración del curso"
                     android:textAppearance="@style/readex_14_regular"
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
                     app:layout_constraintTop_toBottomOf="@+id/recycler" />
 
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen15"
+                    app:layout_constraintEnd_toStartOf="@+id/rightGuideLine"
+                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
+                    app:layout_constraintTop_toBottomOf="@+id/commentText" />
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/topicBtn"
-                    style="?attr/materialCardViewElevatedStyle"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/commentInput"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen8"
-                    android:elevation="@dimen/dimen1"
+                    android:layout_marginTop="@dimen/dimen20"
+                    android:hint="Ingresa tu comentario"
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
-                    app:layout_constraintTop_toBottomOf="@+id/topicTitle">
+                    app:layout_constraintTop_toBottomOf="@+id/ratingBar">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/minimumBalanceBtn"
+                    <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="@dimen/dimen5">
+                        android:layout_height="wrap_content" />
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/topicRecycler"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/dimen8"
-                            android:orientation="vertical"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:listitem="@layout/item_topic" />
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
+                <Button
+                    android:id="@+id/sendBtnd"
+                    style="@style/Widget.Material3.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen17"
+                    android:layout_marginBottom="@dimen/dimen100"
+                    android:onClick="@{()->detailCourseViewModel.setEvent(detailCourseViewModel.Events.sendComment)}"
+                    android:text="Enviar comentario"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
+                    app:layout_constraintTop_toBottomOf="@+id/commentInput"
+                    tools:ignore="HardcodedText" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

@@ -23,6 +23,7 @@ class TopicFragment :
     BaseFragmentWithViewModel<FragmentTopicBinding, TopicViewModel>(),
     TopicViewState {
 
+    // TODO, this fragment and flow is not implemented
 
     override val binding: FragmentTopicBinding by dataBinding(FragmentTopicBinding::inflate)
 

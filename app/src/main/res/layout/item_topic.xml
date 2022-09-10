@@ -31,15 +31,16 @@
         app:layout_constraintTop_toTopOf="@+id/topicImage"
         tools:text="Curso del temario 3/5" />
 
-    <View
-        android:id="@+id/dividarTopic"
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/dividerTopic"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen10"
-        android:background="@color/divider_color_soft"
+        app:dividerColor="@color/divider_color_soft"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleText" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

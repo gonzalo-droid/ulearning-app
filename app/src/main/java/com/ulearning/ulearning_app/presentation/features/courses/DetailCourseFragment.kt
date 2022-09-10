@@ -1,22 +1,20 @@
 package com.ulearning.ulearning_app.presentation.features.courses
 
-import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
-import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.html
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.FragmentDetailCourseBinding
-import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.model.Subscription
+import com.ulearning.ulearning_app.domain.model.Topic
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
+import com.ulearning.ulearning_app.presentation.features.topic.TopicAdapter
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,9 +37,10 @@ class DetailCourseFragment :
 
     private lateinit var adapter: DetailCourseTeacherAdapter
 
-    private var courseId: Int = 0
+    private lateinit var topicRecycler: RecyclerView
 
-    private lateinit var course : Course
+    private lateinit var topicAdapter: TopicAdapter
+
 
     override fun onViewIsCreated(view: View) {
 
@@ -56,6 +55,10 @@ class DetailCourseFragment :
         recycler.layoutManager =
             LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
 
+        topicRecycler = binding.topicRecycler
+
+        topicRecycler.layoutManager = LinearLayoutManager(requireActivity())
+
         observeUiStates()
     }
 
@@ -63,11 +66,11 @@ class DetailCourseFragment :
 
         subscription = requireArguments().getSerializable(Config.SUBSCRIPTION_PUT) as Subscription
 
-        courseId = subscription.course_id!!
-
-        course = subscription.course!!
+        viewModel.courseId = subscription.course_id!!
 
         setDetailCourse(subscription)
+
+        viewModel.setEvent(DetailCourseEvent.GoToTopic)
 
         viewModel.apply {
             lifecycleScopeCreate(activity = requireActivity(), method = {
@@ -97,7 +100,28 @@ class DetailCourseFragment :
         showLoadingDialog()
     }
 
-    override fun goTopic() {
+    override fun getTopics(topics: List<Topic>) {
+
+        closeLoadingDialog()
+
+        val mutableTopics : MutableList<Topic> = mutableListOf()
+
+
+        topics.forEach {
+
+            mutableTopics.add(it)
+
+            it.children!!.reversed().forEach { child ->
+                mutableTopics.add(child)
+            }
+        }
+
+
+        topicAdapter = TopicAdapter(topics = mutableTopics)
+
+        topicRecycler.adapter = topicAdapter
+    }
+/*    override fun goTopic() {
 
         findNavController().navigate(
             R.id.action_detailCourseFragment_to_topicFragment,
@@ -107,7 +131,7 @@ class DetailCourseFragment :
             }
         )
 
-    }
+    }*/
 
     private fun setDetailCourse(data: Subscription) {
         with(binding) {

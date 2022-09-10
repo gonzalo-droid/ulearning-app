@@ -2,6 +2,7 @@ package com.ulearning.ulearning_app.presentation.features.home.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -87,7 +88,9 @@ class HomeFragment :
     }
 
     override fun messageFailure(failure: Failure) {
-        closeLoadingDialog()
+        //closeLoadingDialog()
+
+        closeShimmer()
 
         val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
 
@@ -95,12 +98,17 @@ class HomeFragment :
     }
 
     override fun loading() {
-        showLoadingDialog()
+        with(binding){
+            successLayout.isVisible = false
+            includeLoading.loadingLayout.isVisible = true
+        }
+        //showLoadingDialog()
     }
 
     override fun courseRecentlyList(courses: List<Subscription>) {
-        closeLoadingDialog()
+        //closeLoadingDialog()
 
+        closeShimmer()
         courseRecentlyList = courses
 
         val userName = courses.first().user?.name
@@ -115,7 +123,9 @@ class HomeFragment :
     }
 
     override fun  courseList(courses: List<Subscription>) {
-        closeLoadingDialog()
+        //closeLoadingDialog()
+
+        closeShimmer()
 
         courseList = courses
 
@@ -124,6 +134,13 @@ class HomeFragment :
         }
 
         courseRecycler.adapter = courseAdapter
+    }
+
+    private fun closeShimmer() {
+        with(binding){
+            successLayout.isVisible = true
+            includeLoading.loadingLayout.isVisible = false
+        }
     }
 
     private fun onItemSelected(model: Subscription){

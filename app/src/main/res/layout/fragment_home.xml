@@ -11,123 +11,147 @@ tools:context=".presentation.features.home.view.HomeFragment">
         type="com.ulearning.ulearning_app.presentation.features.home.viewModel.HomeViewModel" />
 </data>
 
+
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline27"
-            android:layout_width="wrap_content"
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.06" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:shimmer_auto_start="true">
+            <include android:id="@+id/includeLoading" layout="@layout/fragment_home_loading" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline28"
-            android:layout_width="wrap_content"
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/successLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.94" />
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-        <include
-            android:id="@+id/topbar"
-            layout="@layout/home_top_bar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@+id/guideline28"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline27"
-            tools:layout_editor_absoluteY="-1dp" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline27"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.06" />
 
-        <TextView
-            android:id="@+id/textView83"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen20"
-            android:text="@string/home_welcome_msg"
-            android:textAppearance="@style/readex_26_regular"
-            app:layout_constraintStart_toStartOf="@+id/guideline27"
-            app:layout_constraintTop_toBottomOf="@+id/topbar" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.94" />
 
-        <TextView
-            android:id="@+id/tvUserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-6dp"
-            android:textAppearance="@style/readex_26_semibold"
-            app:layout_constraintStart_toStartOf="@+id/guideline27"
-            app:layout_constraintTop_toBottomOf="@+id/textView83"
-            tools:text="Estudiante" />
+            <include
+                android:id="@+id/topbar"
+                layout="@layout/home_top_bar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toStartOf="@+id/guideline28"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline27"
+                tools:layout_editor_absoluteY="-1dp" />
 
-        <TextView
-            android:id="@+id/continueLearningText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/continue_learning"
-            android:textAppearance="@style/readex_16_regular"
-            app:layout_constraintStart_toStartOf="@+id/guideline27"
-            app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+            <TextView
+                android:id="@+id/textView83"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen20"
+                android:text="@string/home_welcome_msg"
+                android:textAppearance="@style/readex_26_regular"
+                app:layout_constraintStart_toStartOf="@+id/guideline27"
+                app:layout_constraintTop_toBottomOf="@+id/topbar" />
 
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-6dp"
+                android:textAppearance="@style/readex_26_semibold"
+                app:layout_constraintStart_toStartOf="@+id/guideline27"
+                app:layout_constraintTop_toBottomOf="@+id/textView83"
+                tools:text="Estudiante" />
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/courseRecentlyRecycler"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen8"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toStartOf="@+id/guideline28"
-            app:layout_constraintStart_toStartOf="@+id/guideline27"
-            app:layout_constraintTop_toBottomOf="@+id/continueLearningText"
-            tools:listitem="@layout/list_courses_recently_item" />
-
-        <TextView
-            android:id="@+id/myCourseText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/my_courses"
-            android:textAppearance="@style/readex_16_regular"
-            app:layout_constraintStart_toStartOf="@+id/guideline27"
-            app:layout_constraintTop_toBottomOf="@+id/courseRecentlyRecycler" />
-
-        <TextView
-            android:id="@+id/seeMoreTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_rounded_outline"
-            android:paddingHorizontal="@dimen/dimen8"
-            android:text="@string/see_more"
-            android:textAppearance="@style/readex_12_light"
-            android:textColor="@color/blue"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/myCourseText"
-            app:layout_constraintEnd_toStartOf="@+id/guideline28"
-            app:layout_constraintTop_toTopOf="@+id/myCourseText" />
-        
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/courseRecycler"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen8"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toStartOf="@+id/guideline28"
-            app:layout_constraintStart_toStartOf="@+id/guideline27"
-            app:layout_constraintTop_toBottomOf="@+id/myCourseText"
-            tools:listitem="@layout/item_courses" />
+            <TextView
+                android:id="@+id/continueLearningText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/continue_learning"
+                android:textAppearance="@style/readex_16_regular"
+                app:layout_constraintStart_toStartOf="@+id/guideline27"
+                app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
 
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/courseRecentlyRecycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen8"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toStartOf="@+id/guideline28"
+                app:layout_constraintStart_toStartOf="@+id/guideline27"
+                app:layout_constraintTop_toBottomOf="@+id/continueLearningText"
+                tools:listitem="@layout/list_courses_recently_item" />
+
+            <TextView
+                android:id="@+id/myCourseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/my_courses"
+                android:textAppearance="@style/readex_16_regular"
+                app:layout_constraintStart_toStartOf="@+id/guideline27"
+                app:layout_constraintTop_toBottomOf="@+id/courseRecentlyRecycler" />
+
+            <TextView
+                android:id="@+id/seeMoreTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_outline"
+                android:paddingHorizontal="@dimen/dimen8"
+                android:text="@string/see_more"
+                android:textAppearance="@style/readex_12_light"
+                android:textColor="@color/blue"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/myCourseText"
+                app:layout_constraintEnd_toStartOf="@+id/guideline28"
+                app:layout_constraintTop_toTopOf="@+id/myCourseText" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/courseRecycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen8"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toStartOf="@+id/guideline28"
+                app:layout_constraintStart_toStartOf="@+id/guideline27"
+                app:layout_constraintTop_toBottomOf="@+id/myCourseText"
+                tools:listitem="@layout/item_courses" />
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 </ScrollView>
 </layout>

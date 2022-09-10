@@ -2,6 +2,7 @@ package com.ulearning.ulearning_app.presentation.features.courses
 
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Subscription
+import com.ulearning.ulearning_app.domain.model.Topic
 
 interface DetailCourseViewState {
 
@@ -9,5 +10,5 @@ interface DetailCourseViewState {
 
     fun loading()
 
-    fun goTopic()
+    fun getTopics(topics: List<Topic>)
 }
