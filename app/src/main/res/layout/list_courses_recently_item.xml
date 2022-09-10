@@ -12,25 +12,16 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView5"
         android:layout_width="@dimen/dimen200"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/dimen50"
         style="?attr/materialCardViewElevatedStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <!-- Media -->
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="@dimen/dimen200"
-                android:layout_height="@dimen/dimen100"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/course_test"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
 
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/progress_snack_bar"
@@ -41,28 +32,24 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
                 app:layout_constraintVertical_bias="0.0"
                 app:trackColor="@color/green" />
 
-            <LinearLayout
-                android:id="@+id/titleLayout"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
-                android:padding="@dimen/dimen10">
-
-                <!-- Title, secondary and supporting text -->
-                <TextView
-                    android:id="@+id/titleText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nombre del curso"
-                    android:textAppearance="@style/readex_10_regular"
-                    android:textColor="@color/blue" />
-
-            </LinearLayout>
+                android:text="Nombre del curso"
+                android:layout_marginTop="@dimen/dimen5"
+                android:layout_marginHorizontal="@dimen/dimen10"
+                android:textAppearance="@style/readex_10_regular"
+                android:textColor="@color/blue"
+                android:maxLines="2"
+                android:ellipsize="end"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

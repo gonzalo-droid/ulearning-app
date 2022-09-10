@@ -14,6 +14,7 @@
         <entry key="app/src/main/res/drawable/ic_close.xml" value="0.261" />
         <entry key="app/src/main/res/drawable/ic_course.xml" value="0.261" />
         <entry key="app/src/main/res/drawable/ic_flag.xml" value="0.1805" />
+        <entry key="app/src/main/res/drawable/ic_home.xml" value="0.233" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.256" />
         <entry key="app/src/main/res/drawable/ic_modality.xml" value="0.338" />
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.2335" />
@@ -42,7 +43,7 @@
         <entry key="app/src/main/res/layout/item_courses_loading.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_topic.xml" value="0.5" />
         <entry key="app/src/main/res/layout/list_courses_item.xml" value="0.33489583333333334" />
-        <entry key="app/src/main/res/layout/list_courses_recently_item.xml" value="0.34791666666666665" />
+        <entry key="app/src/main/res/layout/list_courses_recently_item.xml" value="0.5" />
         <entry key="app/src/main/res/layout/list_courses_recently_item_loading.xml" value="0.22870370370370371" />
         <entry key="app/src/main/res/layout/list_teacher_item.xml" value="0.67" />
         <entry key="app/src/main/res/layout/top_bar_simple.xml" value="0.3359375" />
