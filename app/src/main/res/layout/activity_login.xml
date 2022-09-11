@@ -42,47 +42,55 @@
                 android:id="@+id/welcomeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen50"
+                android:layout_marginTop="84dp"
+                android:fontFamily="@font/readex_regular"
                 android:paddingRight="@dimen/dimen5"
                 android:text="Bienvenido a"
-                android:textSize="@dimen/dimen18"
                 android:textColor="@color/blue"
-                android:fontFamily="@font/readex_regular"
+                android:textSize="@dimen/dimen20"
+                app:layout_constraintBottom_toTopOf="@+id/nameText"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/nameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen50"
+                android:fontFamily="@font/readex_medium"
                 android:paddingLeft="@dimen/dimen1"
                 android:text="U-Learning"
-                android:textFontWeight="900"
-                android:textSize="@dimen/dimen40"
-                android:textStyle="bold"
                 android:textColor="@color/blue"
-                android:fontFamily="@font/readex_medium"
+                android:textFontWeight="900"
+                android:textSize="@dimen/dimen45"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/documentTv"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/welcomeText" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/documentTv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen30"
+                android:layout_marginBottom="@dimen/dimen20"
                 android:hint="@string/email"
+                app:layout_constraintBottom_toTopOf="@+id/passwordTv"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/nameText">
+                app:layout_constraintVertical_bias="1.0">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@={loginViewModel.user.email}"/>
+                    android:inputType="textEmailAddress"
+                    android:text="@={loginViewModel.user.email}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,44 +98,35 @@
                 android:id="@+id/passwordTv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen30"
+                android:layout_marginBottom="@dimen/dimen30"
                 android:hint="@string/password"
+                app:endIconMode="password_toggle"
+                app:layout_constraintBottom_toTopOf="@+id/logInBtn"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/documentTv"
-                app:endIconMode="password_toggle">
+                app:layout_constraintVertical_bias="1.0">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
-                    android:text="@={loginViewModel.user.password}"/>
+                    android:text="@={loginViewModel.user.password}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <TextView
-                android:id="@+id/recoveredPasswordText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen17"
-                android:onClick="@{()->loginViewModel.setEvent(loginViewModel.Events.recoveredPasswordClicked)}"
-                android:text="Recuperar contraseña"
-                android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf="@+id/passwordTv"
-                app:layout_constraintTop_toBottomOf="@+id/passwordTv" />
-
             <Button
                 android:id="@+id/logInBtn"
+                style="@style/Widget.Material3.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen17"
+                android:layout_marginBottom="@dimen/dimen40"
                 android:onClick="@{()->loginViewModel.setEvent(loginViewModel.Events.loginClicked)}"
                 android:text="Ingresar"
-                style="@style/Widget.Material3.Button"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/recoveredPasswordText"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
                 tools:ignore="HardcodedText" />
 
 

@@ -25,6 +25,7 @@ tools:context=".presentation.features.home.view.HomeFragment">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/loadingLayout"
             android:visibility="visible"
+            tools:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
@@ -48,6 +49,7 @@ tools:context=".presentation.features.home.view.HomeFragment">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
+            tools:visibility="visible"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -88,10 +90,12 @@ tools:context=".presentation.features.home.view.HomeFragment">
 
             <TextView
                 android:id="@+id/tvUserName"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dimen0"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-6dp"
                 android:textAppearance="@style/readex_26_semibold"
+                app:layout_constraintEnd_toStartOf="@+id/guideline28"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline27"
                 app:layout_constraintTop_toBottomOf="@+id/textView83"
                 tools:text="Estudiante" />

@@ -38,7 +38,7 @@ class AuthRepositoryImpl
                     Left(Failure.DefaultError(R.string.error_user_message))
                 }
             }
-            is Left -> Left(Failure.DefaultError(R.string.error_user_message))
+            is Left -> Left(Failure.DefaultError(R.string.error_credentials))
         }
     }
 
