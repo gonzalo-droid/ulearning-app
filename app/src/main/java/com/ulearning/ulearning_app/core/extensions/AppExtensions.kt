@@ -5,20 +5,17 @@ import android.app.Activity
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
-import android.util.Base64.DEFAULT
-import android.util.Base64.encodeToString
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.ulearning.ulearning_app.core.utils.Config
+import com.ulearning.ulearning_app.domain.model.Subscription
 import kotlinx.coroutines.launch
-import java.lang.Byte.decode
 import java.math.BigDecimal
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
-import android.util.Base64
-import com.ulearning.ulearning_app.core.utils.Config
 
 
 @SuppressLint("SimpleDateFormat")
@@ -68,6 +65,9 @@ infix fun Double.decimalFormat(format: String): String = DecimalFormat(format).f
 
 infix fun Int.decimalFormat(format: String): String = DecimalFormat(format).format(this)
 
+@Suppress("DEPRECATION")
+infix fun String.putSubscription(activity: Activity) =
+    activity.intent.extras!!.getSerializable(this) as Subscription
 
 fun String.isMail(): Boolean = this.matches(Regex(Config.EMAIL_REGEX))
 

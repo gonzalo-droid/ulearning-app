@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.courses
 
+import android.app.Activity
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.model.Topic
@@ -49,6 +50,14 @@ class DetailCourseViewModel
 
     private fun handleTopics(topics: List<Topic>) {
         setState { DetailCourseState.ListTopic(topics = topics) }
+    }
+
+    fun forActivityResult(resultCode: Int, method: () -> Unit) {
+
+        if (resultCode == Activity.RESULT_OK) {
+
+            method()
+        }
     }
 
 

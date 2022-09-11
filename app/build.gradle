@@ -72,6 +72,9 @@ android {
         debug.set(true)
         disabledRules.set(["no-wildcard-imports"])
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {

@@ -50,7 +50,7 @@ class CourseMapperImpl : CourseMapper {
     private fun listTeacherToDomain(data: List<TeacherResponse>?): List<Teacher>? {
         return data?.map {
             Teacher(
-                avatar = it.avatar,
+                //avatar = it.avatar,
                 firstName = it.firstName,
                 id = it.id,
                 lastName = it.lastName,

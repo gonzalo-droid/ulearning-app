@@ -6,8 +6,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:allowBackup="true"
         android:name=".core.AndroidApplication"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="U-Leaning"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -18,24 +18,24 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.App.Starting">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name="com.ulearning.ulearning_app.presentation.features.auth.LoginActivity"
             android:exported="false"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.features.home.view.HomeActivity"
+            android:name="com.ulearning.ulearning_app.presentation.features.home.view.HomeActivity"
             android:exported="false"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ulearning.ulearning_app.presentation.features.courses.DetailCourseActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
