@@ -143,18 +143,20 @@ class HomeFragment :
 
     private fun onItemSelected(model: Subscription){
 
+/*
         startActivity(Intent(requireActivity(), DetailCourseActivity::class.java).apply {
 
             putExtra(Config.SUBSCRIPTION_PUT, model)
 
         })
+*/
 
-/*        findNavController().navigate(
+        findNavController().navigate(
             R.id.action_navigation_home_to_detailCourseActivity,
             Bundle().apply {
                 putSerializable(Config.SUBSCRIPTION_PUT, model)
             }
-        )*/
+        )
 
 
 
