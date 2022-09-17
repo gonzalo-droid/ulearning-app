@@ -20,7 +20,6 @@ object Config {
     const val DATA_VALIDATED_DOCUMENT_PUT = "data_validated_document_put"
 
 
-
     const val DATE_FORMAT_ONE = "EEEE"
     const val DATE_FORMAT_TWO = "yyyy-MM-dd"
     const val DATE_FORMAT_THREE = "yyyy-MM-dd HH:mm:ss"
@@ -56,4 +55,18 @@ object Config {
     const val SUBSCRIPTION_PUT = "subscription"
     const val COURSE_ID_PUT = "courseId"
     const val COURSE = "course"
+
+
+     val DEVICE_ID = "${android.os.Build.BOARD.length % 10}" +
+             "${android.os.Build.DEVICE.length % 10}" +
+             "${android.os.Build.DISPLAY.length % 10}" +
+             "${android.os.Build.HOST.length % 10}" +
+             "${android.os.Build.ID.length % 10}" +
+             "${android.os.Build.MANUFACTURER.length % 10}" +
+             "${android.os.Build.MODEL.length % 10}" +
+             "${android.os.Build.PRODUCT.length % 10}" +
+             "${android.os.Build.TAGS.length % 10}" +
+             "${android.os.Build.TYPE.length % 10}" +
+             "${android.os.Build.USER.length % 10}"
+
 }
