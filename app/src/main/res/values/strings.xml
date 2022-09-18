@@ -22,7 +22,7 @@
     <string name="password_fail">Contraseña incorrecto</string>
     <string name="data_success">Información correcta</string>
     <string name="login_fail">Credenciales incorrectas</string>
-
+    <string name="firebase_token_message">Hubo problemas para conectarse con el servicio</string>
     <string name="home_title">Inicio</string>
     <string name="course_title">Cursos</string>
     <string name="profile_title">Perfil</string>
@@ -89,6 +89,7 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="log_in">Ingresar</string>
 
 
 </resources>

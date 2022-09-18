@@ -16,4 +16,8 @@ interface AuthRepository {
     suspend fun logout(): Either<Failure, Boolean>
 
     suspend fun session(): Either<Failure, Boolean>
+
+    suspend fun fcmToken(
+        fcmToken: String,
+    ): Either<Failure, Boolean>
 }

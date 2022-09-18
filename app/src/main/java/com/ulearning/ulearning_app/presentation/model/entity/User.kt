@@ -1,5 +1,7 @@
 package com.ulearning.ulearning_app.presentation.model.entity
 
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.isAlphaNumeric
 import com.ulearning.ulearning_app.core.extensions.isMail
@@ -13,6 +15,7 @@ open class User constructor(
     var name: String = "",
     var lastName: String = "",
     var phone: String = "",
+    var fcmToken: String = "",
 ) : Serializable {
 
     fun verifyLogin(): Pair<Boolean, Failure?> {
@@ -48,6 +51,25 @@ open class User constructor(
                 )
             }
         }
+    }
+
+    fun serviceTokenFirebase(
+        response: (firebaseToken: String) -> Unit,
+        error: (error: Failure) -> Unit
+    ) {
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+
+                error(
+                    Failure.DefaultError(R.string.firebase_token_message)
+                )
+                return@OnCompleteListener
+            } else {
+
+                response(task.result)
+            }
+        })
     }
 
     private fun isEmailEmpty(): Boolean {

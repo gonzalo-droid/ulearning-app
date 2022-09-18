@@ -1,7 +1,9 @@
 package com.ulearning.ulearning_app.data.remote.api
 
 import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
+import com.ulearning.ulearning_app.data.remote.entities.request.FCMTokenRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
+import com.ulearning.ulearning_app.data.remote.entities.response.FCMTokenResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.ProfileResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.SubscriptionResponse
@@ -21,5 +23,11 @@ interface AuthApi {
     suspend fun profile(
         @Header(SettingRemote.AUTHORIZATION) token: String,
     ): Response<BaseResponse<ProfileResponse>>
+
+    @GET("fmc-token")
+    suspend fun fcmToken(
+        @Header(SettingRemote.AUTHORIZATION) token: String,
+        @Body request: FCMTokenRequest
+    ): Response<BaseResponse<FCMTokenResponse>>
     
 }

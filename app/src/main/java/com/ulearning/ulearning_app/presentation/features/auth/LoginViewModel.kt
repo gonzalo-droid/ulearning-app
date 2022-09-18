@@ -2,16 +2,17 @@ package com.ulearning.ulearning_app.presentation.features.auth
 
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.useCase.auth.DoLoginUseCase
+import com.ulearning.ulearning_app.domain.useCase.auth.SendFCMTokenUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import com.ulearning.ulearning_app.presentation.model.entity.User
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel
 @Inject constructor(
-    private val doLoginUseCase: DoLoginUseCase
+    private val doLoginUseCase: DoLoginUseCase,
+    private val sendFCMTokenUseCase: SendFCMTokenUseCase
 ) : BaseViewModel<LoginEvent, LoginState, LoginEffect>() {
 
     val user = User()
@@ -37,7 +38,7 @@ class LoginViewModel
 
             if (it.first) {
 
-                doLogin()
+                serviceFCM()
 
             } else {
                 setEffect { LoginEffect.ShowMessageFailure(failure = it.second!!) }
@@ -46,17 +47,41 @@ class LoginViewModel
 
     }
 
+    private fun serviceFCM() {
+        user.serviceTokenFirebase(response = { firebaseToken ->
+
+            user.fcmToken = firebaseToken
+
+            doLogin()
+
+        }, error = { error ->
+
+            setEffect { LoginEffect.ShowMessageFailure(failure = error) }
+        })
+    }
+
     private fun doLogin() {
+
         setState { LoginState.Loading }
+
         doLoginUseCase(
             DoLoginUseCase.Params(
-                email = user.email,
-                password = user.password
+                email = user.email, password = user.password
             )
         ) {
             it.either(::handleFailure, ::handleLogin)
         }
 
+    }
+
+    private fun sendFCMToken(){
+        sendFCMTokenUseCase(
+            SendFCMTokenUseCase.Params(
+                fcmToken = user.fcmToken
+            )
+        ) {
+            it.either(::handleFailure, ::handleSuccess)
+        }
     }
 
     private fun handleFailure(failure: Failure) {
@@ -65,6 +90,10 @@ class LoginViewModel
     }
 
     private fun handleLogin(success: Boolean) {
+        sendFCMToken()
+    }
+
+    private fun handleSuccess(success: Boolean) {
         setState { LoginState.LoginSuccess(success = success) }
     }
 

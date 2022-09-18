@@ -5,8 +5,10 @@ import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Either.Left
 import com.ulearning.ulearning_app.core.functional.Either.Right
 import com.ulearning.ulearning_app.core.functional.Failure
+import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.data.dataStore.config.DataStoreConfig
 import com.ulearning.ulearning_app.data.mapper.AuthMapper
+import com.ulearning.ulearning_app.data.remote.entities.request.FCMTokenRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
 import com.ulearning.ulearning_app.data.remote.service.AuthService
@@ -66,10 +68,22 @@ class AuthRepositoryImpl
     }
 
     override suspend fun session(): Either<Failure, Boolean> {
-        return if(dataStore.token().isNotEmpty()){
+        return if (dataStore.token().isNotEmpty()) {
             Right(true)
-        }else {
+        } else {
             Right(false)
+        }
+    }
+
+    override suspend fun fcmToken(fcmToken: String): Either<Failure, Boolean> {
+        return when (val response = service.fcmToken(
+            token = "${SettingRemote.BEARER} ${dataStore.token()}",
+            body = FCMTokenRequest(deviceId = Config.DEVICE_ID, fcmToken = fcmToken)
+        )) {
+            is Right -> {
+                Right(true)
+            }
+            is Left -> Left(Failure.DefaultError(R.string.error_user_message))
         }
     }
 }

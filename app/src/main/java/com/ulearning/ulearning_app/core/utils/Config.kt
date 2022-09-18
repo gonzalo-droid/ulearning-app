@@ -57,6 +57,7 @@ object Config {
     const val COURSE = "course"
 
 
+    /* 12 digits */
      val DEVICE_ID = "${android.os.Build.BOARD.length % 10}" +
              "${android.os.Build.DEVICE.length % 10}" +
              "${android.os.Build.DISPLAY.length % 10}" +
