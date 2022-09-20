@@ -24,7 +24,7 @@ interface AuthApi {
         @Header(SettingRemote.AUTHORIZATION) token: String,
     ): Response<BaseResponse<ProfileResponse>>
 
-    @GET("fmc-token")
+    @POST("fcm-token")
     suspend fun fcmToken(
         @Header(SettingRemote.AUTHORIZATION) token: String,
         @Body request: FCMTokenRequest

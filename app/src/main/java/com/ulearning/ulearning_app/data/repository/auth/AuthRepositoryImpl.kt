@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.data.repository.auth
 
+import android.util.Log
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Either.Left
@@ -81,6 +82,7 @@ class AuthRepositoryImpl
             body = FCMTokenRequest(deviceId = Config.DEVICE_ID, fcmToken = fcmToken)
         )) {
             is Right -> {
+                Log.d("FCMTracker", response.b.toString())
                 Right(true)
             }
             is Left -> Left(Failure.DefaultError(R.string.error_user_message))

@@ -91,5 +91,7 @@
     </string>
     <string name="log_in">Ingresar</string>
 
+    <string name="notification_channel_id">ulearning_notification</string>
+
 
 </resources>
