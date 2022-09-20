@@ -76,7 +76,7 @@ class FCMService : FirebaseMessagingService() {
 
         val notificationBuilder = NotificationCompat.Builder(this,channelId)
             .setSmallIcon(R.drawable.ic_chat)
-            .setColor(ContextCompat.getColor(this, R.color.white))
+            .setColor(ContextCompat.getColor(this, R.color.green))
             .setContentTitle(notification.title)
             .setContentText(notification.body)
             .setAutoCancel(true)
