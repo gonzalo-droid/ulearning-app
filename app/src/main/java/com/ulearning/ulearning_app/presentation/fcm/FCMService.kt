@@ -1,9 +1,11 @@
 package com.ulearning.ulearning_app.presentation.fcm
 
+import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.media.AudioAttributes
 import android.media.RingtoneManager
 import android.os.Build
 import androidx.core.app.NotificationCompat
@@ -27,6 +29,33 @@ class FCMService : FirebaseMessagingService() {
 
     private fun sendNotification(notification: RemoteMessage.Notification) {
 
+        val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        val channelId = getString(R.string.notification_channel_id)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            val notificationChannel = NotificationChannel(
+                getString(R.string.notification_channel_id),
+                getString(R.string.notification_channel_id),
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+
+            notificationChannel.description = "Ulearning messages"
+            notificationChannel.enableLights(true)
+            notificationChannel.lightColor = ContextCompat.getColor(this, R.color.white)
+            notificationChannel.vibrationPattern = longArrayOf(0, 1000, 500, 1000)
+            notificationChannel.enableVibration(true)
+            notificationChannel.setSound(
+                soundUri,
+                AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_NOTIFICATION)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build()
+            )
+            notificationManager.createNotificationChannel(notificationChannel)
+        }
+
+
         val intent = Intent(this, HomeActivity::class.java)
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -44,9 +73,6 @@ class FCMService : FirebaseMessagingService() {
             }
         )
 
-        val channelId = getString(R.string.notification_channel_id)
-
-        val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
         val notificationBuilder = NotificationCompat.Builder(this,channelId)
             .setSmallIcon(R.drawable.ic_chat)
@@ -57,7 +83,7 @@ class FCMService : FirebaseMessagingService() {
             .setSound(soundUri)
             .setContentIntent(pendingIntent)
 
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
 
         notificationManager.notify(
             0,
