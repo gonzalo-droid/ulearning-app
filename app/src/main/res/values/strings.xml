@@ -94,4 +94,7 @@
     <string name="notification_channel_id">ulearning_notification</string>
 
 
+    <string name="notification_channel_description">Ulearning messages</string>
+
+
 </resources>

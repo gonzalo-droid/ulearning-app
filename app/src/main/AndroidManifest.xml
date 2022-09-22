@@ -9,7 +9,7 @@
         android:name=".core.AndroidApplication"
         android:allowBackup="true"
         android:icon="@mipmap/logo_launcher"
-        android:label="U-Leaning"
+        android:label="U-Learning"
         android:roundIcon="@mipmap/logo_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ulearning.App">

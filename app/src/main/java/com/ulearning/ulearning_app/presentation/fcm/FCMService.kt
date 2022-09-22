@@ -42,7 +42,7 @@ class FCMService : FirebaseMessagingService() {
                 NotificationManager.IMPORTANCE_DEFAULT
             )
 
-            notificationChannel.description = "Ulearning messages"
+            notificationChannel.description = getString(R.string.notification_channel_description)
             notificationChannel.enableLights(true)
             notificationChannel.lightColor = ContextCompat.getColor(this, R.color.white)
             notificationChannel.vibrationPattern = longArrayOf(0, 1000, 500, 1000)
