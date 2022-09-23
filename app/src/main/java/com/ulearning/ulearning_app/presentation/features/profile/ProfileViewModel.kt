@@ -25,8 +25,13 @@ class ProfileViewModel
     override fun handleEvent(event: ProfileEvent) {
         when (event) {
             ProfileEvent.DataProfileClicked -> getProfile()
-            ProfileEvent.OnLogoutClick -> logout()
+            ProfileEvent.LogoutClick -> logout()
+            ProfileEvent.PaymentClick -> goPayment()
         }
+    }
+
+    private fun goPayment() {
+
     }
 
     private fun logout() {
@@ -65,7 +70,9 @@ class ProfileViewModel
 
     companion object Events {
         val dataProfileClicked = ProfileEvent.DataProfileClicked
-        val onLogoutClick = ProfileEvent.OnLogoutClick
+        val logoutClick = ProfileEvent.LogoutClick
+        val paymentClick = ProfileEvent.PaymentClick
+
 
     }
 }

@@ -159,7 +159,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen16"
                     android:hint="@string/plan"
-                    app:layout_constraintBottom_toTopOf="@+id/logoutBtn"
+                    app:layout_constraintBottom_toTopOf="@+id/paymentBtn"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
@@ -272,6 +272,39 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/paymentBtn"
+                    style="?attr/materialCardViewElevatedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen8"
+                    android:elevation="@dimen/dimen1"
+                    android:onClick="@{()->profileViewModel.setEvent(profileViewModel.Events.paymentClick)}"
+                    app:layout_constraintBottom_toTopOf="@+id/logoutBtn"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toBottomOf="@+id/planInpuntText">
+
+
+                    <TextView
+                        android:id="@+id/paymentText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/dimen14"
+                        android:padding="@dimen/dimen10"
+                        android:text="@string/my_payments"
+                        android:textAppearance="@style/readex_16_regular"
+                        android:textColor="@color/gray2"
+                        app:drawableStartCompat="@drawable/ic_account"
+                        app:drawableEndCompat="@drawable/ic_arrow_forward"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </com.google.android.material.card.MaterialCardView>
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/logoutBtn"
                     style="?attr/materialCardViewElevatedStyle"
@@ -279,12 +312,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen8"
                     android:elevation="@dimen/dimen1"
-                    android:onClick="@{()->profileViewModel.setEvent(profileViewModel.Events.onLogoutClick)}"
+                    android:onClick="@{()->profileViewModel.setEvent(profileViewModel.Events.logoutClick)}"
                     app:layout_constraintBottom_toTopOf="@+id/saveBtn"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toBottomOf="@+id/planInpuntText">
+                    app:layout_constraintTop_toBottomOf="@+id/paymentBtn">
 
 
                     <TextView

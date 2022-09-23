@@ -95,6 +95,7 @@
 
 
     <string name="notification_channel_description">Ulearning messages</string>
+    <string name="my_payments">Mis pagos</string>
 
 
 </resources>
