@@ -1,6 +1,5 @@
 package com.ulearning.ulearning_app.presentation.features.home.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -17,7 +16,6 @@ import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.FragmentHomeBinding
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
-import com.ulearning.ulearning_app.presentation.features.courses.DetailCourseActivity
 import com.ulearning.ulearning_app.presentation.features.home.HomeEvent
 import com.ulearning.ulearning_app.presentation.features.home.HomeReducer
 import com.ulearning.ulearning_app.presentation.features.home.HomeViewState
