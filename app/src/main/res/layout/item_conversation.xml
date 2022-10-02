@@ -22,6 +22,8 @@
             android:layout_margin="@dimen/dimen10"
             android:textAppearance="@style/readex_12_regular"
             android:textColor="@color/blue"
+            android:maxLines="3"
+            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

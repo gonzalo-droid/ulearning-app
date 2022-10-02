@@ -102,7 +102,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
                     app:layout_constraintTop_toBottomOf="@+id/messageBtn"
-                    tools:listitem="@layout/item_message" />
+                    tools:listitem="@layout/item_conversation" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
