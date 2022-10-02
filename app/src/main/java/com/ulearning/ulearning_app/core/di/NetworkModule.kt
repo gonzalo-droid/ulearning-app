@@ -13,6 +13,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import com.ulearning.ulearning_app.BuildConfig
 import com.ulearning.ulearning_app.data.remote.api.AuthApi
 import com.ulearning.ulearning_app.data.remote.api.CourseApi
+import com.ulearning.ulearning_app.data.remote.api.ConversationApi
 import com.ulearning.ulearning_app.data.remote.api.TopicApi
 import com.ulearning.ulearning_app.data.remote.network.NetworkHandler
 import com.ulearning.ulearning_app.data.remote.service.*
@@ -97,6 +98,12 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    fun provideConversationApi(
+        retrofit: Retrofit
+    ): ConversationApi = retrofit.create(ConversationApi::class.java)
+
+    @Provides
+    @Singleton
     fun provideAuthService(
         authApi: AuthApi,
         networkHandler: NetworkHandler
@@ -116,5 +123,12 @@ object NetworkModule {
         authApi: TopicApi,
         networkHandler: NetworkHandler
     ): TopicService = TopicServiceImpl(authApi, networkHandler)
+
+    @Provides
+    @Singleton
+    fun provideConversationService(
+        authApi: ConversationApi,
+        networkHandler: NetworkHandler
+    ): ConversationService = ConversationServiceImpl(authApi, networkHandler)
 
 }

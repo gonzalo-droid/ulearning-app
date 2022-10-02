@@ -11,4 +11,6 @@ interface DetailCourseViewState {
     fun loading()
 
     fun getTopics(topics: List<Topic>)
+
+    fun goToConversation(courseId: Int)
 }

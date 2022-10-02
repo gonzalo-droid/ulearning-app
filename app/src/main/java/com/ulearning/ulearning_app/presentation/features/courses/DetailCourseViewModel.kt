@@ -1,12 +1,10 @@
 package com.ulearning.ulearning_app.presentation.features.courses
 
-import android.app.Activity
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.model.Topic
 import com.ulearning.ulearning_app.domain.useCase.topic.GetTopicUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
-import com.ulearning.ulearning_app.presentation.features.topic.TopicState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -16,7 +14,8 @@ class DetailCourseViewModel
     private val getTopicUseCase: GetTopicUseCase
 ) : BaseViewModel<DetailCourseEvent, DetailCourseState, DetailCourseEffect>() {
 
-    var courseId = 0
+
+    lateinit var subscription: Subscription
 
     override fun createInitialState(): DetailCourseState {
         return DetailCourseState.Idle
@@ -25,8 +24,15 @@ class DetailCourseViewModel
     override fun handleEvent(event: DetailCourseEvent) {
         when (event) {
             DetailCourseEvent.DataDetailCourseClicked -> getDetailCourse()
-            DetailCourseEvent.GoToTopic -> getTopic()
+            DetailCourseEvent.GetTopic -> getTopic()
             DetailCourseEvent.SendComment -> {}
+            DetailCourseEvent.GoToConversation -> goToConversation()
+        }
+    }
+
+    private fun goToConversation() {
+        if(::subscription.isInitialized){
+            setEffect { DetailCourseEffect.GoToConversation(courseId = subscription.course_id) }
         }
     }
 
@@ -34,10 +40,11 @@ class DetailCourseViewModel
         setState { DetailCourseState.Loading }
 
         getTopicUseCase(
-            GetTopicUseCase.Params(courseId = courseId)
+            GetTopicUseCase.Params(courseId = subscription.course_id)
         ) {
             it.either(::handleFailure, ::handleTopics)
         }
+
     }
 
     private fun getDetailCourse() {
@@ -52,17 +59,7 @@ class DetailCourseViewModel
         setState { DetailCourseState.ListTopic(topics = topics) }
     }
 
-    fun forActivityResult(resultCode: Int, method: () -> Unit) {
-
-        if (resultCode == Activity.RESULT_OK) {
-
-            method()
-        }
-    }
-
-
     companion object Events {
-        val goToTopic = DetailCourseEvent.GoToTopic
-        val sendComment = DetailCourseEvent.SendComment
+        val goToConversation = DetailCourseEvent.GoToConversation
     }
 }

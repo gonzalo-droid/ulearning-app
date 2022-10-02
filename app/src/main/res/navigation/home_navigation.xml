@@ -26,7 +26,15 @@
         android:id="@+id/detailCourseActivity"
         android:name="com.ulearning.ulearning_app.presentation.features.courses.DetailCourseActivity"
         android:label="activity_detail_course"
-        tools:layout="@layout/activity_detail_course" />
+        tools:layout="@layout/activity_detail_course">
+
+    </activity>
+
+    <activity
+        android:id="@+id/conversationActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity"
+        android:label="activity_conversation"
+        tools:layout="@layout/activity_conversation" />
 
 
 </navigation>

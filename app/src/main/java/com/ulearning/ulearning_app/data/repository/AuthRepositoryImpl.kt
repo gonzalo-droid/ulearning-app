@@ -1,4 +1,4 @@
-package com.ulearning.ulearning_app.data.repository.auth
+package com.ulearning.ulearning_app.data.repository
 
 import android.util.Log
 import com.ulearning.ulearning_app.R
@@ -15,7 +15,7 @@ import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
 import com.ulearning.ulearning_app.data.remote.service.AuthService
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
 import com.ulearning.ulearning_app.domain.model.Profile
-import com.ulearning.ulearning_app.domain.repository.auth.AuthRepository
+import com.ulearning.ulearning_app.domain.repository.AuthRepository
 import javax.inject.Inject
 
 class AuthRepositoryImpl

@@ -13,11 +13,7 @@ data class SubscriptionResponse(
     @SerializedName("course")
     var course: CourseResponse?= null,
     @SerializedName("course_id")
-    var courseId: Int?= 0,
-    @SerializedName("deleted_at")
-    var deletedAt: Any?= null,
-    @SerializedName("finished_at")
-    var finishedAt: Any?= null,
+    var courseId: Int,
     @SerializedName("group")
     var group: GroupResponse?= null,
     @SerializedName("group_id")

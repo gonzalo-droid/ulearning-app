@@ -26,6 +26,7 @@ object DetailCourseReducer {
     fun selectEffect(effect: DetailCourseEffect) {
         when (effect) {
             is DetailCourseEffect.ShowMessageFailure -> viewState.messageFailure(effect.failure)
+            is DetailCourseEffect.GoToConversation -> viewState.goToConversation(effect.courseId)
         }
     }
 }

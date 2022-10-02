@@ -11,10 +11,9 @@ import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.FragmentTopicBinding
 import com.ulearning.ulearning_app.domain.model.Course
-import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.model.Topic
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
-import com.ulearning.ulearning_app.presentation.features.courses.DetailCourseTeacherAdapter
+import com.ulearning.ulearning_app.presentation.features.courses.adapter.TopicAdapter
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 

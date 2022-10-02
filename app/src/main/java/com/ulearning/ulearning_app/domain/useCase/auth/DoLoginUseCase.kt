@@ -1,6 +1,6 @@
 package com.ulearning.ulearning_app.domain.useCase.auth
 
-import com.ulearning.ulearning_app.domain.repository.auth.AuthRepository
+import com.ulearning.ulearning_app.domain.repository.AuthRepository
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import javax.inject.Inject
 

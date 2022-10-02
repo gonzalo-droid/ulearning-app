@@ -41,7 +41,7 @@ fun String.encode(): String {
     )
 }
 
-fun String.html() : Spanned {
+fun String.html(): Spanned {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         Html.fromHtml(this, Html.FROM_HTML_MODE_COMPACT)
     } else {
@@ -68,6 +68,10 @@ infix fun Int.decimalFormat(format: String): String = DecimalFormat(format).form
 @Suppress("DEPRECATION")
 infix fun String.putSubscription(activity: Activity) =
     activity.intent.extras!!.getSerializable(this) as Subscription
+
+infix fun String.putString(activity: Activity) = activity.intent.extras!!.getString(this)!!
+
+infix fun String.putInt(activity: Activity) = activity.intent.extras!!.getInt(this)
 
 fun String.isMail(): Boolean = this.matches(Regex(Config.EMAIL_REGEX))
 

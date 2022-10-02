@@ -29,6 +29,10 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.ulearning.ulearning_app.presentation.features.home.view.HomeActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
@@ -36,18 +40,20 @@
             android:name="com.ulearning.ulearning_app.presentation.features.courses.DetailCourseActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
-        <!-- Set custom default icon. This is used when no icon is set for incoming notification messages.
-     See README(https://goo.gl/l4GJaQ) for more. -->
+        <!--
+ Set custom default icon. This is used when no icon is set for incoming notification messages.
+     See README(https://goo.gl/l4GJaQ) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_chat" />
-        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <!--
+ Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/green" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/notification_channel_id" />

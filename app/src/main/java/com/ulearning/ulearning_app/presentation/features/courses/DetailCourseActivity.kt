@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.courses
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +16,9 @@ import com.ulearning.ulearning_app.databinding.ActivityDetailCourseBinding
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.model.Topic
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
-import com.ulearning.ulearning_app.presentation.features.topic.TopicAdapter
+import com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity
+import com.ulearning.ulearning_app.presentation.features.courses.adapter.DetailCourseTeacherAdapter
+import com.ulearning.ulearning_app.presentation.features.courses.adapter.TopicAdapter
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,8 +32,6 @@ class DetailCourseActivity :
     override val viewModel: DetailCourseViewModel by viewModels()
 
     override val dataBindingViewModel = BR.detailCourseViewModel
-
-    private lateinit var subscription: Subscription
 
     private lateinit var recycler: RecyclerView
 
@@ -63,17 +64,13 @@ class DetailCourseActivity :
 
     private fun observeUiStates() {
 
-        //subscription = requireArguments().getSerializable(Config.SUBSCRIPTION_PUT) as Subscription
-
-        viewModel!!.let {
-            subscription = Config.SUBSCRIPTION_PUT putSubscription this@DetailCourseActivity
+        viewModel.let {
+            viewModel.subscription = Config.SUBSCRIPTION_PUT putSubscription this@DetailCourseActivity
         }
 
-        viewModel.courseId = subscription?.course_id!!
+        setDetailCourse(viewModel.subscription)
 
-        setDetailCourse(subscription)
-
-        viewModel.setEvent(DetailCourseEvent.GoToTopic)
+        viewModel.setEvent(DetailCourseEvent.GetTopic)
 
         viewModel.apply {
             lifecycleScopeCreate(activity = this@DetailCourseActivity, method = {
@@ -89,18 +86,6 @@ class DetailCourseActivity :
             })
         }
 
-    }
-
-    override fun messageFailure(failure: Failure) {
-        closeLoadingDialog()
-
-        val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
-
-        showSnackBar(binding.root, getString(messageDesign.idMessage))
-    }
-
-    override fun loading() {
-        showLoadingDialog()
     }
 
     override fun getTopics(topics: List<Topic>) {
@@ -125,6 +110,12 @@ class DetailCourseActivity :
         topicRecycler.adapter = topicAdapter
     }
 
+    override fun goToConversation(courseId: Int) {
+        startActivity(Intent(this, ConversationActivity::class.java).apply {
+            putExtra(Config.COURSE_ID_PUT, viewModel.subscription.course_id)
+        })
+    }
+
     private fun setDetailCourse(data: Subscription) {
         with(binding) {
             topBarInclude.title = data.course?.title
@@ -137,6 +128,19 @@ class DetailCourseActivity :
             adapter = DetailCourseTeacherAdapter(teachers = data.group?.teachers?: arrayListOf())
             recycler.adapter = adapter
         }
+    }
+
+
+    override fun messageFailure(failure: Failure) {
+        closeLoadingDialog()
+
+        val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
+
+        showSnackBar(binding.root, getString(messageDesign.idMessage))
+    }
+
+    override fun loading() {
+        showLoadingDialog()
     }
 
 }

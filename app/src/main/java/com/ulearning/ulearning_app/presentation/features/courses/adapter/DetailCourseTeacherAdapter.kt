@@ -1,4 +1,4 @@
-package com.ulearning.ulearning_app.presentation.features.courses
+package com.ulearning.ulearning_app.presentation.features.courses.adapter
 
 import android.view.LayoutInflater
 import android.view.View

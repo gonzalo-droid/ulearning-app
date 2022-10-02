@@ -41,7 +41,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/dimen16"
                 android:layout_marginBottom="@dimen/dimen40"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp">
@@ -260,6 +259,36 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/messageBtn"
+                    style="?attr/materialCardViewElevatedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen16"
+                    android:elevation="@dimen/dimen1"
+                    android:onClick="@{()->detailCourseViewModel.setEvent(detailCourseViewModel.Events.goToConversation)}"
+                    app:layout_constraintTop_toBottomOf="@+id/sectionTopicLayout"
+                    app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
+                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine">
+
+
+                    <TextView
+                        android:id="@+id/messageText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/dimen14"
+                        android:padding="@dimen/dimen10"
+                        android:text="@string/message_title"
+                        android:textAppearance="@style/readex_16_regular"
+                        android:textColor="@color/gray2"
+                        app:drawableStartCompat="@drawable/ic_message"
+                        app:drawableEndCompat="@drawable/ic_arrow_forward"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </com.google.android.material.card.MaterialCardView>
+
 
                 <TextView
                     android:id="@+id/teacherTitle"
@@ -271,7 +300,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
-                    app:layout_constraintTop_toBottomOf="@+id/sectionTopicLayout" />
+                    app:layout_constraintTop_toBottomOf="@+id/messageBtn" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler"

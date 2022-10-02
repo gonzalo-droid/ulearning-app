@@ -5,7 +5,7 @@ import java.io.Serializable
 data class Subscription(
     var amount: Int? = 0,
     var course: Course? = null,
-    var course_id: Int? = 0,
+    var course_id: Int,
     var group: Group? = null,
     var group_id: Int? = 0,
     var has_certificate: Boolean? = false,
