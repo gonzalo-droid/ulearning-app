@@ -7,6 +7,7 @@ import com.ulearning.ulearning_app.data.mapper.ConversationMapper
 import com.ulearning.ulearning_app.data.remote.service.ConversationService
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
 import com.ulearning.ulearning_app.domain.model.Conversation
+import com.ulearning.ulearning_app.domain.model.Message
 import com.ulearning.ulearning_app.domain.repository.ConversationRepository
 import javax.inject.Inject
 
@@ -29,6 +30,18 @@ class ConversationRepositoryImpl
         )) {
             is Either.Right -> {
                 Either.Right(mapper.conversationsToDomain(response.b))
+            }
+            is Either.Left -> Either.Left(response.a)
+        }
+    }
+
+    override suspend fun getMessages(uuid: String): Either<Failure, List<Message>> {
+        return when (val response = service.messages(
+            token = "${SettingRemote.BEARER} ${dataStore.token()}",
+            uuid = uuid
+        )) {
+            is Either.Right -> {
+                Either.Right(mapper.messagesToDomain(response.b))
             }
             is Either.Left -> Either.Left(response.a)
         }

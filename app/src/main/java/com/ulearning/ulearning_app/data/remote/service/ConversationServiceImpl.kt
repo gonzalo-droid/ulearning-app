@@ -4,6 +4,7 @@ import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.remote.api.ConversationApi
 import com.ulearning.ulearning_app.data.remote.entities.response.ConversationResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.MessageResponse
 import com.ulearning.ulearning_app.data.remote.network.NetworkHandler
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -27,6 +28,18 @@ class ConversationServiceImpl
                 perPage,
                 page,
                 courseId
+            )
+        }
+    }
+
+    override suspend fun messages(
+        token: String,
+        uuid: String
+    ): Either<Failure, List<MessageResponse>> {
+        return networkHandler.callServiceBaseList {
+            api.messages(
+                token,
+                uuid,
             )
         }
     }

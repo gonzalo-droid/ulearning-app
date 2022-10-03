@@ -3,6 +3,7 @@ package com.ulearning.ulearning_app.data.remote.service
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.remote.entities.response.ConversationResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.MessageResponse
 
 
 interface ConversationService {
@@ -13,5 +14,10 @@ interface ConversationService {
         page: Int,
         courseId: Int,
     ): Either<Failure, List<ConversationResponse>>
+
+    suspend fun messages(
+        token: String,
+        uuid: String,
+    ): Either<Failure, List<MessageResponse>>
 
 }

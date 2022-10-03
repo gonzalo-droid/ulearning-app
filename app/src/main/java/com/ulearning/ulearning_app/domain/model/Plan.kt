@@ -4,7 +4,6 @@ import java.io.Serializable
 
 data class Plan(
     var id: Int?= 0,
-    var next_renovation_at: Any?= null,
     var type: String?= "",
-    var user_id: Int?= 0
+    var userId: Int?= 0
 ) : Serializable

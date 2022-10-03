@@ -6,5 +6,5 @@ data class Country(
     var code: String?= "",
     var id: Int?= 0,
     var name: String?= "",
-    var phone_code: String?= ""
+    var phoneCode: String?= ""
 ) : Serializable

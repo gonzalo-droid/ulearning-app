@@ -3,7 +3,11 @@ package com.ulearning.ulearning_app.data.mapper
 
 import com.ulearning.ulearning_app.data.remote.entities.response.ConversationResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.FirstMessageResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.MessageResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.UserResponse
 import com.ulearning.ulearning_app.domain.model.Conversation
+import com.ulearning.ulearning_app.domain.model.Message
+import com.ulearning.ulearning_app.domain.model.User
 import javax.inject.Singleton
 
 @Singleton
@@ -32,6 +36,40 @@ class ConversationMapperImpl : ConversationMapper {
                 replyToAuthor = it.replyToAuthor,
                 toSupport = it.toSupport,
                 uuid = it.uuid
+            )
+        }
+    }
+
+    override suspend fun messagesToDomain(data: List<MessageResponse>): List<Message> {
+        return data.map {
+            Message(
+                classification = it.classification,
+                content = it.content,
+                id = it.id,
+                publishedAt = it.publishedAt,
+                sendBy = it.sendBy.let { user ->
+                    User(
+                        address = user?.address,
+                        dateOfBirth = user?.dateOfBirth,
+                        documentNumber = user?.documentNumber,
+                        documentType = user?.documentType,
+                        email = user?.email,
+                        firstName = user?.firstName,
+                        gender = user?.gender,
+                        id = user?.id,
+                        lastName = user?.lastName,
+                        name = user?.name,
+                        phone = user?.phone,
+                        phoneCode = user?.phoneCode,
+                        role = user?.role,
+                        secondLastName = user?.secondLastName,
+                    )
+                },
+                status = it.status,
+                subject = it.subject,
+                type = it.type,
+                userIds = it.userIds,
+                uuid = it.uuid,
             )
         }
     }

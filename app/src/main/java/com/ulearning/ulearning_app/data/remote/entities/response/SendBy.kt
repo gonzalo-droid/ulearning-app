@@ -3,16 +3,13 @@ package com.ulearning.ulearning_app.data.remote.entities.response
 
 import com.google.gson.annotations.SerializedName
 
-
-data class UserResponse(
+data class SendBy(
     @SerializedName("address")
-    val address: String? = "",
-    @SerializedName("avatar")
-    val avatar: Any? = null,
+    val address: Any? = Any(),
     @SerializedName("date_of_birth")
-    val dateOfBirth: String? = "",
+    val dateOfBirth: Any? = Any(),
     @SerializedName("document_number")
-    val documentNumber: String? = "",
+    val documentNumber: Any? = Any(),
     @SerializedName("document_type")
     val documentType: String? = "",
     @SerializedName("email")
@@ -23,6 +20,8 @@ data class UserResponse(
     val gender: String? = "",
     @SerializedName("id")
     val id: Int? = 0,
+    @SerializedName("is_support")
+    val isSupport: Boolean? = false,
     @SerializedName("last_name")
     val lastName: String? = "",
     @SerializedName("name")
@@ -31,6 +30,8 @@ data class UserResponse(
     val phone: String? = "",
     @SerializedName("phone_code")
     val phoneCode: String? = "",
+    @SerializedName("plan")
+    val plan: PlanResponse? = PlanResponse(),
     @SerializedName("role")
     val role: String? = "",
     @SerializedName("second_last_name")

@@ -75,25 +75,23 @@ class ConversationActivity :
 
     override fun conversations(conversations: List<Conversation>) {
         closeLoadingDialog()
-        adapter = ConversationAdapter(conversations = conversations) { model ->
-            onItemSelected(model)
+
+        adapter = ConversationAdapter(conversations = conversations) { conversation ->
+
+            onItemSelected(conversation)
+
         }
 
         recycler.adapter = adapter
 
     }
 
-    private fun onItemSelected(model: Conversation) {
-        /*findNavController().navigate(
-            R.id.action_navigation_detail_course_to_conversationActivity,
-            Bundle().apply {
-             //   putSerializable(Config.SUBSCRIPTION_PUT, model)
-            }
-        )
-*/
+    private fun onItemSelected(conversation: Conversation) {
+
     }
 
     override fun messageFailure(failure: Failure) {
+
         closeLoadingDialog()
 
         val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
@@ -102,6 +100,8 @@ class ConversationActivity :
     }
 
     override fun loading() {
+
         showLoadingDialog()
+
     }
 }

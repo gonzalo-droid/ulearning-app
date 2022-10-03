@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/logo_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ulearning.App">
+
         <activity
             android:name="com.ulearning.ulearning_app.presentation.features.splash.SplashActivity"
             android:exported="true"
@@ -30,6 +31,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ulearning.ulearning_app.presentation.features.message.MessageActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
