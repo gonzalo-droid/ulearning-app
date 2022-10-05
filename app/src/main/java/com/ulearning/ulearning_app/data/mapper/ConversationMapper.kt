@@ -12,4 +12,6 @@ interface ConversationMapper {
 
     suspend fun messagesToDomain(data: List<MessageResponse>): List<Message>
 
+    suspend fun messageToDomain(data: MessageResponse): Message
+
 }

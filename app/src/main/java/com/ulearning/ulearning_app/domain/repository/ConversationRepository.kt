@@ -16,4 +16,10 @@ interface ConversationRepository {
         uuid: String
     ): Either<Failure, List<Message>>
 
+    suspend fun sendMessages(
+        uuid: String,
+        content: String,
+        userIds: ArrayList<String>,
+    ): Either<Failure, Message>
+
 }

@@ -4,6 +4,7 @@ import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.dataStore.config.DataStoreConfig
 import com.ulearning.ulearning_app.data.mapper.ConversationMapper
+import com.ulearning.ulearning_app.data.remote.entities.request.SendMessageRequest
 import com.ulearning.ulearning_app.data.remote.service.ConversationService
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
 import com.ulearning.ulearning_app.domain.model.Conversation
@@ -42,6 +43,26 @@ class ConversationRepositoryImpl
         )) {
             is Either.Right -> {
                 Either.Right(mapper.messagesToDomain(response.b))
+            }
+            is Either.Left -> Either.Left(response.a)
+        }
+    }
+
+    override suspend fun sendMessages(
+        uuid: String,
+        content: String,
+        userIds: ArrayList<String>
+    ): Either<Failure, Message> {
+        return when (val response = service.sendMessage(
+            token = "${SettingRemote.BEARER} ${dataStore.token()}",
+            body = SendMessageRequest(
+                uuid = uuid,
+                content = content,
+                userIds = userIds
+            ),
+        )) {
+            is Either.Right -> {
+                Either.Right(mapper.messageToDomain(response.b))
             }
             is Either.Left -> Either.Left(response.a)
         }

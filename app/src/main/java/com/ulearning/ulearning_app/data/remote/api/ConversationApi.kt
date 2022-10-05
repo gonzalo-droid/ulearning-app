@@ -1,14 +1,14 @@
 package com.ulearning.ulearning_app.data.remote.api
 
 import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
+import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
+import com.ulearning.ulearning_app.data.remote.entities.request.SendMessageRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.ConversationResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.MessageResponse
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 
 interface ConversationApi {
@@ -22,11 +22,16 @@ interface ConversationApi {
     ): Response<BaseResponse<List<ConversationResponse>>>
 
 
-
     @GET("messages/{uuid}")
     suspend fun messages(
         @Header(SettingRemote.AUTHORIZATION) token: String,
         @Path("uuid") uuid: String,
     ): Response<BaseResponse<List<MessageResponse>>>
-    
+
+    @POST("messages")
+    suspend fun sendMessage(
+        @Header(SettingRemote.AUTHORIZATION) token: String,
+        @Body body: SendMessageRequest,
+    ): Response<BaseResponse<MessageResponse>>
+
 }

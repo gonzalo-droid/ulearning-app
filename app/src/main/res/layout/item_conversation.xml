@@ -7,7 +7,7 @@
     style="?attr/materialCardViewElevatedStyle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/dimen5"
+    android:layout_marginBottom="@dimen/dimen10"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimen10"
-            android:textAppearance="@style/readex_12_regular"
+            android:textAppearance="@style/readex_14_regular"
             android:textColor="@color/blue"
             android:maxLines="3"
             android:ellipsize="end"

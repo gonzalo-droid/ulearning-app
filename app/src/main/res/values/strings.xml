@@ -100,6 +100,7 @@
     <string name="topic_title">Temario</string>
     <string name="teachers">Nuestros docentes</string>
     <string name="new_message">Nuevo mensaje</string>
+    <string name="message_input">Mensaje</string>
 
 
 </resources>

@@ -7,6 +7,8 @@ import com.ulearning.ulearning_app.domain.useCase.conversation.GetConversationUs
 import com.ulearning.ulearning_app.domain.useCase.conversation.GetMessageUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -16,6 +18,8 @@ class MessageViewModel
 ) : BaseViewModel<MessageEvent, MessageState, MessageEffect>() {
 
     var page: Int = 1
+
+    var message = MutableStateFlow<String>("")
 
     lateinit var conversation: Conversation
 
@@ -31,6 +35,10 @@ class MessageViewModel
     }
 
     private fun sendMessage() {
+
+        if(message.value.isNotEmpty()){
+
+        }
 
     }
 

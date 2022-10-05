@@ -73,54 +73,62 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen10"
+                android:layout_marginBottom="@dimen/dimen5"
                 app:dividerColor="@color/divider_color_soft"
                 app:layout_constraintBottom_toTopOf="@+id/charLayout" />
 
-            <RelativeLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/charLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/chatEditText"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toStartOf="@+id/sendBtn"
                     android:background="@android:color/transparent"
-                    android:hint="Enter Message"
-                    android:inputType="text"
+                    android:hint="@string/message_input"
+                    android:inputType="textMultiLine"
+                    android:text="@={messageViewModel.message}"
                     android:maxLines="6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/sendBtn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="Autofill,TouchTargetSizeCheck" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/sendBtn"
+                    style="?attr/materialCardViewElevatedStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    app:cardBackgroundColor="@color/teal_200"
-                    style="?attr/materialCardViewElevatedStyle"
-                    android:layout_marginBottom="@dimen/dimen5"
-                    android:layout_marginTop="@dimen/dimen5">
+                    app:cardBackgroundColor="@color/green"
+                    android:onClick="@{()->messageViewModel.setEvent(messageViewModel.Events.sendMessageClick)}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0">
 
                     <ImageView
                         android:id="@+id/titleText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen8"
+                        android:gravity="end"
+                        android:src="@drawable/ic_baseline_play_arrow"
                         android:textAppearance="@style/readex_12_regular"
                         android:textColor="@color/blue"
-                        android:src="@drawable/ic_play_circle"
-                        android:gravity="end"
                         tools:text="enviar" />
 
                 </com.google.android.material.card.MaterialCardView>
 
 
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

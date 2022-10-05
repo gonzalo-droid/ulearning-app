@@ -74,4 +74,38 @@ class ConversationMapperImpl : ConversationMapper {
             )
         }
     }
+
+    override suspend fun messageToDomain(data: MessageResponse): Message {
+        return data.let {
+            Message(
+                classification = it.classification,
+                content = it.content,
+                id = it.id,
+                publishedAt = it.publishedAt,
+                sendBy = it.sendBy.let { user ->
+                    User(
+                        address = user?.address,
+                        dateOfBirth = user?.dateOfBirth,
+                        documentNumber = user?.documentNumber,
+                        documentType = user?.documentType,
+                        email = user?.email,
+                        firstName = user?.firstName,
+                        gender = user?.gender,
+                        id = user?.id,
+                        lastName = user?.lastName,
+                        name = user?.name,
+                        phone = user?.phone,
+                        phoneCode = user?.phoneCode,
+                        role = user?.role,
+                        secondLastName = user?.secondLastName,
+                    )
+                },
+                status = it.status,
+                subject = it.subject,
+                type = it.type,
+                userIds = it.userIds,
+                uuid = it.uuid,
+            )
+        }
+    }
 }
