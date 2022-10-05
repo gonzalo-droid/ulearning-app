@@ -112,7 +112,7 @@ class DetailCourseActivity :
 
     override fun goToConversation(courseId: Int) {
         startActivity(Intent(this, ConversationActivity::class.java).apply {
-            putExtra(Config.COURSE_ID_PUT, viewModel.subscription.course_id)
+            putExtra(Config.COURSE_ID_PUT, viewModel.subscription.courseId)
         })
     }
 

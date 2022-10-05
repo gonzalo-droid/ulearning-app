@@ -32,7 +32,7 @@ class DetailCourseViewModel
 
     private fun goToConversation() {
         if(::subscription.isInitialized){
-            setEffect { DetailCourseEffect.GoToConversation(courseId = subscription.course_id) }
+            setEffect { DetailCourseEffect.GoToConversation(courseId = subscription.courseId) }
         }
     }
 
@@ -40,7 +40,7 @@ class DetailCourseViewModel
         setState { DetailCourseState.Loading }
 
         getTopicUseCase(
-            GetTopicUseCase.Params(courseId = subscription.course_id)
+            GetTopicUseCase.Params(courseId = subscription.courseId)
         ) {
             it.either(::handleFailure, ::handleTopics)
         }

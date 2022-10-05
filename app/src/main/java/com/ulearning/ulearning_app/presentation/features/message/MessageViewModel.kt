@@ -17,7 +17,7 @@ class MessageViewModel
 
     var page: Int = 1
 
-    var uuid: String = ""
+    lateinit var conversation: Conversation
 
     override fun createInitialState(): MessageState {
         return MessageState.Idle
@@ -39,7 +39,7 @@ class MessageViewModel
         setState { MessageState.Loading }
         getMessageUseCase(
             GetMessageUseCase.Params(
-                uuid = uuid
+                uuid = conversation.uuid
             )
         ) {
             it.either(::handleFailure, ::handleMessages)

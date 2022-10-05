@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.conversation
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,7 @@ import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityConversationBinding
 import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
+import com.ulearning.ulearning_app.presentation.features.message.MessageActivity
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -87,7 +89,9 @@ class ConversationActivity :
     }
 
     private fun onItemSelected(conversation: Conversation) {
-
+        startActivity(Intent(this, MessageActivity::class.java).apply {
+            putExtra(Config.CONVERSATION_PUT,conversation)
+        })
     }
 
     override fun messageFailure(failure: Failure) {

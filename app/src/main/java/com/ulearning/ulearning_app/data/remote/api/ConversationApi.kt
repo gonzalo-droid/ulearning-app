@@ -23,7 +23,7 @@ interface ConversationApi {
 
 
 
-    @GET("messages/{uui}")
+    @GET("messages/{uuid}")
     suspend fun messages(
         @Header(SettingRemote.AUTHORIZATION) token: String,
         @Path("uuid") uuid: String,

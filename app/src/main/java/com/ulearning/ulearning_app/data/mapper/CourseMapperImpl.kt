@@ -36,13 +36,13 @@ class CourseMapperImpl : CourseMapper {
                 user = User(
                     name = it.userResponse?.name,
                 ),
-                course_id = it.courseId,
+                courseId = it.courseId,
                 group = Group(
                     id = it.group?.id,
                     name = it.group?.name,
                     teachers = if(!it.group?.teachers.isNullOrEmpty()) listTeacherToDomain(it.group?.teachers) else arrayListOf(),
                 ),
-                group_id = it.groupId,
+                groupId = it.groupId,
             )
         }
     }

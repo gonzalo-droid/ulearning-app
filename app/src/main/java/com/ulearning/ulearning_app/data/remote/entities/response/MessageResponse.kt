@@ -11,7 +11,7 @@ data class MessageResponse(
     @SerializedName("id")
     val id: Int? = 0,
     @SerializedName("published_at")
-    val publishedAt: String? = "",
+    val publishedAt: String,
     @SerializedName("send_by")
     val sendBy: UserResponse? = UserResponse(),
     @SerializedName("status")

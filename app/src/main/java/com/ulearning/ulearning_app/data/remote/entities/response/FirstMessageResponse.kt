@@ -12,7 +12,7 @@ data class FirstMessageResponse(
     @SerializedName("id")
     val id: Int? = 0,
     @SerializedName("parent_id")
-    val parentId: Any? = Any(),
+    val parentId: Any? = null,
     @SerializedName("published_at")
     val publishedAt: String? = "",
     @SerializedName("send_by")

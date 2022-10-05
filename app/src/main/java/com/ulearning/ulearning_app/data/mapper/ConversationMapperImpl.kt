@@ -6,6 +6,7 @@ import com.ulearning.ulearning_app.data.remote.entities.response.FirstMessageRes
 import com.ulearning.ulearning_app.data.remote.entities.response.MessageResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.UserResponse
 import com.ulearning.ulearning_app.domain.model.Conversation
+import com.ulearning.ulearning_app.domain.model.FirstMessage
 import com.ulearning.ulearning_app.domain.model.Message
 import com.ulearning.ulearning_app.domain.model.User
 import javax.inject.Singleton
@@ -18,7 +19,7 @@ class ConversationMapperImpl : ConversationMapper {
             Conversation(
                 canByReply = it.canByReply,
                 courseId = it.courseId,
-                firstMessage = FirstMessageResponse(
+                firstMessage = FirstMessage(
                     classification = it.firstMessage?.classification,
                     content = it.firstMessage?.content,
                     id = it.firstMessage?.id,

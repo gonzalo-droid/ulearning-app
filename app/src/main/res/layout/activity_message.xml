@@ -7,8 +7,8 @@
     <data>
 
         <variable
-            name="conversationViewModel"
-            type="com.ulearning.ulearning_app.presentation.features.conversation.ConversationViewModel" />
+            name="messageViewModel"
+            type="com.ulearning.ulearning_app.presentation.features.message.MessageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,21 +25,35 @@
             app:layout_constraintTop_toTopOf="parent"
             app:title="@{@string/message_title}" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/rightGuideLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.94" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/leftGuideLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.06" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             app:layout_constrainedHeight="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
+            app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
             app:layout_constraintTop_toBottomOf="@+id/topBarInclude"
             app:layout_constraintVertical_bias="0.0">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_gchat"
+                android:id="@+id/recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="@dimen/dimen16"
                 app:layout_constrainedHeight="true"
                 app:layout_constraintBottom_toTopOf="@+id/text_gchat_indicator"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -60,10 +74,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen10"
                 app:dividerColor="@color/divider_color_soft"
-                app:layout_constraintBottom_toTopOf="@+id/layout_gchat_chatbox" />
+                app:layout_constraintBottom_toTopOf="@+id/charLayout" />
 
             <RelativeLayout
-                android:id="@+id/layout_gchat_chatbox"
+                android:id="@+id/charLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -71,12 +85,11 @@
 
 
                 <EditText
-                    android:id="@+id/edit_gchat_message"
+                    android:id="@+id/chatEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/dimen16"
-                    android:layout_toStartOf="@+id/button_gchat_send"
+                    android:layout_toStartOf="@+id/sendBtn"
                     android:background="@android:color/transparent"
                     android:hint="Enter Message"
                     android:inputType="text"
@@ -84,22 +97,23 @@
                     tools:ignore="Autofill,TouchTargetSizeCheck" />
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/button_gchat_send"
+                    android:id="@+id/sendBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/dimen16"
                     android:layout_alignParentEnd="true"
                     app:cardBackgroundColor="@color/teal_200"
                     style="?attr/materialCardViewElevatedStyle"
-                    android:layout_marginBottom="@dimen/dimen5">
+                    android:layout_marginBottom="@dimen/dimen5"
+                    android:layout_marginTop="@dimen/dimen5">
 
-                    <TextView
+                    <ImageView
                         android:id="@+id/titleText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen10"
+                        android:layout_margin="@dimen/dimen8"
                         android:textAppearance="@style/readex_12_regular"
                         android:textColor="@color/blue"
+                        android:src="@drawable/ic_play_circle"
                         android:gravity="end"
                         tools:text="enviar" />
 

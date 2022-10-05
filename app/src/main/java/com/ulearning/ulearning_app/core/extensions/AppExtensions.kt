@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.ulearning.ulearning_app.core.utils.Config
+import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.Subscription
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
@@ -68,6 +69,10 @@ infix fun Int.decimalFormat(format: String): String = DecimalFormat(format).form
 @Suppress("DEPRECATION")
 infix fun String.putSubscription(activity: Activity) =
     activity.intent.extras!!.getSerializable(this) as Subscription
+
+@Suppress("DEPRECATION")
+infix fun String.putConversation(activity: Activity) =
+    activity.intent.extras!!.getSerializable(this) as Conversation
 
 infix fun String.putString(activity: Activity) = activity.intent.extras!!.getString(this)!!
 
