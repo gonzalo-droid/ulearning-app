@@ -22,26 +22,23 @@ class ConversationViewModel
 
     override fun handleEvent(event: ConversationEvent) {
         when (event) {
-            ConversationEvent.ConversationDetailClicked -> goToMessage()
             ConversationEvent.AddConversationClick -> addConversation()
             ConversationEvent.ConversationsClicked -> getConversations()
         }
     }
 
-    private fun goToMessage() {
-
-    }
-
     private fun addConversation() {
-
+        setEffect { ConversationEffect.GoToNewConversation }
     }
 
     private fun getConversations() {
         setState { ConversationState.Loading }
-        getConversationUseCase(GetConversationUseCase.Params(
-            page = page,
-            courseId = courseId
-        )) {
+        getConversationUseCase(
+            GetConversationUseCase.Params(
+                page = page,
+                courseId = courseId
+            )
+        ) {
             it.either(::handleFailure, ::handleConversations)
         }
     }
@@ -55,9 +52,6 @@ class ConversationViewModel
     }
 
     companion object Events {
-        val conversationDetailClicked = ConversationEvent.ConversationDetailClicked
         val addConversationClick = ConversationEvent.AddConversationClick
-
-
     }
 }

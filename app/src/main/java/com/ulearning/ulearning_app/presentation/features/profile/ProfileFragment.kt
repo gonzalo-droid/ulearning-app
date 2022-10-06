@@ -1,5 +1,7 @@
 package com.ulearning.ulearning_app.presentation.features.profile
 
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.ulearning.ulearning_app.BR
@@ -15,6 +17,7 @@ import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
 import com.ulearning.ulearning_app.presentation.features.auth.LoginActivity
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class ProfileFragment :
@@ -68,7 +71,7 @@ class ProfileFragment :
     override fun getProfile(data: Profile) {
         closeLoadingDialog()
 
-        with(binding){
+        with(binding) {
             headerInclude.nameText.text = data.name
             nameInputText.editText!!.setText(data.firstName)
             lastNameInpuntText.editText!!.setText(data.lastName)
@@ -76,10 +79,17 @@ class ProfileFragment :
             phoneInpuntText.editText!!.setText(data.phone)
             numberDocumentText.text = data.documentNumber
 
-            val date = if(data.dateOfBirth.isNullOrEmpty()) "" else data.dateOfBirth.dateFormat(Config.DATE_FORMAT_TWO).dateFormat(Config.DATE_FORMAT_FIFTEEN)
+            val date =
+                if (data.dateOfBirth.isNullOrEmpty()) "" else data.dateOfBirth.dateFormat(Config.DATE_FORMAT_TWO)
+                    .dateFormat(Config.DATE_FORMAT_FIFTEEN)
 
             dateOfBirthdayeInpuntText.editText!!.setText(date)
         }
+    }
+
+    override fun goToWebView(url: String) {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(browserIntent)
     }
 
     override fun logout() {

@@ -59,7 +59,6 @@ class MessageAdapter constructor(
 
     override fun getItemCount(): Int = messages.size
 
-
     inner class ReceiverViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
 
         val binding = ItemMessageReciverBinding.bind(view)
@@ -72,7 +71,7 @@ class MessageAdapter constructor(
 
             val time = model.publishedAt
             binding.timeText.text =
-                time?.dateFormat(Config.DATE_FORMAT_THREE)?.dateFormat(Config.DATE_FORMAT_SEVEN)
+                time?.dateFormat(Config.DATE_FORMAT_THREE)?.dateFormat(Config.DATE_FORMAT_THIRTY)
 
         }
 
@@ -90,7 +89,7 @@ class MessageAdapter constructor(
 
             val time = model.publishedAt
             binding.timeText.text =
-                time?.dateFormat(Config.DATE_FORMAT_THREE)?.dateFormat(Config.DATE_FORMAT_SEVEN)
+                time?.dateFormat(Config.DATE_FORMAT_THREE)?.dateFormat(Config.DATE_FORMAT_THIRTY)
 
         }
 

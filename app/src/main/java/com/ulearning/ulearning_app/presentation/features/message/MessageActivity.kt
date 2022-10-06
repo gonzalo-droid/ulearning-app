@@ -8,13 +8,11 @@ import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.extensions.putConversation
-import com.ulearning.ulearning_app.core.extensions.putInt
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityMessageBinding
 import com.ulearning.ulearning_app.domain.model.Message
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
-import com.ulearning.ulearning_app.presentation.features.conversation.*
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -54,9 +52,9 @@ class MessageActivity :
 
         viewModel.let {
             viewModel.conversation = Config.CONVERSATION_PUT putConversation this@MessageActivity
-        }
 
-        viewModel.setEvent(MessageEvent.MessagesClicked)
+            viewModel.setEvent(MessageEvent.MessagesClicked)
+        }
 
         viewModel.apply {
             lifecycleScopeCreate(activity = this@MessageActivity, method = {
@@ -74,12 +72,16 @@ class MessageActivity :
 
     }
 
+
     override fun messages(messages: List<Message>) {
         closeLoadingDialog()
 
-        adapter = MessageAdapter(messages = messages.reversed(), conversation = viewModel.conversation)
+        adapter =
+            MessageAdapter(messages = messages.reversed(), conversation = viewModel.conversation)
 
         recycler.adapter = adapter
+
+        adapter.notifyDataSetChanged()
 
         recycler.scrollToPosition(messages.size - 1);
 

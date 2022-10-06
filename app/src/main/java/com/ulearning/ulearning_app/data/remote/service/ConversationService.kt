@@ -2,10 +2,18 @@ package com.ulearning.ulearning_app.data.remote.service
 
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
+import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
+import com.ulearning.ulearning_app.data.remote.entities.request.SendConversationRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.SendMessageRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.ConversationResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.MessageResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.UserResponse
+import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
+import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Query
 
 
 interface ConversationService {
@@ -26,5 +34,18 @@ interface ConversationService {
         token: String,
         body: SendMessageRequest
     ): Either<Failure, MessageResponse>
+
+
+    suspend fun sendConversation(
+        token: String,
+        body: SendConversationRequest
+    ): Either<Failure, ConversationResponse>
+
+    suspend fun userByCourse(
+        token: String,
+        name: String,
+        courseId: Int,
+        withoutPagination: Boolean,
+    ): Either<Failure, List<UserResponse>>
 
 }

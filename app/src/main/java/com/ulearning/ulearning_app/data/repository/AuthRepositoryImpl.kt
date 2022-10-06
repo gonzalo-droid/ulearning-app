@@ -1,6 +1,7 @@
 package com.ulearning.ulearning_app.data.repository
 
 import android.util.Log
+import com.ulearning.ulearning_app.BuildConfig
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Either.Left
@@ -82,8 +83,19 @@ class AuthRepositoryImpl
             body = FCMTokenRequest(deviceId = Config.DEVICE_ID, fcmToken = fcmToken)
         )) {
             is Right -> {
-                Log.d("FCMTracker", response.b.toString())
                 Right(true)
+            }
+            is Left -> Left(Failure.DefaultError(R.string.error_user_message))
+        }
+    }
+
+    override suspend fun selfAuthToken(): Either<Failure, String> {
+        return when (val response = service.selfAuthToken(
+            token = "${SettingRemote.BEARER} ${dataStore.token()}"
+        )) {
+            is Right -> {
+                val url = "${BuildConfig.STUDENT_URL}/sessions/signin-token/${response.b.token}"
+                Right(url)
             }
             is Left -> Left(Failure.DefaultError(R.string.error_user_message))
         }

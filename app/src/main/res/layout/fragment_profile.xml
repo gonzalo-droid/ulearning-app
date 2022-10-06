@@ -297,7 +297,7 @@
                         android:text="@string/my_payments"
                         android:textAppearance="@style/readex_16_regular"
                         android:textColor="@color/gray2"
-                        app:drawableStartCompat="@drawable/ic_account"
+                        app:drawableStartCompat="@drawable/ic_baseline_link"
                         app:drawableEndCompat="@drawable/ic_arrow_forward"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

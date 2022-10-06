@@ -3,10 +3,7 @@ package com.ulearning.ulearning_app.data.remote.api
 import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
 import com.ulearning.ulearning_app.data.remote.entities.request.FCMTokenRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
-import com.ulearning.ulearning_app.data.remote.entities.response.FCMTokenResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.ProfileResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.SubscriptionResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.*
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
 import retrofit2.Response
 import retrofit2.http.*
@@ -29,5 +26,10 @@ interface AuthApi {
         @Header(SettingRemote.AUTHORIZATION) token: String,
         @Body request: FCMTokenRequest
     ): Response<BaseResponse<FCMTokenResponse>>
-    
+
+    @POST("self-auth-token")
+    suspend fun selfAuthToken(
+        @Header(SettingRemote.AUTHORIZATION) token: String,
+    ): Response<BaseResponse<TokenResponse>>
+
 }

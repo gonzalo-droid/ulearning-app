@@ -20,4 +20,7 @@ interface AuthRepository {
     suspend fun fcmToken(
         fcmToken: String,
     ): Either<Failure, Boolean>
+
+    suspend fun selfAuthToken(
+    ): Either<Failure, String>
 }

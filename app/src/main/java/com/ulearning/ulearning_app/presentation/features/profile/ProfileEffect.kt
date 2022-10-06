@@ -8,4 +8,6 @@ sealed class ProfileEffect : UiEffect {
     object Logout : ProfileEffect()
 
     data class ShowMessageFailure constructor(val failure: Failure) : ProfileEffect()
+
+    data class GoToWebView constructor(val url: String) : ProfileEffect()
 }

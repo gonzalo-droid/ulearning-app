@@ -1,27 +1,26 @@
 package com.ulearning.ulearning_app.domain.useCase.conversation
 
+import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.Message
 import com.ulearning.ulearning_app.domain.repository.ConversationRepository
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import javax.inject.Inject
 
-class SendMessageUseCase
+class SendConversationUseCase
 @Inject constructor(private val conversationRepository: ConversationRepository) :
 
-    BaseUseCase<Message, SendMessageUseCase.Params>() {
+    BaseUseCase<Conversation, SendConversationUseCase.Params>() {
 
     override suspend fun run(params: Params) =
-        conversationRepository.sendMessages(
-            params.uuid,
+        conversationRepository.sendConversation(
             params.content,
+            params.courseId,
             params.userIds,
-            params.toSupport
         )
 
     data class Params(
-        val uuid: String,
         val content: String,
-        val userIds: ArrayList<String>,
-        val toSupport: Boolean
+        val courseId: Int,
+        val userIds: ArrayList<Int>,
     )
 }

@@ -25,7 +25,7 @@ object ProfileReducer {
         when (effect) {
             is ProfileEffect.ShowMessageFailure -> viewState.messageFailure(effect.failure)
             is ProfileEffect.Logout -> viewState.logout()
-            else -> {}
+            is ProfileEffect.GoToWebView -> viewState.goToWebView(effect.url)
         }
     }
 }

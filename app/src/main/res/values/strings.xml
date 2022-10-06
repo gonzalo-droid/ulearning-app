@@ -101,6 +101,10 @@
     <string name="teachers">Nuestros docentes</string>
     <string name="new_message">Nuevo mensaje</string>
     <string name="message_input">Mensaje</string>
+    <string name="search_user_input">Buscar usuario</string>
+    <string name="search_title">Buscar</string>
+    <string name="send">Enviar</string>
+    <string name="ente_message_text">Ingrese un mensaje</string>
 
 
 </resources>

@@ -10,7 +10,9 @@ interface ProfileViewState {
 
     fun loading()
 
-    fun getProfile(data : Profile)
+    fun getProfile(data: Profile)
+
+    fun goToWebView(url: String)
 
     fun logout()
 }

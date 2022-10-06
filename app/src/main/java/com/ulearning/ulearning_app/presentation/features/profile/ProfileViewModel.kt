@@ -6,6 +6,7 @@ import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.DoLogoutUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.GetProfileUseCase
+import com.ulearning.ulearning_app.domain.useCase.auth.GetTokenUseCase
 import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursesSubscriptionUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,6 +17,7 @@ class ProfileViewModel
 @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
     private val doLogoutUseCase: DoLogoutUseCase,
+    private val getTokenUseCase: GetTokenUseCase,
 ) : BaseViewModel<ProfileEvent, ProfileState, ProfileEffect>() {
 
     override fun createInitialState(): ProfileState {
@@ -31,7 +33,11 @@ class ProfileViewModel
     }
 
     private fun goPayment() {
-
+        getTokenUseCase(
+            BaseUseCase.None()
+        ) {
+            it.either(::handleFailure, ::handleToken)
+        }
     }
 
     private fun logout() {
@@ -63,8 +69,12 @@ class ProfileViewModel
         setState { ProfileState.DatProfile(data = data) }
     }
 
-    private fun handleLogout(value : Boolean) {
+    private fun handleLogout(value: Boolean) {
         setEffect { ProfileEffect.Logout }
+    }
+
+    private fun handleToken(url: String) {
+        setEffect { ProfileEffect.GoToWebView(url = url) }
     }
 
 

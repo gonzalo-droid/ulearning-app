@@ -8,6 +8,7 @@ import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.FCMTokenResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.ProfileResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.TokenResponse
 import com.ulearning.ulearning_app.data.remote.network.NetworkHandler
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -32,6 +33,10 @@ class AuthServiceImpl
         body: FCMTokenRequest
     ): Either<Failure, FCMTokenResponse> {
         return networkHandler.callServiceBase { authApi.fcmToken(token, body) }
+    }
+
+    override suspend fun selfAuthToken(token: String): Either<Failure, TokenResponse> {
+        return networkHandler.callServiceBase { authApi.selfAuthToken(token) }
     }
 
 }

@@ -16,6 +16,7 @@ import com.ulearning.ulearning_app.databinding.ActivityConversationBinding
 import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
 import com.ulearning.ulearning_app.presentation.features.message.MessageActivity
+import com.ulearning.ulearning_app.presentation.features.search.SearchActivity
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -88,9 +89,16 @@ class ConversationActivity :
 
     }
 
+    override fun newConversation() {
+        startActivity(Intent(this, SearchActivity::class.java).apply {
+            putExtra(Config.COURSE_ID_PUT, viewModel.courseId)
+        })
+        finish()
+    }
+
     private fun onItemSelected(conversation: Conversation) {
         startActivity(Intent(this, MessageActivity::class.java).apply {
-            putExtra(Config.CONVERSATION_PUT,conversation)
+            putExtra(Config.CONVERSATION_PUT, conversation)
         })
     }
 

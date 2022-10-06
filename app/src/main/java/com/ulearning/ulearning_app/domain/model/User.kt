@@ -17,4 +17,9 @@ data class User(
     var phoneCode: String?= null,
     var role: String?= "",
     var secondLastName: String?= "",
-) : Serializable
+) : Serializable {
+
+    override fun toString(): String {
+        return this.name?:""
+    }
+}

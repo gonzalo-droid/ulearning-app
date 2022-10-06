@@ -21,7 +21,7 @@ object ConversationReducer {
     fun selectEffect(effect: ConversationEffect) {
         when (effect) {
             is ConversationEffect.ShowMessageFailure -> viewState.messageFailure(effect.failure)
-
+            is ConversationEffect.GoToNewConversation -> viewState.newConversation()
         }
     }
 }

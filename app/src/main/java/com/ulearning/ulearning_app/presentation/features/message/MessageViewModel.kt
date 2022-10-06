@@ -1,16 +1,17 @@
 package com.ulearning.ulearning_app.presentation.features.message
 
+
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.Message
-import com.ulearning.ulearning_app.domain.useCase.conversation.GetConversationUseCase
 import com.ulearning.ulearning_app.domain.useCase.conversation.GetMessageUseCase
 import com.ulearning.ulearning_app.domain.useCase.conversation.SendMessageUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -41,14 +42,16 @@ class MessageViewModel
 
         val ids = conversation.firstMessage?.userIds
 
-        if(messageInput.value.isNotEmpty()){
+        if (messageInput.value.isNotEmpty()) {
 
             sendMessageUseCase(
 
                 SendMessageUseCase.Params(
                     uuid = conversation.uuid,
                     content = messageInput.value.trim(),
-                    userIds = ids as ArrayList<String>
+                    userIds = ids as ArrayList<String>,
+                    toSupport = false
+
                 )
             ) {
                 it.either(::handleFailure, ::handleMessage)
@@ -59,6 +62,7 @@ class MessageViewModel
 
     private fun getMessages() {
         setState { MessageState.Loading }
+        Log.d("MessageVM", conversation.uuid)
         getMessageUseCase(
             GetMessageUseCase.Params(
                 uuid = conversation.uuid
@@ -70,7 +74,12 @@ class MessageViewModel
 
     private fun handleMessage(message: Message) {
         messageInput.value = ""
-        getMessages()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            getMessages()
+        }, 2000)
+
+
     }
 
     private fun handleMessages(messages: List<Message>) {

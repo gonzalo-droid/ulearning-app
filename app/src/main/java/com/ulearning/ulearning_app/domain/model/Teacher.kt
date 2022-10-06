@@ -19,7 +19,8 @@ data class Teacher(
             "academic_tutor" -> "Tutor académico"
             "umbrella_tutor" -> "Tutor sombrilla"
             "administrative_tutor" -> "Tutor administrativo"
-            else -> ""
+            "teacher" -> "Docente"
+            else -> "Docente"
         }
     }
 }
