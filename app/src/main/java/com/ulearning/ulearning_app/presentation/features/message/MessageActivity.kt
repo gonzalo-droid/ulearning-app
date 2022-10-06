@@ -28,7 +28,7 @@ class MessageActivity :
 
     override val viewModel: MessageViewModel by viewModels()
 
-    override val dataBindingViewModel = BR.conversationViewModel
+    override val dataBindingViewModel = BR.messageViewModel
 
     private lateinit var recycler: RecyclerView
 
@@ -77,9 +77,13 @@ class MessageActivity :
     override fun messages(messages: List<Message>) {
         closeLoadingDialog()
 
-        adapter = MessageAdapter(messages = messages)
+        adapter = MessageAdapter(messages = messages.reversed(), conversation = viewModel.conversation)
 
         recycler.adapter = adapter
+
+        recycler.scrollToPosition(messages.size - 1);
+
+        recycler.scrollToPosition(adapter.itemCount - 1);
 
     }
 
@@ -90,6 +94,7 @@ class MessageActivity :
         val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
 
         showSnackBar(binding.root, getString(messageDesign.idMessage))
+
     }
 
     override fun loading() {

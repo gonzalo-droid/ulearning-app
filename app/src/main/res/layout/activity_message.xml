@@ -93,7 +93,7 @@
                     android:background="@android:color/transparent"
                     android:hint="@string/message_input"
                     android:inputType="textMultiLine"
-                    android:text="@={messageViewModel.message}"
+                    android:text="@={messageViewModel.messageInput}"
                     android:maxLines="6"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/sendBtn"
@@ -115,15 +115,13 @@
                     app:layout_constraintVertical_bias="0.0">
 
                     <ImageView
-                        android:id="@+id/titleText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen8"
                         android:gravity="end"
                         android:src="@drawable/ic_baseline_play_arrow"
                         android:textAppearance="@style/readex_12_regular"
-                        android:textColor="@color/blue"
-                        tools:text="enviar" />
+                        android:textColor="@color/blue" />
 
                 </com.google.android.material.card.MaterialCardView>
 

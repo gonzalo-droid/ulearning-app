@@ -9,10 +9,12 @@ import com.ulearning.ulearning_app.core.extensions.dateFormat
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ItemMessageReciverBinding
 import com.ulearning.ulearning_app.databinding.ItemMessageSendBinding
+import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.Message
 
 class MessageAdapter constructor(
-    private val messages: List<Message>
+    private val messages: List<Message>,
+    private val conversation: Conversation
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -48,7 +50,7 @@ class MessageAdapter constructor(
 
     override fun getItemViewType(position: Int): Int {
         val message: Message = messages[position]
-        return if (message.sendBy.id == 3) {
+        return if (message.sendBy.id == conversation.firstMessage?.sendBy) {
             VIEW_TYPE_MESSAGE_SEND
         } else {
             VIEW_TYPE_MESSAGE_RECEIVED
