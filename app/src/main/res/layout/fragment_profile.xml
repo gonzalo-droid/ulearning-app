@@ -39,7 +39,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen16"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp">
@@ -310,14 +310,16 @@
                     style="?attr/materialCardViewElevatedStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen16"
+                    android:layout_marginTop="@dimen/dimen80"
+                    android:layout_marginBottom="@dimen/dimen32"
                     android:elevation="@dimen/dimen1"
                     android:onClick="@{()->profileViewModel.setEvent(profileViewModel.Events.logoutClick)}"
-                    app:layout_constraintBottom_toTopOf="@+id/saveBtn"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toBottomOf="@+id/paymentBtn">
+                    app:layout_constraintTop_toBottomOf="@+id/planInpuntText"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintVertical_bias="1.0">
 
 
                     <TextView
@@ -339,18 +341,6 @@
                 </com.google.android.material.card.MaterialCardView>
 
 
-                <Button
-                    android:id="@+id/saveBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen24"
-                    android:layout_marginBottom="@dimen/dimen36"
-                    android:text="Guardar"
-                    android:visibility="invisible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                    app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toBottomOf="@+id/planInpuntText" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

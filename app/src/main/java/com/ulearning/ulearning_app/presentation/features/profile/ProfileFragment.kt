@@ -33,7 +33,7 @@ class ProfileFragment :
     override fun onViewIsCreated(view: View) {
 
         ProfileReducer.instance(viewState = this)
-
+        binding.paymentBtn.visibility = View.VISIBLE
         observeUiStates()
     }
 
@@ -84,6 +84,10 @@ class ProfileFragment :
                     .dateFormat(Config.DATE_FORMAT_FIFTEEN)
 
             dateOfBirthdayeInpuntText.editText!!.setText(date)
+
+            if(data.role.equals(Config.ROLE_TEACHER)){
+                paymentBtn.visibility = View.GONE
+            }
         }
     }
 

@@ -59,6 +59,9 @@ object Config {
     const val CONVERSATION_PUT = "conversation"
     const val COURSE = "course"
 
+    const val ROLE_TEACHER = "teacher"
+    const val ROLE_STUDENT = "student"
+
 
     /* 12 digits */
      val DEVICE_ID = "${android.os.Build.BOARD.length % 10}" +
