@@ -1,5 +1,7 @@
 package com.ulearning.ulearning_app.presentation.features.topic
 
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -110,8 +112,13 @@ class TopicFragment :
         }
 
 
-        adapter = TopicAdapter(topics = mutableTopics)
+        adapter = TopicAdapter(topics = mutableTopics){ topic ->
+            onItemSelected(topic)
+        }
 
         recycler.adapter = adapter
+    }
+
+    private fun onItemSelected(topic: Topic) {
     }
 }

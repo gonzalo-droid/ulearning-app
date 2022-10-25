@@ -6,10 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.databinding.ItemTopicBinding
+import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.Topic
 
 class TopicAdapter constructor(
-    private val topics: List<Topic>
+    private val topics: List<Topic>,
+    private val onClickListener: (Topic) -> Unit
 ) : RecyclerView.Adapter<TopicAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -20,7 +22,7 @@ class TopicAdapter constructor(
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.bind(topics[position], position)
+        holder.bind(topics[position], position, onClickListener)
     }
 
     override fun getItemCount(): Int = topics.size
@@ -31,7 +33,7 @@ class TopicAdapter constructor(
         val binding = ItemTopicBinding.bind(view)
 
 
-        fun bind(model: Topic, position : Int) {
+        fun bind(model: Topic, position : Int, onClickListener: (Topic) -> Unit) {
 
             binding.titleText.text  = model.title
 
@@ -40,6 +42,10 @@ class TopicAdapter constructor(
             val icon = if( model.parentId == null ) R.drawable.ic_flag  else R.drawable.ic_check_circle
 
             binding.topicImage.setImageResource(icon)
+
+            itemView.setOnClickListener {
+                onClickListener(model)
+            }
         }
     }
 }

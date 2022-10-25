@@ -1,6 +1,7 @@
 package com.ulearning.ulearning_app.presentation.features.courses
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,12 +14,14 @@ import com.ulearning.ulearning_app.core.extensions.putSubscription
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityDetailCourseBinding
+import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.model.Topic
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
 import com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity
 import com.ulearning.ulearning_app.presentation.features.courses.adapter.DetailCourseTeacherAdapter
 import com.ulearning.ulearning_app.presentation.features.courses.adapter.TopicAdapter
+import com.ulearning.ulearning_app.presentation.features.message.MessageActivity
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -63,9 +66,12 @@ class DetailCourseActivity :
     }
 
     private fun observeUiStates() {
+        viewModel.setEvent(DetailCourseEvent.GetToken)
+
 
         viewModel.let {
-            viewModel.subscription = Config.SUBSCRIPTION_PUT putSubscription this@DetailCourseActivity
+            viewModel.subscription =
+                Config.SUBSCRIPTION_PUT putSubscription this@DetailCourseActivity
         }
 
         setDetailCourse(viewModel.subscription)
@@ -105,9 +111,22 @@ class DetailCourseActivity :
         }
 
 
-        topicAdapter = TopicAdapter(topics = mutableTopics)
+        topicAdapter = TopicAdapter(topics = mutableTopics) { topic ->
+            onItemSelected(topic)
+        }
 
         topicRecycler.adapter = topicAdapter
+    }
+
+    private fun onItemSelected(topic: Topic) {
+        viewModel.let {
+            if(viewModel.urlWebView.isNotEmpty()){
+                val topicUrl = "/courses/${topic.courseId}/topics/${topic.id}"
+                val url = "${viewModel.urlWebView }?return=${topicUrl}"
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            }
+        }
+
     }
 
     override fun goToConversation(courseId: Int) {
@@ -125,7 +144,7 @@ class DetailCourseActivity :
             timeText.text = data.course?.formatAsynchronousHour()
             modalityText.text = data.course?.formatModality()
             topicText.text = data.course?.lessonsCount.toString()
-            adapter = DetailCourseTeacherAdapter(teachers = data.group?.teachers?: arrayListOf())
+            adapter = DetailCourseTeacherAdapter(teachers = data.group?.teachers ?: arrayListOf())
             recycler.adapter = adapter
         }
     }

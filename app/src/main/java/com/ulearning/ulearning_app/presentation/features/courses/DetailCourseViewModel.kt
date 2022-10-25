@@ -3,19 +3,24 @@ package com.ulearning.ulearning_app.presentation.features.courses
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.model.Topic
+import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
+import com.ulearning.ulearning_app.domain.useCase.auth.GetTokenUseCase
 import com.ulearning.ulearning_app.domain.useCase.topic.GetTopicUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
+import com.ulearning.ulearning_app.presentation.features.profile.ProfileEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailCourseViewModel
 @Inject constructor(
-    private val getTopicUseCase: GetTopicUseCase
+    private val getTopicUseCase: GetTopicUseCase,
+    private val getTokenUseCase: GetTokenUseCase,
 ) : BaseViewModel<DetailCourseEvent, DetailCourseState, DetailCourseEffect>() {
 
 
     lateinit var subscription: Subscription
+    var urlWebView:String =""
 
     override fun createInitialState(): DetailCourseState {
         return DetailCourseState.Idle
@@ -27,6 +32,7 @@ class DetailCourseViewModel
             DetailCourseEvent.GetTopic -> getTopic()
             DetailCourseEvent.SendComment -> {}
             DetailCourseEvent.GoToConversation -> goToConversation()
+            DetailCourseEvent.GetToken -> getToken()
         }
     }
 
@@ -45,6 +51,18 @@ class DetailCourseViewModel
             it.either(::handleFailure, ::handleTopics)
         }
 
+    }
+
+    private fun getToken() {
+        getTokenUseCase(
+            BaseUseCase.None()
+        ) {
+            it.either(::handleFailure, ::handleToken)
+        }
+    }
+
+    private fun handleToken(url: String) {
+        urlWebView = url
     }
 
     private fun getDetailCourse() {

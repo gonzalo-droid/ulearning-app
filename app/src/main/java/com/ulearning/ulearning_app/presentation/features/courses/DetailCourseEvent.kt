@@ -13,4 +13,6 @@ sealed class DetailCourseEvent : UiEvent {
 
     object GoToConversation : DetailCourseEvent()
 
+    object GetToken : DetailCourseEvent()
+
 }
