@@ -9,4 +9,6 @@ sealed class HomeEvent : UiEvent {
 
     object RecentlyCoursesHomeClicked : HomeEvent()
 
+    object DataProfileClicked : HomeEvent()
+
 }

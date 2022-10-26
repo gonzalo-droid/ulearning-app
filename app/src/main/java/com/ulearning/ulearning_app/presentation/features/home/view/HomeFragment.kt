@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
+import com.ulearning.ulearning_app.core.extensions.dateFormat
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.FragmentHomeBinding
+import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
 import com.ulearning.ulearning_app.presentation.features.home.HomeEvent
@@ -70,6 +72,7 @@ class HomeFragment :
     private fun observeUiStates() {
         viewModel.setEvent(HomeEvent.RecentlyCoursesHomeClicked)
         viewModel.setEvent(HomeEvent.CoursesHomeClicked)
+        viewModel.setEvent(HomeEvent.DataProfileClicked)
 
         viewModel.apply {
             lifecycleScopeCreate(activity = requireActivity(), method = {
@@ -108,9 +111,6 @@ class HomeFragment :
         closeShimmer()
         courseRecentlyList = courses
 
-        val userName = courses.first().user?.name
-        binding.tvUserName.text = userName
-
         courseRecentlyAdapter = CourseRecentlyAdapter(courses = courseRecentlyList){
                 model -> onItemSelected(model)
         }
@@ -141,22 +141,25 @@ class HomeFragment :
 
     private fun onItemSelected(model: Subscription){
 
-/*
-        startActivity(Intent(requireActivity(), DetailCourseActivity::class.java).apply {
-
-            putExtra(Config.SUBSCRIPTION_PUT, model)
-
-        })
-*/
-
         findNavController().navigate(
             R.id.action_navigation_home_to_detailCourseActivity,
             Bundle().apply {
                 putSerializable(Config.SUBSCRIPTION_PUT, model)
             }
         )
+    }
 
+    override fun getProfile(data: Profile) {
+        closeLoadingDialog()
 
+        with(binding) {
 
+            tvUserName.text = data.name
+
+            if(data.role.equals(Config.ROLE_TEACHER)){
+                continueLearningText.visibility = View.GONE
+                courseRecentlyRecycler.visibility = View.GONE
+            }
+        }
     }
 }

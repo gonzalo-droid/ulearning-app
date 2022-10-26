@@ -120,9 +120,9 @@ class DetailCourseActivity :
 
     private fun onItemSelected(topic: Topic) {
         viewModel.let {
-            if(viewModel.urlWebView.isNotEmpty()){
+            if (viewModel.urlWebView.isNotEmpty()) {
                 val topicUrl = "/courses/${topic.courseId}/topics/${topic.id}"
-                val url = "${viewModel.urlWebView }?return=${topicUrl}"
+                val url = "${viewModel.urlWebView}?return=${topicUrl}"
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
             }
         }
