@@ -33,6 +33,9 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.ulearning.ulearning_app.presentation.features.addConversation.AddConversationActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.ulearning.ulearning_app.presentation.features.message.MessageActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
