@@ -3,13 +3,13 @@ package com.ulearning.ulearning_app.presentation.features.conversation
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.extensions.putInt
-import com.ulearning.ulearning_app.core.extensions.putSubscription
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityConversationBinding
@@ -47,7 +47,7 @@ class ConversationActivity :
 
         recycler = binding.recycler
 
-        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.layoutManager =  GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
 
         observeUiStates()
     }

@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.databinding.ItemTeacherBinding
 import com.ulearning.ulearning_app.domain.model.Teacher
+import com.ulearning.ulearning_app.domain.model.Topic
 
 class DetailCourseTeacherAdapter constructor(
     private val teachers: List<Teacher>,
+    private val onClickListener: (Teacher) -> Unit
 ) : RecyclerView.Adapter<DetailCourseTeacherAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -20,7 +22,7 @@ class DetailCourseTeacherAdapter constructor(
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.bind(teachers[position])
+        holder.bind(teachers[position], onClickListener)
     }
 
     override fun getItemCount(): Int = teachers.size
@@ -31,12 +33,15 @@ class DetailCourseTeacherAdapter constructor(
         val binding = ItemTeacherBinding.bind(view)
 
 
-        fun bind(model: Teacher) {
+        fun bind(model: Teacher, onClickListener: (Teacher) -> Unit) {
 
-            binding.nameText.text  = "${model.firstName} ${model.lastName}"
+            binding.nameText.text = "${model.firstName} ${model.lastName}"
 
-            binding.roleText.text  = model.formatSubtype()
+            binding.roleText.text = model.formatSubtype()
 
+            itemView.setOnClickListener {
+                onClickListener(model)
+            }
 
         }
 

@@ -7,6 +7,9 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.ArrayAdapter
 import androidx.activity.viewModels
+import androidx.core.widget.addTextChangedListener
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
@@ -18,7 +21,10 @@ import com.ulearning.ulearning_app.databinding.ActivitySearchBinding
 import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.User
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
+import com.ulearning.ulearning_app.presentation.features.addConversation.AddConversationActivity
 import com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity
+import com.ulearning.ulearning_app.presentation.features.conversation.ConversationAdapter
+import com.ulearning.ulearning_app.presentation.features.conversation.ConversationEvent
 import com.ulearning.ulearning_app.presentation.features.message.*
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +41,10 @@ class SearchActivity :
 
     override val dataBindingViewModel = BR.searchViewModel
 
+    private lateinit var recycler: RecyclerView
+
+    private lateinit var adapter: UserAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,6 +53,10 @@ class SearchActivity :
         binding.topBarInclude.btnBack.setOnClickListener {
             onBackPressed()
         }
+
+        recycler = binding.recycler
+
+        recycler.layoutManager = LinearLayoutManager(this)
 
         observeUiStates()
     }
@@ -53,20 +67,19 @@ class SearchActivity :
             viewModel.courseId = Config.COURSE_ID_PUT putInt this@SearchActivity
         }
 
-        binding.searchAutocomplete.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        viewModel.setEvent(SearchEvent.GetUsersClick)
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-            override fun afterTextChanged(ed: Editable?) {
-                if (binding.searchAutocomplete.text.length >= 2) {
-                    viewModel.searchUser(binding.searchAutocomplete.text.toString().trim())
+        binding.searchEdit.addTextChangedListener { filter ->
+            with(viewModel) {
+                if (listUser.isNotEmpty()) {
+                    val newUser = listUser.filter { user ->
+                        user.name!!.lowercase().contains(filter.toString().lowercase())
+                    }
+                    adapter.updateUser(newUser)
                 }
+
             }
-        })
-
-
-
+        }
 
         viewModel.apply {
             lifecycleScopeCreate(activity = this@SearchActivity, method = {
@@ -103,27 +116,28 @@ class SearchActivity :
 
     override fun conversation(conversation: Conversation) {
         closeLoadingDialog()
-        startActivity(Intent(this, ConversationActivity::class.java).apply {
+
+        startActivity(Intent(this, AddConversationActivity::class.java).apply {
             putExtra(Config.COURSE_ID_PUT, viewModel.courseId)
         })
+
         finish()
     }
 
     override fun users(users: List<User>) {
         closeLoadingDialog()
-        val adapterUser: ArrayAdapter<User> = ArrayAdapter<User>(
-            this, android.R.layout.simple_dropdown_item_1line, users
-        )
 
-        /* val adapterUser = SearchUserAdapter(
-             users = users,
-             context = this@SearchActivity,
-             resource = R.layout.item_user
-         )*/
-        binding.searchAutocomplete.setAdapter(adapterUser)
+        viewModel.listUser = users
 
-        binding.searchAutocomplete.setOnItemClickListener { adapterView, view, i, l ->
-            viewModel.user = adapterView.getItemAtPosition(i) as User
+        adapter = UserAdapter(users = users) { user ->
+
+            onItemSelected(user)
         }
+
+        recycler.adapter = adapter
+    }
+
+    private fun onItemSelected(user: User) {
+
     }
 }

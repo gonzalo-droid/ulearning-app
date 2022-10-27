@@ -7,6 +7,7 @@ data class Teacher(
     val firstName: String? = "",
     val id: Int? = 0,
     val lastName: String? = "",
+    val name: String? = "",
     val subtype: String? = "",
     val type: String? = ""
 ) : Serializable {

@@ -16,8 +16,10 @@ import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityDetailCourseBinding
 import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.Subscription
+import com.ulearning.ulearning_app.domain.model.Teacher
 import com.ulearning.ulearning_app.domain.model.Topic
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
+import com.ulearning.ulearning_app.presentation.features.addConversation.AddConversationActivity
 import com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity
 import com.ulearning.ulearning_app.presentation.features.courses.adapter.DetailCourseTeacherAdapter
 import com.ulearning.ulearning_app.presentation.features.courses.adapter.TopicAdapter
@@ -144,11 +146,25 @@ class DetailCourseActivity :
             timeText.text = data.course?.formatAsynchronousHour()
             modalityText.text = data.course?.formatModality()
             topicText.text = data.course?.lessonsCount.toString()
-            adapter = DetailCourseTeacherAdapter(teachers = data.group?.teachers ?: arrayListOf())
-            recycler.adapter = adapter
+
+            goTeacher(data.group?.teachers ?: arrayListOf())
         }
     }
 
+    private fun goTeacher(list: List<Teacher>) {
+        adapter = DetailCourseTeacherAdapter(teachers = list) { user ->
+            onItemUserSelected(user)
+        }
+        recycler.adapter = adapter
+    }
+
+    private fun onItemUserSelected(user: Teacher) {
+
+        startActivity(Intent(this, AddConversationActivity::class.java).apply {
+            putExtra(Config.COURSE_ID_PUT, viewModel.subscription.courseId)
+            putExtra(Config.LIST_USER_IDS_PUT, "${user.id},")
+        })
+    }
 
     override fun messageFailure(failure: Failure) {
         closeLoadingDialog()

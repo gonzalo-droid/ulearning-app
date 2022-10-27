@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="@dimen/dimen36"
-            tools:context=".presentation.features.search.SearchActivity">
+            tools:context=".presentation.features.addConversation.AddConversationActivity">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline3"
@@ -45,13 +45,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:title="@{@string/search_title}" />
+                app:title="@{@string/new_chat}" />
 
             <TextView
                 android:id="@+id/searchText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/search_user_input"
+                android:text="@string/for_send"
                 android:textAppearance="@style/readex_12_regular"
                 android:textColor="@color/blue"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -61,26 +61,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/topBarInclude"
                 app:layout_constraintVertical_bias="0.0" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/searchInputText"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="@dimen/dimen0"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="false"
-                app:endIconDrawable="@drawable/ic_baseline_search"
+                android:layout_marginTop="@dimen/dimen8"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/searchText"
-                app:layout_constraintVertical_bias="1.0">
+                app:layout_constraintVertical_bias="1.0"
+                tools:listitem="@layout/item_chip_user" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/searchAutocomplete"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text" />
-
-            </com.google.android.material.textfield.TextInputLayout>
 
 
             <TextView
@@ -88,14 +80,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen8"
-                android:text="@string/ente_message_text"
+                android:text="@string/enter_message_text"
                 android:textAppearance="@style/readex_12_regular"
                 android:textColor="@color/blue"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/searchInputText"
+                app:layout_constraintTop_toBottomOf="@+id/recycler"
                 app:layout_constraintVertical_bias="0.0" />
 
             <com.google.android.material.textfield.TextInputLayout

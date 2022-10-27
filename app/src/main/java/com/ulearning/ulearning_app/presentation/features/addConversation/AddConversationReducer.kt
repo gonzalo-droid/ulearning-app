@@ -22,7 +22,7 @@ object AddConversationReducer {
     fun selectEffect(effect: AddConversationEffect) {
         when (effect) {
             is AddConversationEffect.ShowMessageFailure -> viewState.messageFailure(effect.failure)
-
+            is AddConversationEffect.GoToConversation -> TODO()
         }
     }
 }

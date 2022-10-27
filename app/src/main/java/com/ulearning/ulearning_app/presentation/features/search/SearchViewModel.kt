@@ -25,7 +25,7 @@ class SearchViewModel
 
     var search: String = ""
 
-    var messageInput = MutableStateFlow<String>("")
+    lateinit var listUser: List<User>
 
     lateinit var user: User
 
@@ -35,11 +35,12 @@ class SearchViewModel
 
     override fun handleEvent(event: SearchEvent) {
         when (event) {
-            SearchEvent.SendConversationClick -> sendConversation()
+            SearchEvent.GetUsersClick -> searchUser(search)
         }
     }
 
-    fun searchUser(search: String) {
+    private fun searchUser(search: String) {
+        setState { SearchState.Loading }
         getUserByCourseUseCase(
             GetUserByCourseUseCase.Params(name = search, courseId = courseId)
         ) {
@@ -47,23 +48,6 @@ class SearchViewModel
         }
     }
 
-    private fun sendConversation() {
-
-        if (messageInput.value.isNotEmpty() && ::user.isInitialized) {
-
-            val userIds = arrayListOf<Int>()
-            user.id?.let { userIds.add(it) }
-            sendConversationUseCase(
-                SendConversationUseCase.Params(
-                    content = messageInput.value.trim(),
-                    courseId = courseId,
-                    userIds = userIds
-                )
-            ) {
-                it.either(::handleFailure, ::handleConversation)
-            }
-        }
-    }
 
     private fun handleConversation(conversation: Conversation) {
         setState { SearchState.Loading }

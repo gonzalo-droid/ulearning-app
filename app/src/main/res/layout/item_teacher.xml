@@ -4,15 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingEnd="@dimen/dimen10"
+    android:paddingEnd="@dimen/dimen5"
     tools:ignore="RtlSymmetry">
-
-
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView5"
-        android:layout_width="@dimen/dimen200"
-        android:layout_height="@dimen/dimen70"
+        android:layout_width="@dimen/dimen160"
+        android:layout_height="@dimen/dimen60"
         style="?attr/materialCardViewElevatedStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,8 +23,8 @@
             <!-- Media -->
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="@dimen/dimen50"
-                android:layout_height="@dimen/dimen50"
+                android:layout_width="@dimen/dimen40"
+                android:layout_height="@dimen/dimen40"
                 android:layout_marginLeft="@dimen/dimen5"
                 android:layout_marginTop="@dimen/dimen5"
                 android:scaleType="centerCrop"
@@ -47,6 +45,8 @@
                 android:textColor="@color/blue"
                 android:layout_marginStart="@dimen/dimen5"
                 android:layout_marginEnd="@dimen/dimen5"
+                android:ellipsize="end"
+                android:maxLines="2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/imageView"

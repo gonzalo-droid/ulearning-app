@@ -23,6 +23,8 @@ class AddConversationViewModel
 
     var courseId: Int = 1
 
+    var listUserIds: ArrayList<Int> = arrayListOf<Int>()
+
     var search: String = ""
 
     var messageInput = MutableStateFlow<String>("")
@@ -49,15 +51,13 @@ class AddConversationViewModel
 
     private fun sendConversation() {
 
-        if (messageInput.value.isNotEmpty() && ::user.isInitialized) {
+        if (messageInput.value.isNotEmpty() && listUserIds.isNotEmpty()) {
 
-            val userIds = arrayListOf<Int>()
-            user.id?.let { userIds.add(it) }
             sendConversationUseCase(
                 SendConversationUseCase.Params(
                     content = messageInput.value.trim(),
                     courseId = courseId,
-                    userIds = userIds
+                    userIds = listUserIds
                 )
             ) {
                 it.either(::handleFailure, ::handleConversation)

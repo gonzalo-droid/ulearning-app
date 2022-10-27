@@ -103,8 +103,12 @@
     <string name="message_input">Mensaje</string>
     <string name="search_user_input">Buscar usuario</string>
     <string name="search_title">Buscar</string>
+    <string name="new_chat">Nueva conversación</string>
+    <string name="search_input">Buscar...</string>
     <string name="send">Enviar</string>
-    <string name="ente_message_text">Ingrese un mensaje</string>
+    <string name="for_send">Para:</string>
+    <string name="continue_btn">Continuar</string>
+    <string name="enter_message_text">Ingrese un mensaje</string>
 
 
 </resources>
