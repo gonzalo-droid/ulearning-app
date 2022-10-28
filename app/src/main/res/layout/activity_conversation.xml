@@ -68,10 +68,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen16"
                     android:elevation="@dimen/dimen1"
-                    app:cardBackgroundColor="@color/green"
                     android:onClick="@{()->conversationViewModel.setEvent(conversationViewModel.Events.addConversationClick)}"
+                    app:cardBackgroundColor="@color/green"
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
-                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
                     app:layout_constraintTop_toTopOf="parent">
 

@@ -3,6 +3,7 @@ package com.ulearning.ulearning_app.presentation.features.addConversation
 
 import android.os.Handler
 import android.os.Looper
+import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.User
@@ -63,6 +64,8 @@ class AddConversationViewModel
             ) {
                 it.either(::handleFailure, ::handleConversation)
             }
+        } else {
+            setEffect { AddConversationEffect.ShowMessageFailure(Failure.DefaultError(R.string.failure_message)) }
         }
     }
 

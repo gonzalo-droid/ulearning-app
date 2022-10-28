@@ -138,6 +138,9 @@ class SearchActivity :
     }
 
     private fun onItemSelected(user: User) {
-
+        startActivity(Intent(this, AddConversationActivity::class.java).apply {
+            putExtra(Config.COURSE_ID_PUT, viewModel.courseId)
+            putExtra(Config.LIST_USER_IDS_PUT, "${user.id},")
+        })
     }
 }

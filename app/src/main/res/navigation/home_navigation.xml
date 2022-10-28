@@ -35,6 +35,11 @@
         android:name="com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity"
         android:label="activity_conversation"
         tools:layout="@layout/activity_conversation" />
+    <fragment
+        android:id="@+id/navigation_support"
+        android:name="com.ulearning.ulearning_app.presentation.features.support.SupportFragment"
+        android:label="fragment_support"
+        tools:layout="@layout/fragment_support" />
 
 
 </navigation>

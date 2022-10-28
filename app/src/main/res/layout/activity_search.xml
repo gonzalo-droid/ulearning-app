@@ -81,6 +81,7 @@
             android:background="@color/white"
             android:paddingTop="@dimen/dimen10"
             android:paddingBottom="@dimen/dimen10"
+            android:visibility="invisible"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline5"
             app:layout_constraintBottom_toBottomOf="parent">

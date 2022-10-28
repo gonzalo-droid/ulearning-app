@@ -71,6 +71,7 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toBottomOf="@+id/searchText"
                 app:layout_constraintVertical_bias="1.0"
+                tools:itemCount="1"
                 tools:listitem="@layout/item_chip_user" />
 
 
@@ -107,6 +108,17 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <include
+                android:id="@+id/switches"
+                layout="@layout/include_switch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen10"
+                app:layout_constraintTop_toBottomOf="@+id/messageInputText"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"/>
+
             <Button
                 android:id="@+id/logInBtn"
                 style="@style/Widget.Material3.Button"
@@ -120,7 +132,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/messageInputText"
+                app:layout_constraintTop_toBottomOf="@+id/switches"
                 app:layout_constraintVertical_bias="0.0"
                 tools:ignore="HardcodedText" />
 
