@@ -6,9 +6,8 @@ import android.os.Looper
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.User
-import com.ulearning.ulearning_app.domain.useCase.conversation.GetUserByCourseUseCase
+import com.ulearning.ulearning_app.domain.useCase.conversation.GetUsersByIdsUseCase
 import com.ulearning.ulearning_app.domain.useCase.conversation.SendConversationUseCase
-import com.ulearning.ulearning_app.domain.useCase.conversation.SendMessageUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,19 +16,17 @@ import javax.inject.Inject
 @HiltViewModel
 class AddConversationViewModel
 @Inject constructor(
-    private val getUserByCourseUseCase: GetUserByCourseUseCase,
+    private val getUsersByIdsUseCase: GetUsersByIdsUseCase,
     private val sendConversationUseCase: SendConversationUseCase,
 ) : BaseViewModel<AddConversationEvent, AddConversationState, AddConversationEffect>() {
 
-    var courseId: Int = 1
+    var courseId: Int = 0
 
     var listUserIds: ArrayList<Int> = arrayListOf<Int>()
 
-    var search: String = ""
+    var textUserIds: String = ""
 
     var messageInput = MutableStateFlow<String>("")
-
-    lateinit var user: User
 
     override fun createInitialState(): AddConversationState {
         return AddConversationState.Idle
@@ -38,15 +35,19 @@ class AddConversationViewModel
     override fun handleEvent(event: AddConversationEvent) {
         when (event) {
             AddConversationEvent.SendConversationClick -> sendConversation()
+            AddConversationEvent.GetUsersClick -> getUsers()
         }
     }
 
-    fun searchUser(search: String) {
-        getUserByCourseUseCase(
-            GetUserByCourseUseCase.Params(name = search, courseId = courseId)
-        ) {
-            it.either(::handleFailure, ::handleUser)
+    private fun getUsers() {
+        if (textUserIds.isNotEmpty() && courseId != 0) {
+            getUsersByIdsUseCase(
+                GetUsersByIdsUseCase.Params(ids = textUserIds, courseId = courseId)
+            ) {
+                it.either(::handleFailure, ::handleUser)
+            }
         }
+
     }
 
     private fun sendConversation() {

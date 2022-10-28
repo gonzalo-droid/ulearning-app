@@ -48,4 +48,10 @@ interface ConversationService {
         withoutPagination: Boolean,
     ): Either<Failure, List<UserResponse>>
 
+    suspend fun userByIds(
+        token: String,
+        ids: String,
+        courseId: Int,
+    ): Either<Failure, List<UserResponse>>
+
 }

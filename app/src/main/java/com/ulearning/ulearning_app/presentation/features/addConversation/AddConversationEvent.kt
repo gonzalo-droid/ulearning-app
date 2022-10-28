@@ -6,4 +6,6 @@ import com.ulearning.ulearning_app.presentation.base.UiEvent
 sealed class AddConversationEvent : UiEvent {
 
     object SendConversationClick : AddConversationEvent()
+
+    object GetUsersClick : AddConversationEvent()
 }

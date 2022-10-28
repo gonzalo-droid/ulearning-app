@@ -35,4 +35,9 @@ interface ConversationRepository {
         name: String,
         courseId: Int,
     ): Either<Failure, List<User>>
+
+    suspend fun getUserByIds(
+        ids: String,
+        courseId: Int,
+    ): Either<Failure, List<User>>
 }

@@ -18,7 +18,7 @@
             android:id="@+id/nameTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/dimen4"
+            android:padding="@dimen/dimen5"
             android:ellipsize="end"
             android:maxLines="2"
             android:textAppearance="@style/readex_11_regular"

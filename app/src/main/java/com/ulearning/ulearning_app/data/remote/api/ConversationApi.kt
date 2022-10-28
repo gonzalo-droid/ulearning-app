@@ -49,4 +49,11 @@ interface ConversationApi {
         @Query("course_id") courseId: Int,
         @Query("without_pagination") withoutPagination: Boolean,
     ): Response<BaseResponse<List<UserResponse>>>
+
+    @GET("users")
+    suspend fun userByIds(
+        @Header(SettingRemote.AUTHORIZATION) token: String,
+        @Query("ids") ids: String,
+        @Query("course_id") courseId: Int,
+    ): Response<BaseResponse<List<UserResponse>>>
 }

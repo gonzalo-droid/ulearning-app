@@ -40,7 +40,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dimen40"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp">
@@ -342,7 +342,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/minimumBalanceBtn"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:padding="@dimen/dimen5">
 
                         <androidx.recyclerview.widget.RecyclerView

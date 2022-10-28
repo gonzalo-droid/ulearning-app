@@ -86,4 +86,18 @@ class ConversationServiceImpl
             )
         }
     }
+
+    override suspend fun userByIds(
+        token: String,
+        ids: String,
+        courseId: Int
+    ): Either<Failure, List<UserResponse>> {
+        return networkHandler.callServiceBaseList {
+            api.userByIds(
+                token,
+                ids,
+                courseId
+            )
+        }
+    }
 }

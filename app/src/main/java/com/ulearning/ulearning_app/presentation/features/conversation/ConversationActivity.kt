@@ -47,7 +47,7 @@ class ConversationActivity :
 
         recycler = binding.recycler
 
-        recycler.layoutManager =  GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
+        recycler.layoutManager = LinearLayoutManager(this)
 
         observeUiStates()
     }

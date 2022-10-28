@@ -105,4 +105,17 @@ class ConversationRepositoryImpl
             is Either.Left -> Either.Left(response.a)
         }
     }
+
+    override suspend fun getUserByIds(ids: String, courseId: Int): Either<Failure, List<User>> {
+        return when (val response = service.userByIds(
+            token = "${SettingRemote.BEARER} ${dataStore.token()}",
+            ids = ids,
+            courseId = courseId
+        )) {
+            is Either.Right -> {
+                Either.Right(mapper.usersToDomain(response.b))
+            }
+            is Either.Left -> Either.Left(response.a)
+        }
+    }
 }
