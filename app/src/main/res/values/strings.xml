@@ -78,6 +78,7 @@
     <string name="search_input">Buscar...</string>
     <string name="send">Enviar</string>
     <string name="for_send">Para:</string>
+    <string name="to_support">Soporte de plataforma</string>
     <string name="continue_btn">Continuar</string>
     <string name="enter_message_text">Ingrese un mensaje</string>
 

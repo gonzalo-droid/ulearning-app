@@ -2,6 +2,7 @@ package com.ulearning.ulearning_app.presentation.features.support
 
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Conversation
+import com.ulearning.ulearning_app.domain.useCase.conversation.GetConversationSupportUseCase
 import com.ulearning.ulearning_app.domain.useCase.conversation.GetConversationUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SupportViewModel
 @Inject constructor(
-    private val getConversationUseCase: GetConversationUseCase
+    private val getConversationSupportUseCase: GetConversationSupportUseCase
 ) : BaseViewModel<SupportEvent, SupportState, SupportEffect>() {
 
     var page: Int = 1
@@ -33,10 +34,9 @@ class SupportViewModel
 
     private fun getConversations() {
         setState { SupportState.Loading }
-        getConversationUseCase(
-            GetConversationUseCase.Params(
+        getConversationSupportUseCase(
+            GetConversationSupportUseCase.Params(
                 page = page,
-                courseId = courseId
             )
         ) {
             it.either(::handleFailure, ::handleConversations)

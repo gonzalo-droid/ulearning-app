@@ -4,6 +4,7 @@ import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.remote.api.ConversationApi
 import com.ulearning.ulearning_app.data.remote.entities.request.SendConversationRequest
+import com.ulearning.ulearning_app.data.remote.entities.request.SendConversationSupportRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.SendMessageRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.ConversationResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.MessageResponse
@@ -31,6 +32,22 @@ class ConversationServiceImpl
                 perPage,
                 page,
                 courseId
+            )
+        }
+    }
+
+    override suspend fun conversationsSupport(
+        token: String,
+        perPage: Int,
+        page: Int,
+        toSupport: Boolean
+    ): Either<Failure, List<ConversationResponse>> {
+        return networkHandler.callServiceBaseList {
+            api.conversationsSupport(
+                token,
+                perPage,
+                page,
+                toSupport
             )
         }
     }
@@ -65,6 +82,18 @@ class ConversationServiceImpl
     ): Either<Failure, ConversationResponse> {
         return networkHandler.callServiceBase {
             api.sendConversation(
+                token,
+                body
+            )
+        }
+    }
+
+    override suspend fun sendConversationSupport(
+        token: String,
+        body: SendConversationSupportRequest
+    ): Either<Failure, ConversationResponse> {
+        return networkHandler.callServiceBase {
+            api.sendConversationSupport(
                 token,
                 body
             )

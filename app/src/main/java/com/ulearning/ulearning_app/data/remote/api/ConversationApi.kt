@@ -3,6 +3,7 @@ package com.ulearning.ulearning_app.data.remote.api
 import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
 import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.SendConversationRequest
+import com.ulearning.ulearning_app.data.remote.entities.request.SendConversationSupportRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.SendMessageRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.ConversationResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
@@ -24,6 +25,15 @@ interface ConversationApi {
     ): Response<BaseResponse<List<ConversationResponse>>>
 
 
+    @GET("conversations")
+    suspend fun conversationsSupport(
+        @Header(SettingRemote.AUTHORIZATION) token: String,
+        @Query("per_page") perPage: Int,
+        @Query("page") page: Int,
+        @Query("to_support") toSupport: Boolean,
+    ): Response<BaseResponse<List<ConversationResponse>>>
+
+
     @GET("messages/{uuid}")
     suspend fun messages(
         @Header(SettingRemote.AUTHORIZATION) token: String,
@@ -40,6 +50,12 @@ interface ConversationApi {
     suspend fun sendConversation(
         @Header(SettingRemote.AUTHORIZATION) token: String,
         @Body body: SendConversationRequest,
+    ): Response<BaseResponse<ConversationResponse>>
+
+    @POST("messages")
+    suspend fun sendConversationSupport(
+        @Header(SettingRemote.AUTHORIZATION) token: String,
+        @Body body: SendConversationSupportRequest,
     ): Response<BaseResponse<ConversationResponse>>
 
     @GET("users")

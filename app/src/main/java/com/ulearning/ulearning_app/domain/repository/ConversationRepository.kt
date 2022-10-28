@@ -13,6 +13,10 @@ interface ConversationRepository {
         courseId: Int
     ): Either<Failure, List<Conversation>>
 
+    suspend fun getConversationsSupport(
+        page: Int,
+    ): Either<Failure, List<Conversation>>
+
     suspend fun getMessages(
         uuid: String
     ): Either<Failure, List<Message>>
@@ -27,6 +31,12 @@ interface ConversationRepository {
     suspend fun sendConversation(
         content: String,
         courseId: Int,
+        userIds: ArrayList<Int>,
+    ): Either<Failure, Conversation>
+
+    suspend fun sendConversationSupport(
+        content: String,
+        toSupport: Boolean,
         userIds: ArrayList<Int>,
     ): Either<Failure, Conversation>
 

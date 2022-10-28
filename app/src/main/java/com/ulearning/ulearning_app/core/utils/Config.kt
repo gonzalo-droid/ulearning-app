@@ -61,7 +61,12 @@ object Config {
     const val COURSE = "course"
 
     const val ROLE_TEACHER = "teacher"
+    const val ROLE = "role"
     const val ROLE_STUDENT = "student"
+
+    const val TYPE_MESSAGE = "tyMessage"
+    const val MESSAGE_SUPPORT = "support"
+    const val MESSAGE_COURSE = "course"
 
 
     /* 12 digits */

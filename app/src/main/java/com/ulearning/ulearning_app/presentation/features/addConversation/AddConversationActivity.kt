@@ -1,12 +1,10 @@
 package com.ulearning.ulearning_app.presentation.features.addConversation
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ArrayAdapter
+import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.core.extensions.dataBinding
@@ -20,7 +18,6 @@ import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.User
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
 import com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity
-import com.ulearning.ulearning_app.presentation.features.conversation.ConversationAdapter
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -61,13 +58,30 @@ class AddConversationActivity :
 
 
         viewModel.let {
-            viewModel.courseId = Config.COURSE_ID_PUT putInt this@AddConversationActivity
-            viewModel.textUserIds = Config.LIST_USER_IDS_PUT putString this@AddConversationActivity
-            viewModel.textUserIds.trim().removeSuffix(",").split(",").forEach {
-                viewModel.listUserIds.add(it.toInt())
+            viewModel.typeMessage = Config.TYPE_MESSAGE putString this@AddConversationActivity
+            viewModel.typeRole = Config.ROLE putString this@AddConversationActivity
+
+            binding.recycler.visibility = View.VISIBLE
+            binding.supportTitle.visibility = View.GONE
+
+            binding.switches.switchLayout.visibility = if (viewModel.typeRole == Config.ROLE_TEACHER) View.VISIBLE else View.GONE
+
+
+            if (viewModel.typeMessage == Config.MESSAGE_COURSE) {
+                viewModel.courseId = Config.COURSE_ID_PUT putInt this@AddConversationActivity
+                viewModel.textUserIds =
+                    Config.LIST_USER_IDS_PUT putString this@AddConversationActivity
+                viewModel.textUserIds.trim().removeSuffix(",").split(",").forEach {
+                    viewModel.listUserIds.add(it.toInt())
+                }
+
+                viewModel.setEvent(AddConversationEvent.GetUsersClick)
+            } else {
+
+                binding.recycler.visibility = View.GONE
+                binding.supportTitle.visibility = View.VISIBLE
             }
 
-            viewModel.setEvent(AddConversationEvent.GetUsersClick)
         }
 
 

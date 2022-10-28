@@ -39,7 +39,23 @@
         android:id="@+id/navigation_support"
         android:name="com.ulearning.ulearning_app.presentation.features.support.SupportFragment"
         android:label="fragment_support"
-        tools:layout="@layout/fragment_support" />
+        tools:layout="@layout/fragment_support" >
+        <action
+            android:id="@+id/action_navigation_support_to_messageActivity"
+            app:destination="@id/messageActivity" />
+        <action
+            android:id="@+id/action_navigation_support_to_addConversationActivity"
+            app:destination="@id/addConversationActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/messageActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.message.MessageActivity"
+        android:label="activity_message"
+        tools:layout="@layout/activity_message" />
+    <activity
+        android:id="@+id/addConversationActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.addConversation.AddConversationActivity"
+        android:label="AddConversationActivity" />
 
 
 </navigation>

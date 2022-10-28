@@ -4,6 +4,7 @@ import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
 import com.ulearning.ulearning_app.data.remote.entities.request.SendConversationRequest
+import com.ulearning.ulearning_app.data.remote.entities.request.SendConversationSupportRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.SendMessageRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.ConversationResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.MessageResponse
@@ -25,6 +26,13 @@ interface ConversationService {
         courseId: Int,
     ): Either<Failure, List<ConversationResponse>>
 
+    suspend fun conversationsSupport(
+        token: String,
+        perPage: Int,
+        page: Int,
+        toSupport: Boolean,
+    ): Either<Failure, List<ConversationResponse>>
+
     suspend fun messages(
         token: String,
         uuid: String,
@@ -39,6 +47,11 @@ interface ConversationService {
     suspend fun sendConversation(
         token: String,
         body: SendConversationRequest
+    ): Either<Failure, ConversationResponse>
+
+    suspend fun sendConversationSupport(
+        token: String,
+        body: SendConversationSupportRequest
     ): Either<Failure, ConversationResponse>
 
     suspend fun userByCourse(
