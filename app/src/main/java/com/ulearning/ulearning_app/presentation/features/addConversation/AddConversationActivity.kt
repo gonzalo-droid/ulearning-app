@@ -143,6 +143,7 @@ class AddConversationActivity :
 
     override fun getRole(role: String) {
         viewModel.typeRole = role
-        binding.switches.switchLayout.visibility = if (viewModel.typeRole == Config.ROLE_TEACHER) View.VISIBLE else View.GONE
+        binding.switches.switchLayout.visibility = View.GONE
+        //if (viewModel.typeRole == Config.ROLE_TEACHER) View.VISIBLE else View.GONE
     }
 }
