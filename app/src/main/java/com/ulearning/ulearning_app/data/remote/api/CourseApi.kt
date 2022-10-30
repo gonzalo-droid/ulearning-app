@@ -3,6 +3,7 @@ package com.ulearning.ulearning_app.data.remote.api
 import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
 import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.SubscriptionRequest
+import com.ulearning.ulearning_app.data.remote.entities.response.CourseResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.SubscriptionResponse
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
@@ -21,4 +22,10 @@ interface CourseApi {
         @Query("page") page: Int,
         @Query("is_finished") isFinished: Boolean,
     ): Response<BaseResponse<List<SubscriptionResponse>>>
+
+    @GET("courses")
+    suspend fun coursesTeacher(
+        @Header(SettingRemote.AUTHORIZATION) token: String,
+        @Query("user_id") userId: Int,
+    ): Response<BaseResponse<List<CourseResponse>>>
 }

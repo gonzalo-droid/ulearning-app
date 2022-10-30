@@ -1,6 +1,7 @@
 package com.ulearning.ulearning_app.presentation.features.courses
 
 import com.ulearning.ulearning_app.core.functional.Failure
+import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.model.Topic
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
@@ -21,6 +22,7 @@ class DetailCourseViewModel
 ) : BaseViewModel<DetailCourseEvent, DetailCourseState, DetailCourseEffect>() {
 
 
+    lateinit var course: Course
     lateinit var subscription: Subscription
     var urlWebView:String =""
     var typeRole : String = ""
@@ -45,8 +47,8 @@ class DetailCourseViewModel
     }
 
     private fun goToConversation() {
-        if(::subscription.isInitialized){
-            setEffect { DetailCourseEffect.GoToConversation(courseId = subscription.courseId) }
+        if(::course.isInitialized){
+            setEffect { DetailCourseEffect.GoToConversation(courseId = course.id) }
         }
     }
 
@@ -54,7 +56,7 @@ class DetailCourseViewModel
         setState { DetailCourseState.Loading }
 
         getTopicUseCase(
-            GetTopicUseCase.Params(courseId = subscription.courseId)
+            GetTopicUseCase.Params(courseId = course.id)
         ) {
             it.either(::handleFailure, ::handleTopics)
         }

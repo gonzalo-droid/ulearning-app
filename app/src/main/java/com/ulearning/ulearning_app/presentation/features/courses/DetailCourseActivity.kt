@@ -7,17 +7,11 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
-import com.ulearning.ulearning_app.core.extensions.dataBinding
-import com.ulearning.ulearning_app.core.extensions.html
-import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
-import com.ulearning.ulearning_app.core.extensions.putSubscription
+import com.ulearning.ulearning_app.core.extensions.*
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityDetailCourseBinding
-import com.ulearning.ulearning_app.domain.model.Conversation
-import com.ulearning.ulearning_app.domain.model.Subscription
-import com.ulearning.ulearning_app.domain.model.Teacher
-import com.ulearning.ulearning_app.domain.model.Topic
+import com.ulearning.ulearning_app.domain.model.*
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
 import com.ulearning.ulearning_app.presentation.features.addConversation.AddConversationActivity
 import com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity
@@ -73,11 +67,16 @@ class DetailCourseActivity :
 
 
         viewModel.let {
+            viewModel.course =
+                Config.COURSE_PUT putCourse this@DetailCourseActivity
+
             viewModel.subscription =
-                Config.SUBSCRIPTION_PUT putSubscription this@DetailCourseActivity
+                Config.SUBSCRIPTION_PUT putSubscription  this@DetailCourseActivity
         }
 
-        setDetailCourse(viewModel.subscription)
+        setDetailCourse(viewModel.course)
+
+        setDetailSubscription(viewModel.subscription)
 
         viewModel.setEvent(DetailCourseEvent.GetTopic)
 
@@ -95,6 +94,13 @@ class DetailCourseActivity :
             })
         }
 
+    }
+
+    private fun setDetailSubscription(subscription: Subscription) {
+        with(binding) {
+
+            goTeacher(subscription.group?.teachers ?: arrayListOf())
+        }
     }
 
     override fun getTopics(topics: List<Topic>) {
@@ -134,21 +140,19 @@ class DetailCourseActivity :
 
     override fun goToConversation(courseId: Int) {
         startActivity(Intent(this, ConversationActivity::class.java).apply {
-            putExtra(Config.COURSE_ID_PUT, viewModel.subscription.courseId)
+            putExtra(Config.COURSE_ID_PUT, viewModel.course.id)
         })
     }
 
-    private fun setDetailCourse(data: Subscription) {
+    private fun setDetailCourse(data: Course) {
         with(binding) {
-            topBarInclude.title = data.course?.title
-            titleText.text = data.course?.title
+            topBarInclude.title = data.title
+            titleText.text = data.title
 
-            descriptionText.text = data.course?.descriptionShort?.html()
-            timeText.text = data.course?.formatAsynchronousHour()
-            modalityText.text = data.course?.formatModality()
-            topicText.text = data.course?.lessonsCount.toString()
-
-            goTeacher(data.group?.teachers ?: arrayListOf())
+            descriptionText.text = data.descriptionShort?.html()
+            timeText.text = data.formatAsynchronousHour()
+            modalityText.text = data.formatModality()
+            topicText.text = data.lessonsCount.toString()
         }
     }
 
@@ -162,7 +166,7 @@ class DetailCourseActivity :
     private fun onItemUserSelected(user: Teacher) {
 
         startActivity(Intent(this, AddConversationActivity::class.java).apply {
-            putExtra(Config.COURSE_ID_PUT, viewModel.subscription.courseId)
+            putExtra(Config.COURSE_ID_PUT, viewModel.course.id)
             putExtra(Config.LIST_USER_IDS_PUT, "${user.id},")
             putExtra(Config.TYPE_MESSAGE, Config.MESSAGE_COURSE)
             putExtra(Config.ROLE, viewModel.typeRole)

@@ -40,7 +40,7 @@ data class CourseResponse(
     @SerializedName("groups")
     var groups: List<GroupResponse>?= arrayListOf(),
     @SerializedName("id")
-    var id: Int?= 0,
+    var id: Int,
     @SerializedName("instructions")
     var instructions: String?= "",
     @SerializedName("is_free")

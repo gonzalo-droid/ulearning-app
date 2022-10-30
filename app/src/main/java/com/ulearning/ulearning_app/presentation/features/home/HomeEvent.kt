@@ -7,6 +7,8 @@ sealed class HomeEvent : UiEvent {
 
     object CoursesHomeClicked : HomeEvent()
 
+    object CoursesHomeTeacherClicked : HomeEvent()
+
     object RecentlyCoursesHomeClicked : HomeEvent()
 
     object DataProfileClicked : HomeEvent()

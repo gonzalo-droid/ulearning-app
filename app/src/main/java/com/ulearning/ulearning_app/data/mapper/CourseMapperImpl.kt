@@ -1,6 +1,7 @@
 package com.ulearning.ulearning_app.data.mapper
 
 
+import com.ulearning.ulearning_app.data.remote.entities.response.CourseResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.SubscriptionResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.TeacherResponse
 import com.ulearning.ulearning_app.domain.model.*
@@ -28,10 +29,35 @@ class CourseMapperImpl : CourseMapper {
                         previewUrl = it.course?.mainImage?.previewUrl,
                     ) else null,
                     title = it.course?.title,
-                    id = it.course?.id,
+                    id = it.course!!.id,
                     lessonsCount = it.course?.lessonsCount,
                     modality = it.course?.modality,
                     asynchronousHour = it.course?.asynchronousHour,
+                    amount = 0,
+                    benefits = null,
+                    certificate = null,
+                    code = null,
+                    currency = null,
+                    duration = null,
+                    externalId = null,
+                    externalLink = null,
+                    groups = listOf(),
+                    instructions = null,
+                    languageId = null,
+                    methodology = null,
+                    nature = null,
+                    origin = null,
+                    politicsLink = null,
+                    presentationLink = null,
+                    ratingAverage = null,
+                    ratingCount = null,
+                    record = null,
+                    selfStudyHour = null,
+                    slug = null,
+                    studentsCount = null,
+                    syllabusLink = null,
+                    synchronousHour = null,
+                    target = null,
                 ),
                 user = User(
                     name = it.userResponse?.name,
@@ -40,9 +66,60 @@ class CourseMapperImpl : CourseMapper {
                 group = Group(
                     id = it.group?.id,
                     name = it.group?.name,
-                    teachers = if(!it.group?.teachers.isNullOrEmpty()) listTeacherToDomain(it.group?.teachers) else arrayListOf(),
+                    teachers = if (!it.group?.teachers.isNullOrEmpty()) listTeacherToDomain(it.group?.teachers) else arrayListOf(),
                 ),
                 groupId = it.groupId,
+            )
+        }
+    }
+
+    override suspend fun listCourseToDomain(data: List<CourseResponse>): List<Course> {
+        return data.map {
+            Course(
+                category = if (it.category != null) Category(
+                    color = it.category?.color,
+                    description = it.category?.description,
+                    id = it.category?.id,
+                    name = it.category?.name,
+                    type = it.category?.type
+                ) else null,
+                categoryId = it.categoryId,
+                descriptionLarge = it.descriptionLarge,
+                descriptionShort = it.descriptionShort,
+                mainImage = if (it.mainImage != null) MainImage(
+                    originalUrl = it.mainImage?.originalUrl,
+                    previewUrl = it.mainImage?.previewUrl,
+                ) else null,
+                title = it.title,
+                id = it.id,
+                lessonsCount = it.lessonsCount,
+                modality = it.modality,
+                asynchronousHour = it.asynchronousHour,
+                amount = 0,
+                benefits = null,
+                certificate = null,
+                code = null,
+                currency = null,
+                duration = null,
+                externalId = null,
+                externalLink = null,
+                groups = listOf(),
+                instructions = null,
+                languageId = null,
+                methodology = null,
+                nature = null,
+                origin = null,
+                politicsLink = null,
+                presentationLink = null,
+                ratingAverage = null,
+                ratingCount = null,
+                record = null,
+                selfStudyHour = null,
+                slug = null,
+                studentsCount = null,
+                syllabusLink = null,
+                synchronousHour = null,
+                target = null,
             )
         }
     }

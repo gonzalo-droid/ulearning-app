@@ -6,6 +6,7 @@ import com.ulearning.ulearning_app.data.dataStore.config.DataStoreConfig
 import com.ulearning.ulearning_app.data.mapper.CourseMapper
 import com.ulearning.ulearning_app.data.remote.service.CourseService
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
+import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.repository.CourseRepository
 import javax.inject.Inject
@@ -29,6 +30,18 @@ class CourseRepositoryImpl
         )) {
             is Either.Right -> {
                 Either.Right(mapper.listSubscriptionToDomain(response.b))
+            }
+            is Either.Left -> Either.Left(response.a)
+        }
+    }
+
+    override suspend fun getCoursesTeacher(userId: Int): Either<Failure, List<Course>> {
+        return when (val response = service.coursesTeacher(
+            token = "${SettingRemote.BEARER} ${dataStore.token()}",
+            userId = userId
+        )) {
+            is Either.Right -> {
+                Either.Right(mapper.listCourseToDomain(response.b))
             }
             is Either.Left -> Either.Left(response.a)
         }

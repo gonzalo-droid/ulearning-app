@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
-import com.ulearning.ulearning_app.core.extensions.dateFormat
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.FragmentHomeBinding
+import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
@@ -22,7 +22,8 @@ import com.ulearning.ulearning_app.presentation.features.home.HomeEvent
 import com.ulearning.ulearning_app.presentation.features.home.HomeReducer
 import com.ulearning.ulearning_app.presentation.features.home.HomeViewState
 import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseAdapter
-import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseRecentlyAdapter
+import com.ulearning.ulearning_app.presentation.features.home.adapter.SubscriptionCourseAdapter
+import com.ulearning.ulearning_app.presentation.features.home.adapter.SubscriptionCourseRecentlyAdapter
 import com.ulearning.ulearning_app.presentation.features.home.viewModel.HomeViewModel
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,11 +46,10 @@ class HomeFragment :
 
     private lateinit var courseAdapter: CourseAdapter
 
-    private lateinit var courseRecentlyAdapter: CourseRecentlyAdapter
+    private lateinit var subscriptionCourseAdapter: SubscriptionCourseAdapter
 
-    private var courseList: List<Subscription> = arrayListOf()
+    private lateinit var subscriptionCourseRecentlyAdapter: SubscriptionCourseRecentlyAdapter
 
-    private var courseRecentlyList: List<Subscription> = arrayListOf()
 
 
     override fun onViewIsCreated(view: View) {
@@ -70,8 +70,6 @@ class HomeFragment :
     }
 
     private fun observeUiStates() {
-        viewModel.setEvent(HomeEvent.RecentlyCoursesHomeClicked)
-        viewModel.setEvent(HomeEvent.CoursesHomeClicked)
         viewModel.setEvent(HomeEvent.DataProfileClicked)
 
         viewModel.apply {
@@ -106,27 +104,59 @@ class HomeFragment :
         }
     }
 
-    override fun courseRecentlyList(courses: List<Subscription>) {
+    override fun courseSubscriptionRecentlyList(courses: List<Subscription>) {
 
         closeShimmer()
-        courseRecentlyList = courses
 
-        courseRecentlyAdapter = CourseRecentlyAdapter(courses = courseRecentlyList){
+        subscriptionCourseRecentlyAdapter = SubscriptionCourseRecentlyAdapter(courses = courses){
                 model -> onItemSelected(model)
         }
 
-        courseRecentlyRecycler.adapter = courseRecentlyAdapter
+        courseRecentlyRecycler.adapter = subscriptionCourseRecentlyAdapter
 
     }
 
-    override fun  courseList(courses: List<Subscription>) {
+    override fun  courseSubscriptionList(courses: List<Subscription>) {
 
         closeShimmer()
 
-        courseList = courses
-
-        courseAdapter = CourseAdapter(courses = courseList) {
+        subscriptionCourseAdapter = SubscriptionCourseAdapter(courses = courses) {
                 model -> onItemSelected(model)
+        }
+
+        courseRecycler.adapter = subscriptionCourseAdapter
+    }
+
+    override fun  courseList(courses: List<Course>) {
+
+        closeShimmer()
+
+        val subs = Subscription(
+            amount = null,
+            course = null,
+            courseId = 0,
+            group = null,
+            groupId = null,
+            hasCertificate = null,
+            hasDegree = null,
+            hasRecord = null,
+            id = null,
+            isFinished = null,
+            purchasedCertificate = null,
+            purchasedRecord = null,
+            status = null,
+            timeSession = null,
+            type = null,
+            user = null,
+            userId = null
+        )
+
+        courseAdapter = CourseAdapter(courses = courses) {
+                model ->
+            run {
+                subs.course = model
+                onItemSelected(subs)
+            }
         }
 
         courseRecycler.adapter = courseAdapter
@@ -144,6 +174,7 @@ class HomeFragment :
         findNavController().navigate(
             R.id.action_navigation_home_to_detailCourseActivity,
             Bundle().apply {
+                putSerializable(Config.COURSE_PUT, model.course)
                 putSerializable(Config.SUBSCRIPTION_PUT, model)
             }
         )
@@ -151,14 +182,17 @@ class HomeFragment :
 
     override fun getProfile(data: Profile) {
         closeLoadingDialog()
-
         with(binding) {
-
             tvUserName.text = data.name
-
             if(data.role.equals(Config.ROLE_TEACHER)){
                 continueLearningText.visibility = View.GONE
                 courseRecentlyRecycler.visibility = View.GONE
+
+                viewModel.userId = data.id!!
+                viewModel.setEvent(HomeEvent.CoursesHomeTeacherClicked)
+            } else {
+                viewModel.setEvent(HomeEvent.RecentlyCoursesHomeClicked)
+                viewModel.setEvent(HomeEvent.CoursesHomeClicked)
             }
         }
     }

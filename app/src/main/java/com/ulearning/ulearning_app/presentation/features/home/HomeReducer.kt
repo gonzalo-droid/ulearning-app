@@ -19,13 +19,16 @@ object HomeReducer {
                 viewState.courseList(courses = state.courses)
             }
 
-            is HomeState.CourseRecentlyList -> {
-                viewState.courseRecentlyList(courses = state.courses)
+            is HomeState.CourseSubscriptionList -> {
+                viewState.courseSubscriptionList(courses = state.courses)
+            }
+
+            is HomeState.CourseSubscriptionRecentlyList -> {
+                viewState.courseSubscriptionRecentlyList(courses = state.courses)
             }
             is HomeState.DatProfile -> {
                 viewState.getProfile(data = state.data)
             }
-
         }
     }
 

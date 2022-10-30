@@ -5,18 +5,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.R
-import com.ulearning.ulearning_app.databinding.ListCoursesRecentlyItemBinding
+import com.ulearning.ulearning_app.databinding.ItemCoursesBinding
 import com.ulearning.ulearning_app.domain.model.Subscription
 
-class CourseRecentlyAdapter constructor(
+class SubscriptionCourseAdapter constructor(
     private val courses: List<Subscription>,
     private val onClickListener: (Subscription) -> Unit
-) : RecyclerView.Adapter<CourseRecentlyAdapter.CustomViewHolder>() {
+) : RecyclerView.Adapter<SubscriptionCourseAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         return CustomViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.list_courses_recently_item, parent, false)
+                .inflate(R.layout.item_courses, parent, false)
         )
     }
 
@@ -29,14 +29,14 @@ class CourseRecentlyAdapter constructor(
 
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
 
-        val binding = ListCoursesRecentlyItemBinding.bind(view)
+        val binding = ItemCoursesBinding.bind(view)
 
 
         fun bind(model: Subscription, onClickListener: (Subscription) -> Unit) {
 
-            //binding.progressSnackBar.progress  = model.course!!.category!!.name
+            binding.categoryText.text  = model.course?.category?.name
 
-            binding.titleText.text = model.course!!.title
+            binding.titleText.text  = model.course?.title
 
             itemView.setOnClickListener {
                 onClickListener(model)

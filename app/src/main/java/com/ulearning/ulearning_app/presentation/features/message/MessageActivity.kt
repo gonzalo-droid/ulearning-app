@@ -54,7 +54,7 @@ class MessageActivity :
 
         recyclerUser = binding.recyclerUser
 
-        recyclerUser.layoutManager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
+        recyclerUser.layoutManager = GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false)
 
         observeUiStates()
     }

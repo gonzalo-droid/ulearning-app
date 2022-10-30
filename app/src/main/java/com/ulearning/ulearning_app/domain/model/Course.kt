@@ -3,7 +3,7 @@ package com.ulearning.ulearning_app.domain.model
 import java.io.Serializable
 
 data class Course(
-    var amount: Int?= 0,
+    var amount: Int,
     var asynchronousHour: String?= "",
     var benefits: String?= "",
     var category: Category?= null,
@@ -17,7 +17,7 @@ data class Course(
     var externalId: String?= "",
     var externalLink: Any?= null,
     var groups: List<Group>?= arrayListOf(),
-    var id: Int?= 0,
+    var id: Int,
     var instructions: String?= "",
     var languageId: Int?= 0,
     var lessonsCount: Int?= 0,

@@ -36,6 +36,13 @@ class DataStoreConfig @Inject constructor(
         }
     }
 
+    suspend fun saveId(id: Int) {
+
+        dataStore.updateData { update ->
+
+            update.toBuilder().setId(id).build()
+        }
+    }
 
 
     fun token(): String = runBlocking { dataStore.data.first().token }
@@ -43,5 +50,7 @@ class DataStoreConfig @Inject constructor(
     fun userName(): String = runBlocking { dataStore.data.first().username }
 
     fun role(): String = runBlocking { dataStore.data.first().role }
+
+    fun id(): Int = runBlocking { dataStore.data.first().id }
 
 }

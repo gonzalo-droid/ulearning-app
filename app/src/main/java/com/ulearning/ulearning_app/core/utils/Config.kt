@@ -58,7 +58,7 @@ object Config {
     const val LIST_USER_IDS_PUT = "listUserIds"
     const val MESSAGE_UUID_PUT = "uuidMessage"
     const val CONVERSATION_PUT = "conversation"
-    const val COURSE = "course"
+    const val COURSE_PUT = "course"
 
     const val ROLE_TEACHER = "teacher"
     const val ROLE = "role"

@@ -59,7 +59,7 @@ class TopicFragment :
 
         courseId = requireArguments().getInt(Config.COURSE_ID_PUT)
 
-        course = requireArguments().getSerializable(Config.COURSE) as Course
+        //course = requireArguments().getSerializable(Config.COURSE) as Course
 
         binding.topBarInclude.title = course.title
 
