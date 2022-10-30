@@ -52,6 +52,18 @@ class ConversationServiceImpl
         }
     }
 
+    override suspend fun participantsMessage(
+        token: String,
+        ids: String
+    ): Either<Failure, List<UserResponse>> {
+        return networkHandler.callServiceBaseList {
+            api.participantsMessage(
+                token,
+                ids
+            )
+        }
+    }
+
     override suspend fun messages(
         token: String,
         uuid: String

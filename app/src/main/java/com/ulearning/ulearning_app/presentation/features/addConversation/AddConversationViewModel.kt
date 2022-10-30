@@ -8,6 +8,8 @@ import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.User
+import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
+import com.ulearning.ulearning_app.domain.useCase.auth.GetRoleUseCase
 import com.ulearning.ulearning_app.domain.useCase.conversation.GetUsersByIdsUseCase
 import com.ulearning.ulearning_app.domain.useCase.conversation.SendConversationSupportUseCase
 import com.ulearning.ulearning_app.domain.useCase.conversation.SendConversationUseCase
@@ -21,8 +23,9 @@ class AddConversationViewModel
 @Inject constructor(
     private val getUsersByIdsUseCase: GetUsersByIdsUseCase,
     private val sendConversationUseCase: SendConversationUseCase,
-    private val sendConversationSupportUseCase: SendConversationSupportUseCase
-) : BaseViewModel<AddConversationEvent, AddConversationState, AddConversationEffect>() {
+    private val sendConversationSupportUseCase: SendConversationSupportUseCase,
+    private val getRoleUseCase: GetRoleUseCase,
+    ) : BaseViewModel<AddConversationEvent, AddConversationState, AddConversationEffect>() {
 
     var courseId: Int = 0
 
@@ -32,7 +35,7 @@ class AddConversationViewModel
 
     var typeMessage: String = ""
 
-    var typeRole: String = ""
+    var typeRole : String = ""
 
     var messageInput = MutableStateFlow<String>("")
 
@@ -44,7 +47,12 @@ class AddConversationViewModel
         when (event) {
             AddConversationEvent.SendConversationClick -> send()
             AddConversationEvent.GetUsersClick -> getUsers()
+            AddConversationEvent.GetRole -> getRole()
         }
+    }
+
+    private fun getRole() = getRoleUseCase( BaseUseCase.None()) {
+        it.either(::handleFailure, ::handleRole)
     }
 
     private fun getUsers() {
@@ -111,6 +119,10 @@ class AddConversationViewModel
         }, 2000)
 
 
+    }
+
+    private fun handleRole(role: String) {
+        setState { AddConversationState.GetRole(role = role) }
     }
 
     private fun handleUser(users: List<User>) {

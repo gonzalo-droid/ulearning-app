@@ -53,6 +53,18 @@ class ConversationRepositoryImpl
         }
     }
 
+    override suspend fun participantsMessage(ids: String): Either<Failure, List<User>> {
+        return when (val response = service.participantsMessage(
+            token = "${SettingRemote.BEARER} ${dataStore.token()}",
+            ids = ids
+        )) {
+            is Either.Right -> {
+                Either.Right(mapper.usersToDomain(response.b))
+            }
+            is Either.Left -> Either.Left(response.a)
+        }
+    }
+
     override suspend fun getMessages(uuid: String): Either<Failure, List<Message>> {
         return when (val response = service.messages(
             token = "${SettingRemote.BEARER} ${dataStore.token()}",

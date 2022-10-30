@@ -4,6 +4,7 @@ import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.model.Topic
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
+import com.ulearning.ulearning_app.domain.useCase.auth.GetRoleUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.GetTokenUseCase
 import com.ulearning.ulearning_app.domain.useCase.topic.GetTopicUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
@@ -16,11 +17,13 @@ class DetailCourseViewModel
 @Inject constructor(
     private val getTopicUseCase: GetTopicUseCase,
     private val getTokenUseCase: GetTokenUseCase,
+    private val getRoleUseCase: GetRoleUseCase,
 ) : BaseViewModel<DetailCourseEvent, DetailCourseState, DetailCourseEffect>() {
 
 
     lateinit var subscription: Subscription
     var urlWebView:String =""
+    var typeRole : String = ""
 
     override fun createInitialState(): DetailCourseState {
         return DetailCourseState.Idle
@@ -33,7 +36,12 @@ class DetailCourseViewModel
             DetailCourseEvent.SendComment -> {}
             DetailCourseEvent.GoToConversation -> goToConversation()
             DetailCourseEvent.GetToken -> getToken()
+            DetailCourseEvent.GetRole -> getRole()
         }
+    }
+
+    private fun getRole() = getRoleUseCase( BaseUseCase.None()) {
+        it.either(::handleFailure, ::handleRole)
     }
 
     private fun goToConversation() {
@@ -59,6 +67,10 @@ class DetailCourseViewModel
         ) {
             it.either(::handleFailure, ::handleToken)
         }
+    }
+
+    private fun handleRole(role: String) {
+        typeRole = role
     }
 
     private fun handleToken(url: String) {

@@ -15,4 +15,6 @@ sealed class DetailCourseEvent : UiEvent {
 
     object GetToken : DetailCourseEvent()
 
+    object GetRole : DetailCourseEvent()
+
 }

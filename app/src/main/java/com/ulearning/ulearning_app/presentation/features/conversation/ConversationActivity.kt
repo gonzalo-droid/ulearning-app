@@ -92,6 +92,7 @@ class ConversationActivity :
     override fun newConversation() {
         startActivity(Intent(this, SearchActivity::class.java).apply {
             putExtra(Config.COURSE_ID_PUT, viewModel.courseId)
+            putExtra(Config.TYPE_MESSAGE, Config.MESSAGE_COURSE)
         })
         finish()
     }

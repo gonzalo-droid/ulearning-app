@@ -1,4 +1,4 @@
-package com.ulearning.ulearning_app.presentation.features.addConversation
+package com.ulearning.ulearning_app.presentation.components.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.databinding.ItemChipUserBinding
-import com.ulearning.ulearning_app.databinding.ItemConversationBinding
-import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.User
 
 class UserChipAdapter constructor(

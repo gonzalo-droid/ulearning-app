@@ -11,8 +11,6 @@ interface SearchViewState {
 
     fun loading()
 
-    fun conversation(conversation: Conversation)
-
     fun users(users: List<User>)
 
 }

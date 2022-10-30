@@ -17,6 +17,10 @@ interface ConversationRepository {
         page: Int,
     ): Either<Failure, List<Conversation>>
 
+    suspend fun participantsMessage(
+        ids: String,
+    ): Either<Failure, List<User>>
+
     suspend fun getMessages(
         uuid: String
     ): Either<Failure, List<Message>>

@@ -15,4 +15,6 @@ interface AddConversationViewState {
 
     fun users(users: List<User>)
 
+    fun getRole(role: String)
+
 }

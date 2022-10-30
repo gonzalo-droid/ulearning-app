@@ -69,6 +69,7 @@ class DetailCourseActivity :
 
     private fun observeUiStates() {
         viewModel.setEvent(DetailCourseEvent.GetToken)
+        viewModel.setEvent(DetailCourseEvent.GetRole)
 
 
         viewModel.let {
@@ -164,7 +165,7 @@ class DetailCourseActivity :
             putExtra(Config.COURSE_ID_PUT, viewModel.subscription.courseId)
             putExtra(Config.LIST_USER_IDS_PUT, "${user.id},")
             putExtra(Config.TYPE_MESSAGE, Config.MESSAGE_COURSE)
-            putExtra(Config.ROLE, Config.ROLE_TEACHER)
+            putExtra(Config.ROLE, viewModel.typeRole)
         })
     }
 

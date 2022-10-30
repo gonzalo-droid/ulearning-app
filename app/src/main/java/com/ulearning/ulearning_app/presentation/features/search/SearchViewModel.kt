@@ -18,7 +18,6 @@ import javax.inject.Inject
 class SearchViewModel
 @Inject constructor(
     private val getUserByCourseUseCase: GetUserByCourseUseCase,
-    private val sendConversationUseCase: SendConversationUseCase,
 ) : BaseViewModel<SearchEvent, SearchState, SearchEffect>() {
 
     var courseId: Int = 1
@@ -46,17 +45,6 @@ class SearchViewModel
         ) {
             it.either(::handleFailure, ::handleUser)
         }
-    }
-
-
-    private fun handleConversation(conversation: Conversation) {
-        setState { SearchState.Loading }
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            setState { SearchState.DataConversation(conversation = conversation) }
-        }, 2000)
-
-
     }
 
     private fun handleUser(users: List<User>) {

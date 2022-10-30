@@ -33,6 +33,11 @@ interface ConversationApi {
         @Query("to_support") toSupport: Boolean,
     ): Response<BaseResponse<List<ConversationResponse>>>
 
+    @GET("messages-participants")
+    suspend fun participantsMessage(
+        @Header(SettingRemote.AUTHORIZATION) token: String,
+        @Query("ids") ids: String,
+    ): Response<BaseResponse<List<UserResponse>>>
 
     @GET("messages/{uuid}")
     suspend fun messages(

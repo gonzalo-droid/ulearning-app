@@ -14,7 +14,6 @@ object SearchReducer {
             is SearchState.Idle -> {}
 
             is SearchState.Loading -> viewState.loading()
-            is SearchState.DataConversation -> viewState.conversation(state.conversation)
             is SearchState.UserList -> viewState.users(state.users)
         }
     }

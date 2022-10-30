@@ -15,4 +15,6 @@ sealed class AddConversationState : UiState {
 
     data class UserList constructor(val users: List<User>) : AddConversationState()
 
+    data class GetRole constructor(val role: String) : AddConversationState()
+
 }

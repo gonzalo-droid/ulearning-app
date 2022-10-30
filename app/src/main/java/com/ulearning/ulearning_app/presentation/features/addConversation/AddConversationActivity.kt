@@ -17,6 +17,7 @@ import com.ulearning.ulearning_app.databinding.ActivityAddConversationBinding
 import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.User
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
+import com.ulearning.ulearning_app.presentation.components.adapter.UserChipAdapter
 import com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,14 +58,11 @@ class AddConversationActivity :
     private fun observeUiStates() {
 
 
+        viewModel.setEvent(AddConversationEvent.GetRole)
+
+
         viewModel.let {
             viewModel.typeMessage = Config.TYPE_MESSAGE putString this@AddConversationActivity
-            viewModel.typeRole = Config.ROLE putString this@AddConversationActivity
-
-            binding.recycler.visibility = View.VISIBLE
-            binding.supportTitle.visibility = View.GONE
-
-            binding.switches.switchLayout.visibility = if (viewModel.typeRole == Config.ROLE_TEACHER) View.VISIBLE else View.GONE
 
 
             if (viewModel.typeMessage == Config.MESSAGE_COURSE) {
@@ -74,18 +72,14 @@ class AddConversationActivity :
                 viewModel.textUserIds.trim().removeSuffix(",").split(",").forEach {
                     viewModel.listUserIds.add(it.toInt())
                 }
-
                 viewModel.setEvent(AddConversationEvent.GetUsersClick)
             } else {
-
-                binding.recycler.visibility = View.GONE
-                binding.supportTitle.visibility = View.VISIBLE
+                users(listOf())
             }
 
+
+
         }
-
-
-
 
         viewModel.apply {
             lifecycleScopeCreate(activity = this@AddConversationActivity, method = {
@@ -131,8 +125,17 @@ class AddConversationActivity :
     override fun users(users: List<User>) {
         closeLoadingDialog()
 
-        adapter = UserChipAdapter(users = users)
+        val support : List<User> = listOf ()
+
+        val list   = users.ifEmpty { support.plusElement (User(name = "Soporte plataforma")) }
+
+        adapter = UserChipAdapter(users = list)
 
         recycler.adapter = adapter
+    }
+
+    override fun getRole(role: String) {
+        viewModel.typeRole = role
+        binding.switches.switchLayout.visibility = if (viewModel.typeRole == Config.ROLE_TEACHER) View.VISIBLE else View.GONE
     }
 }

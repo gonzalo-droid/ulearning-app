@@ -8,4 +8,6 @@ sealed class MessageEvent : UiEvent {
     object MessagesClicked : MessageEvent()
 
     object SendMessageClick : MessageEvent()
+
+    object GetParticipantsClick : MessageEvent()
 }

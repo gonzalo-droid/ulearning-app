@@ -33,6 +33,11 @@ interface ConversationService {
         toSupport: Boolean,
     ): Either<Failure, List<ConversationResponse>>
 
+    suspend fun participantsMessage(
+        token: String,
+        ids: String
+    ): Either<Failure, List<UserResponse>>
+
     suspend fun messages(
         token: String,
         uuid: String,

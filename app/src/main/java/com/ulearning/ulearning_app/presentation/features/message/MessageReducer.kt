@@ -1,5 +1,8 @@
 package com.ulearning.ulearning_app.presentation.features.message
 
+import com.ulearning.ulearning_app.presentation.features.addConversation.AddConversationReducer
+import com.ulearning.ulearning_app.presentation.features.addConversation.AddConversationState
+
 
 object MessageReducer {
 
@@ -12,7 +15,7 @@ object MessageReducer {
     fun selectState(state: MessageState) {
         when (state) {
             is MessageState.Idle -> {}
-
+            is MessageState.GetParticipants -> viewState.users(state.users)
             is MessageState.Loading -> viewState.loading()
             is MessageState.Messages -> viewState.messages(state.messages)
         }

@@ -16,6 +16,7 @@ object AddConversationReducer {
             is AddConversationState.Loading -> viewState.loading()
             is AddConversationState.DataConversation -> viewState.conversation(state.conversation)
             is AddConversationState.UserList -> viewState.users(state.users)
+            is AddConversationState.GetRole -> viewState.getRole(state.role)
         }
     }
 

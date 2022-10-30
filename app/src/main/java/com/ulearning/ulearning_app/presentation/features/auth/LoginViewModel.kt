@@ -1,9 +1,13 @@
 package com.ulearning.ulearning_app.presentation.features.auth
 
 import com.ulearning.ulearning_app.core.functional.Failure
+import com.ulearning.ulearning_app.domain.model.Profile
+import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.DoLoginUseCase
+import com.ulearning.ulearning_app.domain.useCase.auth.GetProfileUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.SendFCMTokenUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
+import com.ulearning.ulearning_app.presentation.features.home.HomeState
 import com.ulearning.ulearning_app.presentation.model.entity.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -12,8 +16,9 @@ import javax.inject.Inject
 class LoginViewModel
 @Inject constructor(
     private val doLoginUseCase: DoLoginUseCase,
-    private val sendFCMTokenUseCase: SendFCMTokenUseCase
-) : BaseViewModel<LoginEvent, LoginState, LoginEffect>() {
+    private val sendFCMTokenUseCase: SendFCMTokenUseCase,
+    private val getProfileUseCase: GetProfileUseCase,
+    ) : BaseViewModel<LoginEvent, LoginState, LoginEffect>() {
 
     val user = User()
 
@@ -24,13 +29,17 @@ class LoginViewModel
     override fun handleEvent(event: LoginEvent) {
         when (event) {
             LoginEvent.LoginClicked -> verifyLogin()
-            LoginEvent.RecoveredPasswordClicked -> goRecoveryPassword()
         }
     }
 
-    private fun goRecoveryPassword() {
-
+    private fun getProfile() {
+        getProfileUseCase(
+            BaseUseCase.None()
+        ) {
+            it.either(::handleFailure, ::handleProfile)
+        }
     }
+
 
     private fun verifyLogin() {
 
@@ -86,7 +95,6 @@ class LoginViewModel
 
     private fun handleFailure(failure: Failure) {
         setEffect { LoginEffect.ShowMessageFailure(failure = failure) }
-
     }
 
     private fun handleLogin(success: Boolean) {
@@ -94,11 +102,14 @@ class LoginViewModel
     }
 
     private fun handleSuccess(success: Boolean) {
-        setState { LoginState.LoginSuccess(success = success) }
+        getProfile()
+    }
+
+    private fun handleProfile(data: Profile) {
+        setState { LoginState.LoginSuccess(success = true) }
     }
 
     companion object Events {
         val loginClicked = LoginEvent.LoginClicked
-        val recoveredPasswordClicked = LoginEvent.RecoveredPasswordClicked
     }
 }

@@ -51,9 +51,20 @@ class AuthRepositoryImpl
             token = "${SettingRemote.BEARER} ${dataStore.token()}"
         )) {
             is Right -> {
-                Right(mapper.profileToDomain(response.b))
+                val profile = mapper.profileToDomain(response.b)
+                profile.role?.let { dataStore.saveRole(role = it) }
+                profile.name?.let { dataStore.saveUserName(userName = it) }
+                Right(profile)
             }
             is Left -> Left(Failure.DefaultError(R.string.error_user_message))
+        }
+    }
+
+    override suspend fun getRole(): Either<Failure, String> {
+        return if (dataStore.role().isNotEmpty()) {
+            Right(dataStore.role())
+        } else {
+            Right(Config.ROLE_STUDENT)
         }
     }
 
@@ -61,6 +72,7 @@ class AuthRepositoryImpl
 
         dataStore.saveUserName("")
         dataStore.saveToken("")
+        dataStore.saveRole("")
 
         return if (dataStore.token().isEmpty()) {
             Right(true)

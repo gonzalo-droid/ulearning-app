@@ -7,7 +7,9 @@ import android.util.Log
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.Message
+import com.ulearning.ulearning_app.domain.model.User
 import com.ulearning.ulearning_app.domain.useCase.conversation.GetMessageUseCase
+import com.ulearning.ulearning_app.domain.useCase.conversation.GetParticipantsMessageUseCase
 import com.ulearning.ulearning_app.domain.useCase.conversation.SendMessageUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,12 +20,15 @@ import javax.inject.Inject
 class MessageViewModel
 @Inject constructor(
     private val getMessageUseCase: GetMessageUseCase,
-    private val sendMessageUseCase: SendMessageUseCase
+    private val sendMessageUseCase: SendMessageUseCase,
+    private val getParticipantsMessageUseCase: GetParticipantsMessageUseCase
 ) : BaseViewModel<MessageEvent, MessageState, MessageEffect>() {
 
     var page: Int = 1
 
     var messageInput = MutableStateFlow<String>("")
+
+    var userIds  = ""
 
     lateinit var conversation: Conversation
 
@@ -35,6 +40,20 @@ class MessageViewModel
         when (event) {
             MessageEvent.MessagesClicked -> getMessages()
             MessageEvent.SendMessageClick -> sendMessage()
+            MessageEvent.GetParticipantsClick -> getParticipants()
+        }
+    }
+
+    private fun getParticipants() {
+
+        val list = conversation.firstMessage?.userIds?.joinToString(",") ?: ""
+
+        getParticipantsMessageUseCase(
+            GetParticipantsMessageUseCase.Params(
+                userIds = list
+            )
+        ) {
+            it.either(::handleFailure, ::handleParticipants)
         }
     }
 
@@ -62,7 +81,7 @@ class MessageViewModel
 
     private fun getMessages() {
         setState { MessageState.Loading }
-        Log.d("MessageVM", conversation.uuid)
+
         getMessageUseCase(
             GetMessageUseCase.Params(
                 uuid = conversation.uuid
@@ -84,6 +103,10 @@ class MessageViewModel
 
     private fun handleMessages(messages: List<Message>) {
         setState { MessageState.Messages(messages = messages) }
+    }
+
+    private fun handleParticipants(users: List<User>) {
+        setState { MessageState.GetParticipants(users = users) }
     }
 
     private fun handleFailure(failure: Failure) {

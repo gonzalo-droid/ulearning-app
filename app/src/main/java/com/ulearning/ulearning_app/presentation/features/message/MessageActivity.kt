@@ -2,6 +2,7 @@ package com.ulearning.ulearning_app.presentation.features.message
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
@@ -12,7 +13,9 @@ import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityMessageBinding
 import com.ulearning.ulearning_app.domain.model.Message
+import com.ulearning.ulearning_app.domain.model.User
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
+import com.ulearning.ulearning_app.presentation.components.adapter.UserChipAdapter
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,6 +35,10 @@ class MessageActivity :
 
     private lateinit var adapter: MessageAdapter
 
+    private lateinit var recyclerUser: RecyclerView
+
+    private lateinit var adapterUser: UserChipAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,6 +52,10 @@ class MessageActivity :
 
         recycler.layoutManager = LinearLayoutManager(this)
 
+        recyclerUser = binding.recyclerUser
+
+        recyclerUser.layoutManager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
+
         observeUiStates()
     }
 
@@ -52,6 +63,8 @@ class MessageActivity :
 
         viewModel.let {
             viewModel.conversation = Config.CONVERSATION_PUT putConversation this@MessageActivity
+
+            viewModel.setEvent(MessageEvent.GetParticipantsClick)
 
             viewModel.setEvent(MessageEvent.MessagesClicked)
         }
@@ -97,6 +110,19 @@ class MessageActivity :
 
         showSnackBar(binding.root, getString(messageDesign.idMessage))
 
+    }
+
+    override fun users(users: List<User>) {
+        closeLoadingDialog()
+
+        val support : List<User> = listOf ()
+
+        val list   = users.ifEmpty { support.plusElement (User(name = "Soporte plataforma")) }
+
+
+        adapterUser = UserChipAdapter(users = list)
+
+        recyclerUser.adapter = adapterUser
     }
 
     override fun loading() {

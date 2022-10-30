@@ -114,16 +114,6 @@ class SearchActivity :
 
     }
 
-    override fun conversation(conversation: Conversation) {
-        closeLoadingDialog()
-
-        startActivity(Intent(this, AddConversationActivity::class.java).apply {
-            putExtra(Config.COURSE_ID_PUT, viewModel.courseId)
-        })
-
-        finish()
-    }
-
     override fun users(users: List<User>) {
         closeLoadingDialog()
 
@@ -141,6 +131,7 @@ class SearchActivity :
         startActivity(Intent(this, AddConversationActivity::class.java).apply {
             putExtra(Config.COURSE_ID_PUT, viewModel.courseId)
             putExtra(Config.LIST_USER_IDS_PUT, "${user.id},")
+            putExtra(Config.TYPE_MESSAGE, Config.MESSAGE_COURSE)
         })
     }
 }
