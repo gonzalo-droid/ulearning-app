@@ -78,9 +78,6 @@ class AddConversationActivity :
             } else {
                 users(listOf())
             }
-
-
-
         }
 
         viewModel.apply {
@@ -123,10 +120,8 @@ class AddConversationActivity :
             startActivity(Intent(this, ConversationActivity::class.java).apply {
                 putExtra(Config.COURSE_ID_PUT, viewModel.courseId)
             })
-
         }
-
-            finish()
+        finish()
     }
 
     override fun users(users: List<User>) {
@@ -143,7 +138,16 @@ class AddConversationActivity :
 
     override fun getRole(role: String) {
         viewModel.typeRole = role
-        binding.switches.switchLayout.visibility = View.GONE
-        //if (viewModel.typeRole == Config.ROLE_TEACHER) View.VISIBLE else View.GONE
+        if (viewModel.typeRole == Config.ROLE_TEACHER){
+            binding.switches.switchLayout.visibility = View.VISIBLE
+            setSettingSwitch()
+        } else {
+            binding.switches.switchLayout.visibility = View.GONE
+        }
+    }
+
+    fun setSettingSwitch() {
+        binding.switches.sendSwitch.isChecked = false
+        binding.switches.receptionSwitch.isChecked = false
     }
 }
