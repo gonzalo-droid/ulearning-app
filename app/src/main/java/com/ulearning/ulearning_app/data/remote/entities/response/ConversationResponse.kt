@@ -11,6 +11,8 @@ data class ConversationResponse(
     val courseId: Int? = 0,
     @SerializedName("firstMessage")
     val firstMessage: FirstMessageResponse? = FirstMessageResponse(),
+    @SerializedName("createdBy")
+    val createdBy: UserResponse? = UserResponse(),
     @SerializedName("id")
     val id: Int? = 0,
     @SerializedName("is_broadcast")

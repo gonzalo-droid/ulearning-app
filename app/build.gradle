@@ -112,6 +112,7 @@ dependencies {
     implementation retrofit.retrofitgson
     implementation retrofit.gson
     implementation retrofit.okhttpInterceptor
+    implementation 'com.localebro:okhttpprofiler:1.0.8'
 
     // img
     implementation others.fresco

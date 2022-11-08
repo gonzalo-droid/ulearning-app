@@ -8,7 +8,7 @@ data class FirstMessage(
     val id: Int? = 0,
     val parentId: Any? = null,
     val publishedAt: String? = "",
-    val sendBy: Int? = 0,
+    val sendBy: User? = null,
     val status: String? = "",
     val subject: Any? = null,
     val type: String? = "",

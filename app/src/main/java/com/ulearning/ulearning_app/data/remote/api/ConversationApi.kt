@@ -22,6 +22,7 @@ interface ConversationApi {
         @Query("per_page") perPage: Int,
         @Query("page") page: Int,
         @Query("course_id") courseId: Int,
+        @Query("includes") includes: String = "first_message",
     ): Response<BaseResponse<List<ConversationResponse>>>
 
 
@@ -31,6 +32,7 @@ interface ConversationApi {
         @Query("per_page") perPage: Int,
         @Query("page") page: Int,
         @Query("to_support") toSupport: Boolean,
+        @Query("includes") includes: String = "first_message",
     ): Response<BaseResponse<List<ConversationResponse>>>
 
     @GET("messages-participants")

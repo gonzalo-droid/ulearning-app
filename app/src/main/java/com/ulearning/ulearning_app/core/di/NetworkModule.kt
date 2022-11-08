@@ -3,6 +3,7 @@ package com.ulearning.ulearning_app.core.di
 import android.content.Context
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
+import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -68,6 +69,9 @@ object NetworkModule {
             .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
             .readTimeout(TIMEOUT, TimeUnit.SECONDS)
             .addInterceptor(authInterceptor)
+
+        if (BuildConfig.DEBUG) { builder.addInterceptor(OkHttpProfilerInterceptor()) }
+
         return builder.build()
     }
 
@@ -76,13 +80,11 @@ object NetworkModule {
     fun provideConnection(@ApplicationContext appContext: Context): ConnectionUtils =
         ConnectionUtilsImpl(appContext)
 
-
     @Provides
     @Singleton
     fun provideAuthApi(
         retrofit: Retrofit
     ): AuthApi = retrofit.create(AuthApi::class.java)
-
 
     @Provides
     @Singleton

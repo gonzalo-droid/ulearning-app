@@ -11,12 +11,10 @@ data class FirstMessageResponse(
     val content: String? = "",
     @SerializedName("id")
     val id: Int? = 0,
-    @SerializedName("parent_id")
-    val parentId: Any? = null,
     @SerializedName("published_at")
     val publishedAt: String? = "",
     @SerializedName("send_by")
-    val sendBy: Int? = 0,
+    val sendBy: UserResponse? = UserResponse(),
     @SerializedName("status")
     val status: String? = "",
     @SerializedName("subject")
