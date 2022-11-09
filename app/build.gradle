@@ -39,17 +39,19 @@ android {
     productFlavors {
         dev {
             dimension 'versionFlavor'
-            buildConfigField 'String', 'BASE_URL', '"https://sandbox.api.ulearning.com.pe/api/"'
             buildConfigField 'boolean', 'IS_SHOW_LOG', 'true'
             buildConfigField 'boolean', 'DEBUG', 'true'
-            buildConfigField 'String', 'STUDENT_URL', '"https://sandbox.student.ulearning.com.pe"'
+            buildConfigField 'String', 'BASE_URL', '"https://api.ulearning.com.pe/api/"'
+            buildConfigField 'String', 'STUDENT_URL', '"https://student.ulearning.com.pe"'
+            //buildConfigField 'String', 'BASE_URL', '"https://sandbox.api.ulearning.com.pe/api/"'
+            //buildConfigField 'String', 'STUDENT_URL', '"https://sandbox.student.ulearning.com.pe"'
         }
 
         prod {
             dimension 'versionFlavor'
-            buildConfigField 'String', 'BASE_URL', '"https://api.ulearning.com.pe/api/"'
             buildConfigField 'boolean', 'IS_SHOW_LOG', 'false'
             buildConfigField 'boolean', 'DEBUG', 'false'
+            buildConfigField 'String', 'BASE_URL', '"https://api.ulearning.com.pe/api/"'
             buildConfigField 'String', 'STUDENT_URL', '"https://student.ulearning.com.pe"'
         }
     }
