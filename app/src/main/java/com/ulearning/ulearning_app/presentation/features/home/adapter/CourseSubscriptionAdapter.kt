@@ -6,10 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.databinding.ItemCoursesBinding
+import com.ulearning.ulearning_app.domain.model.CoursePercentage
 import com.ulearning.ulearning_app.domain.model.Subscription
 
 class CourseSubscriptionAdapter constructor(
     private val courses: List<Subscription>,
+    private val percentages: List<CoursePercentage>? = listOf(),
     private val onClickListener: (Subscription) -> Unit
 ) : RecyclerView.Adapter<CourseSubscriptionAdapter.CustomViewHolder>() {
 
@@ -35,6 +37,8 @@ class CourseSubscriptionAdapter constructor(
         fun bind(model: Subscription, onClickListener: (Subscription) -> Unit) {
 
             binding.progressSnackBar.visibility = if(model.isFinished!!) View.INVISIBLE else View.VISIBLE
+
+            percentages.filter
 
             //binding.progressSnackBar.progress  = model.course!!.category!!.name
 

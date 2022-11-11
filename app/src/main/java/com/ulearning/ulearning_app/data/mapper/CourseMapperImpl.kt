@@ -1,6 +1,7 @@
 package com.ulearning.ulearning_app.data.mapper
 
 
+import com.ulearning.ulearning_app.data.remote.entities.response.CoursePercentageResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.CourseResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.SubscriptionResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.TeacherResponse
@@ -121,6 +122,15 @@ class CourseMapperImpl : CourseMapper {
                 syllabusLink = null,
                 synchronousHour = null,
                 target = null,
+            )
+        }
+    }
+
+    override suspend fun listCoursePercentageToDomain(data: List<CoursePercentageResponse>): List<CoursePercentage> {
+        return data.map {
+            CoursePercentage(
+                percentage = it.percentage,
+                courseId = it.courseId
             )
         }
     }

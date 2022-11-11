@@ -7,6 +7,7 @@ import com.ulearning.ulearning_app.data.mapper.CourseMapper
 import com.ulearning.ulearning_app.data.remote.service.CourseService
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
 import com.ulearning.ulearning_app.domain.model.Course
+import com.ulearning.ulearning_app.domain.model.CoursePercentage
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.repository.CourseRepository
 import javax.inject.Inject
@@ -42,6 +43,18 @@ class CourseRepositoryImpl
         )) {
             is Either.Right -> {
                 Either.Right(mapper.listCourseToDomain(response.b))
+            }
+            is Either.Left -> Either.Left(response.a)
+        }
+    }
+
+    override suspend fun getCoursePercentage(courseIds: String): Either<Failure, List<CoursePercentage>> {
+        return when (val response = service.coursePercentage(
+            token = "${SettingRemote.BEARER} ${dataStore.token()}",
+            courseIds = courseIds
+        )) {
+            is Either.Right -> {
+                Either.Right(mapper.listCoursePercentageToDomain(response.b))
             }
             is Either.Left -> Either.Left(response.a)
         }

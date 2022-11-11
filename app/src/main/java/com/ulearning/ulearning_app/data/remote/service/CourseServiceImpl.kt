@@ -6,6 +6,7 @@ import com.ulearning.ulearning_app.data.remote.api.AuthApi
 import com.ulearning.ulearning_app.data.remote.api.CourseApi
 import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.SubscriptionRequest
+import com.ulearning.ulearning_app.data.remote.entities.response.CoursePercentageResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.CourseResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.SubscriptionResponse
@@ -42,4 +43,14 @@ class CourseServiceImpl
         }
     }
 
+    override suspend fun coursePercentage(
+        token: String,
+        courseIds: String
+    ): Either<Failure, List<CoursePercentageResponse>> {
+        return networkHandler.callServiceBaseList {
+            courseApi.coursePercentage(
+                token, courseIds
+            )
+        }
+    }
 }

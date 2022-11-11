@@ -39,7 +39,7 @@ class ConversationAdapter constructor(
             binding.titleText.text  = model.firstMessage?.content
 
             binding.timeText.text = model.firstMessage?.publishedAt?.dateFormat(Config.DATE_FORMAT_THREE)?.dateFormat(Config.DATE_FORMAT_NINETEEN)
-            
+
             itemView.setOnClickListener {
                 onClickListener(model)
             }

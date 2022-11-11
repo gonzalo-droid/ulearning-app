@@ -3,6 +3,7 @@ package com.ulearning.ulearning_app.data.remote.api
 import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
 import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.SubscriptionRequest
+import com.ulearning.ulearning_app.data.remote.entities.response.CoursePercentageResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.CourseResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.SubscriptionResponse
@@ -28,4 +29,11 @@ interface CourseApi {
         @Header(SettingRemote.AUTHORIZATION) token: String,
         @Query("user_id") userId: Int,
     ): Response<BaseResponse<List<CourseResponse>>>
+
+    @GET("courses-advances")
+    suspend fun coursePercentage(
+        @Header(SettingRemote.AUTHORIZATION) token: String,
+        @Query("course_ids") courseIds: String,
+    ): Response<BaseResponse<List<CoursePercentageResponse>>>
+
 }

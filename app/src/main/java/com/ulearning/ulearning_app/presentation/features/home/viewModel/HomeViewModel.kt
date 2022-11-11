@@ -2,11 +2,13 @@ package com.ulearning.ulearning_app.presentation.features.home.viewModel
 
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Course
+import com.ulearning.ulearning_app.domain.model.CoursePercentage
 import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.DoLoginUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.GetProfileUseCase
+import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursePercentageUseCase
 import com.ulearning.ulearning_app.domain.useCase.courses.GetCourseUseCase
 import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursesSubscriptionUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
@@ -24,11 +26,16 @@ class HomeViewModel
 @Inject constructor(
     private val getCoursesSubscriptionUseCase: GetCoursesSubscriptionUseCase,
     private val getProfileUseCase: GetProfileUseCase,
-    private val getCourseUseCase: GetCourseUseCase
+    private val getCourseUseCase: GetCourseUseCase,
+    private val getCoursePercentageUseCase: GetCoursePercentageUseCase,
 ) : BaseViewModel<HomeEvent, HomeState, HomeEffect>() {
 
     private val isFinished = true
     private val page = 1
+
+    private val courseIds = listOf<Int>()
+
+    private var listCourseRecent = listOf<Subscription>()
 
     var userId = 1
 
@@ -73,6 +80,15 @@ class HomeViewModel
         }
     }
 
+    private fun getCoursePercentage(courseIds: String ) {
+
+        getCoursePercentageUseCase(
+            GetCoursePercentageUseCase.Params(courseIds = courseIds)
+        ) {
+            it.either(::handleFailure, ::handleCoursePercentage)
+        }
+    }
+
     private fun getCourseRecent() {
 
         getCoursesSubscriptionUseCase(
@@ -96,7 +112,15 @@ class HomeViewModel
     }
 
     private fun handleCourseRecent(courses: List<Subscription>) {
-        setState { HomeState.CourseRecent(courses = courses) }
+        courses.forEach { courseIds.plus(it.courseId) }
+
+        getCoursePercentage(courseIds.joinToString())
+
+        listCourseRecent = courses
+    }
+
+    private fun handleCoursePercentage(percentages: List<CoursePercentage>) {
+        setState { HomeState.CourseRecent(courses = listCourseRecent, percentages = percentages) }
     }
 
     private fun handleProfile(data: Profile) {

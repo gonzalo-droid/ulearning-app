@@ -14,6 +14,7 @@ import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.FragmentCourseBinding
 import com.ulearning.ulearning_app.domain.model.Course
+import com.ulearning.ulearning_app.domain.model.CoursePercentage
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
 import com.ulearning.ulearning_app.presentation.features.home.CourseReducer
@@ -113,11 +114,12 @@ class CourseFragment :
     }
 
 
-    override fun getCourseRecent(courses: List<Subscription>) {
+    override fun getCourseRecent(courses: List<Subscription>, percentages: List<CoursePercentage>) {
         closeLoadingDialog()
-        courseRecycler.adapter = CourseSubscriptionAdapter(courses = courses) { model ->
-            onItemSelected(model)
-        }
+        courseRecycler.adapter =
+            CourseSubscriptionAdapter(courses = courses, percentages = percentages) { model ->
+                onItemSelected(model)
+            }
     }
 
     private fun onItemSelected(model: Subscription) {

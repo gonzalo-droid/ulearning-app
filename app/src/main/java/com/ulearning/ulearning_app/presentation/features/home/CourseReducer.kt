@@ -16,7 +16,7 @@ object CourseReducer {
             is HomeState.Loading -> viewState.loading()
 
             is HomeState.CourseRecent -> {
-                viewState.getCourseRecent(courses = state.courses)
+                viewState.getCourseRecent(courses = state.courses, percentages = state.percentages)
             }
             is HomeState.CourseTeacher -> {
                 viewState.getCourseTeacher(courses = state.courses)
