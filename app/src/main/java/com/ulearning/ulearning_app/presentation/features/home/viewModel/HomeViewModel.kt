@@ -6,7 +6,6 @@ import com.ulearning.ulearning_app.domain.model.CoursePercentage
 import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
-import com.ulearning.ulearning_app.domain.useCase.auth.DoLoginUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.GetProfileUseCase
 import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursePercentageUseCase
 import com.ulearning.ulearning_app.domain.useCase.courses.GetCourseUseCase
@@ -15,8 +14,6 @@ import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import com.ulearning.ulearning_app.presentation.features.home.HomeEvent
 import com.ulearning.ulearning_app.presentation.features.home.HomeState
-import com.ulearning.ulearning_app.presentation.features.profile.ProfileEvent
-import com.ulearning.ulearning_app.presentation.features.profile.ProfileState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -33,7 +30,7 @@ class HomeViewModel
     private val isFinished = true
     private val page = 1
 
-    private val courseIds = listOf<Int>()
+    private val courseIds = arrayListOf<Int>()
 
     private var listCourseRecent = listOf<Subscription>()
 
@@ -80,7 +77,7 @@ class HomeViewModel
         }
     }
 
-    private fun getCoursePercentage(courseIds: String ) {
+    private fun getCoursePercentage(courseIds: String) {
 
         getCoursePercentageUseCase(
             GetCoursePercentageUseCase.Params(courseIds = courseIds)
@@ -112,8 +109,7 @@ class HomeViewModel
     }
 
     private fun handleCourseRecent(courses: List<Subscription>) {
-        courses.forEach { courseIds.plus(it.courseId) }
-
+        courses.forEach { courseIds.add(it.courseId) }
         getCoursePercentage(courseIds.joinToString())
 
         listCourseRecent = courses

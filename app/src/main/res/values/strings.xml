@@ -98,4 +98,6 @@
     <string name="course_recent">En progreso</string>
     <string name="course_complete">Completados</string>
 
+    <string name="course_percentage_value">%1$s </string>
+
 </resources>

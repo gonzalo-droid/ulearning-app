@@ -33,14 +33,26 @@ class CourseSubscriptionAdapter constructor(
 
         val binding = ItemCoursesBinding.bind(view)
 
-
         fun bind(model: Subscription, onClickListener: (Subscription) -> Unit) {
 
             binding.progressSnackBar.visibility = if(model.isFinished!!) View.INVISIBLE else View.VISIBLE
+            binding.percentageText.visibility = if(model.isFinished!!) View.INVISIBLE else View.VISIBLE
 
-            percentages.filter
+            var coursePercentage : CoursePercentage? = null
+            var valueString = "0"
+            var valueInt = 0
 
-            //binding.progressSnackBar.progress  = model.course!!.category!!.name
+            percentages?.let { per ->
+                coursePercentage = per.firstOrNull { it.courseId == model.courseId }
+
+                if(!coursePercentage?.percentage.isNullOrEmpty()) {
+                    valueString = coursePercentage?.percentage!!
+                    valueInt =coursePercentage?.percentage!!.toDouble().toInt()
+                }
+                binding.progressSnackBar.progress  = valueInt
+            }
+
+            binding.percentageText.text = "$valueString %"
 
             binding.titleText.text = model.course!!.title
 

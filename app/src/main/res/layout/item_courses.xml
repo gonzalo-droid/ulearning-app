@@ -53,8 +53,7 @@
                 android:id="@+id/titleText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen20"
-                android:layout_marginEnd="@dimen/dimen20"
+                android:layout_marginHorizontal="@dimen/dimen10"
                 android:layout_marginTop="@dimen/dimen40"
                 android:layout_marginBottom="@dimen/dimen10"
                 android:text="Nombre del curso"
@@ -65,7 +64,25 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.7" />
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/percentageText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen5"
+                android:layout_marginRight="@dimen/dimen10"
+                android:layout_marginBottom="@dimen/dimen5"
+                android:gravity="end"
+                android:textAppearance="@style/readex_10_light"
+                android:textColor="@color/blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleText"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="40 %" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
