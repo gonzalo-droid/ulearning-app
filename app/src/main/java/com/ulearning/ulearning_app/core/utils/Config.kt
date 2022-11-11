@@ -37,7 +37,7 @@ object Config {
     const val DATE_FORMAT_FIFTEEN = "dd/MM/yyyy"
     const val DATE_FORMAT_SIXTEEN = "dd / MMM / yyyy"
     const val DATE_FORMAT_EIGHTEEN = "yyyy-MM-dd'T'HH:mm:ss"
-    const val DATE_FORMAT_NINETEEN = "dd 'de' MMMM hh:mm a"
+    const val DATE_FORMAT_NINETEEN = "dd/MM/yyyy hh:mm a"
     const val DATE_FORMAT_THIRTY = "dd/MM HH:mm"
 
     const val DECIMAL_FORMAT_ONE = "S/ ###,#00.00"

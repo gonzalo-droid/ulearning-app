@@ -10,7 +10,7 @@
         android:id="@+id/navigation_home"
         android:name="com.ulearning.ulearning_app.presentation.features.home.view.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
 
         <action
             android:id="@+id/action_navigation_home_to_detailCourseActivity"
@@ -39,7 +39,7 @@
         android:id="@+id/navigation_support"
         android:name="com.ulearning.ulearning_app.presentation.features.support.SupportFragment"
         android:label="fragment_support"
-        tools:layout="@layout/fragment_support" >
+        tools:layout="@layout/fragment_support">
         <action
             android:id="@+id/action_navigation_support_to_messageActivity"
             app:destination="@id/messageActivity" />
@@ -56,6 +56,4 @@
         android:id="@+id/addConversationActivity"
         android:name="com.ulearning.ulearning_app.presentation.features.addConversation.AddConversationActivity"
         android:label="AddConversationActivity" />
-
-
 </navigation>

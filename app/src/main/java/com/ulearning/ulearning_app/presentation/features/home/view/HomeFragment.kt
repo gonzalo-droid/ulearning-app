@@ -2,11 +2,11 @@ package com.ulearning.ulearning_app.presentation.features.home.view
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
@@ -14,20 +14,16 @@ import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.FragmentHomeBinding
-import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
 import com.ulearning.ulearning_app.presentation.features.home.HomeEvent
 import com.ulearning.ulearning_app.presentation.features.home.HomeReducer
 import com.ulearning.ulearning_app.presentation.features.home.HomeViewState
-import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseAdapter
-import com.ulearning.ulearning_app.presentation.features.home.adapter.SubscriptionCourseAdapter
-import com.ulearning.ulearning_app.presentation.features.home.adapter.SubscriptionCourseRecentlyAdapter
+import com.ulearning.ulearning_app.presentation.features.home.adapter.HomeViewPagerAdapter
 import com.ulearning.ulearning_app.presentation.features.home.viewModel.HomeViewModel
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class HomeFragment :
@@ -38,35 +34,36 @@ class HomeFragment :
 
     override val viewModel: HomeViewModel by viewModels()
 
-    override val dataBindingViewModel = BR.loginViewModel
-
-    private lateinit var courseRecentlyRecycler: RecyclerView
-
-    private lateinit var courseRecycler: RecyclerView
-
-    private lateinit var courseAdapter: CourseAdapter
-
-    private lateinit var subscriptionCourseAdapter: SubscriptionCourseAdapter
-
-    private lateinit var subscriptionCourseRecentlyAdapter: SubscriptionCourseRecentlyAdapter
-
-
+    override val dataBindingViewModel = BR.homeViewModel
 
     override fun onViewIsCreated(view: View) {
 
         HomeReducer.instance(viewState = this)
 
+        binding.viewPager.apply {
+            (getChildAt(0) as RecyclerView).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+            adapter =
+                HomeViewPagerAdapter(childFragmentManager, lifecycle)
+        }
+
+        //binding.viewPager.isSaveEnabled = false
+
+        TabLayoutMediator(
+            binding.tabLayout,
+            binding.viewPager
+        ) { tab: TabLayout.Tab, position: Int ->
+            when (position) {
+                COURSE_RECENT -> tab.text = getString(R.string.course_recent)
+                COURSE_COMPLETE -> tab.text = getString(R.string.course_complete)
+            }
+        }.attach()
+
         observeUiStates()
+    }
 
-        courseRecycler = binding.courseRecycler
-
-        courseRecentlyRecycler = binding.courseRecentlyRecycler
-
-        courseRecycler.layoutManager = LinearLayoutManager(requireActivity())
-
-        courseRecentlyRecycler.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-
-
+    companion object {
+        const val COURSE_RECENT = 0
+        const val COURSE_COMPLETE = 1
     }
 
     private fun observeUiStates() {
@@ -90,86 +87,16 @@ class HomeFragment :
 
     override fun messageFailure(failure: Failure) {
 
-        closeShimmer()
-
         val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
 
         showSnackBar(binding.root, getString(messageDesign.idMessage))
     }
 
     override fun loading() {
-        with(binding){
-            successLayout.isVisible = false
-            loadingLayout.isVisible = true
-        }
+       showLoadingDialog()
     }
 
-    override fun courseSubscriptionRecentlyList(courses: List<Subscription>) {
-
-        closeShimmer()
-
-        subscriptionCourseRecentlyAdapter = SubscriptionCourseRecentlyAdapter(courses = courses){
-                model -> onItemSelected(model)
-        }
-
-        courseRecentlyRecycler.adapter = subscriptionCourseRecentlyAdapter
-
-    }
-
-    override fun  courseSubscriptionList(courses: List<Subscription>) {
-
-        closeShimmer()
-
-        subscriptionCourseAdapter = SubscriptionCourseAdapter(courses = courses) {
-                model -> onItemSelected(model)
-        }
-
-        courseRecycler.adapter = subscriptionCourseAdapter
-    }
-
-    override fun  courseList(courses: List<Course>) {
-
-        closeShimmer()
-
-        val subs = Subscription(
-            amount = null,
-            course = null,
-            courseId = 0,
-            group = null,
-            groupId = null,
-            hasCertificate = null,
-            hasDegree = null,
-            hasRecord = null,
-            id = null,
-            isFinished = null,
-            purchasedCertificate = null,
-            purchasedRecord = null,
-            status = null,
-            timeSession = null,
-            type = null,
-            user = null,
-            userId = null
-        )
-
-        courseAdapter = CourseAdapter(courses = courses) {
-                model ->
-            run {
-                subs.course = model
-                onItemSelected(subs)
-            }
-        }
-
-        courseRecycler.adapter = courseAdapter
-    }
-
-    private fun closeShimmer() {
-        with(binding){
-            successLayout.isVisible = true
-            loadingLayout.isVisible = false
-        }
-    }
-
-    private fun onItemSelected(model: Subscription){
+    private fun onItemSelected(model: Subscription) {
 
         findNavController().navigate(
             R.id.action_navigation_home_to_detailCourseActivity,
@@ -184,16 +111,18 @@ class HomeFragment :
         closeLoadingDialog()
         with(binding) {
             tvUserName.text = data.name
-            if(data.role.equals(Config.ROLE_TEACHER)){
-                continueLearningText.visibility = View.GONE
-                courseRecentlyRecycler.visibility = View.GONE
-
+           /* if (data.role.equals(Config.ROLE_TEACHER)) {
                 viewModel.userId = data.id!!
                 viewModel.setEvent(HomeEvent.CoursesHomeTeacherClicked)
             } else {
                 viewModel.setEvent(HomeEvent.RecentlyCoursesHomeClicked)
                 viewModel.setEvent(HomeEvent.CoursesHomeClicked)
-            }
+            }*/
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.viewPager.adapter = null
     }
 }

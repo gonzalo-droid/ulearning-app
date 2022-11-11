@@ -7,136 +7,104 @@
     <data>
 
         <variable
-            name="homePageViewModel"
+            name="homeViewModel"
             type="com.ulearning.ulearning_app.presentation.features.home.viewModel.HomeViewModel" />
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/successLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/loadingLayout"
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline27"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="invisible">
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.06" />
 
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:shimmer_auto_start="true">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.94" />
 
-                <include layout="@layout/fragment_home_loading" />
+        <include
+            android:id="@+id/topbar"
+            layout="@layout/home_top_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/guideline28"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline27"
+            tools:layout_editor_absoluteY="-1dp" />
 
-            </com.facebook.shimmer.ShimmerFrameLayout>
+        <TextView
+            android:id="@+id/textView83"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_welcome_msg"
+            android:textAppearance="@style/readex_26_regular"
+            app:layout_constraintStart_toStartOf="@+id/guideline27"
+            app:layout_constraintTop_toBottomOf="@+id/topbar" />
 
+        <TextView
+            android:id="@+id/tvUserName"
+            android:layout_width="@dimen/dimen0"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-6dp"
+            android:textAppearance="@style/readex_26_semibold"
+            app:layout_constraintEnd_toStartOf="@+id/guideline28"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline27"
+            app:layout_constraintTop_toBottomOf="@+id/textView83"
+            tools:text="Estudiante" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/successLayout"
-            android:layout_width="match_parent"
+            android:id="@+id/tabConstraintLayout"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="gone"
+            android:layout_marginTop="@dimen/dimen16"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            tools:visibility="visible">
+            app:layout_constraintEnd_toStartOf="@+id/guideline28"
+            app:layout_constraintStart_toStartOf="@+id/guideline27"
+            app:layout_constraintTop_toBottomOf="@+id/tvUserName">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline27"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.06" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline28"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.94" />
-
-            <include
-                android:id="@+id/topbar"
-                layout="@layout/home_top_bar"
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toStartOf="@+id/guideline28"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/guideline27"
-                tools:layout_editor_absoluteY="-1dp" />
+                android:layout_height="@dimen/dimen35"
+                app:layout_constraintBottom_toTopOf="@+id/viewPager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tabGravity="start"
+                app:tabIndicatorFullWidth="false"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/gray1"
+                app:tabTextColor="@color/gray2" />
 
-            <TextView
-                android:id="@+id/textView83"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen20"
-                android:text="@string/home_welcome_msg"
-                android:textAppearance="@style/readex_26_regular"
-                app:layout_constraintStart_toStartOf="@+id/guideline27"
-                app:layout_constraintTop_toBottomOf="@+id/topbar" />
-
-            <TextView
-                android:id="@+id/tvUserName"
-                android:layout_width="@dimen/dimen0"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="-6dp"
-                android:textAppearance="@style/readex_26_semibold"
-                app:layout_constraintEnd_toStartOf="@+id/guideline28"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/guideline27"
-                app:layout_constraintTop_toBottomOf="@+id/textView83"
-                tools:text="Estudiante" />
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/tabConstraintLayout"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/dimen16"
+                android:layout_weight="1"
+                android:paddingTop="@dimen/dimen15"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guideline28"
-                app:layout_constraintStart_toStartOf="@+id/guideline27"
-                app:layout_constraintTop_toBottomOf="@+id/tvUserName">
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tabLayout"
-                    android:layout_width="@dimen/dimen240"
-                    android:layout_height="@dimen/dimen35"
-                    app:layout_constraintBottom_toTopOf="@+id/viewPager"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tabGravity="start"
-                    app:tabIndicatorFullWidth="false"
-                    app:tabMode="scrollable"
-                    app:tabSelectedTextColor="@color/gray1"
-                    app:tabTextColor="@color/gray2" />
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/viewPager"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:paddingTop="@dimen/dimen15"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

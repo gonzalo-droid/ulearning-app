@@ -1,11 +1,11 @@
 package com.ulearning.ulearning_app.presentation.features.home
 
 
-object HomeReducer {
+object CourseReducer {
 
-    private lateinit var viewState: HomeViewState
+    private lateinit var viewState: CourseViewState
 
-    fun instance(viewState: HomeViewState) {
+    fun instance(viewState: CourseViewState) {
         this.viewState = viewState
     }
 
@@ -15,8 +15,11 @@ object HomeReducer {
 
             is HomeState.Loading -> viewState.loading()
 
-            is HomeState.DatProfile -> {
-                viewState.getProfile(data = state.data)
+            is HomeState.CourseRecent -> {
+                viewState.getCourseRecent(courses = state.courses)
+            }
+            is HomeState.CourseTeacher -> {
+                viewState.getCourseTeacher(courses = state.courses)
             }
         }
     }

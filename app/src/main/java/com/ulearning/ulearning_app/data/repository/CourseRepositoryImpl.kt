@@ -24,7 +24,7 @@ class CourseRepositoryImpl
     ): Either<Failure, List<Subscription>> {
         return when (val response = service.subscriptions(
             token = "${SettingRemote.BEARER} ${dataStore.token()}",
-            perPage = 20,
+            perPage = 30,
             page = page,
             isFinished = isFinished
         )) {

@@ -5,11 +5,11 @@ import com.ulearning.ulearning_app.presentation.base.UiEvent
 
 sealed class HomeEvent : UiEvent {
 
-    object CoursesHomeClicked : HomeEvent()
+    object CourseRecentClicked : HomeEvent()
 
-    object CoursesHomeTeacherClicked : HomeEvent()
+    object CourseTeacherClicked : HomeEvent()
 
-    object RecentlyCoursesHomeClicked : HomeEvent()
+    object CourseCompleteClicked : HomeEvent()
 
     object DataProfileClicked : HomeEvent()
 

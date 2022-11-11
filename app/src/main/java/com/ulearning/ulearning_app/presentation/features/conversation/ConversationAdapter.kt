@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.R
+import com.ulearning.ulearning_app.core.extensions.dateFormat
+import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ItemConversationBinding
 import com.ulearning.ulearning_app.domain.model.Conversation
 
@@ -36,6 +38,8 @@ class ConversationAdapter constructor(
 
             binding.titleText.text  = model.firstMessage?.content
 
+            binding.timeText.text = model.firstMessage?.publishedAt?.dateFormat(Config.DATE_FORMAT_THREE)?.dateFormat(Config.DATE_FORMAT_NINETEEN)
+            
             itemView.setOnClickListener {
                 onClickListener(model)
             }

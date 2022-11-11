@@ -12,26 +12,21 @@ import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
-import com.ulearning.ulearning_app.databinding.FragmentCourseBinding
-import com.ulearning.ulearning_app.domain.model.Course
+import com.ulearning.ulearning_app.databinding.FragmentCourseCompleteBinding
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
-import com.ulearning.ulearning_app.presentation.features.home.CourseReducer
-import com.ulearning.ulearning_app.presentation.features.home.CourseViewState
-import com.ulearning.ulearning_app.presentation.features.home.HomeEvent
-import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseAdapter
+import com.ulearning.ulearning_app.presentation.features.home.*
 import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseSubscriptionAdapter
 import com.ulearning.ulearning_app.presentation.features.home.viewModel.HomeViewModel
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CourseFragment :
-    BaseFragmentWithViewModel<FragmentCourseBinding, HomeViewModel>(),
-    CourseViewState {
+class CourseCompletedFragment :
+    BaseFragmentWithViewModel<FragmentCourseCompleteBinding, HomeViewModel>(),
+    CourseCompleteViewState {
 
-
-    override val binding: FragmentCourseBinding by dataBinding(FragmentCourseBinding::inflate)
+    override val binding: FragmentCourseCompleteBinding by dataBinding(FragmentCourseCompleteBinding::inflate)
 
     override val viewModel: HomeViewModel by viewModels()
 
@@ -42,7 +37,7 @@ class CourseFragment :
 
     override fun onViewIsCreated(view: View) {
 
-        CourseReducer.instance(viewState = this)
+        CourseCompleteReducer.instance(viewState = this)
 
         observeUiStates()
 
@@ -53,18 +48,18 @@ class CourseFragment :
     }
 
     private fun observeUiStates() {
-        viewModel.setEvent(HomeEvent.CourseRecentClicked)
+        viewModel.setEvent(HomeEvent.CourseCompleteClicked)
 
         viewModel.apply {
             lifecycleScopeCreate(activity = requireActivity(), method = {
                 state.collect { state ->
-                    CourseReducer.selectState(state)
+                    CourseCompleteReducer.selectState(state)
                 }
             })
 
             lifecycleScopeCreate(activity = requireActivity(), method = {
                 effect.collect { effect ->
-                    CourseReducer.selectEffect(effect)
+                    CourseCompleteReducer.selectEffect(effect)
                 }
             })
         }
@@ -82,38 +77,7 @@ class CourseFragment :
         showLoadingDialog()
     }
 
-    override fun getCourseTeacher(courses: List<Course>) {
-        closeLoadingDialog()
-        val subs = Subscription(
-            amount = null,
-            course = null,
-            courseId = 0,
-            group = null,
-            groupId = null,
-            hasCertificate = null,
-            hasDegree = null,
-            hasRecord = null,
-            id = null,
-            isFinished = null,
-            purchasedCertificate = null,
-            purchasedRecord = null,
-            status = null,
-            timeSession = null,
-            type = null,
-            user = null,
-            userId = null
-        )
-
-        courseRecycler.adapter = CourseAdapter(courses = courses) { model ->
-            run {
-                subs.course = model
-                onItemSelected(subs)
-            }
-        }
-    }
-
-
-    override fun getCourseRecent(courses: List<Subscription>) {
+    override fun getCourseComplete(courses: List<Subscription>) {
         closeLoadingDialog()
         courseRecycler.adapter = CourseSubscriptionAdapter(courses = courses) { model ->
             onItemSelected(model)
@@ -129,22 +93,5 @@ class CourseFragment :
                 putSerializable(Config.SUBSCRIPTION_PUT, model)
             }
         )
-    }
-
-    companion object {
-
-        private const val IS_FINISHED = "isFinished"
-
-/*        fun newInstance(
-            isFinished: Boolean = true
-        ): CourseFragment =
-            CourseFragment(
-                isFinished
-            ).apply {
-                arguments = Bundle().apply {
-                    putBoolean(IS_FINISHED, isFinished)
-                }
-            }*/
-
     }
 }

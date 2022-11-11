@@ -69,6 +69,7 @@ class CourseMapperImpl : CourseMapper {
                     teachers = if (!it.group?.teachers.isNullOrEmpty()) listTeacherToDomain(it.group?.teachers) else arrayListOf(),
                 ),
                 groupId = it.groupId,
+                isFinished = it.isFinished
             )
         }
     }

@@ -8,10 +8,10 @@ import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.databinding.ItemCoursesBinding
 import com.ulearning.ulearning_app.domain.model.Subscription
 
-class SubscriptionCourseAdapter constructor(
+class CourseSubscriptionAdapter constructor(
     private val courses: List<Subscription>,
     private val onClickListener: (Subscription) -> Unit
-) : RecyclerView.Adapter<SubscriptionCourseAdapter.CustomViewHolder>() {
+) : RecyclerView.Adapter<CourseSubscriptionAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         return CustomViewHolder(
@@ -34,9 +34,11 @@ class SubscriptionCourseAdapter constructor(
 
         fun bind(model: Subscription, onClickListener: (Subscription) -> Unit) {
 
-            binding.categoryText.text  = model.course?.category?.name
+            binding.progressSnackBar.visibility = if(model.isFinished!!) View.INVISIBLE else View.VISIBLE
 
-            binding.titleText.text  = model.course?.title
+            //binding.progressSnackBar.progress  = model.course!!.category!!.name
+
+            binding.titleText.text = model.course!!.title
 
             itemView.setOnClickListener {
                 onClickListener(model)
