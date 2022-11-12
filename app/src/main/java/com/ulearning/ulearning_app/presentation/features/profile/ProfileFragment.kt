@@ -75,17 +75,29 @@ class ProfileFragment :
             headerInclude.nameText.text = data.name
             nameInputText.editText!!.setText(data.firstName)
             lastNameInputText.editText!!.setText(data.lastName)
+            lastNameMotherInputText.editText!!.setText(data.secondLastName)
             emailInputText.editText!!.setText(data.email)
             phoneInputText.editText!!.setText(data.phone)
             numberDocumentText.text = data.documentNumber
 
             val date =
-                if (data.dateOfBirth.isNullOrEmpty()) "" else data.dateOfBirth.dateFormat(Config.DATE_FORMAT_TWO)
+                if (data.dateOfBirth.isNullOrEmpty()) ""
+                else data.dateOfBirth.dateFormat(Config.DATE_FORMAT_TWO)
                     .dateFormat(Config.DATE_FORMAT_FIFTEEN)
 
             dateOfBirthdayInputText.editText!!.setText(date)
 
-            if(data.role.equals(Config.ROLE_TEACHER)){
+
+/*            val imageUri: String? =
+                if (benefits.get(position).imagesUrl.isNotEmpty())
+                    benefits[position].imagesUrl[0] else null
+
+            Picasso.with(itemView.context).load(imageUri).fit().centerCrop()
+                .placeholder(R.drawable.benefits_placeholder)
+                .error(R.drawable.benefits_placeholder)
+                .into(binding.imageView)*/
+
+            if (data.role.equals(Config.ROLE_TEACHER)) {
                 paymentBtn.visibility = View.GONE
             }
         }

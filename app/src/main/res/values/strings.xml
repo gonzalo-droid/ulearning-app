@@ -39,6 +39,8 @@
 
     <string name="name">nombre</string>
     <string name="last_name">apellidos</string>
+    <string name="last_name_father">apellido paterno</string>
+    <string name="last_name_mother">apellido materno</string>
     <string name="phone">celular</string>
     <string name="date_of_birthday">fecha de nacimiento</string>
     <string name="plan">plan</string>

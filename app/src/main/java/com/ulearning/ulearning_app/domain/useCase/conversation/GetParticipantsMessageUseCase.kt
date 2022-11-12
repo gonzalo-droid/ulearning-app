@@ -1,7 +1,5 @@
 package com.ulearning.ulearning_app.domain.useCase.conversation
 
-import com.ulearning.ulearning_app.domain.model.Conversation
-import com.ulearning.ulearning_app.domain.model.Message
 import com.ulearning.ulearning_app.domain.model.User
 import com.ulearning.ulearning_app.domain.repository.ConversationRepository
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
