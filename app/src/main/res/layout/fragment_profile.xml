@@ -52,7 +52,7 @@
                     android:layout_marginTop="@dimen/dimen16"
                     android:hint="@string/name"
 
-                    app:layout_constraintBottom_toTopOf="@+id/lastNameInpuntText"
+                    app:layout_constraintBottom_toTopOf="@+id/lastNameInputText"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
@@ -70,12 +70,12 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/lastNameInpuntText"
+                    android:id="@+id/lastNameInputText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen16"
                     android:hint="@string/last_name"
-                    app:layout_constraintBottom_toTopOf="@+id/emailInpuntText"
+                    app:layout_constraintBottom_toTopOf="@+id/emailInputText"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
@@ -91,16 +91,16 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/emailInpuntText"
+                    android:id="@+id/emailInputText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen16"
                     android:hint="@string/email"
-                    app:layout_constraintBottom_toTopOf="@+id/phoneInpuntText"
+                    app:layout_constraintBottom_toTopOf="@+id/phoneInputText"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toBottomOf="@+id/lastNameInpuntText">
+                    app:layout_constraintTop_toBottomOf="@+id/lastNameInputText">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -112,16 +112,16 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/phoneInpuntText"
+                    android:id="@+id/phoneInputText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen16"
                     android:hint="@string/phone"
-                    app:layout_constraintBottom_toTopOf="@+id/dateOfBirthdayeInpuntText"
+                    app:layout_constraintBottom_toTopOf="@+id/dateOfBirthdayInputText"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toBottomOf="@+id/emailInpuntText">
+                    app:layout_constraintTop_toBottomOf="@+id/emailInputText">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -133,37 +133,16 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/dateOfBirthdayeInpuntText"
+                    android:id="@+id/dateOfBirthdayInputText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen16"
                     android:hint="@string/date_of_birthday"
-                    app:layout_constraintBottom_toTopOf="@+id/planInpuntText"
+                    app:layout_constraintBottom_toTopOf="@+id/planInputText"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toBottomOf="@+id/phoneInpuntText">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:cursorVisible="false"
-                        android:focusable="false" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/planInpuntText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen16"
-                    android:hint="@string/plan"
-                    app:layout_constraintBottom_toTopOf="@+id/paymentBtn"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toBottomOf="@+id/dateOfBirthdayeInpuntText">
+                    app:layout_constraintTop_toBottomOf="@+id/phoneInputText">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -285,8 +264,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toBottomOf="@+id/planInpuntText">
-
+                    app:layout_constraintTop_toBottomOf="@+id/dateOfBirthdayInputText">
 
                     <TextView
                         android:id="@+id/paymentText"
@@ -317,7 +295,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toBottomOf="@+id/planInpuntText"
+                    app:layout_constraintTop_toBottomOf="@+id/dateOfBirthdayInputText"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintVertical_bias="1.0">
 

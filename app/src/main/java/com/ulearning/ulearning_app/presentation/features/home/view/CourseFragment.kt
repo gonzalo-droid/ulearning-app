@@ -83,37 +83,6 @@ class CourseFragment :
         showLoadingDialog()
     }
 
-    override fun getCourseTeacher(courses: List<Course>) {
-        closeLoadingDialog()
-        val subs = Subscription(
-            amount = null,
-            course = null,
-            courseId = 0,
-            group = null,
-            groupId = null,
-            hasCertificate = null,
-            hasDegree = null,
-            hasRecord = null,
-            id = null,
-            isFinished = null,
-            purchasedCertificate = null,
-            purchasedRecord = null,
-            status = null,
-            timeSession = null,
-            type = null,
-            user = null,
-            userId = null
-        )
-
-        courseRecycler.adapter = CourseAdapter(courses = courses) { model ->
-            run {
-                subs.course = model
-                onItemSelected(subs)
-            }
-        }
-    }
-
-
     override fun getCourseRecent(courses: List<Subscription>, percentages: List<CoursePercentage>) {
         closeLoadingDialog()
         courseRecycler.adapter =

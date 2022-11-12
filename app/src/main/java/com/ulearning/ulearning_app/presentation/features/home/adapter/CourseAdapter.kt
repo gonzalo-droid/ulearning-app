@@ -35,9 +35,12 @@ class CourseAdapter constructor(
 
         fun bind(model: Course, onClickListener: (Course) -> Unit) {
 
-            binding.categoryText.text  = model.category?.name
+            binding.progressSnackBar.visibility = View.INVISIBLE
+            binding.percentageText.visibility = View.INVISIBLE
 
-            binding.titleText.text  = model.title
+            binding.categoryText.text = model.category?.name
+
+            binding.titleText.text = model.title
 
             itemView.setOnClickListener {
                 onClickListener(model)

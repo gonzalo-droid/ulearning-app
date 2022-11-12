@@ -18,6 +18,9 @@ object HomeReducer {
             is HomeState.DatProfile -> {
                 viewState.getProfile(data = state.data)
             }
+            is HomeState.CourseTeacher -> {
+                viewState.getCourseTeacher(courses = state.courses)
+            }
         }
     }
 

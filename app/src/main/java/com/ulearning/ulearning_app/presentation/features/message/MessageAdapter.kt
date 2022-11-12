@@ -50,6 +50,7 @@ class MessageAdapter constructor(
 
     override fun getItemViewType(position: Int): Int {
         val message: Message = messages[position]
+        conversation
         return if (message.sendBy.id == conversation.firstMessage?.sendBy?.id) {
             VIEW_TYPE_MESSAGE_SEND
         } else {

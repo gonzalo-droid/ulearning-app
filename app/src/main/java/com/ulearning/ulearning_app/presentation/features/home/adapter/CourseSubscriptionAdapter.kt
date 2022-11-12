@@ -52,6 +52,8 @@ class CourseSubscriptionAdapter constructor(
                 binding.progressSnackBar.progress  = valueInt
             }
 
+            binding.categoryText.text = model.course?.category?.name
+
             binding.percentageText.text = "$valueString %"
 
             binding.titleText.text = model.course!!.title

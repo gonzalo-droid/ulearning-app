@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/home_welcome_msg"
-            android:textAppearance="@style/readex_26_regular"
+            android:textAppearance="@style/readex_20_regular"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
             app:layout_constraintTop_toBottomOf="@+id/topbar" />
 
@@ -60,7 +60,7 @@
             android:layout_width="@dimen/dimen0"
             android:layout_height="wrap_content"
             android:layout_marginTop="-6dp"
-            android:textAppearance="@style/readex_26_semibold"
+            android:textAppearance="@style/readex_24_semibold"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
@@ -68,11 +68,61 @@
             tools:text="Estudiante" />
 
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/teacherConstraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dimen16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline28"
+        app:layout_constraintStart_toStartOf="@+id/guideline27"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserName">
+
+        <TextView
+            android:id="@+id/titleTeacherTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_courses"
+            android:textAppearance="@style/readex_16_regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/courseTeacherRecycler"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen8"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleTeacherTv"
+            tools:listitem="@layout/item_courses" />
+
+        <include
+            android:id="@+id/noDataInclude"
+            layout="@layout/include_no_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleTeacherTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/tabConstraintLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/dimen16"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
             app:layout_constraintStart_toStartOf="@+id/guideline27"

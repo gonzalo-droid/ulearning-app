@@ -13,4 +13,6 @@ interface HomeViewState {
 
     fun getProfile(data: Profile)
 
+    fun getCourseTeacher(courses: List<Course>)
+
 }

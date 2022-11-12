@@ -11,8 +11,6 @@ interface CourseViewState {
 
     fun loading()
 
-    fun getCourseTeacher(courses: List<Course>)
-
     fun getCourseRecent(courses: List<Subscription>, percentages: List<CoursePercentage>)
 
 }

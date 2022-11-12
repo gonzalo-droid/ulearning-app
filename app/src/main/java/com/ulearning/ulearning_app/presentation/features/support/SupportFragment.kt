@@ -1,6 +1,5 @@
 package com.ulearning.ulearning_app.presentation.features.support
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -9,15 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.R
-import com.ulearning.ulearning_app.core.extensions.*
+import com.ulearning.ulearning_app.core.extensions.dataBinding
+import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.FragmentSupportBinding
 import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
 import com.ulearning.ulearning_app.presentation.features.conversation.ConversationAdapter
-import com.ulearning.ulearning_app.presentation.features.message.MessageActivity
-import com.ulearning.ulearning_app.presentation.features.search.SearchActivity
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -92,6 +90,11 @@ class SupportFragment :
             }
         )
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.setEvent(SupportEvent.ConversationsClicked)
     }
 
     private fun onItemSelected(conversation: Conversation) {

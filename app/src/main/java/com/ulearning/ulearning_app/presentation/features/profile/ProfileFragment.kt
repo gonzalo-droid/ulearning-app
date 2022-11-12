@@ -74,16 +74,16 @@ class ProfileFragment :
         with(binding) {
             headerInclude.nameText.text = data.name
             nameInputText.editText!!.setText(data.firstName)
-            lastNameInpuntText.editText!!.setText(data.lastName)
-            emailInpuntText.editText!!.setText(data.email)
-            phoneInpuntText.editText!!.setText(data.phone)
+            lastNameInputText.editText!!.setText(data.lastName)
+            emailInputText.editText!!.setText(data.email)
+            phoneInputText.editText!!.setText(data.phone)
             numberDocumentText.text = data.documentNumber
 
             val date =
                 if (data.dateOfBirth.isNullOrEmpty()) "" else data.dateOfBirth.dateFormat(Config.DATE_FORMAT_TWO)
                     .dateFormat(Config.DATE_FORMAT_FIFTEEN)
 
-            dateOfBirthdayeInpuntText.editText!!.setText(date)
+            dateOfBirthdayInputText.editText!!.setText(date)
 
             if(data.role.equals(Config.ROLE_TEACHER)){
                 paymentBtn.visibility = View.GONE

@@ -66,16 +66,21 @@ class AddConversationActivity :
         viewModel.let {
             viewModel.typeMessage = Config.TYPE_MESSAGE putString this@AddConversationActivity
 
-
             if (viewModel.typeMessage == Config.MESSAGE_COURSE) {
+
                 viewModel.courseId = Config.COURSE_ID_PUT putInt this@AddConversationActivity
+
                 viewModel.textUserIds =
                     Config.LIST_USER_IDS_PUT putString this@AddConversationActivity
+
                 viewModel.textUserIds.trim().removeSuffix(",").split(",").forEach {
                     viewModel.listUserIds.add(it.toInt())
                 }
+
                 viewModel.setEvent(AddConversationEvent.GetUsersClick)
+
             } else {
+
                 users(listOf())
             }
         }
@@ -146,7 +151,7 @@ class AddConversationActivity :
         }
     }
 
-    fun setSettingSwitch() {
+    private fun setSettingSwitch() {
         binding.switches.sendSwitch.isChecked = false
         binding.switches.receptionSwitch.isChecked = false
     }

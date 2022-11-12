@@ -20,14 +20,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dimen10"
+            android:ellipsize="end"
+            android:maxLines="3"
             android:textAppearance="@style/readex_14_regular"
             android:textColor="@color/blue"
-            android:maxLines="3"
-            android:ellipsize="end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             tools:text="Welcome message" />
 
         <TextView
