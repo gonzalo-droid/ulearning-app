@@ -39,11 +39,11 @@ class CourseCompletedFragment :
 
         CourseCompleteReducer.instance(viewState = this)
 
-        observeUiStates()
-
         courseRecycler = binding.courseRecycler
 
         courseRecycler.layoutManager = LinearLayoutManager(requireActivity())
+
+        observeUiStates()
 
     }
 

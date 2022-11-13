@@ -40,17 +40,15 @@ class CourseFragment :
 
     private lateinit var courseRecycler: RecyclerView
 
-
     override fun onViewIsCreated(view: View) {
 
         CourseReducer.instance(viewState = this)
-
-        observeUiStates()
 
         courseRecycler = binding.courseRecycler
 
         courseRecycler.layoutManager = LinearLayoutManager(requireActivity())
 
+        observeUiStates()
     }
 
     private fun observeUiStates() {
@@ -85,6 +83,7 @@ class CourseFragment :
 
     override fun getCourseRecent(courses: List<Subscription>, percentages: List<CoursePercentage>) {
         closeLoadingDialog()
+
         courseRecycler.adapter =
             CourseSubscriptionAdapter(courses = courses, percentages = percentages) { model ->
                 onItemSelected(model)
