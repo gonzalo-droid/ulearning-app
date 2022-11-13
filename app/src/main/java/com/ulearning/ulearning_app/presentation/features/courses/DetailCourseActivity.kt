@@ -158,8 +158,8 @@ class DetailCourseActivity :
             topBarInclude.title = data.title
             titleText.text = data.title
 
-            descriptionText.text = data.descriptionShort?.html()
-            timeText.text = data.formatAsynchronousHour()
+            descriptionText.text = data.descriptionLarge?.html()
+            timeText.text = data.formatSelfStudyHour()
             modalityText.text = data.formatModality()
             topicText.text = data.lessonsCount.toString()
         }

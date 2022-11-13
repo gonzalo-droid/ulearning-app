@@ -44,6 +44,10 @@ data class Course(
         return  "${this.asynchronousHour.toString()} hr"
     }
 
+    fun formatSelfStudyHour() : String {
+        return  "${this.selfStudyHour.toString()} hr"
+    }
+
     fun formatModality() : String {
         return when (this.modality) {
             "virtual" -> "Virtual"
