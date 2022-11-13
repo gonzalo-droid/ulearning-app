@@ -91,6 +91,7 @@ class CourseCompletedFragment :
             Bundle().apply {
                 putSerializable(Config.COURSE_PUT, model.course)
                 putSerializable(Config.SUBSCRIPTION_PUT, model)
+                putSerializable(Config.ROLE, viewModel.typeRole)
             }
         )
     }

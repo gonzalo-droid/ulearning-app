@@ -115,6 +115,7 @@ class HomeFragment :
             Bundle().apply {
                 putSerializable(Config.COURSE_PUT, model.course)
                 putSerializable(Config.SUBSCRIPTION_PUT, model)
+                putSerializable(Config.ROLE, viewModel.typeRole)
             }
         )
     }
@@ -151,12 +152,14 @@ class HomeFragment :
                 tabConstraintLayout.visibility = View.INVISIBLE
                 teacherConstraintLayout.visibility = View.VISIBLE
 
+                viewModel.typeRole = Config.ROLE_TEACHER
+
                 viewModel.setEvent(HomeEvent.CourseTeacherClicked)
 
             } else { // student
                 tabConstraintLayout.visibility = View.VISIBLE
                 teacherConstraintLayout.visibility = View.INVISIBLE
-
+                viewModel.typeRole = Config.ROLE_STUDENT
                 initTabLayout()
             }
         }

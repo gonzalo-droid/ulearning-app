@@ -3,6 +3,7 @@ package com.ulearning.ulearning_app.presentation.features.courses
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -63,6 +64,7 @@ class DetailCourseActivity :
 
     private fun observeUiStates() {
         viewModel.setEvent(DetailCourseEvent.GetToken)
+
         viewModel.setEvent(DetailCourseEvent.GetRole)
 
 
@@ -71,14 +73,21 @@ class DetailCourseActivity :
                 Config.COURSE_PUT putCourse this@DetailCourseActivity
 
             viewModel.subscription =
-                Config.SUBSCRIPTION_PUT putSubscription  this@DetailCourseActivity
+                Config.SUBSCRIPTION_PUT putSubscription this@DetailCourseActivity
         }
 
+
+        if(viewModel.typeRole == Config.ROLE_STUDENT && viewModel.subscription.isFinished!!){
+            binding.messageBtn.visibility = View.GONE
+        }
         setDetailCourse(viewModel.course)
 
         setDetailSubscription(viewModel.subscription)
 
         viewModel.setEvent(DetailCourseEvent.GetTopic)
+
+        binding.messageBtn.visibility =
+            if (viewModel.subscription.isFinished!!) View.GONE else View.VISIBLE
 
         viewModel.apply {
             lifecycleScopeCreate(activity = this@DetailCourseActivity, method = {

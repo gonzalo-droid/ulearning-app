@@ -104,8 +104,9 @@ class ProfileFragment :
     }
 
     override fun goToWebView(url: String) {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-        startActivity(browserIntent)
+
+        val urlPayment = "${url}?return=/payments"
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(urlPayment)))
     }
 
     override fun logout() {

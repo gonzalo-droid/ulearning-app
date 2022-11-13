@@ -28,6 +28,7 @@ class HomeViewModel
 ) : BaseViewModel<HomeEvent, HomeState, HomeEffect>() {
 
     private val isFinished = true
+
     private val page = 1
 
     private val courseIds = arrayListOf<Int>()
@@ -35,6 +36,8 @@ class HomeViewModel
     private var listCourseRecent = listOf<Subscription>()
 
     var userId = 1
+
+    var typeRole: String = ""
 
     override fun createInitialState(): HomeState {
         return HomeState.Idle

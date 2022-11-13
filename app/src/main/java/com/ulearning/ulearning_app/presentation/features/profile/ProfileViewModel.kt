@@ -2,12 +2,10 @@ package com.ulearning.ulearning_app.presentation.features.profile
 
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Profile
-import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.DoLogoutUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.GetProfileUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.GetTokenUseCase
-import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursesSubscriptionUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
