@@ -103,5 +103,6 @@
     <string name="no_data">Sin resultados encontrados</string>
 
     <string name="course_percentage_value">%1$s </string>
+    <string name="hour_learn_title">Horas de aprendizaje</string>
 
 </resources>

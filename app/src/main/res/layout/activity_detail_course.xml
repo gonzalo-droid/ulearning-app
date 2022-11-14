@@ -90,113 +90,81 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/sectionTimeLayout"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen17"
-                    app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
+                    android:layout_marginTop="@dimen/dimen16"
+                    app:layout_constraintEnd_toStartOf="@+id/sectionModalityLayout"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
                     app:layout_constraintTop_toBottomOf="@+id/descriptionText">
 
-                    <ImageView
-                        android:id="@+id/imageView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.20"
-                        app:srcCompat="@drawable/ic_time" />
-
                     <TextView
                         android:id="@+id/timeText"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen10"
+                        android:drawableStart="@drawable/ic_time"
+                        android:drawablePadding="@dimen/dimen5"
+                        android:gravity="center"
                         android:textAppearance="@style/readex_16_medium"
                         android:textColor="@color/blue"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/imageView3"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="24hr" />
 
                     <TextView
                         android:id="@+id/descriptionTimeText"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawablePadding="@dimen/dimen14"
-                        android:text="Horas de aprendizaje"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:text="@string/hour_learn_title"
                         android:textAppearance="@style/readex_12_light"
                         android:textColor="@color/blue"
-                        app:layout_constraintStart_toStartOf="@+id/timeText"
-                        app:layout_constraintTop_toBottomOf="@+id/timeText" />
-
-                    <com.google.android.material.divider.MaterialDivider
-                        android:id="@+id/dividerTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen10"
-                        app:dividerColor="@color/divider_color_soft"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/descriptionTimeText" />
+                        app:layout_constraintTop_toBottomOf="@+id/timeText" />
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/sectionModalityLayout"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen10"
+                    app:layout_constraintBottom_toBottomOf="@+id/sectionTimeLayout"
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
-                    app:layout_constraintTop_toBottomOf="@+id/sectionTimeLayout">
+                    app:layout_constraintTop_toTopOf="@+id/sectionTimeLayout"
+                    app:layout_constraintVertical_bias="0.0">
 
-                    <ImageView
-                        android:id="@+id/modalityImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.20"
-                        app:srcCompat="@drawable/ic_modality" />
 
                     <TextView
                         android:id="@+id/modalityText"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen10"
+                        android:drawableStart="@drawable/ic_modality"
+                        android:drawablePadding="@dimen/dimen5"
+                        android:gravity="center"
                         android:textAppearance="@style/readex_16_medium"
                         android:textColor="@color/blue"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/modalityImage"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="Virtual" />
 
                     <TextView
                         android:id="@+id/descriptionModalityText"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawablePadding="@dimen/dimen14"
+                        android:gravity="center"
                         android:text="Modalidad"
                         android:textAppearance="@style/readex_12_light"
                         android:textColor="@color/blue"
-                        app:layout_constraintStart_toStartOf="@+id/modalityText"
-                        app:layout_constraintTop_toBottomOf="@+id/modalityText" />
-
-
-                    <com.google.android.material.divider.MaterialDivider
-                        android:id="@+id/dividerModality"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen10"
-                        app:dividerColor="@color/divider_color_soft"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/descriptionModalityText" />
+                        app:layout_constraintTop_toBottomOf="@+id/modalityText" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -204,57 +172,41 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/sectionTopicLayout"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen10"
+                    app:layout_constraintBottom_toBottomOf="@+id/sectionTimeLayout"
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
-                    app:layout_constraintTop_toBottomOf="@+id/sectionModalityLayout">
-
-                    <ImageView
-                        android:id="@+id/topicImage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableTint="@color/blue"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.20"
-                        app:srcCompat="@drawable/ic_topic" />
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toEndOf="@+id/sectionModalityLayout"
+                    app:layout_constraintTop_toTopOf="@+id/sectionTimeLayout"
+                    app:layout_constraintVertical_bias="0.0">
 
                     <TextView
                         android:id="@+id/topicText"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen10"
+                        android:drawableStart="@drawable/ic_topic"
+                        android:drawablePadding="@dimen/dimen5"
+                        android:gravity="center"
                         android:textAppearance="@style/readex_16_medium"
                         android:textColor="@color/blue"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/topicImage"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="4" />
 
                     <TextView
                         android:id="@+id/descriptionTopicText"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawablePadding="@dimen/dimen14"
+                        android:gravity="center"
+                        android:maxLines="2"
                         android:text="Total de sesiones"
                         android:textAppearance="@style/readex_12_light"
                         android:textColor="@color/blue"
-                        app:layout_constraintStart_toStartOf="@+id/topicText"
-                        app:layout_constraintTop_toBottomOf="@+id/topicText" />
-
-                    <com.google.android.material.divider.MaterialDivider
-                        android:id="@+id/dividerTopic"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen10"
-                        app:dividerColor="@color/divider_color_soft"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/descriptionTopicText" />
+                        app:layout_constraintTop_toBottomOf="@+id/topicText" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -267,7 +219,7 @@
                     android:layout_marginTop="@dimen/dimen16"
                     android:elevation="@dimen/dimen1"
                     android:onClick="@{()->detailCourseViewModel.setEvent(detailCourseViewModel.Events.goToConversation)}"
-                    app:layout_constraintTop_toBottomOf="@+id/sectionTopicLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/sectionTimeLayout"
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine">
 

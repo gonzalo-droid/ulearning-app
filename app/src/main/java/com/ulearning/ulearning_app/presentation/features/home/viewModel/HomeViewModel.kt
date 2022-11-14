@@ -90,7 +90,7 @@ class HomeViewModel
     }
 
     private fun getCourseRecent() {
-
+        setState { HomeState.Loading }
         getCoursesSubscriptionUseCase(
             GetCoursesSubscriptionUseCase.Params(page = page, isFinished = !isFinished)
         ) {

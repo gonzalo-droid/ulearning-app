@@ -19,8 +19,8 @@ android {
         applicationId 'com.ulearning.ulearning_app'
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 9
-        versionName "1.0.9"
+        versionCode 10
+        versionName "1.1.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -41,10 +41,10 @@ android {
             dimension 'versionFlavor'
             buildConfigField 'boolean', 'IS_SHOW_LOG', 'true'
             buildConfigField 'boolean', 'DEBUG', 'true'
-            /*buildConfigField 'String', 'BASE_URL', '"https://api.ulearning.com.pe/api/"'
-            buildConfigField 'String', 'STUDENT_URL', '"https://student.ulearning.com.pe"'*/
-            buildConfigField 'String', 'BASE_URL', '"https://sandbox.api.ulearning.com.pe/api/"'
-            buildConfigField 'String', 'STUDENT_URL', '"https://sandbox.student.ulearning.com.pe"'
+            buildConfigField 'String', 'BASE_URL', '"https://api.ulearning.com.pe/api/"'
+            buildConfigField 'String', 'STUDENT_URL', '"https://student.ulearning.com.pe"'
+       /*     buildConfigField 'String', 'BASE_URL', '"https://sandbox.api.ulearning.com.pe/api/"'
+            buildConfigField 'String', 'STUDENT_URL', '"https://sandbox.student.ulearning.com.pe"'*/
         }
 
         prod {

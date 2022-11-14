@@ -53,11 +53,11 @@ class CourseMapperImpl : CourseMapper {
                     ratingAverage = null,
                     ratingCount = null,
                     record = null,
-                    selfStudyHour = null,
+                    selfStudyHour = it.course?.selfStudyHour,
                     slug = null,
                     studentsCount = null,
-                    syllabusLink = null,
-                    synchronousHour = null,
+                    syllabusLink = it.course?.syllabusLink,
+                    synchronousHour = it.course?.synchronousHour,
                     target = null,
                 ),
                 user = User(
@@ -116,11 +116,11 @@ class CourseMapperImpl : CourseMapper {
                 ratingAverage = null,
                 ratingCount = null,
                 record = null,
-                selfStudyHour = null,
+                selfStudyHour = it.selfStudyHour,
                 slug = null,
                 studentsCount = null,
                 syllabusLink = null,
-                synchronousHour = null,
+                synchronousHour = it.synchronousHour,
                 target = null,
             )
         }
