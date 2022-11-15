@@ -6,9 +6,7 @@ import com.ulearning.ulearning_app.data.dataStore.config.DataStoreConfig
 import com.ulearning.ulearning_app.data.mapper.CourseMapper
 import com.ulearning.ulearning_app.data.remote.service.CourseService
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
-import com.ulearning.ulearning_app.domain.model.Course
-import com.ulearning.ulearning_app.domain.model.CoursePercentage
-import com.ulearning.ulearning_app.domain.model.Subscription
+import com.ulearning.ulearning_app.domain.model.*
 import com.ulearning.ulearning_app.domain.repository.CourseRepository
 import javax.inject.Inject
 
@@ -58,5 +56,17 @@ class CourseRepositoryImpl
             }
             is Either.Left -> Either.Left(response.a)
         }
+    }
+
+    override suspend fun myFiles(subscriptionId: Int): Either<Failure, List<FileItem>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun checkAvailableFiles(subscriptionId: Int): Either<Failure, CheckAvailableFiles> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun downloadFile(hash: String): Either<Failure, DownloadFile> {
+        TODO("Not yet implemented")
     }
 }

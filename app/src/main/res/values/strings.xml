@@ -104,5 +104,6 @@
 
     <string name="course_percentage_value">%1$s </string>
     <string name="hour_learn_title">Horas de aprendizaje</string>
+    <string name="download_cert">Descargar certificado</string>
 
 </resources>

@@ -1,11 +1,9 @@
 package com.ulearning.ulearning_app.data.mapper
 
-import com.ulearning.ulearning_app.data.remote.entities.response.CoursePercentageResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.CourseResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.SubscriptionResponse
-import com.ulearning.ulearning_app.domain.model.Course
-import com.ulearning.ulearning_app.domain.model.CoursePercentage
-import com.ulearning.ulearning_app.domain.model.Subscription
+import com.ulearning.ulearning_app.core.functional.Either
+import com.ulearning.ulearning_app.core.functional.Failure
+import com.ulearning.ulearning_app.data.remote.entities.response.*
+import com.ulearning.ulearning_app.domain.model.*
 
 
 interface CourseMapper {
@@ -17,5 +15,10 @@ interface CourseMapper {
 
     suspend fun listCoursePercentageToDomain(data: List<CoursePercentageResponse>): List<CoursePercentage>
 
+    suspend fun myFilesToDomain(data: List<FileItemResponse>): List<FileItem>
+
+    suspend fun checkAvailableFilesToDomain(data: CheckAvailableFilesResponse): CheckAvailableFiles
+
+    suspend fun downloadFileToDomain(data: DownloadFileResponse): DownloadFile
 
 }

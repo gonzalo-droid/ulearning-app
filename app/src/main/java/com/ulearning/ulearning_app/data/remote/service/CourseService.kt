@@ -2,9 +2,7 @@ package com.ulearning.ulearning_app.data.remote.service
 
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
-import com.ulearning.ulearning_app.data.remote.entities.response.CoursePercentageResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.CourseResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.SubscriptionResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.*
 
 interface CourseService {
 
@@ -25,4 +23,19 @@ interface CourseService {
         token: String,
         courseIds: String,
     ): Either<Failure, List<CoursePercentageResponse>>
+
+    suspend fun myFiles(
+        token: String,
+        subscriptionId: Int,
+    ): Either<Failure, List<FileItemResponse>>
+
+    suspend fun checkAvailableFiles(
+        token: String,
+        subscriptionId: Int,
+    ): Either<Failure, CheckAvailableFilesResponse>
+
+    suspend fun downloadFile(
+        token: String,
+        hash: String,
+    ): Either<Failure, DownloadFileResponse>
 }

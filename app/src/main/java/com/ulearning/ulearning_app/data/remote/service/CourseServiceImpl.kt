@@ -2,14 +2,8 @@ package com.ulearning.ulearning_app.data.remote.service
 
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
-import com.ulearning.ulearning_app.data.remote.api.AuthApi
 import com.ulearning.ulearning_app.data.remote.api.CourseApi
-import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
-import com.ulearning.ulearning_app.data.remote.entities.request.SubscriptionRequest
-import com.ulearning.ulearning_app.data.remote.entities.response.CoursePercentageResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.CourseResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.SubscriptionResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.*
 import com.ulearning.ulearning_app.data.remote.network.NetworkHandler
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -50,6 +44,39 @@ class CourseServiceImpl
         return networkHandler.callServiceBaseList {
             courseApi.coursePercentage(
                 token, courseIds
+            )
+        }
+    }
+
+    override suspend fun myFiles(
+        token: String,
+        subscriptionId: Int
+    ): Either<Failure, List<FileItemResponse>> {
+        return networkHandler.callServiceBaseList {
+            courseApi.myFiles(
+                token, subscriptionId
+            )
+        }
+    }
+
+    override suspend fun checkAvailableFiles(
+        token: String,
+        subscriptionId: Int
+    ): Either<Failure, CheckAvailableFilesResponse> {
+        return networkHandler.callServiceBase {
+            courseApi.checkAvailableFiles(
+                token, subscriptionId
+            )
+        }
+    }
+
+    override suspend fun downloadFile(
+        token: String,
+        hash: String
+    ): Either<Failure, DownloadFileResponse> {
+        return networkHandler.callServiceBase {
+            courseApi.downloadFile(
+                token, hash
             )
         }
     }

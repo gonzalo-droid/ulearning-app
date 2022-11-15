@@ -80,3 +80,4 @@ interface ConversationApi {
         @Query("course_id") courseId: Int,
     ): Response<BaseResponse<List<UserResponse>>>
 }
+

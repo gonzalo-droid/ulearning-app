@@ -1,10 +1,7 @@
 package com.ulearning.ulearning_app.data.mapper
 
 
-import com.ulearning.ulearning_app.data.remote.entities.response.CoursePercentageResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.CourseResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.SubscriptionResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.TeacherResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.*
 import com.ulearning.ulearning_app.domain.model.*
 import javax.inject.Singleton
 
@@ -131,6 +128,57 @@ class CourseMapperImpl : CourseMapper {
             CoursePercentage(
                 percentage = it.percentage,
                 courseId = it.courseId
+            )
+        }
+    }
+
+    override suspend fun myFilesToDomain(data: List<FileItemResponse>): List<FileItem> {
+        return data.map {
+            FileItem(
+                bucket = it.bucket,
+                code = it.code,
+                courseId = it.courseId,
+                fileInfo = it.fileInfoResponse?.let { info -> fileInfoToDomain(info) },
+                hash = it.hash,
+                id = it.id,
+                name = it.name,
+                number = it.number,
+                type = it.type,
+                userId = it.userId,
+                year = it.year
+            )
+        }
+    }
+
+    private fun fileInfoToDomain(data: FileInfoResponse): FileInfo {
+        return data.let {
+            FileInfo(
+                date = it.date,
+                email = it.email,
+                hours = it.hours,
+                name = it.name,
+                period = it.period,
+                rating = it.rating,
+                sendMail = it.sendMail,
+                title = it.title,
+                topics = it.topics,
+            )
+        }
+    }
+
+    override suspend fun checkAvailableFilesToDomain(data: CheckAvailableFilesResponse): CheckAvailableFiles {
+        return data.let {
+            CheckAvailableFiles(
+                certificate = it.certificate, record = it.record
+            )
+        }
+    }
+
+    override suspend fun downloadFileToDomain(data: DownloadFileResponse): DownloadFile {
+        return data.let {
+            DownloadFile(
+                file = it.file,
+                filename = it.filename
             )
         }
     }
