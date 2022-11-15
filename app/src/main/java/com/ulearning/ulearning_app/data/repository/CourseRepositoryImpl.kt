@@ -59,14 +59,38 @@ class CourseRepositoryImpl
     }
 
     override suspend fun myFiles(subscriptionId: Int): Either<Failure, List<FileItem>> {
-        TODO("Not yet implemented")
+        return when (val response = service.myFiles(
+            token = "${SettingRemote.BEARER} ${dataStore.token()}",
+            subscriptionId = subscriptionId
+        )) {
+            is Either.Right -> {
+                Either.Right(mapper.myFilesToDomain(response.b))
+            }
+            is Either.Left -> Either.Left(response.a)
+        }
     }
 
     override suspend fun checkAvailableFiles(subscriptionId: Int): Either<Failure, CheckAvailableFiles> {
-        TODO("Not yet implemented")
+        return when (val response = service.checkAvailableFiles(
+            token = "${SettingRemote.BEARER} ${dataStore.token()}",
+            subscriptionId = subscriptionId
+        )) {
+            is Either.Right -> {
+                Either.Right(mapper.checkAvailableFilesToDomain(response.b))
+            }
+            is Either.Left -> Either.Left(response.a)
+        }
     }
 
     override suspend fun downloadFile(hash: String): Either<Failure, DownloadFile> {
-        TODO("Not yet implemented")
+        return when (val response = service.downloadFile(
+            token = "${SettingRemote.BEARER} ${dataStore.token()}",
+            hash = hash
+        )) {
+            is Either.Right -> {
+                Either.Right(mapper.downloadFileToDomain(response.b))
+            }
+            is Either.Left -> Either.Left(response.a)
+        }
     }
 }

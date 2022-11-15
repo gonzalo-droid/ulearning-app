@@ -17,4 +17,10 @@ sealed class DetailCourseEvent : UiEvent {
 
     object GetRole : DetailCourseEvent()
 
+    object GetMyFiles : DetailCourseEvent()
+
+    object GetCheckAvailableFiles : DetailCourseEvent()
+
+    object GetDownloadFile : DetailCourseEvent()
+
 }

@@ -20,6 +20,9 @@ object DetailCourseReducer {
             is DetailCourseState.ListTopic -> {
                 viewState.getTopics(topics = state.topics)
             }
+            is DetailCourseState.CheckFiles -> viewState.checkAvailableFiles(checkAvailableFiles = state.checkAvailableFiles)
+            is DetailCourseState.GetDownloadFile -> viewState.downloadFile(downloadFile = state.downloadFile)
+            is DetailCourseState.MyFiles -> viewState.myFiles(files = state.files)
         }
     }
 
