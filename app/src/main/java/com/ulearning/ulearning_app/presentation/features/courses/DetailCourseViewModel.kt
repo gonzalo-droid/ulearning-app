@@ -1,12 +1,13 @@
 package com.ulearning.ulearning_app.presentation.features.courses
 
 import com.ulearning.ulearning_app.core.functional.Failure
-import com.ulearning.ulearning_app.domain.model.Course
-import com.ulearning.ulearning_app.domain.model.Subscription
-import com.ulearning.ulearning_app.domain.model.Topic
+import com.ulearning.ulearning_app.domain.model.*
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.GetRoleUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.GetTokenUseCase
+import com.ulearning.ulearning_app.domain.useCase.courses.GetCheckAvailableFilesUseCase
+import com.ulearning.ulearning_app.domain.useCase.courses.GetDownloadFileUseCase
+import com.ulearning.ulearning_app.domain.useCase.courses.GetMyFilesUseCase
 import com.ulearning.ulearning_app.domain.useCase.topic.GetTopicUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import com.ulearning.ulearning_app.presentation.features.profile.ProfileEffect
@@ -19,13 +20,16 @@ class DetailCourseViewModel
     private val getTopicUseCase: GetTopicUseCase,
     private val getTokenUseCase: GetTokenUseCase,
     private val getRoleUseCase: GetRoleUseCase,
+    private val getMyFilesUseCase: GetMyFilesUseCase,
+    private val checkAvailableFilesUseCase: GetCheckAvailableFilesUseCase,
+    private val downloadFileUseCase: GetDownloadFileUseCase
 ) : BaseViewModel<DetailCourseEvent, DetailCourseState, DetailCourseEffect>() {
 
 
     lateinit var course: Course
     lateinit var subscription: Subscription
-    var urlWebView:String =""
-    var typeRole : String = ""
+    var urlWebView: String = ""
+    var typeRole: String = ""
 
     override fun createInitialState(): DetailCourseState {
         return DetailCourseState.Idle
@@ -39,15 +43,36 @@ class DetailCourseViewModel
             DetailCourseEvent.GoToConversation -> goToConversation()
             DetailCourseEvent.GetToken -> getToken()
             DetailCourseEvent.GetRole -> getRole()
+            DetailCourseEvent.GetCheckAvailableFiles -> getCheckAvailableFiles()
+            DetailCourseEvent.GetDownloadFile -> TODO()
+            DetailCourseEvent.GetMyFiles -> getMyFiles()
         }
     }
 
-    private fun getRole() = getRoleUseCase( BaseUseCase.None()) {
+    private fun getCheckAvailableFiles() {
+        if (subscription.id != 0) {
+            checkAvailableFilesUseCase(
+                GetCheckAvailableFilesUseCase.Params(subscriptionId = subscription.id!!)
+            ) {
+                it.either(::handleFailure, ::handleCheckFiles)
+            }
+        }
+    }
+
+    private fun getMyFiles() {
+        getMyFilesUseCase(
+            GetMyFilesUseCase.Params(subscriptionId = subscription.id!!)
+        ) {
+            it.either(::handleFailure, ::handleMyFiles)
+        }
+    }
+
+    private fun getRole() = getRoleUseCase(BaseUseCase.None()) {
         it.either(::handleFailure, ::handleRole)
     }
 
     private fun goToConversation() {
-        if(::course.isInitialized){
+        if (::course.isInitialized) {
             setEffect { DetailCourseEffect.GoToConversation(courseId = course.id) }
         }
     }
@@ -89,6 +114,14 @@ class DetailCourseViewModel
 
     private fun handleTopics(topics: List<Topic>) {
         setState { DetailCourseState.ListTopic(topics = topics) }
+    }
+
+    private fun handleCheckFiles(checkAvailableFiles: CheckAvailableFiles) {
+        setState { DetailCourseState.CheckFiles(checkAvailableFiles = checkAvailableFiles) }
+    }
+
+    private fun handleMyFiles(files: List<FileItem>) {
+        setState { DetailCourseState.MyFiles(files = files) }
     }
 
     companion object Events {

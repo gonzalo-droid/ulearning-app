@@ -15,7 +15,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.20"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_topic" />
 
     <TextView
@@ -30,17 +30,18 @@
         app:layout_constraintEnd_toStartOf="@+id/arrowImage"
         app:layout_constraintStart_toEndOf="@+id/topicImage"
         app:layout_constraintTop_toTopOf="@+id/topicImage"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="Curso del temario 3/5" />
 
     <ImageView
         android:id="@+id/arrowImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/blue"
         android:drawableTint="@color/blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/titleText"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_arrow_forward" />
 
     <com.google.android.material.divider.MaterialDivider

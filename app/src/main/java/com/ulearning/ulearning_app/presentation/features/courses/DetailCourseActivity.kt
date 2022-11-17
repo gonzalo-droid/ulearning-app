@@ -41,6 +41,15 @@ class DetailCourseActivity :
 
     private lateinit var topicAdapter: TopicAdapter
 
+    private lateinit var certificate: FileItem
+
+    private lateinit var record: FileItem
+
+    private lateinit var checkFiles: CheckAvailableFiles
+
+    var withCertificate: Boolean = false
+    var withRecord: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -77,9 +86,22 @@ class DetailCourseActivity :
         }
 
 
-        if(viewModel.typeRole == Config.ROLE_STUDENT && viewModel.subscription.isFinished!!){
+        if (viewModel.typeRole == Config.ROLE_STUDENT && viewModel.subscription.isFinished!!) {
             binding.messageBtn.visibility = View.GONE
         }
+
+        if (viewModel.typeRole == Config.ROLE_STUDENT) {
+            viewModel.setEvent(DetailCourseEvent.GetMyFiles)
+            viewModel.setEvent(DetailCourseEvent.GetCheckAvailableFiles)
+            withCertificate =
+                viewModel.subscription.course?.certificate!! || viewModel.subscription.purchasedCertificate!!
+            withRecord =
+                viewModel.subscription.course?.record!! || viewModel.subscription.purchasedRecord!!
+        }
+
+
+
+
         setDetailCourse(viewModel.course)
 
         setDetailSubscription(viewModel.subscription)
@@ -144,13 +166,38 @@ class DetailCourseActivity :
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
             }
         }
-
     }
 
     override fun goToConversation(courseId: Int) {
         startActivity(Intent(this, ConversationActivity::class.java).apply {
             putExtra(Config.COURSE_ID_PUT, viewModel.course.id)
         })
+    }
+
+    override fun myFiles(files: List<FileItem>) {
+
+        files.forEach {
+            if (it.type === "certificate") {
+                certificate = it
+            }
+            if (it.type === "record") {
+                record = it;
+            }
+        }
+
+    }
+
+    override fun checkAvailableFiles(checkAvailableFiles: CheckAvailableFiles) {
+        checkFiles = checkAvailableFiles
+
+        with(binding) {
+            downloadBtn.visibility = if (checkFiles.certificate!!) View.VISIBLE else View.GONE
+            downloadRecordBtn.visibility = if (checkFiles.record!!) View.VISIBLE else View.GONE
+        }
+    }
+
+    override fun downloadFile(downloadFile: DownloadFile) {
+
     }
 
     private fun setDetailCourse(data: Course) {

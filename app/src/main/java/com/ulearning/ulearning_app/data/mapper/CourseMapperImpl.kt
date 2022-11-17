@@ -33,7 +33,7 @@ class CourseMapperImpl : CourseMapper {
                     asynchronousHour = it.course?.asynchronousHour,
                     amount = 0,
                     benefits = null,
-                    certificate = null,
+                    certificate = it.course?.certificate,
                     code = null,
                     currency = null,
                     duration = null,
@@ -49,7 +49,7 @@ class CourseMapperImpl : CourseMapper {
                     presentationLink = null,
                     ratingAverage = null,
                     ratingCount = null,
-                    record = null,
+                    record = it.course?.record,
                     selfStudyHour = it.course?.selfStudyHour,
                     slug = null,
                     studentsCount = null,
@@ -67,7 +67,18 @@ class CourseMapperImpl : CourseMapper {
                     teachers = if (!it.group?.teachers.isNullOrEmpty()) listTeacherToDomain(it.group?.teachers) else arrayListOf(),
                 ),
                 groupId = it.groupId,
-                isFinished = it.isFinished
+                isFinished = it.isFinished,
+                amount = null,
+                hasCertificate = null,
+                hasDegree = null,
+                hasRecord = null,
+                id = null,
+                purchasedCertificate = it.purchasedCertificate,
+                purchasedRecord = it.purchasedRecord,
+                status = null,
+                timeSession = null,
+                type = null,
+                userId = null
             )
         }
     }

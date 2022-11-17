@@ -219,9 +219,9 @@
                     android:layout_marginTop="@dimen/dimen16"
                     android:elevation="@dimen/dimen1"
                     android:onClick="@{()->detailCourseViewModel.setEvent(detailCourseViewModel.Events.goToConversation)}"
-                    app:layout_constraintTop_toBottomOf="@+id/sectionTimeLayout"
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
-                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine">
+                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
+                    app:layout_constraintTop_toBottomOf="@+id/sectionTimeLayout">
 
 
                     <TextView
@@ -232,9 +232,10 @@
                         android:padding="@dimen/dimen10"
                         android:text="@string/message_title"
                         android:textAppearance="@style/readex_16_regular"
-                        android:textColor="@color/gray2"
-                        app:drawableStartCompat="@drawable/ic_message"
+                        android:textColor="@color/blue"
+                        android:drawableTint="@color/blue"
                         app:drawableEndCompat="@drawable/ic_arrow_forward"
+                        app:drawableStartCompat="@drawable/ic_message"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -267,38 +268,6 @@
                     tools:listitem="@layout/item_teacher" />
 
 
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/downloadBtn"
-                    style="?attr/materialCardViewElevatedStyle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen16"
-                    android:elevation="@dimen/dimen1"
-                    android:onClick="@{()->detailCourseViewModel.setEvent(detailCourseViewModel.Events.goToConversation)}"
-                    app:layout_constraintTop_toBottomOf="@+id/recycler"
-                    app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
-                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine">
-
-
-                    <TextView
-                        android:id="@+id/downloadText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="@dimen/dimen14"
-                        android:padding="@dimen/dimen10"
-                        android:text="@string/download_cert"
-                        android:textAppearance="@style/readex_16_regular"
-                        android:textColor="@color/gray2"
-                        app:drawableStartCompat="@drawable/ic_baseline_cloud_download"
-                        app:drawableEndCompat="@drawable/ic_arrow_forward"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                </com.google.android.material.card.MaterialCardView>
-
-
                 <TextView
                     android:id="@+id/topicTitle"
                     android:layout_width="wrap_content"
@@ -309,19 +278,80 @@
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
-                    app:layout_constraintTop_toBottomOf="@+id/downloadBtn" />
+                    app:layout_constraintTop_toBottomOf="@+id/recycler" />
 
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/downloadBtn"
+                    style="?attr/materialCardViewElevatedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen8"
+                    android:elevation="@dimen/dimen1"
+                    android:onClick="@{()->detailCourseViewModel.setEvent(detailCourseViewModel.Events.goToConversation)}"
+                    app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
+                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
+                    app:layout_constraintTop_toBottomOf="@+id/topicTitle">
+
+
+                    <TextView
+                        android:id="@+id/downloadText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/dimen14"
+                        android:drawableTint="@color/blue"
+                        android:padding="@dimen/dimen10"
+                        android:text="@string/download_cert"
+                        android:textAppearance="@style/readex_16_regular"
+                        android:textColor="@color/blue"
+                        app:drawableEndCompat="@drawable/ic_arrow_forward"
+                        app:drawableStartCompat="@drawable/ic_baseline_cloud_download"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/downloadRecordBtn"
+                    style="?attr/materialCardViewElevatedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen8"
+                    android:elevation="@dimen/dimen1"
+                    android:onClick="@{()->detailCourseViewModel.setEvent(detailCourseViewModel.Events.goToConversation)}"
+                    app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
+                    app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
+                    app:layout_constraintTop_toBottomOf="@+id/downloadBtn">
+
+
+                    <TextView
+                        android:id="@+id/downloadRecordText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/dimen14"
+                        android:drawableTint="@color/blue"
+                        android:padding="@dimen/dimen10"
+                        android:text="@string/download_record"
+                        android:textAppearance="@style/readex_16_regular"
+                        android:textColor="@color/blue"
+                        app:drawableEndCompat="@drawable/ic_arrow_forward"
+                        app:drawableStartCompat="@drawable/ic_baseline_cloud_download"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/topicBtn"
                     style="?attr/materialCardViewElevatedStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen8"
+                    android:layout_marginTop="@dimen/dimen16"
                     android:elevation="@dimen/dimen1"
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
-                    app:layout_constraintTop_toBottomOf="@+id/topicTitle">
+                    app:layout_constraintTop_toBottomOf="@+id/downloadRecordBtn">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/minimumBalanceBtn"
