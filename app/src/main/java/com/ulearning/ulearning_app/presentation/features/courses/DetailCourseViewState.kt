@@ -16,10 +16,18 @@ interface DetailCourseViewState {
 
     fun goToConversation(courseId: Int)
 
+    fun getRole(role: String)
+
     fun myFiles(files: List<FileItem>)
+
+    fun myCertificate(certificate: FileItem)
+
+    fun myRecord(record: FileItem)
 
     fun checkAvailableFiles(checkAvailableFiles: CheckAvailableFiles)
 
     fun downloadFile(downloadFile: DownloadFile)
+
+    fun certificatePDF(file: DownloadFile)
 
 }

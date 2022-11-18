@@ -3,8 +3,10 @@ package com.ulearning.ulearning_app.data.remote.service
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.remote.api.CourseApi
+import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.*
 import com.ulearning.ulearning_app.data.remote.network.NetworkHandler
+import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -54,6 +56,17 @@ class CourseServiceImpl
     ): Either<Failure, List<FileItemResponse>> {
         return networkHandler.callServiceBaseList {
             courseApi.myFiles(
+                token, subscriptionId
+            )
+        }
+    }
+
+    override suspend fun myCertificates(
+        token: String,
+        subscriptionId: Int
+    ): Either<Failure, FileItemResponse> {
+        return networkHandler.callServiceBase {
+            courseApi.myCertificates(
                 token, subscriptionId
             )
         }

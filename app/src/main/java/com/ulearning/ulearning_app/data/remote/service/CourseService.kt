@@ -2,7 +2,13 @@ package com.ulearning.ulearning_app.data.remote.service
 
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
+import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.*
+import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
+import retrofit2.Response
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Path
 
 interface CourseService {
 
@@ -28,6 +34,11 @@ interface CourseService {
         token: String,
         subscriptionId: Int,
     ): Either<Failure, List<FileItemResponse>>
+
+    suspend fun myCertificates(
+        token: String,
+        subscriptionId: Int,
+    ): Either<Failure, FileItemResponse>
 
     suspend fun checkAvailableFiles(
         token: String,

@@ -14,7 +14,13 @@ sealed class DetailCourseState : UiState {
 
     data class ListTopic constructor(val topics: List<Topic>) : DetailCourseState()
 
+    data class GetRole constructor(val role: String) : DetailCourseState()
+
     data class MyFiles constructor(val files: List<FileItem>) : DetailCourseState()
+
+    data class MyCertificate constructor(val certificate: FileItem) : DetailCourseState()
+
+    data class CertificatePDF constructor(val file: DownloadFile) : DetailCourseState()
 
     data class CheckFiles constructor(val checkAvailableFiles: CheckAvailableFiles) :
         DetailCourseState()

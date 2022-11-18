@@ -68,17 +68,17 @@ class CourseMapperImpl : CourseMapper {
                 ),
                 groupId = it.groupId,
                 isFinished = it.isFinished,
-                amount = null,
-                hasCertificate = null,
-                hasDegree = null,
-                hasRecord = null,
-                id = null,
+                amount = it.amount,
+                hasCertificate = it.hasCertificate,
+                hasDegree = it.hasDegree,
+                hasRecord = it.hasRecord,
+                id = it.id,
                 purchasedCertificate = it.purchasedCertificate,
                 purchasedRecord = it.purchasedRecord,
-                status = null,
-                timeSession = null,
-                type = null,
-                userId = null
+                status = it.status,
+                timeSession = it.timeSession,
+                type = it.status,
+                userId = it.userId
             )
         }
     }
@@ -161,6 +161,24 @@ class CourseMapperImpl : CourseMapper {
         }
     }
 
+    override suspend fun myFileToDomain(data: FileItemResponse): FileItem {
+        return data.let {
+            FileItem(
+                bucket = it.bucket,
+                code = it.code,
+                courseId = it.courseId,
+                fileInfo = it.fileInfoResponse?.let { info -> fileInfoToDomain(info) },
+                hash = it.hash,
+                id = it.id,
+                name = it.name,
+                number = it.number,
+                type = it.type,
+                userId = it.userId,
+                year = it.year
+            )
+        }
+    }
+
     private fun fileInfoToDomain(data: FileInfoResponse): FileInfo {
         return data.let {
             FileInfo(
@@ -189,7 +207,8 @@ class CourseMapperImpl : CourseMapper {
         return data.let {
             DownloadFile(
                 file = it.file,
-                filename = it.filename
+                filename = it.filename,
+                fileUrl = it.fileUrl
             )
         }
     }

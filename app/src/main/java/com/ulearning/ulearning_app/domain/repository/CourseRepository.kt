@@ -26,6 +26,10 @@ interface CourseRepository {
         subscriptionId: Int,
     ): Either<Failure, List<FileItem>>
 
+    suspend fun myCertificates(
+        subscriptionId: Int,
+    ): Either<Failure, FileItem>
+
     suspend fun checkAvailableFiles(
         subscriptionId: Int,
     ): Either<Failure, CheckAvailableFiles>

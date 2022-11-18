@@ -32,7 +32,7 @@ class DataStoreConfig @Inject constructor(
 
         dataStore.updateData { update ->
 
-            update.toBuilder().setUsername(role).build()
+            update.toBuilder().setRole(role).build()
         }
     }
 

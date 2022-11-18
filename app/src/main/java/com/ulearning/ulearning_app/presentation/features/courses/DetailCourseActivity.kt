@@ -1,13 +1,17 @@
 package com.ulearning.ulearning_app.presentation.features.courses
 
+import android.app.DownloadManager
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
+import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.*
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
@@ -18,9 +22,11 @@ import com.ulearning.ulearning_app.presentation.features.addConversation.AddConv
 import com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity
 import com.ulearning.ulearning_app.presentation.features.courses.adapter.DetailCourseTeacherAdapter
 import com.ulearning.ulearning_app.presentation.features.courses.adapter.TopicAdapter
-import com.ulearning.ulearning_app.presentation.features.message.MessageActivity
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
+import java.io.IOException
+import java.util.*
 
 @AndroidEntryPoint
 class DetailCourseActivity :
@@ -47,8 +53,6 @@ class DetailCourseActivity :
 
     private lateinit var checkFiles: CheckAvailableFiles
 
-    var withCertificate: Boolean = false
-    var withRecord: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,44 +76,6 @@ class DetailCourseActivity :
     }
 
     private fun observeUiStates() {
-        viewModel.setEvent(DetailCourseEvent.GetToken)
-
-        viewModel.setEvent(DetailCourseEvent.GetRole)
-
-
-        viewModel.let {
-            viewModel.course =
-                Config.COURSE_PUT putCourse this@DetailCourseActivity
-
-            viewModel.subscription =
-                Config.SUBSCRIPTION_PUT putSubscription this@DetailCourseActivity
-        }
-
-
-        if (viewModel.typeRole == Config.ROLE_STUDENT && viewModel.subscription.isFinished!!) {
-            binding.messageBtn.visibility = View.GONE
-        }
-
-        if (viewModel.typeRole == Config.ROLE_STUDENT) {
-            viewModel.setEvent(DetailCourseEvent.GetMyFiles)
-            viewModel.setEvent(DetailCourseEvent.GetCheckAvailableFiles)
-            withCertificate =
-                viewModel.subscription.course?.certificate!! || viewModel.subscription.purchasedCertificate!!
-            withRecord =
-                viewModel.subscription.course?.record!! || viewModel.subscription.purchasedRecord!!
-        }
-
-
-
-
-        setDetailCourse(viewModel.course)
-
-        setDetailSubscription(viewModel.subscription)
-
-        viewModel.setEvent(DetailCourseEvent.GetTopic)
-
-        binding.messageBtn.visibility =
-            if (viewModel.subscription.isFinished!!) View.GONE else View.VISIBLE
 
         viewModel.apply {
             lifecycleScopeCreate(activity = this@DetailCourseActivity, method = {
@@ -124,6 +90,27 @@ class DetailCourseActivity :
                 }
             })
         }
+
+        viewModel.let {
+            viewModel.course =
+                Config.COURSE_PUT putCourse this@DetailCourseActivity
+
+            viewModel.subscription =
+                Config.SUBSCRIPTION_PUT putSubscription this@DetailCourseActivity
+        }
+
+        viewModel.setEvent(DetailCourseEvent.GetToken)
+
+        viewModel.setEvent(DetailCourseEvent.GetRole)
+
+        viewModel.setEvent(DetailCourseEvent.GetTopic)
+
+        setDetailCourse(viewModel.course)
+
+        setDetailSubscription(viewModel.subscription)
+
+        binding.messageBtn.visibility =
+            if (viewModel.subscription.isFinished!!) View.GONE else View.VISIBLE
 
     }
 
@@ -174,6 +161,24 @@ class DetailCourseActivity :
         })
     }
 
+    override fun getRole(role: String) {
+        with(viewModel) {
+            typeRole = role
+            if (role == Config.ROLE_STUDENT && subscription.isFinished!!) {
+                binding.messageBtn.visibility = View.GONE
+            }
+
+            if (role == Config.ROLE_STUDENT) {
+                setEvent(DetailCourseEvent.GetMyFiles)
+                setEvent(DetailCourseEvent.GetCheckAvailableFiles)
+                withCertificate =
+                    subscription.course?.certificate!! || subscription.purchasedCertificate!!
+                withRecord =
+                    subscription.course?.record!! || subscription.purchasedRecord!!
+            }
+        }
+    }
+
     override fun myFiles(files: List<FileItem>) {
 
         files.forEach {
@@ -187,18 +192,52 @@ class DetailCourseActivity :
 
     }
 
+    override fun myCertificate(certificate: FileItem) {
+        viewModel.setEvent(DetailCourseEvent.GetDownloadFile)
+    }
+
+    override fun myRecord(record: FileItem) {
+        viewModel.setEvent(DetailCourseEvent.GetDownloadFile)
+    }
+
     override fun checkAvailableFiles(checkAvailableFiles: CheckAvailableFiles) {
         checkFiles = checkAvailableFiles
 
         with(binding) {
-            downloadBtn.visibility = if (checkFiles.certificate!!) View.VISIBLE else View.GONE
+            downloadBtn.visibility = if (checkFiles?.certificate!!) View.VISIBLE else View.GONE
             downloadRecordBtn.visibility = if (checkFiles.record!!) View.VISIBLE else View.GONE
         }
     }
 
     override fun downloadFile(downloadFile: DownloadFile) {
+        closeLoadingDialog()
+    }
+
+    override fun certificatePDF(file: DownloadFile) {
+        closeLoadingDialog()
+        try {
+            val uri = null
+                //Uri.parse(file.fileUrl);
+
+            val request = DownloadManager.Request(uri)
+                .setTitle("U-Learning Pdf")
+                .setDescription("Descargando...")
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI)
+                .setVisibleInDownloadsUi(true)
+                .setDestinationInExternalFilesDir(
+                    this,
+                    Environment.DIRECTORY_DOCUMENTS,
+                    file.filename + ".pdf"
+                );
+            val dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+            dm.enqueue(request)
+        } catch (e: Exception) {
+            messageFailure(Failure.DefaultError(R.string.error_download_pdf))
+        }
 
     }
+
 
     private fun setDetailCourse(data: Course) {
         with(binding) {

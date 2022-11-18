@@ -17,6 +17,8 @@ interface CourseMapper {
 
     suspend fun myFilesToDomain(data: List<FileItemResponse>): List<FileItem>
 
+    suspend fun myFileToDomain(data: FileItemResponse): FileItem
+
     suspend fun checkAvailableFilesToDomain(data: CheckAvailableFilesResponse): CheckAvailableFiles
 
     suspend fun downloadFileToDomain(data: DownloadFileResponse): DownloadFile

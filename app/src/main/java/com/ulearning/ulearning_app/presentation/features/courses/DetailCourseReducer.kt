@@ -23,6 +23,9 @@ object DetailCourseReducer {
             is DetailCourseState.CheckFiles -> viewState.checkAvailableFiles(checkAvailableFiles = state.checkAvailableFiles)
             is DetailCourseState.GetDownloadFile -> viewState.downloadFile(downloadFile = state.downloadFile)
             is DetailCourseState.MyFiles -> viewState.myFiles(files = state.files)
+            is DetailCourseState.CertificatePDF -> viewState.certificatePDF(file = state.file)
+            is DetailCourseState.MyCertificate -> viewState.myCertificate(certificate = state.certificate)
+            is DetailCourseState.GetRole -> viewState.getRole(role = state.role)
         }
     }
 

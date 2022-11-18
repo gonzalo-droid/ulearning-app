@@ -107,4 +107,6 @@
     <string name="download_cert">Descargar certificado</string>
     <string name="download_record">Descargar constancia</string>
 
+    <string name="error_download_pdf">Ocurrió un error en la descarga, por favor intentelo más tarde</string>
+
 </resources>

@@ -70,6 +70,18 @@ class CourseRepositoryImpl
         }
     }
 
+    override suspend fun myCertificates(subscriptionId: Int): Either<Failure, FileItem> {
+        return when (val response = service.myCertificates(
+            token = "${SettingRemote.BEARER} ${dataStore.token()}",
+            subscriptionId = subscriptionId
+        )) {
+            is Either.Right -> {
+                Either.Right(mapper.myFileToDomain(response.b))
+            }
+            is Either.Left -> Either.Left(response.a)
+        }
+    }
+
     override suspend fun checkAvailableFiles(subscriptionId: Int): Either<Failure, CheckAvailableFiles> {
         return when (val response = service.checkAvailableFiles(
             token = "${SettingRemote.BEARER} ${dataStore.token()}",

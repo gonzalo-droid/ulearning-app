@@ -13,6 +13,10 @@ sealed class DetailCourseEvent : UiEvent {
 
     object GoToConversation : DetailCourseEvent()
 
+    object GoToCertificate : DetailCourseEvent()
+
+    object GoToRecord : DetailCourseEvent()
+
     object GetToken : DetailCourseEvent()
 
     object GetRole : DetailCourseEvent()

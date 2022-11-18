@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.courses
 
+import android.util.Log
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.*
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
@@ -7,6 +8,7 @@ import com.ulearning.ulearning_app.domain.useCase.auth.GetRoleUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.GetTokenUseCase
 import com.ulearning.ulearning_app.domain.useCase.courses.GetCheckAvailableFilesUseCase
 import com.ulearning.ulearning_app.domain.useCase.courses.GetDownloadFileUseCase
+import com.ulearning.ulearning_app.domain.useCase.courses.GetMyCertificateUseCase
 import com.ulearning.ulearning_app.domain.useCase.courses.GetMyFilesUseCase
 import com.ulearning.ulearning_app.domain.useCase.topic.GetTopicUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
@@ -22,7 +24,8 @@ class DetailCourseViewModel
     private val getRoleUseCase: GetRoleUseCase,
     private val getMyFilesUseCase: GetMyFilesUseCase,
     private val checkAvailableFilesUseCase: GetCheckAvailableFilesUseCase,
-    private val downloadFileUseCase: GetDownloadFileUseCase
+    private val downloadFileUseCase: GetDownloadFileUseCase,
+    private val getMyCertificateUseCase: GetMyCertificateUseCase,
 ) : BaseViewModel<DetailCourseEvent, DetailCourseState, DetailCourseEffect>() {
 
 
@@ -30,6 +33,10 @@ class DetailCourseViewModel
     lateinit var subscription: Subscription
     var urlWebView: String = ""
     var typeRole: String = ""
+    var withCertificate: Boolean = false
+    var withRecord: Boolean = false
+
+    lateinit var certificate: FileItem
 
     override fun createInitialState(): DetailCourseState {
         return DetailCourseState.Idle
@@ -44,13 +51,55 @@ class DetailCourseViewModel
             DetailCourseEvent.GetToken -> getToken()
             DetailCourseEvent.GetRole -> getRole()
             DetailCourseEvent.GetCheckAvailableFiles -> getCheckAvailableFiles()
-            DetailCourseEvent.GetDownloadFile -> TODO()
+
+            DetailCourseEvent.GetDownloadFile -> downloadCertificatePDF()
             DetailCourseEvent.GetMyFiles -> getMyFiles()
+
+            DetailCourseEvent.GoToCertificate -> goCertificate()
+            DetailCourseEvent.GoToRecord -> goRecord()
+        }
+    }
+
+    private fun goRecord() {
+
+    }
+
+    private fun goCertificate() {
+        if (withCertificate) {
+            generateCertificate()
+            return
+        }
+        generateCertificatePayment()
+    }
+
+    private fun generateCertificatePayment() {
+
+    }
+
+    private fun generateCertificate() {
+        setState { DetailCourseState.Loading }
+        if (::subscription.isInitialized) {
+            getMyCertificateUseCase(
+                GetMyCertificateUseCase.Params(subscriptionId = subscription.id!!)
+            ) {
+                it.either(::handleFailure, ::handleMyCertificate)
+            }
+        }
+
+    }
+
+    private fun downloadCertificatePDF() {
+        if (::certificate.isInitialized) {
+            downloadFileUseCase(
+                GetDownloadFileUseCase.Params(hash = certificate.hash!!)
+            ) {
+                it.either(::handleFailure, ::handleCertificatePDF)
+            }
         }
     }
 
     private fun getCheckAvailableFiles() {
-        if (subscription.id != 0) {
+        if (::subscription.isInitialized) {
             checkAvailableFilesUseCase(
                 GetCheckAvailableFilesUseCase.Params(subscriptionId = subscription.id!!)
             ) {
@@ -60,10 +109,12 @@ class DetailCourseViewModel
     }
 
     private fun getMyFiles() {
-        getMyFilesUseCase(
-            GetMyFilesUseCase.Params(subscriptionId = subscription.id!!)
-        ) {
-            it.either(::handleFailure, ::handleMyFiles)
+        if (::subscription.isInitialized) {
+            getMyFilesUseCase(
+                GetMyFilesUseCase.Params(subscriptionId = subscription.id!!)
+            ) {
+                it.either(::handleFailure, ::handleMyFiles)
+            }
         }
     }
 
@@ -97,7 +148,7 @@ class DetailCourseViewModel
     }
 
     private fun handleRole(role: String) {
-        typeRole = role
+        setState { DetailCourseState.GetRole(role = role) }
     }
 
     private fun handleToken(url: String) {
@@ -124,7 +175,27 @@ class DetailCourseViewModel
         setState { DetailCourseState.MyFiles(files = files) }
     }
 
+    private fun handleMyCertificate(certificate: FileItem) {
+
+        Log.d("generateCertificate :", "handleMyCertificate");
+
+        this.certificate = certificate
+        //this.downloadCertificatePDF();
+
+        setState { DetailCourseState.MyCertificate(certificate = certificate) }
+    }
+
+    private fun handleCertificatePDF(file: DownloadFile) {
+
+        Log.d("generateCertificate :", "handleCertificatePDF");
+
+        setState { DetailCourseState.CertificatePDF(file = file) }
+    }
+
+
     companion object Events {
         val goToConversation = DetailCourseEvent.GoToConversation
+        val goToCertificate = DetailCourseEvent.GoToCertificate
+        val goToRecord = DetailCourseEvent.GoToRecord
     }
 }
