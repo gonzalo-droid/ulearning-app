@@ -76,6 +76,13 @@ class DetailCourseActivity :
     }
 
     private fun observeUiStates() {
+        viewModel.let {
+            viewModel.course =
+                Config.COURSE_PUT putCourse this@DetailCourseActivity
+
+            viewModel.subscription =
+                Config.SUBSCRIPTION_PUT putSubscription this@DetailCourseActivity
+        }
 
         viewModel.apply {
             lifecycleScopeCreate(activity = this@DetailCourseActivity, method = {
@@ -91,14 +98,6 @@ class DetailCourseActivity :
             })
         }
 
-        viewModel.let {
-            viewModel.course =
-                Config.COURSE_PUT putCourse this@DetailCourseActivity
-
-            viewModel.subscription =
-                Config.SUBSCRIPTION_PUT putSubscription this@DetailCourseActivity
-        }
-
         viewModel.setEvent(DetailCourseEvent.GetToken)
 
         viewModel.setEvent(DetailCourseEvent.GetRole)
@@ -109,16 +108,10 @@ class DetailCourseActivity :
 
         setDetailSubscription(viewModel.subscription)
 
-        binding.messageBtn.visibility =
-            if (viewModel.subscription.isFinished!!) View.GONE else View.VISIBLE
-
     }
 
     private fun setDetailSubscription(subscription: Subscription) {
-        with(binding) {
-
-            goTeacher(subscription.group?.teachers ?: arrayListOf())
-        }
+        goTeacher(subscription.group?.teachers ?: arrayListOf())
     }
 
     override fun getTopics(topics: List<Topic>) {
@@ -169,12 +162,17 @@ class DetailCourseActivity :
             }
 
             if (role == Config.ROLE_STUDENT) {
-                setEvent(DetailCourseEvent.GetMyFiles)
                 setEvent(DetailCourseEvent.GetCheckAvailableFiles)
+                setEvent(DetailCourseEvent.GetMyFiles)
                 withCertificate =
                     subscription.course?.certificate!! || subscription.purchasedCertificate!!
                 withRecord =
                     subscription.course?.record!! || subscription.purchasedRecord!!
+
+                binding.downloadCertText.text =
+                    if (!withCertificate) getString(R.string.buy_cert) else getString(R.string.download_cert)
+                binding.downloadRecordText.text =
+                    if (!withRecord) getString(R.string.buy_record) else getString(R.string.download_record)
             }
         }
     }
@@ -200,11 +198,21 @@ class DetailCourseActivity :
         viewModel.setEvent(DetailCourseEvent.GetDownloadFile)
     }
 
+    override fun generateCertificatePayment(url: String) {
+        with(viewModel) {
+            if (urlWebView.isNotEmpty()) {
+                val topicUrl = "/courses/${subscription.courseId}"
+                val url = "${viewModel.urlWebView}?return=${topicUrl}"
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            }
+        }
+    }
+
     override fun checkAvailableFiles(checkAvailableFiles: CheckAvailableFiles) {
         checkFiles = checkAvailableFiles
 
         with(binding) {
-            downloadBtn.visibility = if (checkFiles?.certificate!!) View.VISIBLE else View.GONE
+            downloadCertBtn.visibility = if (checkFiles.certificate!!) View.VISIBLE else View.GONE
             downloadRecordBtn.visibility = if (checkFiles.record!!) View.VISIBLE else View.GONE
         }
     }
@@ -216,8 +224,7 @@ class DetailCourseActivity :
     override fun certificatePDF(file: DownloadFile) {
         closeLoadingDialog()
         try {
-            val uri = null
-                //Uri.parse(file.fileUrl);
+            val uri = Uri.parse(file.fileUrl);
 
             val request = DownloadManager.Request(uri)
                 .setTitle("U-Learning Pdf")
@@ -237,7 +244,6 @@ class DetailCourseActivity :
         }
 
     }
-
 
     private fun setDetailCourse(data: Course) {
         with(binding) {

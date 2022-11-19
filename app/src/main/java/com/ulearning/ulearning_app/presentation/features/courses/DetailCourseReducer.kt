@@ -26,6 +26,12 @@ object DetailCourseReducer {
             is DetailCourseState.CertificatePDF -> viewState.certificatePDF(file = state.file)
             is DetailCourseState.MyCertificate -> viewState.myCertificate(certificate = state.certificate)
             is DetailCourseState.GetRole -> viewState.getRole(role = state.role)
+            is DetailCourseState.GenerateCertificatePayment -> viewState.generateCertificatePayment(
+                url = state.url
+            )
+            is DetailCourseState.GenerateRecordPayment -> viewState.generateCertificatePayment(
+                url = state.url
+            )
         }
     }
 

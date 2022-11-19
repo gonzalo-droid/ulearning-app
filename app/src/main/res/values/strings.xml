@@ -104,7 +104,11 @@
 
     <string name="course_percentage_value">%1$s </string>
     <string name="hour_learn_title">Horas de aprendizaje</string>
+
     <string name="download_cert">Descargar certificado</string>
+    <string name="buy_cert">Comprar certificado</string>
+
+    <string name="buy_record">Comprar certificado</string>
     <string name="download_record">Descargar constancia</string>
 
     <string name="error_download_pdf">Ocurrió un error en la descarga, por favor intentelo más tarde</string>

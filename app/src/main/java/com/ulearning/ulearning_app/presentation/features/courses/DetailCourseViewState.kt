@@ -24,6 +24,8 @@ interface DetailCourseViewState {
 
     fun myRecord(record: FileItem)
 
+    fun generateCertificatePayment(url: String)
+
     fun checkAvailableFiles(checkAvailableFiles: CheckAvailableFiles)
 
     fun downloadFile(downloadFile: DownloadFile)

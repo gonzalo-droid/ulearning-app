@@ -12,7 +12,6 @@ import com.ulearning.ulearning_app.domain.useCase.courses.GetMyCertificateUseCas
 import com.ulearning.ulearning_app.domain.useCase.courses.GetMyFilesUseCase
 import com.ulearning.ulearning_app.domain.useCase.topic.GetTopicUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
-import com.ulearning.ulearning_app.presentation.features.profile.ProfileEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -61,6 +60,14 @@ class DetailCourseViewModel
     }
 
     private fun goRecord() {
+        if (withRecord) {
+            generateRecord()
+            return
+        }
+        generateCertificatePayment()
+    }
+
+    private fun generateRecord() {
 
     }
 
@@ -73,6 +80,9 @@ class DetailCourseViewModel
     }
 
     private fun generateCertificatePayment() {
+        if (::subscription.isInitialized) {
+            setState { DetailCourseState.GenerateCertificatePayment(url = urlWebView) }
+        }
 
     }
 
@@ -131,12 +141,13 @@ class DetailCourseViewModel
     private fun getTopic() {
         setState { DetailCourseState.Loading }
 
-        getTopicUseCase(
-            GetTopicUseCase.Params(courseId = course.id)
-        ) {
-            it.either(::handleFailure, ::handleTopics)
+        if (::course.isInitialized) {
+            getTopicUseCase(
+                GetTopicUseCase.Params(courseId = course.id)
+            ) {
+                it.either(::handleFailure, ::handleTopics)
+            }
         }
-
     }
 
     private fun getToken() {

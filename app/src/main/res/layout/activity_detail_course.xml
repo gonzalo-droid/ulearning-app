@@ -281,20 +281,22 @@
                     app:layout_constraintTop_toBottomOf="@+id/recycler" />
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/downloadBtn"
+                    android:id="@+id/downloadCertBtn"
                     style="?attr/materialCardViewElevatedStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen8"
                     android:elevation="@dimen/dimen1"
                     android:onClick="@{()->detailCourseViewModel.setEvent(detailCourseViewModel.Events.goToCertificate)}"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
-                    app:layout_constraintTop_toBottomOf="@+id/topicTitle">
+                    app:layout_constraintTop_toBottomOf="@+id/topicTitle"
+                    tools:visibility="visible">
 
 
                     <TextView
-                        android:id="@+id/downloadText"
+                        android:id="@+id/downloadCertText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawablePadding="@dimen/dimen14"
@@ -319,9 +321,11 @@
                     android:layout_marginTop="@dimen/dimen8"
                     android:elevation="@dimen/dimen1"
                     android:onClick="@{()->detailCourseViewModel.setEvent(detailCourseViewModel.Events.goToRecord)}"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
-                    app:layout_constraintTop_toBottomOf="@+id/downloadBtn">
+                    app:layout_constraintTop_toBottomOf="@+id/downloadCertBtn"
+                    tools:visibility="visible">
 
 
                     <TextView

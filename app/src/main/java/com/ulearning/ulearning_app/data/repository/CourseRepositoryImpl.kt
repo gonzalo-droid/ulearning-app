@@ -1,5 +1,10 @@
 package com.ulearning.ulearning_app.data.repository
 
+import android.util.Log
+import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
+import com.ulearning.ulearning_app.core.extensions.encode
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.dataStore.config.DataStoreConfig
@@ -66,7 +71,13 @@ class CourseRepositoryImpl
             is Either.Right -> {
                 Either.Right(mapper.myFilesToDomain(response.b))
             }
-            is Either.Left -> Either.Left(response.a)
+            is Either.Left -> {
+/*                val json = response.a.toString()
+                Log.d("json list", json.encode())
+                val convertedObject: JsonObject = Gson().fromJson(json, JsonObject::class.java)
+                */
+                Either.Left(response.a)
+            }
         }
     }
 
