@@ -72,6 +72,17 @@ class CourseServiceImpl
         }
     }
 
+    override suspend fun myRecords(
+        token: String,
+        subscriptionId: Int
+    ): Either<Failure, FileItemResponse> {
+        return networkHandler.callServiceBase {
+            courseApi.myRecords(
+                token, subscriptionId
+            )
+        }
+    }
+
     override suspend fun checkAvailableFiles(
         token: String,
         subscriptionId: Int

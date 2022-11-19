@@ -21,17 +21,19 @@ object DetailCourseReducer {
                 viewState.getTopics(topics = state.topics)
             }
             is DetailCourseState.CheckFiles -> viewState.checkAvailableFiles(checkAvailableFiles = state.checkAvailableFiles)
-            is DetailCourseState.GetDownloadFile -> viewState.downloadFile(downloadFile = state.downloadFile)
             is DetailCourseState.MyFiles -> viewState.myFiles(files = state.files)
-            is DetailCourseState.CertificatePDF -> viewState.certificatePDF(file = state.file)
-            is DetailCourseState.MyCertificate -> viewState.myCertificate(certificate = state.certificate)
+            is DetailCourseState.DownloadFilePDF -> viewState.downloadFilePDF(file = state.file)
             is DetailCourseState.GetRole -> viewState.getRole(role = state.role)
+
             is DetailCourseState.GenerateCertificatePayment -> viewState.generateCertificatePayment(
                 url = state.url
             )
             is DetailCourseState.GenerateRecordPayment -> viewState.generateCertificatePayment(
                 url = state.url
             )
+
+            is DetailCourseState.MyCertificate -> viewState.myCertificate(certificate = state.certificate)
+            is DetailCourseState.MyRecord -> viewState.myRecord(record = state.record)
         }
     }
 

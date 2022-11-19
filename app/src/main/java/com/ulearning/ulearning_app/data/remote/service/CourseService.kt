@@ -40,6 +40,11 @@ interface CourseService {
         subscriptionId: Int,
     ): Either<Failure, FileItemResponse>
 
+    suspend fun myRecords(
+        token: String,
+        subscriptionId: Int,
+    ): Either<Failure, FileItemResponse>
+
     suspend fun checkAvailableFiles(
         token: String,
         subscriptionId: Int,

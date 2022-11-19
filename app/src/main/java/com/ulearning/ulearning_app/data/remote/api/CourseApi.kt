@@ -46,6 +46,12 @@ interface CourseApi {
         @Path("subscription_id") subscriptionId: Int,
     ): Response<BaseResponse<FileItemResponse>>
 
+    @POST("my-records/{subscription_id}")
+    suspend fun myRecords(
+        @Header(SettingRemote.AUTHORIZATION) token: String,
+        @Path("subscription_id") subscriptionId: Int,
+    ): Response<BaseResponse<FileItemResponse>>
+
     @GET("download-file/{hash}/hash")
     suspend fun downloadFile(
         @Header(SettingRemote.AUTHORIZATION) token: String,

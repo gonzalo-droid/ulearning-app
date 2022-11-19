@@ -28,8 +28,6 @@ interface DetailCourseViewState {
 
     fun checkAvailableFiles(checkAvailableFiles: CheckAvailableFiles)
 
-    fun downloadFile(downloadFile: DownloadFile)
-
-    fun certificatePDF(file: DownloadFile)
+    fun downloadFilePDF(file: DownloadFile)
 
 }

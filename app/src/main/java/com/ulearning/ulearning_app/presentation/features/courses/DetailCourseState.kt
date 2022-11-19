@@ -24,11 +24,10 @@ sealed class DetailCourseState : UiState {
 
     data class MyCertificate constructor(val certificate: FileItem) : DetailCourseState()
 
-    data class CertificatePDF constructor(val file: DownloadFile) : DetailCourseState()
+    data class MyRecord constructor(val record: FileItem) : DetailCourseState()
+
+    data class DownloadFilePDF constructor(val file: DownloadFile) : DetailCourseState()
 
     data class CheckFiles constructor(val checkAvailableFiles: CheckAvailableFiles) :
         DetailCourseState()
-
-    data class GetDownloadFile constructor(val downloadFile: DownloadFile) : DetailCourseState()
-
 }

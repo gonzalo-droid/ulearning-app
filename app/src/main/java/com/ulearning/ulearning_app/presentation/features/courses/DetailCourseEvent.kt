@@ -25,6 +25,8 @@ sealed class DetailCourseEvent : UiEvent {
 
     object GetCheckAvailableFiles : DetailCourseEvent()
 
-    object GetDownloadFile : DetailCourseEvent()
+    object GetDownloadCertificate : DetailCourseEvent()
+
+    object GetDownloadRecord : DetailCourseEvent()
 
 }

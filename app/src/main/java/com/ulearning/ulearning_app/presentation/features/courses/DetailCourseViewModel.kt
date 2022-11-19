@@ -6,10 +6,7 @@ import com.ulearning.ulearning_app.domain.model.*
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.GetRoleUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.GetTokenUseCase
-import com.ulearning.ulearning_app.domain.useCase.courses.GetCheckAvailableFilesUseCase
-import com.ulearning.ulearning_app.domain.useCase.courses.GetDownloadFileUseCase
-import com.ulearning.ulearning_app.domain.useCase.courses.GetMyCertificateUseCase
-import com.ulearning.ulearning_app.domain.useCase.courses.GetMyFilesUseCase
+import com.ulearning.ulearning_app.domain.useCase.courses.*
 import com.ulearning.ulearning_app.domain.useCase.topic.GetTopicUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,6 +22,7 @@ class DetailCourseViewModel
     private val checkAvailableFilesUseCase: GetCheckAvailableFilesUseCase,
     private val downloadFileUseCase: GetDownloadFileUseCase,
     private val getMyCertificateUseCase: GetMyCertificateUseCase,
+    private val getMyRecordUseCase: GetMyRecordUseCase,
 ) : BaseViewModel<DetailCourseEvent, DetailCourseState, DetailCourseEffect>() {
 
 
@@ -36,6 +34,7 @@ class DetailCourseViewModel
     var withRecord: Boolean = false
 
     lateinit var certificate: FileItem
+    lateinit var record: FileItem
 
     override fun createInitialState(): DetailCourseState {
         return DetailCourseState.Idle
@@ -51,7 +50,9 @@ class DetailCourseViewModel
             DetailCourseEvent.GetRole -> getRole()
             DetailCourseEvent.GetCheckAvailableFiles -> getCheckAvailableFiles()
 
-            DetailCourseEvent.GetDownloadFile -> downloadCertificatePDF()
+            DetailCourseEvent.GetDownloadCertificate -> downloadCertificatePDF()
+            DetailCourseEvent.GetDownloadRecord -> downloadRecordPDF()
+
             DetailCourseEvent.GetMyFiles -> getMyFiles()
 
             DetailCourseEvent.GoToCertificate -> goCertificate()
@@ -68,7 +69,14 @@ class DetailCourseViewModel
     }
 
     private fun generateRecord() {
-
+        setState { DetailCourseState.Loading }
+        if (::subscription.isInitialized) {
+            getMyRecordUseCase(
+                GetMyRecordUseCase.Params(subscriptionId = subscription.id!!)
+            ) {
+                it.either(::handleFailure, ::handleMyRecord)
+            }
+        }
     }
 
     private fun goCertificate() {
@@ -83,7 +91,6 @@ class DetailCourseViewModel
         if (::subscription.isInitialized) {
             setState { DetailCourseState.GenerateCertificatePayment(url = urlWebView) }
         }
-
     }
 
     private fun generateCertificate() {
@@ -95,7 +102,6 @@ class DetailCourseViewModel
                 it.either(::handleFailure, ::handleMyCertificate)
             }
         }
-
     }
 
     private fun downloadCertificatePDF() {
@@ -103,7 +109,17 @@ class DetailCourseViewModel
             downloadFileUseCase(
                 GetDownloadFileUseCase.Params(hash = certificate.hash!!)
             ) {
-                it.either(::handleFailure, ::handleCertificatePDF)
+                it.either(::handleFailure, ::handleFilePDF)
+            }
+        }
+    }
+
+    private fun downloadRecordPDF() {
+        if (::record.isInitialized) {
+            downloadFileUseCase(
+                GetDownloadFileUseCase.Params(hash = record.hash!!)
+            ) {
+                it.either(::handleFailure, ::handleFilePDF)
             }
         }
     }
@@ -188,19 +204,21 @@ class DetailCourseViewModel
 
     private fun handleMyCertificate(certificate: FileItem) {
 
-        Log.d("generateCertificate :", "handleMyCertificate");
-
         this.certificate = certificate
-        //this.downloadCertificatePDF();
 
         setState { DetailCourseState.MyCertificate(certificate = certificate) }
     }
 
-    private fun handleCertificatePDF(file: DownloadFile) {
+    private fun handleMyRecord(record: FileItem) {
 
-        Log.d("generateCertificate :", "handleCertificatePDF");
+        this.record = record
 
-        setState { DetailCourseState.CertificatePDF(file = file) }
+        setState { DetailCourseState.MyRecord(record = record) }
+    }
+
+    private fun handleFilePDF(file: DownloadFile) {
+
+        setState { DetailCourseState.DownloadFilePDF(file = file) }
     }
 
 

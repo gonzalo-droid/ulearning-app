@@ -369,6 +369,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dimen8"
                             android:orientation="vertical"
+                            android:nestedScrollingEnabled="false"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

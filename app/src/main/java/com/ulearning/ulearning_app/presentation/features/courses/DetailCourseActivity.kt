@@ -191,11 +191,11 @@ class DetailCourseActivity :
     }
 
     override fun myCertificate(certificate: FileItem) {
-        viewModel.setEvent(DetailCourseEvent.GetDownloadFile)
+        viewModel.setEvent(DetailCourseEvent.GetDownloadCertificate)
     }
 
     override fun myRecord(record: FileItem) {
-        viewModel.setEvent(DetailCourseEvent.GetDownloadFile)
+        viewModel.setEvent(DetailCourseEvent.GetDownloadRecord)
     }
 
     override fun generateCertificatePayment(url: String) {
@@ -217,11 +217,7 @@ class DetailCourseActivity :
         }
     }
 
-    override fun downloadFile(downloadFile: DownloadFile) {
-        closeLoadingDialog()
-    }
-
-    override fun certificatePDF(file: DownloadFile) {
+    override fun downloadFilePDF(file: DownloadFile) {
         closeLoadingDialog()
         try {
             val uri = Uri.parse(file.fileUrl);

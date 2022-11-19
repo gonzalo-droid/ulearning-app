@@ -1,10 +1,5 @@
 package com.ulearning.ulearning_app.data.repository
 
-import android.util.Log
-import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
-import com.ulearning.ulearning_app.core.extensions.encode
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.dataStore.config.DataStoreConfig
@@ -83,6 +78,18 @@ class CourseRepositoryImpl
 
     override suspend fun myCertificates(subscriptionId: Int): Either<Failure, FileItem> {
         return when (val response = service.myCertificates(
+            token = "${SettingRemote.BEARER} ${dataStore.token()}",
+            subscriptionId = subscriptionId
+        )) {
+            is Either.Right -> {
+                Either.Right(mapper.myFileToDomain(response.b))
+            }
+            is Either.Left -> Either.Left(response.a)
+        }
+    }
+
+    override suspend fun myRecords(subscriptionId: Int): Either<Failure, FileItem> {
+        return when (val response = service.myRecords(
             token = "${SettingRemote.BEARER} ${dataStore.token()}",
             subscriptionId = subscriptionId
         )) {
