@@ -21,7 +21,11 @@
         android:id="@+id/navigation_profile"
         android:name="com.ulearning.ulearning_app.presentation.features.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_scanQrActivity"
+            app:destination="@id/scanQrActivity" />
+    </fragment>
     <activity
         android:id="@+id/detailCourseActivity"
         android:name="com.ulearning.ulearning_app.presentation.features.courses.DetailCourseActivity"
@@ -56,4 +60,9 @@
         android:id="@+id/addConversationActivity"
         android:name="com.ulearning.ulearning_app.presentation.features.addConversation.AddConversationActivity"
         android:label="AddConversationActivity" />
+    <activity
+        android:id="@+id/scanQrActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.scanQr.ScanQrActivity"
+        android:label="activity_scan_qr"
+        tools:layout="@layout/activity_scan_qr" />
 </navigation>

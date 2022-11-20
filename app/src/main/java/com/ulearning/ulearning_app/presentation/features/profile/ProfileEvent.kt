@@ -11,4 +11,6 @@ sealed class ProfileEvent : UiEvent {
 
     object PaymentClick : ProfileEvent()
 
+    object ScanQRClick : ProfileEvent()
+
 }

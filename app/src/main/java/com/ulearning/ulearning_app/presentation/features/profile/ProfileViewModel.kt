@@ -27,7 +27,12 @@ class ProfileViewModel
             ProfileEvent.DataProfileClicked -> getProfile()
             ProfileEvent.LogoutClick -> logout()
             ProfileEvent.PaymentClick -> goPayment()
+            ProfileEvent.ScanQRClick -> scanQr()
         }
+    }
+
+    private fun scanQr() {
+        setState { ProfileState.ScanQr }
     }
 
     private fun goPayment() {
@@ -80,6 +85,7 @@ class ProfileViewModel
         val dataProfileClicked = ProfileEvent.DataProfileClicked
         val logoutClick = ProfileEvent.LogoutClick
         val paymentClick = ProfileEvent.PaymentClick
+        val scanQRClick = ProfileEvent.ScanQRClick
 
 
     }

@@ -1,20 +1,15 @@
-package com.ulearning.ulearning_app.presentation.features.profile
+package com.ulearning.ulearning_app.presentation.features.validateCert
 
 import com.ulearning.ulearning_app.core.functional.Failure
+import com.ulearning.ulearning_app.domain.model.FileItem
 import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.domain.model.Subscription
 
-interface ProfileViewState {
+interface ValidateCertViewState {
 
     fun messageFailure(failure: Failure)
 
     fun loading()
 
-    fun getProfile(data: Profile)
-
-    fun goToWebView(url: String)
-
-    fun logout()
-
-    fun scanQr()
+    fun validateCert(file: FileItem)
 }

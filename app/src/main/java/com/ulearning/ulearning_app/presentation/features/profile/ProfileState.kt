@@ -10,6 +10,8 @@ sealed class ProfileState : UiState {
 
     object Loading : ProfileState()
 
+    object ScanQr : ProfileState()
+
     data class DatProfile constructor(val data: Profile) : ProfileState()
 
 }

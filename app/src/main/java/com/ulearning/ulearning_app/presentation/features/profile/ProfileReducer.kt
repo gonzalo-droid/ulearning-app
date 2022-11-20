@@ -18,6 +18,7 @@ object ProfileReducer {
             is ProfileState.DatProfile -> {
                 viewState.getProfile(data = state.data)
             }
+            is ProfileState.ScanQr -> viewState.scanQr()
         }
     }
 

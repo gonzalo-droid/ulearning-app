@@ -112,5 +112,15 @@
     <string name="download_record">Descargar constancia</string>
 
     <string name="error_download_pdf">Ocurrió un error en la descarga, por favor intentelo más tarde</string>
+    <string name="number_certificate">N° de certificado *</string>
+    <string name="validate">Validar</string>
+    <string name="code_cert">Código de verificación para descarga</string>
+    <string name="item_number_cert">N° de certificado digital: %1$s</string>
+    <string name="item_name">Participante: %1$s</string>
+    <string name="item_hour">Horas de aprendizaje: %1$s</string>
+    <string name="item_score">Puntaje: %1$s</string>
+    <string name="subTile_card_course">Completaste el curso de %1$s</string>
+    <string name="title_download_cert">Descargue su certificado</string>
+    <string name="number_cert_error">N° de certificado es obligatorio</string>
 
 </resources>

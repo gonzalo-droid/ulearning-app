@@ -55,6 +55,7 @@ object Config {
 
     const val SUBSCRIPTION_PUT = "subscription"
     const val COURSE_ID_PUT = "courseId"
+    const val PARAM_NAME_PUT = "paramName"
     const val LIST_USER_IDS_PUT = "listUserIds"
     const val MESSAGE_UUID_PUT = "uuidMessage"
     const val CONVERSATION_PUT = "conversation"

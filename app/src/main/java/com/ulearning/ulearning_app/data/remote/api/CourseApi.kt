@@ -1,6 +1,7 @@
 package com.ulearning.ulearning_app.data.remote.api
 
 import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
+import com.ulearning.ulearning_app.data.remote.entities.request.ShowGuestFileRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.*
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
 import retrofit2.Response
@@ -44,6 +45,12 @@ interface CourseApi {
     suspend fun myCertificates(
         @Header(SettingRemote.AUTHORIZATION) token: String,
         @Path("subscription_id") subscriptionId: Int,
+    ): Response<BaseResponse<FileItemResponse>>
+
+    @POST("show-guest-file")
+    suspend fun showGuestFile(
+        @Header(SettingRemote.AUTHORIZATION) token: String,
+        @Body request: ShowGuestFileRequest,
     ): Response<BaseResponse<FileItemResponse>>
 
     @POST("my-records/{subscription_id}")

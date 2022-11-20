@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ulearning.ulearning_app">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -13,6 +21,20 @@
         android:roundIcon="@mipmap/logo_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ulearning.App">
+        <activity
+            android:name=".ValidateCertActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ScanQrActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name="com.ulearning.ulearning_app.presentation.features.splash.SplashActivity"
             android:exported="true"
@@ -52,6 +74,15 @@
             android:name="com.ulearning.ulearning_app.presentation.features.search.SearchActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ulearning.ulearning_app.presentation.features.scanQr.ScanQrActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.ulearning.ulearning_app.presentation.features.validateCert.ValidateCertActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <!--
  Set custom default icon. This is used when no icon is set for incoming notification messages.
      See README(https://goo.gl/l4GJaQ) for more.
@@ -69,6 +100,9 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/notification_channel_id" />
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="barcode" />
 
         <service
             android:name="com.ulearning.ulearning_app.presentation.fcm.FCMService"

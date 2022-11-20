@@ -4,6 +4,7 @@ import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.remote.api.CourseApi
 import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
+import com.ulearning.ulearning_app.data.remote.entities.request.ShowGuestFileRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.*
 import com.ulearning.ulearning_app.data.remote.network.NetworkHandler
 import retrofit2.Response
@@ -79,6 +80,17 @@ class CourseServiceImpl
         return networkHandler.callServiceBase {
             courseApi.myRecords(
                 token, subscriptionId
+            )
+        }
+    }
+
+    override suspend fun showGuestFile(
+        token: String,
+        request: ShowGuestFileRequest
+    ): Either<Failure, FileItemResponse> {
+        return networkHandler.callServiceBase {
+            courseApi.showGuestFile(
+                token, request
             )
         }
     }

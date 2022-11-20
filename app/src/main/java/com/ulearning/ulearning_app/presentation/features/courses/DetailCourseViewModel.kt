@@ -139,7 +139,7 @@ class DetailCourseViewModel
             getMyFilesUseCase(
                 GetMyFilesUseCase.Params(subscriptionId = subscription.id!!)
             ) {
-                it.either(::handleFailure, ::handleMyFiles)
+                it.either(::handleFailureNoShow, ::handleMyFiles)
             }
         }
     }
@@ -189,6 +189,10 @@ class DetailCourseViewModel
     private fun handleFailure(failure: Failure) {
         setEffect { DetailCourseEffect.ShowMessageFailure(failure = failure) }
     }
+
+    private fun handleFailureNoShow(failure: Failure) {}
+
+
 
     private fun handleTopics(topics: List<Topic>) {
         setState { DetailCourseState.ListTopic(topics = topics) }

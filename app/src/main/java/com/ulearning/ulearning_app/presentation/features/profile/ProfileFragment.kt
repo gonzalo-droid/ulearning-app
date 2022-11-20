@@ -2,9 +2,12 @@ package com.ulearning.ulearning_app.presentation.features.profile
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.ulearning.ulearning_app.BR
+import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.dateFormat
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
@@ -15,6 +18,7 @@ import com.ulearning.ulearning_app.databinding.FragmentProfileBinding
 import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
 import com.ulearning.ulearning_app.presentation.features.auth.LoginActivity
+import com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,6 +43,12 @@ class ProfileFragment :
 
     private fun observeUiStates() {
         viewModel.setEvent(ProfileEvent.DataProfileClicked)
+
+        binding.scanQrBtn.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_navigation_profile_to_scanQrActivity,
+            )
+        }
 
         viewModel.apply {
             lifecycleScopeCreate(activity = requireActivity(), method = {
@@ -113,6 +123,10 @@ class ProfileFragment :
         closeLoadingDialog()
         requireContext().startNewActivity<LoginActivity>()
         requireActivity().finishAffinity()
+    }
+
+    override fun scanQr() {
+
     }
 
 }

@@ -160,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen16"
                     android:hint="@string/date_of_birthday"
-                    app:layout_constraintBottom_toTopOf="@+id/planInputText"
+                    app:layout_constraintBottom_toTopOf="@+id/scanQrBtn"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
@@ -273,6 +273,36 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/scanQrBtn"
+                    style="?attr/materialCardViewElevatedStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen16"
+                    android:elevation="@dimen/dimen1"
+                    app:layout_constraintBottom_toTopOf="@+id/paymentBtn"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/guideline5"
+                    app:layout_constraintTop_toBottomOf="@+id/dateOfBirthdayInputText"
+                    app:layout_constraintVertical_bias="0.0">
+
+                    <TextView
+                        android:id="@+id/scanQrText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/dimen14"
+                        android:padding="@dimen/dimen10"
+                        android:text="Scan QR"
+                        android:textAppearance="@style/readex_16_regular"
+                        android:textColor="@color/gray2"
+                        app:drawableEndCompat="@drawable/ic_arrow_forward"
+                        app:drawableStartCompat="@drawable/ic_baseline_qr_code_scanner"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/paymentBtn"
@@ -280,13 +310,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen16"
+                    android:layout_marginBottom="@dimen/dimen16"
                     android:elevation="@dimen/dimen1"
                     android:onClick="@{()->profileViewModel.setEvent(profileViewModel.Events.paymentClick)}"
                     app:layout_constraintBottom_toTopOf="@+id/logoutBtn"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="@+id/guideline5"
-                    app:layout_constraintTop_toBottomOf="@+id/dateOfBirthdayInputText">
+                    app:layout_constraintTop_toBottomOf="@+id/scanQrBtn">
 
                     <TextView
                         android:id="@+id/paymentText"
