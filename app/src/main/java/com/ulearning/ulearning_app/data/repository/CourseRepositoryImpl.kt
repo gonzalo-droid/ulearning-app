@@ -4,6 +4,7 @@ import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.dataStore.config.DataStoreConfig
 import com.ulearning.ulearning_app.data.mapper.CourseMapper
+import com.ulearning.ulearning_app.data.remote.entities.request.DownloadGuestFileRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.ShowGuestFileRequest
 import com.ulearning.ulearning_app.data.remote.service.CourseService
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
@@ -129,6 +130,21 @@ class CourseRepositoryImpl
         return when (val response = service.downloadFile(
             token = "${SettingRemote.BEARER} ${dataStore.token()}",
             hash = hash
+        )) {
+            is Either.Right -> {
+                Either.Right(mapper.downloadFileToDomain(response.b))
+            }
+            is Either.Left -> Either.Left(response.a)
+        }
+    }
+
+    override suspend fun downloadGuestFile(
+        hash: String,
+        name: String
+    ): Either<Failure, DownloadFile> {
+        return when (val response = service.downloadGuestFile(
+            token = "${SettingRemote.BEARER} ${dataStore.token()}",
+            request = DownloadGuestFileRequest(name = name, hash = hash)
         )) {
             is Either.Right -> {
                 Either.Right(mapper.downloadFileToDomain(response.b))

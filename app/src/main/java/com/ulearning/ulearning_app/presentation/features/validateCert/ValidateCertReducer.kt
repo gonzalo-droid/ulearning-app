@@ -15,6 +15,9 @@ object ValidateCertReducer {
 
             is ValidateCertState.Loading -> viewState.loading()
             is ValidateCertState.ValidateCert -> viewState.validateCert(state.file)
+
+            is ValidateCertState.DownloadFilePDF -> viewState.downloadFilePDF(file = state.file)
+
         }
     }
 

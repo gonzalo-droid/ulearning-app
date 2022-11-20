@@ -4,6 +4,7 @@ import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.remote.api.CourseApi
 import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
+import com.ulearning.ulearning_app.data.remote.entities.request.DownloadGuestFileRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.ShowGuestFileRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.*
 import com.ulearning.ulearning_app.data.remote.network.NetworkHandler
@@ -113,6 +114,17 @@ class CourseServiceImpl
         return networkHandler.callServiceBase {
             courseApi.downloadFile(
                 token, hash
+            )
+        }
+    }
+
+    override suspend fun downloadGuestFile(
+        token: String,
+        request: DownloadGuestFileRequest
+    ): Either<Failure, DownloadFileResponse> {
+        return networkHandler.callServiceBase {
+            courseApi.downloadGuestFile(
+                token, request
             )
         }
     }

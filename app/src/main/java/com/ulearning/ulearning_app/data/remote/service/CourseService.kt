@@ -3,6 +3,7 @@ package com.ulearning.ulearning_app.data.remote.service
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
+import com.ulearning.ulearning_app.data.remote.entities.request.DownloadGuestFileRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.ShowGuestFileRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.*
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
@@ -57,5 +58,10 @@ interface CourseService {
     suspend fun downloadFile(
         token: String,
         hash: String,
+    ): Either<Failure, DownloadFileResponse>
+
+    suspend fun downloadGuestFile(
+        token: String,
+        request: DownloadGuestFileRequest,
     ): Either<Failure, DownloadFileResponse>
 }

@@ -45,4 +45,10 @@ interface CourseRepository {
     suspend fun downloadFile(
         hash: String,
     ): Either<Failure, DownloadFile>
+
+    suspend fun downloadGuestFile(
+        hash: String,
+        name: String,
+    ): Either<Failure, DownloadFile>
+
 }

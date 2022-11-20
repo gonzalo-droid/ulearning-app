@@ -1,9 +1,13 @@
 package com.ulearning.ulearning_app.data.remote.api
 
+import com.ulearning.ulearning_app.core.functional.Either
+import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
+import com.ulearning.ulearning_app.data.remote.entities.request.DownloadGuestFileRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.ShowGuestFileRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.*
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
+import com.ulearning.ulearning_app.domain.model.DownloadFile
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -64,5 +68,12 @@ interface CourseApi {
         @Header(SettingRemote.AUTHORIZATION) token: String,
         @Path("hash") hash: String,
     ): Response<BaseResponse<DownloadFileResponse>>
+
+    @POST("download-guest-file")
+    suspend fun downloadGuestFile(
+        @Header(SettingRemote.AUTHORIZATION) token: String,
+        @Body request: DownloadGuestFileRequest,
+    ): Response<BaseResponse<DownloadFileResponse>>
+
 }
 
