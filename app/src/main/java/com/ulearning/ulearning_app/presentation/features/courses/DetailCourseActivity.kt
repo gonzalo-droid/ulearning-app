@@ -121,11 +121,11 @@ class DetailCourseActivity :
         val mutableTopics: MutableList<Topic> = mutableListOf()
 
 
-        topics.forEach {
+        topics.forEach { it ->
 
             mutableTopics.add(it)
 
-            it.children!!.reversed().forEach { child ->
+            it.children!!.forEach { child ->
                 mutableTopics.add(child)
             }
         }
