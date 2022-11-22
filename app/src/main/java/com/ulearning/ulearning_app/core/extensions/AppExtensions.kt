@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.google.gson.JsonElement
+import com.google.gson.JsonParser
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.Course
@@ -87,6 +89,12 @@ infix fun String.putInt(activity: Activity) = activity.intent.extras!!.getInt(th
 fun String.isMail(): Boolean = this.matches(Regex(Config.EMAIL_REGEX))
 
 fun String.isAlphaNumeric(): Boolean = this.matches(Regex(Config.ALPHA_NUMERIC_REGEX))
+
+fun String.toJsonElement(): JsonElement {
+
+    return JsonParser().parse(this)
+}
+
 
 fun lifecycleScopeCreate(activity: Activity, method: suspend () -> Unit) =
     (activity as AppCompatActivity).lifecycleScope.launch {

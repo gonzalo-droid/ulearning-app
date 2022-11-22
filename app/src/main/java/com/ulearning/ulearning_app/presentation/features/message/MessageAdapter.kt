@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.message
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,8 @@ import com.ulearning.ulearning_app.domain.model.Message
 
 class MessageAdapter constructor(
     private val messages: List<Message>,
-    private val conversation: Conversation
+    private val conversation: Conversation,
+    private val userId: Int,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -50,8 +52,9 @@ class MessageAdapter constructor(
 
     override fun getItemViewType(position: Int): Int {
         val message: Message = messages[position]
-        conversation
-        return if (message.sendBy.id == conversation.firstMessage?.sendBy?.id) {
+        Log.d("firstMessage", message.sendBy.id.toString())
+        Log.d("firstMessage", conversation.firstMessage?.sendBy?.id.toString())
+        return if (message.sendBy.id == userId) {
             VIEW_TYPE_MESSAGE_SEND
         } else {
             VIEW_TYPE_MESSAGE_RECEIVED

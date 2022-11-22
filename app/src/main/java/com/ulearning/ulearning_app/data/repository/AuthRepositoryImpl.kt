@@ -1,6 +1,5 @@
 package com.ulearning.ulearning_app.data.repository
 
-import android.util.Log
 import com.ulearning.ulearning_app.BuildConfig
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.functional.Either
@@ -54,6 +53,7 @@ class AuthRepositoryImpl
                 val profile = mapper.profileToDomain(response.b)
                 profile.role?.let { dataStore.saveRole(role = it) }
                 profile.name?.let { dataStore.saveUserName(userName = it) }
+                profile.id?.let { dataStore.saveId(id = it) }
                 Right(profile)
             }
             is Left -> Left(Failure.DefaultError(R.string.error_user_message))
@@ -68,11 +68,20 @@ class AuthRepositoryImpl
         }
     }
 
+    override suspend fun getUserId(): Either<Failure, Int> {
+        return if (dataStore.id() != 0) {
+            Right(dataStore.id())
+        } else {
+            Left(Failure.DefaultError(R.string.error_user_message))
+        }
+    }
+
     override suspend fun logout(): Either<Failure, Boolean> {
 
         dataStore.saveUserName("")
         dataStore.saveToken("")
         dataStore.saveRole("")
+        dataStore.saveId(0)
 
         return if (dataStore.token().isEmpty()) {
             Right(true)

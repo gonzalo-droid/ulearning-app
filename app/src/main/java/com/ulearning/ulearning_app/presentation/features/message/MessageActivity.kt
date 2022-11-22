@@ -66,7 +66,9 @@ class MessageActivity :
 
             viewModel.setEvent(MessageEvent.GetParticipantsClick)
 
-            viewModel.setEvent(MessageEvent.MessagesClicked)
+            viewModel.setEvent(MessageEvent.GetUserIdClick)
+
+
         }
 
         viewModel.apply {
@@ -90,7 +92,11 @@ class MessageActivity :
         closeLoadingDialog()
 
         adapter =
-            MessageAdapter(messages = messages.reversed(), conversation = viewModel.conversation)
+            MessageAdapter(
+                messages = messages.reversed(),
+                conversation = viewModel.conversation,
+                userId = viewModel.userId
+            )
 
         recycler.adapter = adapter
 
@@ -102,6 +108,24 @@ class MessageActivity :
 
     }
 
+    override fun users(users: List<User>) {
+        closeLoadingDialog()
+
+        val support: List<User> = listOf()
+
+        val list = users.ifEmpty { support.plusElement(User(name = "Soporte plataforma")) }
+
+
+        adapterUser = UserChipAdapter(users = list)
+
+        recyclerUser.adapter = adapterUser
+    }
+
+    override fun userId(userId: Int) {
+        viewModel.userId = userId
+        viewModel.setEvent(MessageEvent.MessagesClicked)
+    }
+
     override fun messageFailure(failure: Failure) {
 
         closeLoadingDialog()
@@ -110,19 +134,6 @@ class MessageActivity :
 
         showSnackBar(binding.root, getString(messageDesign.idMessage))
 
-    }
-
-    override fun users(users: List<User>) {
-        closeLoadingDialog()
-
-        val support : List<User> = listOf ()
-
-        val list   = users.ifEmpty { support.plusElement (User(name = "Soporte plataforma")) }
-
-
-        adapterUser = UserChipAdapter(users = list)
-
-        recyclerUser.adapter = adapterUser
     }
 
     override fun loading() {

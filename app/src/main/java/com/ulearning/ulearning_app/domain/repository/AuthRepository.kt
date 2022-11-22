@@ -19,6 +19,8 @@ interface AuthRepository {
 
     suspend fun getRole(): Either<Failure, String>
 
+    suspend fun getUserId(): Either<Failure, Int>
+
     suspend fun fcmToken(
         fcmToken: String,
     ): Either<Failure, Boolean>

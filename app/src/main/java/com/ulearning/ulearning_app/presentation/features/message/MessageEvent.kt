@@ -10,4 +10,6 @@ sealed class MessageEvent : UiEvent {
     object SendMessageClick : MessageEvent()
 
     object GetParticipantsClick : MessageEvent()
+
+    object GetUserIdClick : MessageEvent()
 }

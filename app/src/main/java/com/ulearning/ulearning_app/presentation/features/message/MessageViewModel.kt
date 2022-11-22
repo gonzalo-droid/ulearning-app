@@ -8,6 +8,8 @@ import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.Message
 import com.ulearning.ulearning_app.domain.model.User
+import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
+import com.ulearning.ulearning_app.domain.useCase.auth.GetUserIdUseCase
 import com.ulearning.ulearning_app.domain.useCase.conversation.GetMessageUseCase
 import com.ulearning.ulearning_app.domain.useCase.conversation.GetParticipantsMessageUseCase
 import com.ulearning.ulearning_app.domain.useCase.conversation.SendMessageUseCase
@@ -21,14 +23,17 @@ class MessageViewModel
 @Inject constructor(
     private val getMessageUseCase: GetMessageUseCase,
     private val sendMessageUseCase: SendMessageUseCase,
-    private val getParticipantsMessageUseCase: GetParticipantsMessageUseCase
+    private val getParticipantsMessageUseCase: GetParticipantsMessageUseCase,
+    private val getUserIdUseCase: GetUserIdUseCase,
 ) : BaseViewModel<MessageEvent, MessageState, MessageEffect>() {
 
     var page: Int = 1
 
+    var userId: Int = 0
+
     var messageInput = MutableStateFlow<String>("")
 
-    var userIds  = ""
+    var userIds = ""
 
     lateinit var conversation: Conversation
 
@@ -41,6 +46,15 @@ class MessageViewModel
             MessageEvent.MessagesClicked -> getMessages()
             MessageEvent.SendMessageClick -> sendMessage()
             MessageEvent.GetParticipantsClick -> getParticipants()
+            MessageEvent.GetUserIdClick -> getUserId()
+        }
+    }
+
+    private fun getUserId() {
+        getUserIdUseCase(
+            BaseUseCase.None()
+        ) {
+            it.either(::handleFailure, ::handleUserId)
         }
     }
 
@@ -112,6 +126,11 @@ class MessageViewModel
     private fun handleFailure(failure: Failure) {
         setEffect { MessageEffect.ShowMessageFailure(failure = failure) }
     }
+
+    private fun handleUserId(userId: Int) {
+        setState { MessageState.GetUserId(userId = userId) }
+    }
+
 
     companion object Events {
         val sendMessageClick = MessageEvent.SendMessageClick
