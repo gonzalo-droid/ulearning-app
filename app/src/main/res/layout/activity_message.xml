@@ -61,19 +61,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerUser"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen8"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@+id/toText"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="1.0"
+                app:layout_constraintTop_toBottomOf="@+id/toText"
                 tools:itemCount="1"
                 tools:listitem="@layout/item_chip_user" />
-
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/divider"

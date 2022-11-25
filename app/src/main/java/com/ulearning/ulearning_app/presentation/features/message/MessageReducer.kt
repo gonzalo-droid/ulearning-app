@@ -19,6 +19,7 @@ object MessageReducer {
             is MessageState.Loading -> viewState.loading()
             is MessageState.Messages -> viewState.messages(state.messages)
             is MessageState.GetUserId -> viewState.userId(state.userId)
+            MessageState.SupportUser -> viewState.supportUser()
         }
     }
 

@@ -123,4 +123,8 @@
     <string name="title_download_cert">Descargue su certificado</string>
     <string name="number_cert_error">N° de certificado es obligatorio</string>
 
+
+    <string name="support_platform">Soporte plataforma</string>
+
+
 </resources>

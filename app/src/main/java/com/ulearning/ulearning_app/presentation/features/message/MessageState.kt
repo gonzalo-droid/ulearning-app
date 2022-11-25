@@ -10,6 +10,8 @@ sealed class MessageState : UiState {
 
     object Loading : MessageState()
 
+    object SupportUser : MessageState()
+
     data class Messages constructor(val messages: List<Message>) : MessageState()
 
     data class GetParticipants constructor(val users: List<User>) : MessageState()

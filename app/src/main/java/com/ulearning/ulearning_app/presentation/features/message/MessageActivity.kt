@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
+import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.extensions.putConversation
@@ -54,7 +55,7 @@ class MessageActivity :
 
         recyclerUser = binding.recyclerUser
 
-        recyclerUser.layoutManager = GridLayoutManager(this, 3, GridLayoutManager.VERTICAL, false)
+        recyclerUser.layoutManager = GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false)
 
         observeUiStates()
     }
@@ -64,10 +65,9 @@ class MessageActivity :
         viewModel.let {
             viewModel.conversation = Config.CONVERSATION_PUT putConversation this@MessageActivity
 
-            viewModel.setEvent(MessageEvent.GetParticipantsClick)
-
             viewModel.setEvent(MessageEvent.GetUserIdClick)
 
+            viewModel.setEvent(MessageEvent.GetParticipantsClick)
 
         }
 
@@ -111,12 +111,7 @@ class MessageActivity :
     override fun users(users: List<User>) {
         closeLoadingDialog()
 
-        val support: List<User> = listOf()
-
-        val list = users.ifEmpty { support.plusElement(User(name = "Soporte plataforma")) }
-
-
-        adapterUser = UserChipAdapter(users = list)
+        adapterUser = UserChipAdapter(users = users)
 
         recyclerUser.adapter = adapterUser
     }
@@ -124,6 +119,21 @@ class MessageActivity :
     override fun userId(userId: Int) {
         viewModel.userId = userId
         viewModel.setEvent(MessageEvent.MessagesClicked)
+    }
+
+    override fun supportUser() {
+        val userList: List<User> = listOf()
+
+        adapterUser =
+            UserChipAdapter(
+                users = userList.plusElement(
+                    User(
+                        name = getString(R.string.support_platform)
+                    )
+                )
+            )
+
+        recyclerUser.adapter = adapterUser
     }
 
     override fun messageFailure(failure: Failure) {

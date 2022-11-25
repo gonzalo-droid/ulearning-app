@@ -60,15 +60,20 @@ class MessageViewModel
 
     private fun getParticipants() {
 
-        val list = conversation.firstMessage?.userIds?.joinToString(",") ?: ""
+        if (conversation.toSupport!!) {
+            setState { MessageState.SupportUser }
+        } else {
+            val list = conversation.firstMessage?.userIds?.joinToString(",") ?: ""
 
-        getParticipantsMessageUseCase(
-            GetParticipantsMessageUseCase.Params(
-                userIds = list
-            )
-        ) {
-            it.either(::handleFailure, ::handleParticipants)
+            getParticipantsMessageUseCase(
+                GetParticipantsMessageUseCase.Params(
+                    userIds = list
+                )
+            ) {
+                it.either(::handleFailure, ::handleParticipants)
+            }
         }
+
     }
 
     private fun sendMessage() {
@@ -83,7 +88,7 @@ class MessageViewModel
                     uuid = conversation.uuid,
                     content = messageInput.value.trim(),
                     userIds = ids as ArrayList<String>,
-                    toSupport = false
+                    toSupport = conversation.toSupport!!
 
                 )
             ) {
@@ -111,7 +116,6 @@ class MessageViewModel
         Handler(Looper.getMainLooper()).postDelayed({
             getMessages()
         }, 2000)
-
 
     }
 

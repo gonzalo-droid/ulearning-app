@@ -10,6 +10,8 @@ interface MessageViewState {
 
     fun loading()
 
+    fun supportUser()
+
     fun messages(messages: List<Message>)
 
     fun users(users: List<User>)

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/materialCardView5"
     style="?attr/materialCardViewElevatedStyle"
-    android:layout_width="wrap_content"
+    android:layout_width="100dp"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/dimen5"
     app:layout_constraintStart_toStartOf="parent"
