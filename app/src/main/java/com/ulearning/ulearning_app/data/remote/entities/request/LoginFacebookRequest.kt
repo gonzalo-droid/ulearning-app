@@ -7,6 +7,7 @@ import java.io.Serializable
 data class LoginFacebookRequest(
     @SerializedName("email") val email: String? = "",
     @SerializedName("name") val name: String? = "",
-    @SerializedName("family_name") val familyName: String? = "",
-    @SerializedName("given_name") val givenName: String? = "",
+    @SerializedName("first_name") val firstName: String? = "",
+    @SerializedName("last_name") val lastName: String? = "",
+    @SerializedName("picture") val picture: String? = "",
 ) : Serializable

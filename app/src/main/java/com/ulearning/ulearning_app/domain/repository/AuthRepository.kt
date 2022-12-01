@@ -3,6 +3,7 @@ package com.ulearning.ulearning_app.domain.repository
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Profile
+import com.ulearning.ulearning_app.presentation.model.entity.LoginFacebook
 import com.ulearning.ulearning_app.presentation.model.entity.LoginGoogle
 
 interface AuthRepository {
@@ -17,7 +18,7 @@ interface AuthRepository {
     ): Either<Failure, Boolean>
 
     suspend fun loginFacebook(
-        data: LoginGoogle,
+        data: LoginFacebook,
     ): Either<Failure, Boolean>
 
     suspend fun profile(): Either<Failure, Profile>

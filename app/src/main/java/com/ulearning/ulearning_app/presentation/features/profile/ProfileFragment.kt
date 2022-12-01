@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.facebook.login.LoginManager
 import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
@@ -120,6 +121,8 @@ class ProfileFragment :
     }
 
     override fun logout() {
+        LoginManager.getInstance().logOut()
+        
         closeLoadingDialog()
         requireContext().startNewActivity<LoginActivity>()
         requireActivity().finishAffinity()

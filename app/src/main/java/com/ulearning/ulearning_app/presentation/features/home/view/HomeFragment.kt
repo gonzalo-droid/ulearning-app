@@ -146,7 +146,7 @@ class HomeFragment :
     override fun getProfile(data: Profile) {
         closeLoadingDialog()
         with(binding) {
-            tvUserName.text = data.name
+            tvUserName.text = data.name?.trim()
             if (data.role.equals(Config.ROLE_TEACHER)) {
                 viewModel.userId = data.id!!
                 tabConstraintLayout.visibility = View.INVISIBLE

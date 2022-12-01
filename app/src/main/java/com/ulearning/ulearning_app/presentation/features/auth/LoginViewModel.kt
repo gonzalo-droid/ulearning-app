@@ -7,6 +7,7 @@ import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.*
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import com.ulearning.ulearning_app.presentation.features.home.HomeState
+import com.ulearning.ulearning_app.presentation.model.entity.LoginFacebook
 import com.ulearning.ulearning_app.presentation.model.entity.LoginGoogle
 import com.ulearning.ulearning_app.presentation.model.entity.User
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -49,6 +50,18 @@ class LoginViewModel
             BaseUseCase.None()
         ) {
             it.either(::handleFailure, ::handleProfile)
+        }
+    }
+
+
+    fun sendDataLoginInFacebook(data: LoginFacebook) {
+
+        doLoginFacebookUseCase(
+            DoLoginFacebookUseCase.Params(
+                data = data
+            )
+        ) {
+            it.either(::handleFailure, ::handleLoginProvider)
         }
     }
 

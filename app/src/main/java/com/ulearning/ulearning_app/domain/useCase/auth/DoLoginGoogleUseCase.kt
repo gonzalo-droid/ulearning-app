@@ -10,7 +10,7 @@ class DoLoginGoogleUseCase
 @Inject constructor(private val authRepository: AuthRepository) :
     BaseUseCase<Boolean, DoLoginGoogleUseCase.Params>() {
 
-    override suspend fun run(params: Params) = authRepository.loginFacebook(params.data)
+    override suspend fun run(params: Params) = authRepository.loginGoogle(params.data)
 
     data class Params(val data: LoginGoogle)
 }

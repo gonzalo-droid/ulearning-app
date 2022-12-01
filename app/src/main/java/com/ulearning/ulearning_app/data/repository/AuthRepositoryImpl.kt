@@ -18,6 +18,7 @@ import com.ulearning.ulearning_app.data.remote.service.AuthService
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
 import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.domain.repository.AuthRepository
+import com.ulearning.ulearning_app.presentation.model.entity.LoginFacebook
 import com.ulearning.ulearning_app.presentation.model.entity.LoginGoogle
 import javax.inject.Inject
 
@@ -73,14 +74,15 @@ class AuthRepositoryImpl
         }
     }
 
-    override suspend fun loginFacebook(data: LoginGoogle): Either<Failure, Boolean> {
+    override suspend fun loginFacebook(data: LoginFacebook): Either<Failure, Boolean> {
         return when (val response =
             service.loginFacebook(
                 LoginFacebookRequest(
                     email = data.email,
                     name = data.name,
-                    familyName = data.familyName,
-                    givenName = data.givenName
+                    firstName = data.firstName,
+                    lastName = data.lastName,
+                    picture = data.picture,
                 )
             )
         ) {

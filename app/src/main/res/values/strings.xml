@@ -1,9 +1,13 @@
 <resources>
 
 
+    <!--
+    How to sigIn with facebook
+    https://developers.facebook.com/docs/facebook-login/android
+    -->
     <string name="facebook_app_id">743887196605416</string>
     <string name="fb_login_protocol_scheme">fb743887196605416</string>
-    <string name="facebook_client_token">56789</string>
+    <string name="facebook_client_token">5bdc9a20f0126221a8d9598c3d2c2c52</string>
 
     <string name="app_name">ulearning_app</string>
 
@@ -135,6 +139,6 @@
     <string name="error_sign_in_google">Error al ingresar con Google, por favor intentelo nuevamente</string>
     <string name="error_sign_in_facebook">Error al ingresar con Facebook, por favor intentelo nuevamente</string>
 
-    error_sign_in_google
+
 
 </resources>
