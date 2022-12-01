@@ -1,13 +1,13 @@
 package com.ulearning.ulearning_app.presentation.features.auth
 
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
-import com.ulearning.ulearning_app.domain.useCase.auth.DoLoginUseCase
-import com.ulearning.ulearning_app.domain.useCase.auth.GetProfileUseCase
-import com.ulearning.ulearning_app.domain.useCase.auth.SendFCMTokenUseCase
+import com.ulearning.ulearning_app.domain.useCase.auth.*
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import com.ulearning.ulearning_app.presentation.features.home.HomeState
+import com.ulearning.ulearning_app.presentation.model.entity.LoginGoogle
 import com.ulearning.ulearning_app.presentation.model.entity.User
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -18,7 +18,9 @@ class LoginViewModel
     private val doLoginUseCase: DoLoginUseCase,
     private val sendFCMTokenUseCase: SendFCMTokenUseCase,
     private val getProfileUseCase: GetProfileUseCase,
-    ) : BaseViewModel<LoginEvent, LoginState, LoginEffect>() {
+    private val doLoginFacebookUseCase: DoLoginFacebookUseCase,
+    private val doLoginGoogleUseCase: DoLoginGoogleUseCase
+) : BaseViewModel<LoginEvent, LoginState, LoginEffect>() {
 
     val user = User()
 
@@ -32,6 +34,16 @@ class LoginViewModel
         }
     }
 
+    private fun loginInFacebook() {
+        doLoginUseCase(
+            DoLoginUseCase.Params(
+                email = user.email, password = user.password
+            )
+        ) {
+            it.either(::handleFailure, ::handleLoginProvider)
+        }
+    }
+
     private fun getProfile() {
         getProfileUseCase(
             BaseUseCase.None()
@@ -40,6 +52,16 @@ class LoginViewModel
         }
     }
 
+    fun sendDataLoginInGoogle(data: LoginGoogle) {
+
+        doLoginGoogleUseCase(
+            DoLoginGoogleUseCase.Params(
+                data = data
+            )
+        ) {
+            it.either(::handleFailure, ::handleLoginProvider)
+        }
+    }
 
     private fun verifyLogin() {
 
@@ -83,7 +105,7 @@ class LoginViewModel
 
     }
 
-    private fun sendFCMToken(){
+    private fun sendFCMToken() {
         sendFCMTokenUseCase(
             SendFCMTokenUseCase.Params(
                 fcmToken = user.fcmToken
@@ -95,6 +117,21 @@ class LoginViewModel
 
     private fun handleFailure(failure: Failure) {
         setEffect { LoginEffect.ShowMessageFailure(failure = failure) }
+    }
+
+    private fun handleLoginProvider(success: Boolean) {
+
+        user.serviceTokenFirebase(response = { firebaseToken ->
+
+            user.fcmToken = firebaseToken
+
+            sendFCMToken()
+
+        }, error = { error ->
+
+            setEffect { LoginEffect.ShowMessageFailure(failure = error) }
+        })
+
     }
 
     private fun handleLogin(success: Boolean) {
@@ -111,5 +148,7 @@ class LoginViewModel
 
     companion object Events {
         val loginClicked = LoginEvent.LoginClicked
+        val loginGoogleClicked = LoginEvent.LoginGoogleClicked
+        val loginFacebookClicked = LoginEvent.LoginFacebookClicked
     }
 }

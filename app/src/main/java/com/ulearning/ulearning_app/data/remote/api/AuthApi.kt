@@ -2,6 +2,8 @@ package com.ulearning.ulearning_app.data.remote.api
 
 import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
 import com.ulearning.ulearning_app.data.remote.entities.request.FCMTokenRequest
+import com.ulearning.ulearning_app.data.remote.entities.request.LoginFacebookRequest
+import com.ulearning.ulearning_app.data.remote.entities.request.LoginGoogleRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.*
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
@@ -32,4 +34,14 @@ interface AuthApi {
         @Header(SettingRemote.AUTHORIZATION) token: String,
     ): Response<BaseResponse<TokenResponse>>
 
+
+    @POST("login-google")
+    suspend fun loginGoogle(
+        @Body request: LoginGoogleRequest
+    ): Response<LoginResponse>
+
+    @POST("login-facebook")
+    suspend fun loginFacebook(
+        @Body request: LoginFacebookRequest
+    ): Response<LoginResponse>
 }

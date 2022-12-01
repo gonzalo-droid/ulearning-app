@@ -132,6 +132,7 @@
                 style="@style/Widget.Material3.Button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_rounded_blue"
                 android:layout_marginBottom="@dimen/dimen40"
                 android:onClick="@{()->loginViewModel.setEvent(loginViewModel.Events.loginClicked)}"
                 android:text="@string/log_in"
@@ -139,8 +140,43 @@
                 app:layout_constraintEnd_toStartOf="@+id/guideline3"
                 app:layout_constraintStart_toStartOf="@+id/guideline5"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
+                app:layout_constraintVertical_bias="0.7"
                 tools:ignore="HardcodedText" />
+
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen16"
+                app:dividerColor="@color/divider_color_soft"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
+                app:layout_constraintTop_toBottomOf="@+id/logInBtn" />
+
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/logInGoogle"
+                android:layout_width="0dp"
+                android:layout_marginTop="@dimen/dimen16"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="visible"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
+                app:layout_constraintTop_toBottomOf="@+id/divider"/>
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/logInFacebook"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dimen16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintStart_toStartOf="@+id/guideline5"
+                app:layout_constraintTop_toBottomOf="@+id/logInGoogle"
+                app:layout_constraintVertical_bias="0.0" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

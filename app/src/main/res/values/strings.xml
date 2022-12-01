@@ -1,6 +1,12 @@
 <resources>
+
+
+    <string name="facebook_app_id">743887196605416</string>
+    <string name="fb_login_protocol_scheme">fb743887196605416</string>
+    <string name="facebook_client_token">56789</string>
+
     <string name="app_name">ulearning_app</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="label_loading">Cargando…</string>
@@ -126,5 +132,9 @@
 
     <string name="support_platform">Soporte plataforma</string>
 
+    <string name="error_sign_in_google">Error al ingresar con Google, por favor intentelo nuevamente</string>
+    <string name="error_sign_in_facebook">Error al ingresar con Facebook, por favor intentelo nuevamente</string>
+
+    error_sign_in_google
 
 </resources>

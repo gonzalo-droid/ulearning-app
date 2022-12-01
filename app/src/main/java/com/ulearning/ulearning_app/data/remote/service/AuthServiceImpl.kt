@@ -4,6 +4,8 @@ import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.remote.api.AuthApi
 import com.ulearning.ulearning_app.data.remote.entities.request.FCMTokenRequest
+import com.ulearning.ulearning_app.data.remote.entities.request.LoginFacebookRequest
+import com.ulearning.ulearning_app.data.remote.entities.request.LoginGoogleRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.FCMTokenResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
@@ -38,5 +40,14 @@ class AuthServiceImpl
     override suspend fun selfAuthToken(token: String): Either<Failure, TokenResponse> {
         return networkHandler.callServiceBase { authApi.selfAuthToken(token) }
     }
+
+    override suspend fun loginGoogle(body: LoginGoogleRequest): Either<Failure, LoginResponse> {
+        return networkHandler.callService { authApi.loginGoogle(body) }
+    }
+
+    override suspend fun loginFacebook(body: LoginFacebookRequest): Either<Failure, LoginResponse> {
+        return networkHandler.callService { authApi.loginFacebook(body) }
+    }
+
 
 }

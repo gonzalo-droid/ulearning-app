@@ -10,12 +10,15 @@ import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.data.dataStore.config.DataStoreConfig
 import com.ulearning.ulearning_app.data.mapper.AuthMapper
 import com.ulearning.ulearning_app.data.remote.entities.request.FCMTokenRequest
+import com.ulearning.ulearning_app.data.remote.entities.request.LoginFacebookRequest
+import com.ulearning.ulearning_app.data.remote.entities.request.LoginGoogleRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
 import com.ulearning.ulearning_app.data.remote.service.AuthService
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
 import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.domain.repository.AuthRepository
+import com.ulearning.ulearning_app.presentation.model.entity.LoginGoogle
 import javax.inject.Inject
 
 class AuthRepositoryImpl
@@ -44,6 +47,57 @@ class AuthRepositoryImpl
             is Left -> Left(Failure.DefaultError(R.string.error_credentials))
         }
     }
+
+    override suspend fun loginGoogle(data: LoginGoogle): Either<Failure, Boolean> {
+        return when (val response =
+            service.loginGoogle(
+                LoginGoogleRequest(
+                    email = data.email,
+                    name = data.name,
+                    familyName = data.familyName,
+                    givenName = data.givenName
+                )
+            )
+        ) {
+            is Right -> {
+                val loginResponse: LoginResponse = response.b
+
+                return if (loginResponse.token.isNotEmpty()) {
+                    dataStore.saveToken(token = loginResponse.token)
+                    Right(true)
+                } else {
+                    Left(Failure.DefaultError(R.string.error_user_message))
+                }
+            }
+            is Left -> Left(Failure.DefaultError(R.string.error_credentials))
+        }
+    }
+
+    override suspend fun loginFacebook(data: LoginGoogle): Either<Failure, Boolean> {
+        return when (val response =
+            service.loginFacebook(
+                LoginFacebookRequest(
+                    email = data.email,
+                    name = data.name,
+                    familyName = data.familyName,
+                    givenName = data.givenName
+                )
+            )
+        ) {
+            is Right -> {
+                val loginResponse: LoginResponse = response.b
+
+                return if (loginResponse.token.isNotEmpty()) {
+                    dataStore.saveToken(token = loginResponse.token)
+                    Right(true)
+                } else {
+                    Left(Failure.DefaultError(R.string.error_user_message))
+                }
+            }
+            is Left -> Left(Failure.DefaultError(R.string.error_credentials))
+        }
+    }
+
 
     override suspend fun profile(): Either<Failure, Profile> {
         return when (val response = service.profile(

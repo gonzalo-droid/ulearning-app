@@ -7,5 +7,9 @@ sealed class LoginEffect : UiEffect {
 
     object ShowSuccess : LoginEffect()
 
+    object LoginGoogleEffect : LoginEffect()
+
+    object LoginFacebookEffect : LoginEffect()
+
     data class ShowMessageFailure constructor(val failure: Failure) : LoginEffect()
 }

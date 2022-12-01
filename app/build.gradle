@@ -112,6 +112,11 @@ dependencies {
 
     implementation 'com.google.android.gms:play-services-vision:20.1.3'
 
+    // paging
+
+    def paging_version = "3.1.1"
+
+    implementation "androidx.paging:paging-runtime:$paging_version"
 
     // Retrofit
     implementation retrofit.retrofit
@@ -127,7 +132,6 @@ dependencies {
 
     // For WebP support, including animated WebP
     implementation 'com.facebook.fresco:animated-webp:2.6.0'
-    implementation 'com.facebook.fresco:webpsupport:2.6.0'
 
     // For WebP support, without animations
     implementation 'com.facebook.fresco:webpsupport:2.6.0'
@@ -135,6 +139,21 @@ dependencies {
     // https://medium.com/geekculture/shimmer-effect-in-android-2b6840cc0097
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
+    // login firebase
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:31.1.0')
+
+    // Add the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
+    // Also add the dependency for the Google Play services library and specify its version
+    implementation 'com.google.android.gms:play-services-auth:20.4.0'
+
+    // facebook
+    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+
+    
 
     //HILT
     implementation daggerHilt.hilt

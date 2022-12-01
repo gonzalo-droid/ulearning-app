@@ -8,6 +8,10 @@ interface LoginViewState {
 
     fun loading()
 
+    fun loginInFacebook()
+
+    fun loginInGoogle()
+
     fun homeActivity()
 
 }
