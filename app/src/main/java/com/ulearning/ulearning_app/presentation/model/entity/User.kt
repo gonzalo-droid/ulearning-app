@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.presentation.model.entity
 
+import android.util.Log
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.ulearning.ulearning_app.R
@@ -60,7 +61,7 @@ open class User constructor(
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
-
+                Log.e("FirebaseToken",task.exception?.message.toString())
                 error(
                     Failure.DefaultError(R.string.firebase_token_message)
                 )

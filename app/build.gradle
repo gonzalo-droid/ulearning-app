@@ -19,8 +19,8 @@ android {
         applicationId 'com.ulearning.ulearning_app'
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 13
-        versionName "1.1.4"
+        versionCode 15
+        versionName "1.1.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -159,9 +159,9 @@ dependencies {
     //HILT
     implementation daggerHilt.hilt
     implementation 'androidx.preference:preference:1.1.1'
-    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.2.12'
-    implementation 'com.google.firebase:firebase-analytics-ktx:21.1.0'
-    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.8'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.2'
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.1.0'
     kapt daggerHilt.compiler
     annotationProcessor daggerHilt.annotationProcessor
 

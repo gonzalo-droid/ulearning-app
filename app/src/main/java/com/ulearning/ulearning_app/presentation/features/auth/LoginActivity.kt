@@ -106,12 +106,14 @@ class LoginActivity : BaseActivityWithViewModel<ActivityLoginBinding, LoginViewM
 
                         val accessToken = AccessToken.getCurrentAccessToken()
                         val isLoggedIn = accessToken != null && !accessToken.isExpired
+                        if(isLoggedIn) LoginManager.getInstance().logOut()
 
                         val request = GraphRequest.newMeRequest(
                             token
                         ) { `object`, response ->
                             try {
                                 /**
+                                 * https://developers.facebook.com/docs/facebook-login/android
                                  * https://developers.facebook.com/docs/android/graph?locale=es_ES#userdata-troubleshooting
                                  *
                                  * get data with GraphRequest

@@ -35,7 +35,7 @@
 
     <string name="failure_message">Debe ingresar un mensaje</string>
 
-    <string name="firebase_token_message">Hubo problemas para conectarse con el servicio</string>
+    <string name="firebase_token_message">Hubo problemas para conectarse con el servicio de notificaciones</string>
     <string name="home_title">Inicio</string>
     <string name="course_title">Cursos</string>
     <string name="profile_title">Perfil</string>

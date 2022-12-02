@@ -14,6 +14,30 @@
       },
       "oauth_client": [
         {
+          "client_id": "576598582278-4mg5cnid5315vsep458ldbjkpdsve7qu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ulearning.ulearning_app",
+            "certificate_hash": "7f8aa2df4dc8db8ec0922fc1ad015aaa3900dc63"
+          }
+        },
+        {
+          "client_id": "576598582278-j61hbjg938ik831o4keiqbse94ctuu4s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ulearning.ulearning_app",
+            "certificate_hash": "d17496eaaa1749ee43f73657a39aa7277c9a45d6"
+          }
+        },
+        {
+          "client_id": "576598582278-o9c4o54pg3o4such0h2kll2in58b0ju1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ulearning.ulearning_app",
+            "certificate_hash": "5e215e18609868e0e5b51d5fe2addd634ad79dce"
+          }
+        },
+        {
           "client_id": "576598582278-v92ejso8nc505p73eb8vagsu0o222b0f.apps.googleusercontent.com",
           "client_type": 3
         }
