@@ -17,6 +17,7 @@ class AuthRepositoryImplTest {
 
     private lateinit var service: AuthApi
 
+
     companion object {
         private lateinit var retrofit: Retrofit
 
@@ -24,7 +25,7 @@ class AuthRepositoryImplTest {
         @JvmStatic
         fun setupCommon() {
             retrofit = Retrofit.Builder()
-                .baseUrl("https://sandbox.api.ulearning.com.pe/api/")
+                .baseUrl("https://api.ulearning.com.pe/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         }
@@ -37,10 +38,10 @@ class AuthRepositoryImplTest {
 
 
     @Test
-    fun loginReturnSuccessTest() {
+    fun `login return success test`() {
         runBlocking {
             val result = service.login(
-                LoginRequest(email = "one_student@gmail.com", password = "ulearning2022")
+                LoginRequest(email = "admin@gmail.com", password = "ulearning2022")
             )
 
             assertThat(result.body()!!.token.isNotEmpty(), `is` (true))
