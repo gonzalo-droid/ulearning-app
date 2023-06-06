@@ -163,7 +163,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@drawable/bg_rounded_icon"
-                        android:src="@drawable/baseline_play_arrow_24"
+                        android:src="@drawable/baseline_star_24"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -194,7 +194,7 @@
                         app:layout_constraintStart_toStartOf="@+id/completedText"
                         app:layout_constraintTop_toBottomOf="@+id/completedText"
                         app:layout_constraintVertical_bias="0.0"
-                        tools:text="revisa tus certificados" />
+                        tools:text="Revisa tus certificados" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -219,7 +219,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@drawable/bg_rounded_icon"
-                        android:src="@drawable/baseline_play_arrow_24"
+                        android:src="@drawable/baseline_workspaces_24"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -228,7 +228,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/dimen10"
-                        android:text="Paquetes de curos"
+                        android:text="Paquetes de cursos"
                         android:textAppearance="@style/readex_20_medium"
                         android:textColor="@color/blue"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -250,7 +250,7 @@
                         app:layout_constraintStart_toStartOf="@+id/packsText"
                         app:layout_constraintTop_toBottomOf="@+id/packsText"
                         app:layout_constraintVertical_bias="0.0"
-                        tools:text="Sigue estudiando" />
+                        tools:text="Cursos asociados" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -275,7 +275,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@drawable/bg_rounded_icon"
-                        android:src="@drawable/baseline_play_arrow_24"
+                        android:src="@drawable/baseline_route_24"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -284,7 +284,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/dimen10"
-                        android:text="En progreso"
+                        android:text="Rutas de aprendizaje"
                         android:textAppearance="@style/readex_20_medium"
                         android:textColor="@color/blue"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -306,7 +306,7 @@
                         app:layout_constraintStart_toStartOf="@+id/routesText"
                         app:layout_constraintTop_toBottomOf="@+id/routesText"
                         app:layout_constraintVertical_bias="0.0"
-                        tools:text="Sigue estudiando" />
+                        tools:text="Sigue la ruta de estudio" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
