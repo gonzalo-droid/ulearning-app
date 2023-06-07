@@ -138,7 +138,13 @@
 
     <string name="error_sign_in_google">Error al ingresar con Google, por favor intentelo nuevamente</string>
     <string name="error_sign_in_facebook">Error al ingresar con Facebook, por favor intentelo nuevamente</string>
-
+    <string name="keep_learning_progress">Sigue estudiando</string>
+    <string name="completed_subtitle">Revisa tus certificados</string>
+    <string name="course_pack_title">Paquetes de cursos</string>
+    <string name="course_pack_subtitle">Cursos asociados</string>
+    <string name="course_route_title">Rutas de aprendizaje</string>
+    <string name="course_route_subtitle">Sigue la ruta de estudio</string>
+    <string name="title_activity_course_completed">CourseCompletedActivity</string>
 
 
 </resources>

@@ -46,6 +46,7 @@ class ProfileFragment :
         viewModel.setEvent(ProfileEvent.DataProfileClicked)
 
         binding.scanQrBtn.setOnClickListener {
+
             findNavController().navigate(
                 R.id.action_navigation_profile_to_scanQrActivity,
             )

@@ -43,6 +43,11 @@ class CourseCompletedFragment :
 
         courseRecycler.layoutManager = LinearLayoutManager(requireActivity())
 
+        binding.topBarInclude.btnBack.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+
+
         observeUiStates()
 
     }

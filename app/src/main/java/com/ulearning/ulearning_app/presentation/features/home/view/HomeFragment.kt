@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.home.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -55,6 +56,28 @@ class HomeFragment :
         courseTeacherRecycler = binding.courseTeacherRecycler
 
         courseTeacherRecycler.layoutManager = LinearLayoutManager(requireActivity())
+
+
+        binding.cardProgress.setOnClickListener {
+            navigateToCourseFragment()
+        }
+
+        binding.cardCompleted.setOnClickListener {
+            navigateToCourseCompletedFragment()
+        }
+    }
+
+    private fun navigateToCourseFragment() {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.mobile_navigation, CourseFragment())
+            .addToBackStack(null)
+            .commit()
+    }
+    private fun navigateToCourseCompletedFragment() {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.mobile_navigation, CourseCompletedFragment())
+            .addToBackStack(null)
+            .commit()
     }
 
 
@@ -77,25 +100,7 @@ class HomeFragment :
 
     }
 
-    private fun initTabLayout() {
-        binding.viewPager.apply {
-            (getChildAt(0) as RecyclerView).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-            adapter =
-                HomeViewPagerAdapter(childFragmentManager, lifecycle)
-        }
 
-        //binding.viewPager.isSaveEnabled = false
-
-        TabLayoutMediator(
-            binding.tabLayout,
-            binding.viewPager
-        ) { tab: TabLayout.Tab, position: Int ->
-            when (position) {
-                COURSE_RECENT -> tab.text = getString(R.string.course_recent)
-                COURSE_COMPLETE -> tab.text = getString(R.string.course_complete)
-            }
-        }.attach()
-    }
 
     override fun messageFailure(failure: Failure) {
 
@@ -149,7 +154,7 @@ class HomeFragment :
             tvUserName.text = data.name?.trim()
             if (data.role.equals(Config.ROLE_TEACHER)) {
                 viewModel.userId = data.id!!
-                tabConstraintLayout.visibility = View.INVISIBLE
+                studentConstraintLayout.visibility = View.INVISIBLE
                 teacherConstraintLayout.visibility = View.VISIBLE
 
                 viewModel.typeRole = Config.ROLE_TEACHER
@@ -157,10 +162,9 @@ class HomeFragment :
                 viewModel.setEvent(HomeEvent.CourseTeacherClicked)
 
             } else { // student
-                tabConstraintLayout.visibility = View.VISIBLE
+                studentConstraintLayout.visibility = View.VISIBLE
                 teacherConstraintLayout.visibility = View.INVISIBLE
                 viewModel.typeRole = Config.ROLE_STUDENT
-                initTabLayout()
             }
         }
     }
