@@ -27,6 +27,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Loading..."/>
+        android:text="Cargando..."/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

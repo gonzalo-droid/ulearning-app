@@ -9,8 +9,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
+import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.hideKeyboard
 import com.ulearning.ulearning_app.presentation.dialogs.LoadingDialog
 import kotlinx.coroutines.launch
@@ -46,7 +48,7 @@ abstract class BaseActivity<VBinding : ViewDataBinding> :
     protected fun showSnackBar(
         rootView: View,
         contentText: String?,
-        duration: Int = Snackbar.LENGTH_LONG
+        duration: Int = Snackbar.LENGTH_LONG,
     ) {
         Snackbar.make(rootView, contentText ?: "error desconocido", duration).show()
     }
@@ -106,5 +108,27 @@ abstract class BaseActivity<VBinding : ViewDataBinding> :
 
     protected fun logInfo(infoMessage: Any?) {
         Log.i(this.javaClass.simpleName, "INFO: $infoMessage")
+    }
+
+    open fun replaceFragment(fragment: Fragment) {
+        pushFragment(fragment, R.id.mobile_navigation, false)
+    }
+    open fun pushFragment(
+        fragment: Fragment,
+        container: Int,
+        addBackStack: Boolean,
+        vararg animations: Int,
+    ) {
+        val transaction = supportFragmentManager.beginTransaction()
+        val tag = fragment.javaClass.simpleName
+        if (addBackStack) {
+            transaction.addToBackStack(tag)
+        }
+        transaction.replace(container, fragment, tag)
+        try {
+            transaction.commit()
+        } catch (e: Exception) {
+            return
+        }
     }
 }

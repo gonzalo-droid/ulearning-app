@@ -60,34 +60,35 @@
             android:layout_width="@dimen/dimen0"
             android:layout_height="wrap_content"
             android:layout_marginTop="-6dp"
-            android:textAppearance="@style/readex_24_semibold"
+            android:text="Estudiante"
+            android:textAppearance="@style/readex_26_semibold"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
-            app:layout_constraintTop_toBottomOf="@+id/textView83"
-            tools:text="Estudiante" />
+            app:layout_constraintTop_toBottomOf="@+id/textView83" />
 
+
+        <TextView
+            android:id="@+id/titleCoursesTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_courses"
+            android:layout_marginTop="20dp"
+            android:textAppearance="@style/readex_16_regular"
+            app:layout_constraintEnd_toStartOf="@+id/guideline28"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/guideline27"
+            app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/teacherConstraintLayout"
+            android:id="@+id/studentConstraintLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/dimen16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline28"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
-            app:layout_constraintTop_toBottomOf="@+id/tvUserName">
-
-            <TextView
-                android:id="@+id/titleTeacherTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/my_courses"
-                android:textAppearance="@style/readex_16_regular"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/titleCoursesTv">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardProgress"
@@ -95,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleTeacherTv">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -116,7 +117,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/dimen10"
-                        android:text="En progreso"
+                        android:text="@string/course_recent"
                         android:textAppearance="@style/readex_20_medium"
                         android:textColor="@color/blue"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -130,6 +131,7 @@
                         android:id="@+id/progressSubText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/keep_learning_progress"
                         android:textAppearance="@style/readex_14_regular"
                         android:textColor="@color/blue"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -137,8 +139,7 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/progressText"
                         app:layout_constraintTop_toBottomOf="@+id/progressText"
-                        app:layout_constraintVertical_bias="0.0"
-                        tools:text="Sigue estudiando" />
+                        app:layout_constraintVertical_bias="0.0" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -172,7 +173,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/dimen10"
-                        android:text="Completados"
+                        android:text="@string/course_complete"
                         android:textAppearance="@style/readex_20_medium"
                         android:textColor="@color/blue"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -186,6 +187,7 @@
                         android:id="@+id/completedSubText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/completed_subtitle"
                         android:textAppearance="@style/readex_14_regular"
                         android:textColor="@color/blue"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -193,8 +195,7 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/completedText"
                         app:layout_constraintTop_toBottomOf="@+id/completedText"
-                        app:layout_constraintVertical_bias="0.0"
-                        tools:text="Revisa tus certificados" />
+                        app:layout_constraintVertical_bias="0.0" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -228,7 +229,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/dimen10"
-                        android:text="Paquetes de cursos"
+                        android:text="@string/course_pack_title"
                         android:textAppearance="@style/readex_20_medium"
                         android:textColor="@color/blue"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -242,6 +243,7 @@
                         android:id="@+id/packsSubText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/course_pack_subtitle"
                         android:textAppearance="@style/readex_14_regular"
                         android:textColor="@color/blue"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -249,8 +251,7 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/packsText"
                         app:layout_constraintTop_toBottomOf="@+id/packsText"
-                        app:layout_constraintVertical_bias="0.0"
-                        tools:text="Cursos asociados" />
+                        app:layout_constraintVertical_bias="0.0" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -284,7 +285,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/dimen10"
-                        android:text="Rutas de aprendizaje"
+                        android:text="@string/course_route_title"
                         android:textAppearance="@style/readex_20_medium"
                         android:textColor="@color/blue"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -298,6 +299,7 @@
                         android:id="@+id/routesSubText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/course_route_subtitle"
                         android:textAppearance="@style/readex_14_regular"
                         android:textColor="@color/blue"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -305,12 +307,25 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/routesText"
                         app:layout_constraintTop_toBottomOf="@+id/routesText"
-                        app:layout_constraintVertical_bias="0.0"
-                        tools:text="Sigue la ruta de estudio" />
+                        app:layout_constraintVertical_bias="0.0" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/teacherConstraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dimen16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline28"
+            app:layout_constraintStart_toStartOf="@+id/guideline27"
+            app:layout_constraintTop_toBottomOf="@+id/titleCoursesTv"
+            tools:visibility="gone">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/courseTeacherRecycler"
@@ -321,22 +336,20 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardRoutes"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/item_courses" />
-
-            <include
-                android:id="@+id/noDataInclude"
-                layout="@layout/include_no_data"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleTeacherTv" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <include
+            android:id="@+id/noDataInclude"
+            layout="@layout/include_no_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleCoursesTv" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/tabConstraintLayout"

@@ -1,6 +1,7 @@
 package com.ulearning.ulearning_app.presentation.features.home.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -48,6 +49,10 @@ class CourseFragment :
 
         courseRecycler.layoutManager = LinearLayoutManager(requireActivity())
 
+        binding.topBarInclude.btnBack.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+
         observeUiStates()
     }
 
@@ -70,6 +75,16 @@ class CourseFragment :
 
     }
 
+    override fun onPause() {
+        super.onPause()
+        Log.d("LifeCicle", "OnPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("LifeCicle", "onStop")
+        // parentFragmentManager.popBackStack()
+    }
     override fun messageFailure(failure: Failure) {
 
         val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
@@ -101,7 +116,6 @@ class CourseFragment :
             }
         )
     }
-
     companion object {
 
         private const val IS_FINISHED = "isFinished"
