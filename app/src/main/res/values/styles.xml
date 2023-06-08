@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+
+    <style name="ExpandedAppBar" >
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">@font/readex_semibold</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="CollapsedAppBar" >
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/readex_regular</item>
+        <item name="android:textColor">@color/blue</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
     <style name="welcomeText">Te damos la Bienvenida</style>
 
     <style name="readex_light">

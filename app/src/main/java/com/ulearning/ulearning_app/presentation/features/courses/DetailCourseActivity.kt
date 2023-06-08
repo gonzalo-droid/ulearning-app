@@ -6,10 +6,14 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.text.TextUtils
+import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
@@ -64,11 +68,19 @@ class DetailCourseActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val toolbar = binding.toolbar
+
+        setSupportActionBar(toolbar)
+
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        val upArrow = resources.getDrawable(R.drawable.ic_arrow_back)
+
+        supportActionBar!!.setHomeAsUpIndicator(upArrow)
+
         DetailCourseReducer.instance(viewState = this)
 
-        binding.topBarInclude.btnBack.setOnClickListener {
-            finish()
-        }
+
 
         recycler = binding.recycler
 
@@ -241,9 +253,20 @@ class DetailCourseActivity :
 
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun setDetailCourse(data: Course) {
         with(binding) {
-            topBarInclude.title = data.title
+
+            binding.toolbarLayout.title = data.title
             titleText.text = data.title
 
             descriptionText.text = data.descriptionLarge?.html()
