@@ -1,12 +1,10 @@
 package com.ulearning.ulearning_app.presentation.features.auth
 
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.*
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
-import com.ulearning.ulearning_app.presentation.features.home.HomeState
 import com.ulearning.ulearning_app.presentation.model.entity.LoginFacebook
 import com.ulearning.ulearning_app.presentation.model.entity.LoginGoogle
 import com.ulearning.ulearning_app.presentation.model.entity.User

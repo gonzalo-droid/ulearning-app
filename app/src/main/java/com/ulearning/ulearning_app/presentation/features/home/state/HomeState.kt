@@ -1,4 +1,4 @@
-package com.ulearning.ulearning_app.presentation.features.home
+package com.ulearning.ulearning_app.presentation.features.home.state
 
 import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.model.CoursePercentage

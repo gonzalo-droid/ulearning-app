@@ -1,4 +1,8 @@
-package com.ulearning.ulearning_app.presentation.features.home
+package com.ulearning.ulearning_app.presentation.features.home.reducer
+
+import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
+import com.ulearning.ulearning_app.presentation.features.home.state.HomeState
+import com.ulearning.ulearning_app.presentation.features.home.viewState.HomeViewState
 
 
 object HomeReducer {
@@ -6,7 +10,7 @@ object HomeReducer {
     private lateinit var viewState: HomeViewState
 
     fun instance(viewState: HomeViewState) {
-        this.viewState = viewState
+        HomeReducer.viewState = viewState
     }
 
     fun selectState(state: HomeState) {

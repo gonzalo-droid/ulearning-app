@@ -12,11 +12,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.R
-import com.ulearning.ulearning_app.core.extensions.*
+import com.ulearning.ulearning_app.core.extensions.dataBinding
+import com.ulearning.ulearning_app.core.extensions.html
+import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
+import com.ulearning.ulearning_app.core.extensions.putCourse
+import com.ulearning.ulearning_app.core.extensions.putSubscription
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityDetailCourseBinding
-import com.ulearning.ulearning_app.domain.model.*
+import com.ulearning.ulearning_app.domain.model.CheckAvailableFiles
+import com.ulearning.ulearning_app.domain.model.Course
+import com.ulearning.ulearning_app.domain.model.DownloadFile
+import com.ulearning.ulearning_app.domain.model.FileItem
+import com.ulearning.ulearning_app.domain.model.Subscription
+import com.ulearning.ulearning_app.domain.model.Teacher
+import com.ulearning.ulearning_app.domain.model.Topic
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
 import com.ulearning.ulearning_app.presentation.features.addConversation.AddConversationActivity
 import com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity
@@ -24,9 +34,6 @@ import com.ulearning.ulearning_app.presentation.features.courses.adapter.DetailC
 import com.ulearning.ulearning_app.presentation.features.courses.adapter.TopicAdapter
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.File
-import java.io.IOException
-import java.util.*
 
 @AndroidEntryPoint
 class DetailCourseActivity :
@@ -60,13 +67,12 @@ class DetailCourseActivity :
         DetailCourseReducer.instance(viewState = this)
 
         binding.topBarInclude.btnBack.setOnClickListener {
-            onBackPressed()
+            finish()
         }
 
         recycler = binding.recycler
 
-        recycler.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         topicRecycler = binding.topicRecycler
 
@@ -77,8 +83,7 @@ class DetailCourseActivity :
 
     private fun observeUiStates() {
         viewModel.let {
-            viewModel.course =
-                Config.COURSE_PUT putCourse this@DetailCourseActivity
+            viewModel.course = Config.COURSE_PUT putCourse this@DetailCourseActivity
 
             viewModel.subscription =
                 Config.SUBSCRIPTION_PUT putSubscription this@DetailCourseActivity
@@ -166,8 +171,7 @@ class DetailCourseActivity :
                 setEvent(DetailCourseEvent.GetMyFiles)
                 withCertificate =
                     subscription.course?.certificate!! || subscription.purchasedCertificate!!
-                withRecord =
-                    subscription.course?.record!! || subscription.purchasedRecord!!
+                withRecord = subscription.course?.record!! || subscription.purchasedRecord!!
 
                 binding.downloadCertText.text =
                     if (!withCertificate) getString(R.string.buy_cert) else getString(R.string.download_cert)
@@ -184,7 +188,7 @@ class DetailCourseActivity :
                 certificate = it
             }
             if (it.type === "record") {
-                record = it;
+                record = it
             }
         }
 
@@ -220,19 +224,15 @@ class DetailCourseActivity :
     override fun downloadFilePDF(file: DownloadFile) {
         closeLoadingDialog()
         try {
-            val uri = Uri.parse(file.fileUrl);
+            val uri = Uri.parse(file.fileUrl)
 
-            val request = DownloadManager.Request(uri)
-                .setTitle("U-Learning Pdf")
+            val request = DownloadManager.Request(uri).setTitle("U-Learning Pdf")
                 .setDescription("Descargando...")
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
                 .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI)
-                .setVisibleInDownloadsUi(true)
-                .setDestinationInExternalFilesDir(
-                    this,
-                    Environment.DIRECTORY_DOCUMENTS,
-                    file.filename + ".pdf"
-                );
+                .setVisibleInDownloadsUi(true).setDestinationInExternalFilesDir(
+                    this, Environment.DIRECTORY_DOCUMENTS, file.filename + ".pdf"
+                )
             val dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             dm.enqueue(request)
         } catch (e: Exception) {

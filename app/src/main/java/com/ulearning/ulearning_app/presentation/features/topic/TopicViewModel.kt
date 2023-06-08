@@ -1,12 +1,9 @@
 package com.ulearning.ulearning_app.presentation.features.topic
 
 import com.ulearning.ulearning_app.core.functional.Failure
-import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.model.Topic
-import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursesSubscriptionUseCase
 import com.ulearning.ulearning_app.domain.useCase.topic.GetTopicUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
-import com.ulearning.ulearning_app.presentation.features.home.HomeState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

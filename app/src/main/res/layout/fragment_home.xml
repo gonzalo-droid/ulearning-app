@@ -117,7 +117,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/dimen10"
-                        android:text="@string/course_recent"
+                        android:text="@string/course_progress"
                         android:textAppearance="@style/readex_20_medium"
                         android:textColor="@color/blue"
                         app:layout_constraintBottom_toBottomOf="parent"

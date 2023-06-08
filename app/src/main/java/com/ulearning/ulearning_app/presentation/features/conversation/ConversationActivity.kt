@@ -3,7 +3,6 @@ package com.ulearning.ulearning_app.presentation.features.conversation
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
@@ -42,7 +41,7 @@ class ConversationActivity :
         ConversationReducer.instance(viewState = this)
 
         binding.topBarInclude.btnBack.setOnClickListener {
-            onBackPressed()
+            finish()
         }
 
         recycler = binding.recycler

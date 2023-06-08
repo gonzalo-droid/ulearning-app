@@ -13,8 +13,20 @@
         tools:layout="@layout/fragment_home">
 
         <action
+            android:id="@+id/action_navigation_home_to_courseCompletedActivity"
+            app:destination="@id/courseCompletedActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_courseProgressActivity"
+            app:destination="@id/courseProgressActivity" />
+        <action
             android:id="@+id/action_navigation_home_to_detailCourseActivity"
             app:destination="@id/detailCourseActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_courseRouteActivity"
+            app:destination="@id/courseRouteActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_coursePacksActivity"
+            app:destination="@id/coursePacksActivity" />
     </fragment>
 
     <fragment
@@ -65,4 +77,24 @@
         android:name="com.ulearning.ulearning_app.presentation.features.scanQr.ScanQrActivity"
         android:label="activity_scan_qr"
         tools:layout="@layout/activity_scan_qr" />
+    <activity
+        android:id="@+id/courseCompletedActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.home.view.CourseCompletedActivity"
+        android:label="activity_course_completed"
+        tools:layout="@layout/activity_course_completed" />
+    <activity
+        android:id="@+id/courseProgressActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.home.view.CourseProgressActivity"
+        android:label="activity_course_progress"
+        tools:layout="@layout/activity_course_progress" />
+    <activity
+        android:id="@+id/courseRouteActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.home.view.CourseRouteActivity"
+        android:label="activity_course_route"
+        tools:layout="@layout/activity_course_route" />
+    <activity
+        android:id="@+id/coursePacksActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.home.view.CoursePacksActivity"
+        android:label="activity_course_packs"
+        tools:layout="@layout/activity_course_packs" />
 </navigation>

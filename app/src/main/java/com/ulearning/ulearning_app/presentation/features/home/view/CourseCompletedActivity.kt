@@ -1,44 +1,102 @@
 package com.ulearning.ulearning_app.presentation.features.home.view
 
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import com.ulearning.ulearning_app.R
+import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.ulearning.ulearning_app.BR
+import com.ulearning.ulearning_app.core.extensions.dataBinding
+import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
+import com.ulearning.ulearning_app.core.functional.Failure
+import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityCourseCompletedBinding
+import com.ulearning.ulearning_app.domain.model.Subscription
+import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
+import com.ulearning.ulearning_app.presentation.features.courses.DetailCourseActivity
+import com.ulearning.ulearning_app.presentation.features.home.viewState.CourseCompleteViewState
+import com.ulearning.ulearning_app.presentation.features.home.event.CourseCompletedEvent
+import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseSubscriptionAdapter
+import com.ulearning.ulearning_app.presentation.features.home.reducer.CourseCompletedReducer
+import com.ulearning.ulearning_app.presentation.features.home.viewModel.CourseCompletedViewModel
+import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
+import dagger.hilt.android.AndroidEntryPoint
 
-class CourseCompletedActivity : AppCompatActivity() {
+@AndroidEntryPoint
+class CourseCompletedActivity :
+    BaseActivityWithViewModel<ActivityCourseCompletedBinding, CourseCompletedViewModel>(),
+    CourseCompleteViewState {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityCourseCompletedBinding
+    override val binding: ActivityCourseCompletedBinding by dataBinding(
+        ActivityCourseCompletedBinding::inflate
+    )
+
+    override val viewModel: CourseCompletedViewModel by viewModels()
+
+    override val dataBindingViewModel = BR.courseCompletedViewModel
+
+    private lateinit var courseRecycler: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
 
-        binding = ActivityCourseCompletedBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        CourseCompletedReducer.instance(viewState = this)
 
-        setSupportActionBar(binding.toolbar)
+        binding.topBarInclude.btnBack.setOnClickListener {
+            finish()
+        }
 
-        val navController = findNavController(R.id.nav_host_fragment_content_course_completed)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        courseRecycler = binding.courseRecycler
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAnchorView(R.id.fab)
-                .setAction("Action", null).show()
+        courseRecycler.layoutManager = LinearLayoutManager(this@CourseCompletedActivity)
+
+        observeUiStates()
+    }
+
+    private fun observeUiStates() {
+        viewModel.setEvent(CourseCompletedEvent.CourseCompleteClicked)
+
+        viewModel.apply {
+            lifecycleScopeCreate(activity = this@CourseCompletedActivity, method = {
+                state.collect { state ->
+                    CourseCompletedReducer.selectState(state)
+                }
+            })
+
+            lifecycleScopeCreate(activity = this@CourseCompletedActivity, method = {
+                effect.collect { effect ->
+                    CourseCompletedReducer.selectEffect(effect)
+                }
+            })
+        }
+
+    }
+
+    override fun messageFailure(failure: Failure) {
+        val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
+
+        showSnackBar(binding.root, getString(messageDesign.idMessage))
+    }
+
+    override fun loading() {
+        showLoadingDialog()
+    }
+
+    override fun getCourseComplete(courses: List<Subscription>) {
+        closeLoadingDialog()
+        courseRecycler.adapter = CourseSubscriptionAdapter(courses = courses) { model ->
+            onItemSelected(model)
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_course_completed)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+    private fun onItemSelected(model: Subscription) {
+
+        startActivity(Intent(this, DetailCourseActivity::class.java).apply {
+            putExtra(Config.COURSE_PUT, model.course)
+            putExtra(Config.SUBSCRIPTION_PUT, model)
+            putExtra(Config.ROLE, viewModel.typeRole)
+        })
+
     }
+
 }

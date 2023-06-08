@@ -107,7 +107,7 @@
     <string name="schedule_message">Programar</string>
     <string name="platform_message">Mensajería a plataforma</string>
 
-    <string name="course_recent">En progreso</string>
+    <string name="course_progress">En progreso</string>
     <string name="course_complete">Completados</string>
 
     <string name="no_data">Sin resultados encontrados</string>

@@ -1,14 +1,11 @@
 package com.ulearning.ulearning_app.presentation.features.home.view
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
@@ -20,18 +17,16 @@ import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
-import com.ulearning.ulearning_app.presentation.features.home.HomeEvent
-import com.ulearning.ulearning_app.presentation.features.home.HomeReducer
-import com.ulearning.ulearning_app.presentation.features.home.HomeViewState
+import com.ulearning.ulearning_app.presentation.features.home.event.HomeEvent
+import com.ulearning.ulearning_app.presentation.features.home.reducer.HomeReducer
+import com.ulearning.ulearning_app.presentation.features.home.viewState.HomeViewState
 import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseAdapter
-import com.ulearning.ulearning_app.presentation.features.home.adapter.HomeViewPagerAdapter
 import com.ulearning.ulearning_app.presentation.features.home.viewModel.HomeViewModel
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment :
-    BaseFragmentWithViewModel<FragmentHomeBinding, HomeViewModel>(),
+class HomeFragment : BaseFragmentWithViewModel<FragmentHomeBinding, HomeViewModel>(),
     HomeViewState {
 
     override val binding: FragmentHomeBinding by dataBinding(FragmentHomeBinding::inflate)
@@ -42,10 +37,6 @@ class HomeFragment :
 
     private lateinit var courseTeacherRecycler: RecyclerView
 
-    companion object {
-        const val COURSE_RECENT = 0
-        const val COURSE_COMPLETE = 1
-    }
 
     override fun onViewIsCreated(view: View) {
 
@@ -59,7 +50,7 @@ class HomeFragment :
 
 
         binding.cardProgress.setOnClickListener {
-            navigateToCourseFragment()
+            navigateToCourseProgressFragment()
         }
 
         binding.cardCompleted.setOnClickListener {
@@ -67,17 +58,16 @@ class HomeFragment :
         }
     }
 
-    private fun navigateToCourseFragment() {
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.mobile_navigation, CourseFragment())
-            .addToBackStack(null)
-            .commit()
+    private fun navigateToCourseProgressFragment() {
+        findNavController().navigate(
+            R.id.action_navigation_home_to_courseProgressActivity, Bundle()
+        )
     }
+
     private fun navigateToCourseCompletedFragment() {
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.mobile_navigation, CourseCompletedFragment())
-            .addToBackStack(null)
-            .commit()
+        findNavController().navigate(
+            R.id.action_navigation_home_to_courseCompletedActivity, Bundle()
+        )
     }
 
 
@@ -101,7 +91,6 @@ class HomeFragment :
     }
 
 
-
     override fun messageFailure(failure: Failure) {
 
         val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
@@ -115,14 +104,12 @@ class HomeFragment :
 
     private fun onItemSelected(model: Subscription) {
 
-        findNavController().navigate(
-            R.id.action_navigation_home_to_detailCourseActivity,
+        findNavController().navigate(R.id.action_navigation_home_to_detailCourseActivity,
             Bundle().apply {
                 putSerializable(Config.COURSE_PUT, model.course)
                 putSerializable(Config.SUBSCRIPTION_PUT, model)
                 putSerializable(Config.ROLE, viewModel.typeRole)
-            }
-        )
+            })
     }
 
     override fun getCourseTeacher(courses: List<Course>) {
@@ -131,7 +118,7 @@ class HomeFragment :
             courseId = 0,
         )
 
-        if(courses.isNotEmpty()){
+        if (courses.isNotEmpty()) {
             binding.courseTeacherRecycler.visibility = View.VISIBLE
             binding.noDataInclude.noDataLayout.visibility = View.INVISIBLE
         } else {

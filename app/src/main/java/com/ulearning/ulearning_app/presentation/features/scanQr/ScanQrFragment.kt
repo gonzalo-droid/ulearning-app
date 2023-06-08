@@ -1,53 +1,5 @@
 package com.ulearning.ulearning_app.presentation.features.scanQr
 
-import android.Manifest
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
-import android.os.Build
-import android.os.Bundle
-import android.os.Handler
-import android.util.Log
-import android.view.SurfaceHolder
-import android.view.SurfaceView
-import android.view.View
-import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.util.isNotEmpty
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.vision.CameraSource
-import com.google.android.gms.vision.Detector
-import com.google.android.gms.vision.barcode.Barcode
-import com.google.android.gms.vision.barcode.BarcodeDetector
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
-import com.ulearning.ulearning_app.BR
-import com.ulearning.ulearning_app.R
-import com.ulearning.ulearning_app.core.extensions.dataBinding
-import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
-import com.ulearning.ulearning_app.core.functional.Failure
-import com.ulearning.ulearning_app.core.utils.Config
-import com.ulearning.ulearning_app.databinding.FragmentHomeBinding
-import com.ulearning.ulearning_app.databinding.FragmentScanQrBinding
-import com.ulearning.ulearning_app.domain.model.Course
-import com.ulearning.ulearning_app.domain.model.Profile
-import com.ulearning.ulearning_app.domain.model.Subscription
-import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
-import com.ulearning.ulearning_app.presentation.features.home.HomeEvent
-import com.ulearning.ulearning_app.presentation.features.home.HomeReducer
-import com.ulearning.ulearning_app.presentation.features.home.HomeViewState
-import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseAdapter
-import com.ulearning.ulearning_app.presentation.features.home.adapter.HomeViewPagerAdapter
-import com.ulearning.ulearning_app.presentation.features.home.viewModel.HomeViewModel
-import com.ulearning.ulearning_app.presentation.features.validateCert.ValidateCertActivity
-import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
-import dagger.hilt.android.AndroidEntryPoint
-import java.io.IOException
 /*
 @AndroidEntryPoint
 class ScanQrFragment :
