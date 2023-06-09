@@ -6,14 +6,12 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.text.TextUtils
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.bumptech.glide.request.RequestOptions
 import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
@@ -37,6 +35,7 @@ import com.ulearning.ulearning_app.presentation.features.conversation.Conversati
 import com.ulearning.ulearning_app.presentation.features.courses.adapter.DetailCourseTeacherAdapter
 import com.ulearning.ulearning_app.presentation.features.courses.adapter.TopicAdapter
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
+import com.ulearning.ulearning_app.presentation.utils.imageLoader.ImageLoaderGlide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -79,8 +78,6 @@ class DetailCourseActivity :
         supportActionBar!!.setHomeAsUpIndicator(upArrow)
 
         DetailCourseReducer.instance(viewState = this)
-
-
 
         recycler = binding.recycler
 
@@ -265,6 +262,17 @@ class DetailCourseActivity :
 
     private fun setDetailCourse(data: Course) {
         with(binding) {
+
+            if (!data.mainImage?.originalUrl.isNullOrEmpty()) {
+                ImageLoaderGlide().loadImage(
+                    imageView = binding.imageCourseIv,
+                    imagePath = data.mainImage?.originalUrl!!,
+                    requestOptions = RequestOptions.centerCropTransform(),
+                    placeHolder = R.mipmap.ic_logo_launcher
+                )
+            }else{
+                binding.imageCourseIv.setImageResource(R.drawable.course_test)
+            }
 
             binding.toolbarLayout.title = data.title
             titleText.text = data.title

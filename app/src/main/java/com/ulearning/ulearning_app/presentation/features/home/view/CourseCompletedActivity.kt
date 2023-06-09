@@ -2,6 +2,7 @@ package com.ulearning.ulearning_app.presentation.features.home.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +15,7 @@ import com.ulearning.ulearning_app.databinding.ActivityCourseCompletedBinding
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
 import com.ulearning.ulearning_app.presentation.features.courses.DetailCourseActivity
-import com.ulearning.ulearning_app.presentation.features.home.viewState.CourseCompleteViewState
+import com.ulearning.ulearning_app.presentation.features.home.viewState.CourseCompletedViewState
 import com.ulearning.ulearning_app.presentation.features.home.event.CourseCompletedEvent
 import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseSubscriptionAdapter
 import com.ulearning.ulearning_app.presentation.features.home.reducer.CourseCompletedReducer
@@ -25,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CourseCompletedActivity :
     BaseActivityWithViewModel<ActivityCourseCompletedBinding, CourseCompletedViewModel>(),
-    CourseCompleteViewState {
+    CourseCompletedViewState {
 
     override val binding: ActivityCourseCompletedBinding by dataBinding(
         ActivityCourseCompletedBinding::inflate
@@ -49,6 +50,11 @@ class CourseCompletedActivity :
         courseRecycler = binding.courseRecycler
 
         courseRecycler.layoutManager = LinearLayoutManager(this@CourseCompletedActivity)
+
+
+        binding.noDataInclude.root.visibility = View.GONE
+        binding.courseRecycler.visibility = View.INVISIBLE
+        binding.skeletonInclude.root.visibility = View.VISIBLE
 
         observeUiStates()
     }
@@ -79,13 +85,21 @@ class CourseCompletedActivity :
     }
 
     override fun loading() {
-        showLoadingDialog()
+        binding.skeletonInclude.root.visibility = View.VISIBLE
     }
 
-    override fun getCourseComplete(courses: List<Subscription>) {
-        closeLoadingDialog()
-        courseRecycler.adapter = CourseSubscriptionAdapter(courses = courses) { model ->
-            onItemSelected(model)
+    override fun getCourseCompleted(courses: List<Subscription>) {
+        binding.skeletonInclude.root.visibility = View.INVISIBLE
+
+        if (courses.isNullOrEmpty()) {
+            binding.courseRecycler.visibility = View.INVISIBLE
+            binding.noDataInclude.root.visibility = View.VISIBLE
+        } else {
+            binding.noDataInclude.root.visibility = View.GONE
+            courseRecycler.adapter = CourseSubscriptionAdapter(courses = courses) { model ->
+                onItemSelected(model)
+            }
+            binding.courseRecycler.visibility = View.VISIBLE
         }
     }
 

@@ -39,12 +39,6 @@ class LoadingDialog(var loadingText: String? = null) : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvProgressText.text = loadingText ?: getString(R.string.label_loading)
     }
 
-    fun updateLoadingText(someText: String?) {
-        if (someText != null) {
-            binding.tvProgressText.text = someText
-        }
-    }
 }

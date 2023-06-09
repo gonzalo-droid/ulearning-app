@@ -4,12 +4,12 @@ import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.model.Subscription
 
-interface CourseCompleteViewState {
+interface CourseRouteViewState {
 
     fun messageFailure(failure: Failure)
 
     fun loading()
 
-    fun getCourseComplete(courses: List<Subscription>)
+    fun getCourseRoute(courses: List<Subscription>)
 
 }

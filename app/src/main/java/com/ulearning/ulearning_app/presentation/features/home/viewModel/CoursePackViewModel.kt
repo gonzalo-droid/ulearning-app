@@ -4,18 +4,18 @@ import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursesSubscriptionUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
-import com.ulearning.ulearning_app.presentation.features.home.event.CourseCompletedEvent
-import com.ulearning.ulearning_app.presentation.features.home.state.CourseCompletedState
+import com.ulearning.ulearning_app.presentation.features.home.event.CoursePackEvent
+import com.ulearning.ulearning_app.presentation.features.home.state.CoursePackState
 import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 
 @HiltViewModel
-class CourseCompletedViewModel
+class CoursePackViewModel
 @Inject constructor(
     private val getCoursesSubscriptionUseCase: GetCoursesSubscriptionUseCase,
-) : BaseViewModel<CourseCompletedEvent, CourseCompletedState, HomeEffect>() {
+) : BaseViewModel<CoursePackEvent, CoursePackState, HomeEffect>() {
 
     private val isFinished = true
 
@@ -25,24 +25,24 @@ class CourseCompletedViewModel
 
     var typeRole: String = ""
 
-    override fun createInitialState(): CourseCompletedState {
-        return CourseCompletedState.Idle
+    override fun createInitialState(): CoursePackState {
+        return CoursePackState.Idle
     }
 
 
-    override fun handleEvent(event: CourseCompletedEvent) {
+    override fun handleEvent(event: CoursePackEvent) {
         when (event) {
-            CourseCompletedEvent.CourseCompleteClicked -> getCourseCompleted()
+            CoursePackEvent.CoursePackClicked -> getCourseComplete()
         }
     }
 
-    private fun getCourseCompleted() {
-        setState { CourseCompletedState.Loading }
+    private fun getCourseComplete() {
+        setState { CoursePackState.Loading }
 
         getCoursesSubscriptionUseCase(
             GetCoursesSubscriptionUseCase.Params(page = page, isFinished = isFinished)
         ) {
-            it.either(::handleFailure, ::handleCourseCompleted)
+            it.either(::handleFailure, ::handleCourseComplete)
         }
     }
 
@@ -51,8 +51,8 @@ class CourseCompletedViewModel
     }
 
 
-    private fun handleCourseCompleted(courses: List<Subscription>) {
-        setState { CourseCompletedState.CourseCompleted(courses = courses) }
+    private fun handleCourseComplete(courses: List<Subscription>) {
+        setState { CoursePackState.CourseComplete(courses = courses) }
     }
 
     companion object Events

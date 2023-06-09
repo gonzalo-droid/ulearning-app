@@ -128,16 +128,9 @@ dependencies {
     implementation retrofit.okhttpInterceptor
     implementation 'com.localebro:okhttpprofiler:1.0.8'
 
-    // img
-    implementation others.fresco
-    // For animated GIF support
-    implementation 'com.facebook.fresco:animated-gif:2.6.0'
-
-    // For WebP support, including animated WebP
-    implementation 'com.facebook.fresco:animated-webp:2.6.0'
-
-    // For WebP support, without animations
-    implementation 'com.facebook.fresco:webpsupport:2.6.0'
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.14.1'
+    kapt 'com.github.bumptech.glide:compiler:4.14.1'
 
     // https://medium.com/geekculture/shimmer-effect-in-android-2b6840cc0097
     implementation 'com.facebook.shimmer:shimmer:0.5.0'

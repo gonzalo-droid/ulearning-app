@@ -50,26 +50,29 @@ class HomeFragment : BaseFragmentWithViewModel<FragmentHomeBinding, HomeViewMode
 
 
         binding.cardProgress.setOnClickListener {
-            navigateToCourseProgressFragment()
+            findNavController().navigate(
+                R.id.action_navigation_home_to_courseProgressActivity, Bundle()
+            )
         }
 
         binding.cardCompleted.setOnClickListener {
-            navigateToCourseCompletedFragment()
+            findNavController().navigate(
+                R.id.action_navigation_home_to_courseCompletedActivity, Bundle()
+            )
+        }
+
+        binding.cardPacks.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_navigation_home_to_coursePacksActivity, Bundle()
+            )
+        }
+
+        binding.cardRoutes.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_navigation_home_to_courseRouteActivity, Bundle()
+            )
         }
     }
-
-    private fun navigateToCourseProgressFragment() {
-        findNavController().navigate(
-            R.id.action_navigation_home_to_courseProgressActivity, Bundle()
-        )
-    }
-
-    private fun navigateToCourseCompletedFragment() {
-        findNavController().navigate(
-            R.id.action_navigation_home_to_courseCompletedActivity, Bundle()
-        )
-    }
-
 
     private fun observeUiStates() {
         viewModel.setEvent(HomeEvent.DataProfileClicked)
@@ -120,9 +123,9 @@ class HomeFragment : BaseFragmentWithViewModel<FragmentHomeBinding, HomeViewMode
 
         if (courses.isNotEmpty()) {
             binding.courseTeacherRecycler.visibility = View.VISIBLE
-            binding.noDataInclude.noDataLayout.visibility = View.INVISIBLE
+
         } else {
-            binding.noDataInclude.noDataLayout.visibility = View.VISIBLE
+
             binding.courseTeacherRecycler.visibility = View.INVISIBLE
         }
 

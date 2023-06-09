@@ -10,6 +10,7 @@
 
 
     <color name="green">#00ba5a</color>
+    <color name="green_200">#A5D6A7</color>
     <color name="blue">#2d2d8a</color>
     <color name="blue_a100">#82B1FF</color>
     <color name="gray0">#AAA9A9</color>
@@ -20,7 +21,7 @@
     <color name="gray5">#33595959</color>
 
 
-    <color name="viewLoading">#C8C8C9</color>
+    <color name="skeleton">#C8C8C9</color>
 
 
 

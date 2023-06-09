@@ -1,15 +1,15 @@
 package com.ulearning.ulearning_app.presentation.features.home.reducer
 
-import com.ulearning.ulearning_app.presentation.features.home.viewState.CourseCompleteViewState
-import com.ulearning.ulearning_app.presentation.features.home.state.CourseCompletedState
 import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
+import com.ulearning.ulearning_app.presentation.features.home.state.CourseCompletedState
+import com.ulearning.ulearning_app.presentation.features.home.viewState.CourseCompletedViewState
 
 
 object CourseCompletedReducer {
 
-    private lateinit var viewState: CourseCompleteViewState
+    private lateinit var viewState: CourseCompletedViewState
 
-    fun instance(viewState: CourseCompleteViewState) {
+    fun instance(viewState: CourseCompletedViewState) {
         CourseCompletedReducer.viewState = viewState
     }
 
@@ -19,8 +19,8 @@ object CourseCompletedReducer {
 
             is CourseCompletedState.Loading -> viewState.loading()
 
-            is CourseCompletedState.CourseComplete -> {
-                viewState.getCourseComplete(courses = state.courses)
+            is CourseCompletedState.CourseCompleted -> {
+                viewState.getCourseCompleted(courses = state.courses)
             }
         }
     }

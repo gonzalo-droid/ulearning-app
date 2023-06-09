@@ -1,7 +1,6 @@
 package com.ulearning.ulearning_app.core
 
 import android.app.Application
-import com.facebook.drawee.backends.pipeline.Fresco
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
 import com.ulearning.ulearning_app.R
@@ -13,7 +12,7 @@ class AndroidApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Fresco.initialize(this)
+
 
         val options = FirebaseOptions.Builder()
             .setApplicationId(getString(R.string.google_app_id))//FIREBASE_APPLICATION_ID

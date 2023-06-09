@@ -109,6 +109,13 @@
 
     <string name="course_progress">En progreso</string>
     <string name="course_complete">Completados</string>
+    <string name="course_route">Rutas de aprendizaje</string>
+    <string name="course_pack">Packs de cursos</string>
+
+    <string name="message_empty_course_completed">Aún no completes tus cursos.</string>
+    <string name="message_empty_course_progress">Aún no incias tus cursos</string>
+    <string name="message_empty_course_route">Aún no inicias tus rutas de aprendizaje</string>
+    <string name="message_empty_course_pack">Aún no inicias tus packs de cursos</string>
 
     <string name="no_data">Sin resultados encontrados</string>
 

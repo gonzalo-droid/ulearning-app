@@ -28,9 +28,24 @@
         android:id="@+id/materialCardView5"
         style="?attr/materialCardViewElevatedStyle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="150dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/course_test"
+            android:scaleType="centerCrop"
+            android:contentDescription="TODO"
+            android:alpha="0.9"/>
+        <View
+            android:alpha="0.9"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/green_200"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -59,6 +74,8 @@
                 android:text="Nombre del curso"
                 android:textAppearance="@style/readex_20_regular"
                 android:textColor="@color/blue"
+                android:maxLines="3"
+                android:ellipsize="end"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -76,12 +93,13 @@
                 android:gravity="end"
                 android:textAppearance="@style/readex_10_light"
                 android:textColor="@color/blue"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titleText"
-                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintVertical_bias="1.0"
                 tools:text="40 %" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

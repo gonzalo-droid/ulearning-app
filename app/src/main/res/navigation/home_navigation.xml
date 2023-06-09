@@ -94,7 +94,7 @@
         tools:layout="@layout/activity_course_route" />
     <activity
         android:id="@+id/coursePacksActivity"
-        android:name="com.ulearning.ulearning_app.presentation.features.home.view.CoursePacksActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.home.view.CoursePackActivity"
         android:label="activity_course_packs"
         tools:layout="@layout/activity_course_packs" />
 </navigation>

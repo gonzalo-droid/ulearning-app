@@ -340,17 +340,6 @@
                 tools:listitem="@layout/item_courses" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <include
-            android:id="@+id/noDataInclude"
-            layout="@layout/include_no_data"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleCoursesTv" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/tabConstraintLayout"
             android:layout_width="0dp"

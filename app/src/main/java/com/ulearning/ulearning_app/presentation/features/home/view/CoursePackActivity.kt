@@ -11,39 +11,37 @@ import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
-import com.ulearning.ulearning_app.databinding.ActivityCourseProgressBinding
-import com.ulearning.ulearning_app.domain.model.CoursePercentage
+import com.ulearning.ulearning_app.databinding.ActivityCoursePacksBinding
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
 import com.ulearning.ulearning_app.presentation.features.courses.DetailCourseActivity
-import com.ulearning.ulearning_app.presentation.features.home.event.CourseProgressEvent
-import com.ulearning.ulearning_app.presentation.features.home.viewState.CourseProgressViewState
 import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseSubscriptionAdapter
-import com.ulearning.ulearning_app.presentation.features.home.reducer.CourseProgressReducer
-import com.ulearning.ulearning_app.presentation.features.home.viewModel.CourseProgressViewModel
+import com.ulearning.ulearning_app.presentation.features.home.event.CoursePackEvent
+import com.ulearning.ulearning_app.presentation.features.home.reducer.CoursePackReducer
+import com.ulearning.ulearning_app.presentation.features.home.viewModel.CoursePackViewModel
+import com.ulearning.ulearning_app.presentation.features.home.viewState.CoursePackViewState
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
-class CourseProgressActivity :
-    BaseActivityWithViewModel<ActivityCourseProgressBinding, CourseProgressViewModel>(),
-    CourseProgressViewState {
+class CoursePackActivity :
+    BaseActivityWithViewModel<ActivityCoursePacksBinding, CoursePackViewModel>(),
+    CoursePackViewState {
 
-    override val binding: ActivityCourseProgressBinding by dataBinding(
-        ActivityCourseProgressBinding::inflate
+    override val binding: ActivityCoursePacksBinding by dataBinding(
+        ActivityCoursePacksBinding::inflate
     )
 
-    override val viewModel: CourseProgressViewModel by viewModels()
+    override val viewModel: CoursePackViewModel by viewModels()
 
-    override val dataBindingViewModel = BR.courseProgressViewModel
+    override val dataBindingViewModel = BR.coursePackViewModel
 
     private lateinit var courseRecycler: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        CourseProgressReducer.instance(viewState = this)
+        CoursePackReducer.instance(viewState = this)
 
         binding.topBarInclude.btnBack.setOnClickListener {
             finish()
@@ -51,8 +49,7 @@ class CourseProgressActivity :
 
         courseRecycler = binding.courseRecycler
 
-        courseRecycler.layoutManager = LinearLayoutManager(this@CourseProgressActivity)
-
+        courseRecycler.layoutManager = LinearLayoutManager(this@CoursePackActivity)
 
         binding.noDataInclude.root.visibility = View.GONE
         binding.courseRecycler.visibility = View.INVISIBLE
@@ -62,18 +59,18 @@ class CourseProgressActivity :
     }
 
     private fun observeUiStates() {
-        viewModel.setEvent(CourseProgressEvent.CourseRecentClicked)
+        viewModel.setEvent(CoursePackEvent.CoursePackClicked)
 
         viewModel.apply {
-            lifecycleScopeCreate(activity = this@CourseProgressActivity, method = {
+            lifecycleScopeCreate(activity = this@CoursePackActivity, method = {
                 state.collect { state ->
-                    CourseProgressReducer.selectState(state)
+                    CoursePackReducer.selectState(state)
                 }
             })
 
-            lifecycleScopeCreate(activity = this@CourseProgressActivity, method = {
+            lifecycleScopeCreate(activity = this@CoursePackActivity, method = {
                 effect.collect { effect ->
-                    CourseProgressReducer.selectEffect(effect)
+                    CoursePackReducer.selectEffect(effect)
                 }
             })
         }
@@ -90,21 +87,18 @@ class CourseProgressActivity :
         binding.skeletonInclude.root.visibility = View.VISIBLE
     }
 
-    override fun getCourseRecent(courses: List<Subscription>, percentages: List<CoursePercentage>) {
+    override fun getCourseComplete(courses: List<Subscription>) {
         binding.skeletonInclude.root.visibility = View.INVISIBLE
-
         if (courses.isNullOrEmpty()) {
             binding.courseRecycler.visibility = View.INVISIBLE
             binding.noDataInclude.root.visibility = View.VISIBLE
         } else {
             binding.noDataInclude.root.visibility = View.GONE
-            courseRecycler.adapter =
-                CourseSubscriptionAdapter(courses = courses, percentages = percentages) { model ->
-                    onItemSelected(model)
-                }
+            courseRecycler.adapter = CourseSubscriptionAdapter(courses = courses) { model ->
+                onItemSelected(model)
+            }
             binding.courseRecycler.visibility = View.VISIBLE
         }
-
     }
 
     private fun onItemSelected(model: Subscription) {

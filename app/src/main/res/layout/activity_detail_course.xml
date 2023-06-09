@@ -19,8 +19,7 @@
             android:id="@+id/appBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:theme="@style/AppTheme.AppBarOverlay"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -29,15 +28,21 @@
                 android:layout_height="200dp"
                 app:collapsedTitleGravity="top|center"
                 app:collapsedTitleTextAppearance="@style/CollapsedAppBar"
-                app:expandedTitleTextAppearance="@style/ExpandedAppBar"
+                app:contentScrim="@color/green"
                 app:expandedTitleGravity="bottom|center"
                 app:expandedTitleMarginStart="50dp"
+                app:expandedTitleTextAppearance="@style/ExpandedAppBar"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:contentScrim="@color/green"
-                android:background="@color/green"
-                app:toolbarId="@id/toolbar"
-                app:maxLines="2">
+                app:maxLines="2"
+                app:toolbarId="@id/toolbar">
 
+                <ImageView
+                    android:id="@+id/imageCourseIv"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/course_test"
+                    app:layout_collapseMode="parallax" />
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -45,10 +50,8 @@
                     android:layout_height="?attr/actionBarSize"
                     android:gravity="top"
                     app:layout_collapseMode="pin"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-                    app:titleMarginTop="18dp"
-                    android:background="@color/green"/>
-
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:titleMarginTop="18dp" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -60,8 +63,8 @@
             android:layout_height="wrap_content"
             android:clipToPadding="false"
             android:paddingBottom="@dimen/dimen40"
-            app:layout_constrainedHeight="true"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constrainedHeight="true">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -393,8 +396,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dimen8"
-                            android:orientation="vertical"
                             android:nestedScrollingEnabled="false"
+                            android:orientation="vertical"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
