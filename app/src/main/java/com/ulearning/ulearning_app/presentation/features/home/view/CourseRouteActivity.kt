@@ -15,6 +15,7 @@ import com.ulearning.ulearning_app.databinding.ActivityCourseRouteBinding
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
 import com.ulearning.ulearning_app.presentation.features.courses.DetailCourseActivity
+import com.ulearning.ulearning_app.presentation.features.home.adapter.CoursePackageSubscriptionAdapter
 import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseSubscriptionAdapter
 import com.ulearning.ulearning_app.presentation.features.home.event.CourseRouteEvent
 import com.ulearning.ulearning_app.presentation.features.home.reducer.CourseRouteReducer
@@ -94,7 +95,9 @@ class CourseRouteActivity :
             binding.noDataInclude.root.visibility = View.VISIBLE
         } else {
             binding.noDataInclude.root.visibility = View.GONE
-            courseRecycler.adapter = CourseSubscriptionAdapter(courses = courses) { model ->
+            courseRecycler.adapter = CoursePackageSubscriptionAdapter(
+                courses = courses, type = "route"
+            ) { model ->
                 onItemSelected(model)
             }
             binding.courseRecycler.visibility = View.VISIBLE
@@ -103,10 +106,10 @@ class CourseRouteActivity :
 
     private fun onItemSelected(model: Subscription) {
 
-        startActivity(Intent(this, DetailCourseActivity::class.java).apply {
-            putExtra(Config.COURSE_PUT, model.course)
-            putExtra(Config.SUBSCRIPTION_PUT, model)
-            putExtra(Config.ROLE, viewModel.typeRole)
+        startActivity(Intent(this, CoursePackageActivity::class.java).apply {
+            // putExtra(Config.COURSE_PUT, model.course)
+            // putExtra(Config.SUBSCRIPTION_PUT, model)
+            // putExtra(Config.ROLE, viewModel.typeRole)
         })
 
     }

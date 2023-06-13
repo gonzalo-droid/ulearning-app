@@ -150,7 +150,7 @@ class DetailCourseViewModel
 
     private fun goToConversation() {
         if (::course.isInitialized) {
-            setEffect { DetailCourseEffect.GoToConversation(courseId = course.id) }
+            setEffect { course.id?.let { DetailCourseEffect.GoToConversation(courseId = it) }!! }
         }
     }
 
@@ -159,7 +159,7 @@ class DetailCourseViewModel
 
         if (::course.isInitialized) {
             getTopicUseCase(
-                GetTopicUseCase.Params(courseId = course.id)
+                GetTopicUseCase.Params(courseId = course.id!!)
             ) {
                 it.either(::handleFailure, ::handleTopics)
             }
@@ -191,7 +191,6 @@ class DetailCourseViewModel
     }
 
     private fun handleFailureNoShow(failure: Failure) {}
-
 
 
     private fun handleTopics(topics: List<Topic>) {

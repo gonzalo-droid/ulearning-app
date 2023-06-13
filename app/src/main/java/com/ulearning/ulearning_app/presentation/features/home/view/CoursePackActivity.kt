@@ -15,6 +15,7 @@ import com.ulearning.ulearning_app.databinding.ActivityCoursePacksBinding
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
 import com.ulearning.ulearning_app.presentation.features.courses.DetailCourseActivity
+import com.ulearning.ulearning_app.presentation.features.home.adapter.CoursePackageSubscriptionAdapter
 import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseSubscriptionAdapter
 import com.ulearning.ulearning_app.presentation.features.home.event.CoursePackEvent
 import com.ulearning.ulearning_app.presentation.features.home.reducer.CoursePackReducer
@@ -94,7 +95,10 @@ class CoursePackActivity :
             binding.noDataInclude.root.visibility = View.VISIBLE
         } else {
             binding.noDataInclude.root.visibility = View.GONE
-            courseRecycler.adapter = CourseSubscriptionAdapter(courses = courses) { model ->
+            courseRecycler.adapter = CoursePackageSubscriptionAdapter(
+                courses = courses,
+                type = "pack"
+            ) { model ->
                 onItemSelected(model)
             }
             binding.courseRecycler.visibility = View.VISIBLE

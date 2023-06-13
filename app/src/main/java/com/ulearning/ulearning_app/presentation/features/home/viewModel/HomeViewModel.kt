@@ -108,7 +108,7 @@ class HomeViewModel
     }
 
     private fun handleCourseComplete(courses: List<Subscription>) {
-        setState { HomeState.CourseComplete(courses = courses) }
+        setState { HomeState.CourseCompleted(courses = courses) }
     }
 
     private fun handleCourseRecent(courses: List<Subscription>) {

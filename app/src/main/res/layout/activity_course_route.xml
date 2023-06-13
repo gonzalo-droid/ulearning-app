@@ -51,7 +51,7 @@
             app:layout_constraintEnd_toEndOf="@+id/guideline28"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
             app:layout_constraintTop_toBottomOf="@+id/topBarInclude"
-            tools:listitem="@layout/item_courses" />
+            tools:listitem="@layout/item_route" />
 
         <include
             android:id="@+id/skeletonInclude"

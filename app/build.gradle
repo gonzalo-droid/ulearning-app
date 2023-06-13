@@ -42,13 +42,12 @@ android {
             dimension 'versionFlavor'
             buildConfigField 'boolean', 'IS_SHOW_LOG', 'true'
             buildConfigField 'boolean', 'DEBUG', 'true'
-            buildConfigField 'String', 'BASE_URL', '"https://api.ulearning.com.pe/api/"'
+            buildConfigField 'String', 'BASE_URL', '"https://api.ulearning.com.pe/api/"'// '"http://10.0.2.2:3100/api/"'
             buildConfigField 'String', 'STUDENT_URL', '"https://student.ulearning.com.pe"'
-            /*
-            buildConfigField 'String', 'BASE_URL', '"https://sandbox.api.ulearning.com.pe/api/"'
-            buildConfigField 'String', 'STUDENT_URL', '"https://sandbox.student.ulearning.com.pe"'*/
         }
 
+        // email : "one_student@gmail.com"
+        // password : "ulearning2022"
         prod {
             dimension 'versionFlavor'
             buildConfigField 'boolean', 'IS_SHOW_LOG', 'false'

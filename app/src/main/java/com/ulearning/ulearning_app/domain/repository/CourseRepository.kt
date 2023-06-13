@@ -9,17 +9,22 @@ import com.ulearning.ulearning_app.domain.model.*
 
 interface CourseRepository {
 
+    suspend fun getSubscriptionsPackage(
+        page: Int,
+        type: String,
+    ): Either<Failure, List<Subscription>>
+
     suspend fun getSubscriptions(
         page: Int,
-        isFinished: Boolean
+        isFinished: Boolean,
     ): Either<Failure, List<Subscription>>
 
     suspend fun getCoursesTeacher(
-        userId: Int
+        userId: Int,
     ): Either<Failure, List<Course>>
 
     suspend fun getCoursePercentage(
-        courseIds: String
+        courseIds: String,
     ): Either<Failure, List<CoursePercentage>>
 
     suspend fun myFiles(

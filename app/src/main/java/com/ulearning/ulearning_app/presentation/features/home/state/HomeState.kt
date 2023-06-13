@@ -16,7 +16,7 @@ sealed class HomeState : UiState {
 
     data class CourseTeacher constructor(val courses: List<Course>) : HomeState()
 
-    data class CourseComplete constructor(val courses: List<Subscription>) : HomeState()
+    data class CourseCompleted constructor(val courses: List<Subscription>) : HomeState()
 
     data class CourseRecent constructor(val courses: List<Subscription>, val percentages: List<CoursePercentage>) : HomeState()
 

@@ -2,6 +2,7 @@ package com.ulearning.ulearning_app.presentation.features.home.viewModel
 
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Subscription
+import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursesPackageSubscriptionUseCase
 import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursesSubscriptionUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import com.ulearning.ulearning_app.presentation.features.home.event.CourseRouteEvent
@@ -14,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CourseRouteViewModel
 @Inject constructor(
-    private val getCoursesSubscriptionUseCase: GetCoursesSubscriptionUseCase,
+    private val getCoursesPackageSubscriptionUseCase: GetCoursesPackageSubscriptionUseCase,
 ) : BaseViewModel<CourseRouteEvent, CourseRouteState, HomeEffect>() {
 
     private val isFinished = true
@@ -38,8 +39,8 @@ class CourseRouteViewModel
     private fun getRoutes() {
         setState { CourseRouteState.Loading }
 
-        getCoursesSubscriptionUseCase(
-            GetCoursesSubscriptionUseCase.Params(page = page, isFinished = !isFinished)
+        getCoursesPackageSubscriptionUseCase(
+            GetCoursesPackageSubscriptionUseCase.Params(page = page, type = "learning_package")
         ) {
             it.either(::handleFailure, ::handleCourseRoute)
         }

@@ -4,20 +4,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.request.RequestOptions
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.databinding.ItemCoursesBinding
 import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.model.Subscription
+import com.ulearning.ulearning_app.presentation.utils.imageLoader.ImageLoaderGlide
 
 class CourseAdapter constructor(
     private val courses: List<Course>,
-    private val onClickListener: (Course) -> Unit
+    private val onClickListener: (Course) -> Unit,
 ) : RecyclerView.Adapter<CourseAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         return CustomViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_courses, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_courses, parent, false)
         )
     }
 
@@ -41,6 +42,16 @@ class CourseAdapter constructor(
             binding.categoryText.text = model.category?.name
 
             binding.titleText.text = model.title
+
+            model.mainImage?.originalUrl?.let {
+                ImageLoaderGlide().loadImage(
+                    imageView = binding.imageIv,
+                    imagePath = it,
+                    requestOptions = RequestOptions.centerCropTransform(),
+                    placeHolder = R.mipmap.ic_logo_launcher
+                )
+            }
+
 
             itemView.setOnClickListener {
                 onClickListener(model)

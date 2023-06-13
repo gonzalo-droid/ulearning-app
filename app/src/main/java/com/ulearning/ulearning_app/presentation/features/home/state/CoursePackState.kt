@@ -9,6 +9,6 @@ sealed class CoursePackState : UiState {
 
     object Loading : CoursePackState()
 
-    data class CourseComplete constructor(val courses: List<Subscription>) : CoursePackState()
+    data class CoursePack constructor(val courses: List<Subscription>) : CoursePackState()
 
 }

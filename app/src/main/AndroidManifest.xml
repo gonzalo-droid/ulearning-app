@@ -20,21 +20,8 @@
         android:label="U-Learning"
         android:roundIcon="@mipmap/logo_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Ulearning.App">
-        <activity
-            android:name=".presentation.features.home.view.CourseCompletedActivity"
-            android:exported="false"
-            android:label="@string/title_activity_course_completed" />
-        <activity
-            android:name=".presentation.features.home.view.CourseProgressActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.features.home.view.CourseRouteActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.features.home.view.CoursePackActivity"
-            android:exported="false" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -100,7 +87,29 @@
         <activity
             android:name=".presentation.features.courses.DetailCourseActivity"
             android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.App.Transparent" />
+        <activity
+            android:name=".presentation.features.home.view.CoursePackageActivity"
+            android:exported="false"
             android:theme="@style/Theme.App.Transparent"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".presentation.features.home.view.CourseCompletedActivity"
+            android:exported="false"
+            android:label="@string/title_activity_course_completed"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".presentation.features.home.view.CourseProgressActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".presentation.features.home.view.CourseRouteActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".presentation.features.home.view.CoursePackActivity"
+            android:exported="false"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.features.search.SearchActivity"

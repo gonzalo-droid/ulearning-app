@@ -11,7 +11,12 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface CourseService {
-
+    suspend fun subscriptionsPackage(
+        token: String,
+        perPage: Int,
+        page: Int,
+        includes: String
+    ): Either<Failure, List<SubscriptionResponse>>
     suspend fun subscriptions(
         token: String,
         perPage: Int,

@@ -1,13 +1,10 @@
 package com.ulearning.ulearning_app.data.remote.api
 
-import com.ulearning.ulearning_app.core.functional.Either
-import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
 import com.ulearning.ulearning_app.data.remote.entities.request.DownloadGuestFileRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.ShowGuestFileRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.*
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
-import com.ulearning.ulearning_app.domain.model.DownloadFile
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -19,6 +16,16 @@ interface CourseApi {
         @Query("per_page") perPage: Int,
         @Query("page") page: Int,
         @Query("is_finished") isFinished: Boolean,
+    ): Response<BaseResponse<List<SubscriptionResponse>>>
+
+    @GET("https://mockbin.org/bin/2afbba16-5d35-4018-849a-1d7436295976") // subscriptions
+    suspend fun subscriptionsPackage(
+        @Header(SettingRemote.AUTHORIZATION) token: String,
+        @Query("per_page") perPage: Int,
+        @Query("page") page: Int,
+        @Query("classification") classification: String = "path,package",
+        @Query("includes") includes: String = "learning_package",
+        // @Query("without_pagination") withoutPagination: Boolean = true,
     ): Response<BaseResponse<List<SubscriptionResponse>>>
 
     @GET("courses")

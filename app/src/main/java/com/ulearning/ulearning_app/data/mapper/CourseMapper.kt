@@ -8,7 +8,6 @@ import com.ulearning.ulearning_app.domain.model.*
 
 interface CourseMapper {
 
-
     suspend fun listSubscriptionToDomain(data: List<SubscriptionResponse>): List<Subscription>
 
     suspend fun listCourseToDomain(data: List<CourseResponse>): List<Course>

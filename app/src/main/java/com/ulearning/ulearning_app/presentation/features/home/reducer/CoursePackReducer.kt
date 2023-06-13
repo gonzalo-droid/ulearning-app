@@ -19,7 +19,7 @@ object CoursePackReducer {
 
             is CoursePackState.Loading -> viewState.loading()
 
-            is CoursePackState.CourseComplete -> {
+            is CoursePackState.CoursePack -> {
                 viewState.getCourseComplete(courses = state.courses)
             }
         }

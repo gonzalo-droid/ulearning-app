@@ -19,5 +19,7 @@ data class Subscription(
     var timeSession: Int? = 0,
     var type: String? = "",
     var user: User? = null,
-    var userId: Int? = 0
+    var userId: Int? = 0,
+    var learningPackage: LearningPackage? = null,
 ) : Serializable
+

@@ -17,6 +17,18 @@ class CourseServiceImpl
 @Inject constructor(
     private val courseApi: CourseApi, private val networkHandler: NetworkHandler
 ) : CourseService {
+    override suspend fun subscriptionsPackage(
+        token: String,
+        perPage: Int,
+        page: Int,
+        includes: String,
+    ): Either<Failure, List<SubscriptionResponse>> {
+        return networkHandler.callServiceBaseList {
+            courseApi.subscriptionsPackage(
+                token, perPage, page, includes
+            )
+        }
+    }
 
     override suspend fun subscriptions(
         token: String,

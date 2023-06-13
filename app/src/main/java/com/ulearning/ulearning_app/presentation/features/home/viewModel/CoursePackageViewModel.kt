@@ -2,21 +2,22 @@ package com.ulearning.ulearning_app.presentation.features.home.viewModel
 
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Subscription
-import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursesPackageSubscriptionUseCase
 import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursesSubscriptionUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import com.ulearning.ulearning_app.presentation.features.home.event.CoursePackEvent
 import com.ulearning.ulearning_app.presentation.features.home.state.CoursePackState
 import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
+import com.ulearning.ulearning_app.presentation.features.home.event.CoursePackageEvent
+import com.ulearning.ulearning_app.presentation.features.home.state.CoursePackageState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 
 @HiltViewModel
-class CoursePackViewModel
+class CoursePackageViewModel
 @Inject constructor(
-    private val getCoursesPackageSubscriptionUseCase: GetCoursesPackageSubscriptionUseCase,
-) : BaseViewModel<CoursePackEvent, CoursePackState, HomeEffect>() {
+    private val getCoursesSubscriptionUseCase: GetCoursesSubscriptionUseCase,
+) : BaseViewModel<CoursePackageEvent, CoursePackageState, HomeEffect>() {
 
     private val isFinished = true
 
@@ -26,22 +27,22 @@ class CoursePackViewModel
 
     var typeRole: String = ""
 
-    override fun createInitialState(): CoursePackState {
-        return CoursePackState.Idle
+    override fun createInitialState(): CoursePackageState {
+        return CoursePackageState.Idle
     }
 
 
-    override fun handleEvent(event: CoursePackEvent) {
+    override fun handleEvent(event: CoursePackageEvent) {
         when (event) {
-            CoursePackEvent.CoursePackClicked -> getPacks()
+            CoursePackageEvent.CoursePackageClicked -> getCourseComplete()
         }
     }
 
-    private fun getPacks() {
-        setState { CoursePackState.Loading }
+    private fun getCourseComplete() {
+        setState { CoursePackageState.Loading }
 
-        getCoursesPackageSubscriptionUseCase(
-            GetCoursesPackageSubscriptionUseCase.Params(page = page, type = "learning_package")
+        getCoursesSubscriptionUseCase(
+            GetCoursesSubscriptionUseCase.Params(page = page, isFinished = isFinished)
         ) {
             it.either(::handleFailure, ::handleCourseComplete)
         }
@@ -53,7 +54,7 @@ class CoursePackViewModel
 
 
     private fun handleCourseComplete(courses: List<Subscription>) {
-        setState { CoursePackState.CoursePack(courses = courses) }
+        setState { CoursePackageState.CoursePackage(courses = courses) }
     }
 
     companion object Events

@@ -6,7 +6,7 @@ object SupportReducer {
     private lateinit var viewState: SupportViewState
 
     fun instance(viewState: SupportViewState) {
-        this.viewState = viewState
+        SupportReducer.viewState = viewState
     }
 
     fun selectState(state: SupportState) {
