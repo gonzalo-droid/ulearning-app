@@ -48,44 +48,27 @@ class ListCoursesPackageFragment :
 
         ListCoursesPackageReducer.instance(viewState = this@ListCoursesPackageFragment)
 
-        observeUiStates()
-
         courseRecycler = binding.courseRecycler
 
         courseRecycler.layoutManager = LinearLayoutManager(requireContext())
 
-
+        observeUiStates()
 
     }
 
     private fun observeUiStates() {
 
-        with(viewModel) {
-            items.observe(viewLifecycleOwner) { data ->
-                Log.d("TagItems", "viewModel.getSharedData() " + data?.size.toString())
-                courseRecycler.adapter = CoursePackageItemAdapter(
-                    items = data
-                ) { model ->
-                    onItemSelected(model)
-                }
+        val list : List<LearningPackageItem>? = (requireActivity() as CoursePackageActivity).returnListCourse()
+        if(!list.isNullOrEmpty()){
+            courseRecycler.adapter = CoursePackageItemAdapter(
+                items = list
+            ) { model ->
+                onItemSelected(model)
             }
+            Log.d("TagItems", "getListCoursesPackage "+ list.first().course?.title )
+
         }
 
-        /*
-        viewModel.apply {
-            lifecycleScopeCreate(activity = requireActivity(), method = {
-                state.collect { state ->
-                    ListCoursesPackageReducer.selectState(state)
-                }
-            })
-
-            lifecycleScopeCreate(activity = requireActivity(), method = {
-                effect.collect { effect ->
-                    ListCoursesPackageReducer.selectEffect(effect)
-                }
-            })
-        }
-        */
     }
 
     override fun messageFailure(failure: Failure) {
@@ -101,8 +84,6 @@ class ListCoursesPackageFragment :
 
     override fun getListCoursesPackage(items: List<LearningPackageItem>?) {
         closeLoadingDialog()
-        Log.d("TagItems", "getListCoursesPackage "+ items?.size.toString())
-
         courseRecycler.adapter = CoursePackageItemAdapter(
             items = items!!
         ) { model ->

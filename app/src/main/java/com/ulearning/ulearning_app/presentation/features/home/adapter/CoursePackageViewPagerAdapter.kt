@@ -9,7 +9,6 @@ import com.ulearning.ulearning_app.presentation.features.home.view.ListCoursesPa
 
 class CoursePackageViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
-
     override fun getItemCount() = 2
 
     override fun createFragment(position: Int): Fragment {

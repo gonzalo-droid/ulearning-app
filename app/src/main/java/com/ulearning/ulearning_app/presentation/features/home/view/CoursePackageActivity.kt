@@ -21,6 +21,8 @@ import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityCoursePackageBinding
 import com.ulearning.ulearning_app.domain.model.CoursePackage
+import com.ulearning.ulearning_app.domain.model.LearningPackage
+import com.ulearning.ulearning_app.domain.model.LearningPackageItem
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
 import com.ulearning.ulearning_app.presentation.features.courseDetail.DetailCourseActivity
@@ -61,8 +63,6 @@ class CoursePackageActivity :
         supportActionBar!!.setHomeAsUpIndicator(upArrow)
 
         CoursePackageReducer.instance(viewState = this@CoursePackageActivity)
-
-        initTabLayout()
 
         observeUiStates()
     }
@@ -120,16 +120,17 @@ class CoursePackageActivity :
 
             viewModel.setSharedData(course.learningPackage?.items!!)
 
+            initTabLayout()
+
         }
     }
 
-    private fun onItemSelected(model: Subscription) {
+    fun returnListCourse(): List<LearningPackageItem>? {
+        return viewModel.items?.value ?: arrayListOf()
+    }
 
-        startActivity(Intent(this, DetailCourseActivity::class.java).apply {
-            putExtra(Config.COURSE_PUT, model.course)
-            putExtra(Config.SUBSCRIPTION_PUT, model)
-            putExtra(Config.ROLE, viewModel.typeRole)
-        })
+    fun returnLearningPackage(): LearningPackage? {
+        return viewModel.learningPackage?.value
     }
 
     private fun initTabLayout() {

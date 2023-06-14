@@ -12,7 +12,7 @@ import com.ulearning.ulearning_app.domain.model.LearningPackageItem
 import com.ulearning.ulearning_app.presentation.utils.imageLoader.ImageLoaderGlide
 
 class CoursePackageItemAdapter constructor(
-    private val items: List<LearningPackageItem>,
+    private val items: List<LearningPackageItem> = arrayListOf(),
     private val onClickListener: (LearningPackageItem) -> Unit,
 ) : RecyclerView.Adapter<CoursePackageItemAdapter.CustomViewHolder>() {
 

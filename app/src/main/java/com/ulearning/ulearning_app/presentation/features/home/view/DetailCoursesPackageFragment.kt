@@ -1,6 +1,7 @@
 package com.ulearning.ulearning_app.presentation.features.home.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -11,8 +12,11 @@ import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.FragmentDetailCoursePackageBinding
+import com.ulearning.ulearning_app.domain.model.LearningPackage
+import com.ulearning.ulearning_app.domain.model.LearningPackageItem
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
+import com.ulearning.ulearning_app.presentation.features.home.adapter.CoursePackageItemAdapter
 import com.ulearning.ulearning_app.presentation.features.home.event.CoursePackageEvent
 import com.ulearning.ulearning_app.presentation.features.home.reducer.DetailCoursesPackageReducer
 import com.ulearning.ulearning_app.presentation.features.home.viewModel.CoursePackageViewModel
@@ -35,7 +39,17 @@ class DetailCoursesPackageFragment :
 
         DetailCoursesPackageReducer.instance(viewState = this)
 
-        observeUiStates()
+        // observeUiStates()
+
+        val data : LearningPackage? = (requireActivity() as CoursePackageActivity).returnLearningPackage()
+        if(data != null){
+            with(binding){
+                titleText.text = data.title
+                shortDescriptionTv.text = data.descriptionShort
+                largeDescriptionTv.text = data.descriptionLarge
+            }
+
+        }
     }
 
     private fun observeUiStates() {

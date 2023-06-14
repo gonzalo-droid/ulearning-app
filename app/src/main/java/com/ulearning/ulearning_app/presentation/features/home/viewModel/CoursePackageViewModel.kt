@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.CoursePackage
+import com.ulearning.ulearning_app.domain.model.LearningPackage
 import com.ulearning.ulearning_app.domain.model.LearningPackageItem
 import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursePackageUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
@@ -31,15 +32,23 @@ class CoursePackageViewModel
     private val _items = MutableLiveData<List<LearningPackageItem>>()
     val items: LiveData<List<LearningPackageItem>> = _items
 
+
+    private val _learningPackage = MutableLiveData<LearningPackage>()
+    val learningPackage: LiveData<LearningPackage> = _learningPackage
+
+
     fun setSharedData(data: List<LearningPackageItem>) {
-        Log.d("TagItems", "setSharedData "+ data?.size.toString())
         _items.postValue(data)
     }
 
-    fun getSharedData(): LiveData<List<LearningPackageItem>> {
-        Log.d("TagItems", "getSharedData ")
-        return items
+    fun setSharedLearningPackage(data: LearningPackage) {
+        _learningPackage.postValue(data)
     }
+    /*
+    fun getSharedData(): LiveData<List<LearningPackageItem>> {
+        return sharedData
+    }
+    */
 
     override fun createInitialState(): CoursePackageState {
         return CoursePackageState.Idle
