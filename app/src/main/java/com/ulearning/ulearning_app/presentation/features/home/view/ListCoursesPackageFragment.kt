@@ -1,8 +1,10 @@
 package com.ulearning.ulearning_app.presentation.features.home.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -44,35 +46,46 @@ class ListCoursesPackageFragment :
 
     override fun onViewIsCreated(view: View) {
 
-        ListCoursesPackageReducer.instance(viewState = this)
+        ListCoursesPackageReducer.instance(viewState = this@ListCoursesPackageFragment)
 
-        courseRecycler = binding.courseRecycler
-
-        courseRecycler.layoutManager = LinearLayoutManager(requireActivity())
+        observeUiStates()
 
         courseRecycler = binding.courseRecycler
 
         courseRecycler.layoutManager = LinearLayoutManager(requireContext())
 
-        observeUiStates()
+
+
     }
 
     private fun observeUiStates() {
-        viewModel.setEvent(CoursePackageEvent.ListCoursesPackageClicked)
 
+        with(viewModel) {
+            items.observe(viewLifecycleOwner) { data ->
+                Log.d("TagItems", "viewModel.getSharedData() " + data?.size.toString())
+                courseRecycler.adapter = CoursePackageItemAdapter(
+                    items = data
+                ) { model ->
+                    onItemSelected(model)
+                }
+            }
+        }
+
+        /*
         viewModel.apply {
             lifecycleScopeCreate(activity = requireActivity(), method = {
                 state.collect { state ->
-                    CoursePackageReducer.selectState(state)
+                    ListCoursesPackageReducer.selectState(state)
                 }
             })
 
             lifecycleScopeCreate(activity = requireActivity(), method = {
                 effect.collect { effect ->
-                    CoursePackageReducer.selectEffect(effect)
+                    ListCoursesPackageReducer.selectEffect(effect)
                 }
             })
         }
+        */
     }
 
     override fun messageFailure(failure: Failure) {
@@ -88,19 +101,13 @@ class ListCoursesPackageFragment :
 
     override fun getListCoursesPackage(items: List<LearningPackageItem>?) {
         closeLoadingDialog()
+        Log.d("TagItems", "getListCoursesPackage "+ items?.size.toString())
 
         courseRecycler.adapter = CoursePackageItemAdapter(
             items = items!!
         ) { model ->
             onItemSelected(model)
         }
-
-        /*
-        courseRecycler.adapter =
-            CourseSubscriptionAdapter(courses = courses, percentages = percentages) { model ->
-                onItemSelected(model)
-            }
-        */
     }
 
     private fun onItemSelected(model: LearningPackageItem) {

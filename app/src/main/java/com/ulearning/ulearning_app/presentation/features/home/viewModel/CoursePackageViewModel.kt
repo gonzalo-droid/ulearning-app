@@ -1,17 +1,20 @@
 package com.ulearning.ulearning_app.presentation.features.home.viewModel
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.CoursePackage
 import com.ulearning.ulearning_app.domain.model.LearningPackageItem
-import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursePackageUseCase
-import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursesSubscriptionUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import com.ulearning.ulearning_app.presentation.features.home.event.CoursePackageEvent
 import com.ulearning.ulearning_app.presentation.features.home.state.CoursePackageState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.util.ArrayList
 import javax.inject.Inject
+
 
 @HiltViewModel
 class CoursePackageViewModel
@@ -21,11 +24,22 @@ class CoursePackageViewModel
 
     var learningPackageId = 0
 
-    var items: List<LearningPackageItem>? = arrayListOf()
-
     var userId = 1
 
     var typeRole: String = ""
+
+    private val _items = MutableLiveData<List<LearningPackageItem>>()
+    val items: LiveData<List<LearningPackageItem>> = _items
+
+    fun setSharedData(data: List<LearningPackageItem>) {
+        Log.d("TagItems", "setSharedData "+ data?.size.toString())
+        _items.postValue(data)
+    }
+
+    fun getSharedData(): LiveData<List<LearningPackageItem>> {
+        Log.d("TagItems", "getSharedData ")
+        return items
+    }
 
     override fun createInitialState(): CoursePackageState {
         return CoursePackageState.Idle
@@ -41,7 +55,7 @@ class CoursePackageViewModel
     private fun getListCoursesPackageClicked(){
         setState { CoursePackageState.Loading }
 
-        handleListCourseComplete(items)
+        // handleListCourseComplete(items)
     }
 
     private fun getCoursePackageUseCase() {
@@ -62,8 +76,11 @@ class CoursePackageViewModel
         setState { CoursePackageState.CoursePackageData(course = course) }
     }
 
-    private fun handleListCourseComplete(items: List<LearningPackageItem>?) {
-        setState { CoursePackageState.ListCoursesPackage(items = items) }
+    private fun handleListCourseComplete(items: MutableLiveData<List<LearningPackageItem>>) {
+
+
+        // setState { CoursePackageState.ListCoursesPackage(items = items) }
+        // Log.d("TagItems", "handleListCourseComplete "+ items?.size.toString())
     }
 
 

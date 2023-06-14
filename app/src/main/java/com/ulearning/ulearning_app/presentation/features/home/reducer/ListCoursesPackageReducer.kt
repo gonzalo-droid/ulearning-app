@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.home.reducer
 
+import android.util.Log
 import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import com.ulearning.ulearning_app.presentation.features.home.state.CoursePackageState
 import com.ulearning.ulearning_app.presentation.features.home.viewState.ListCoursesPackageViewState
@@ -19,6 +20,7 @@ object ListCoursesPackageReducer {
             is CoursePackageState.Loading -> viewState.loading()
 
             is CoursePackageState.ListCoursesPackage -> {
+                Log.d("TagItems", "ListCoursesPackage "+ state.items?.size.toString())
                 viewState.getListCoursesPackage(items = state.items)
             }
 

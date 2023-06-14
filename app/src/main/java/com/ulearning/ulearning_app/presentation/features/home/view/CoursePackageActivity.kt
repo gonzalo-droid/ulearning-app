@@ -2,6 +2,7 @@ package com.ulearning.ulearning_app.presentation.features.home.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -59,7 +60,7 @@ class CoursePackageActivity :
 
         supportActionBar!!.setHomeAsUpIndicator(upArrow)
 
-        CoursePackageReducer.instance(viewState = this)
+        CoursePackageReducer.instance(viewState = this@CoursePackageActivity)
 
         initTabLayout()
 
@@ -117,10 +118,7 @@ class CoursePackageActivity :
             toolbarLayout.title = course.learningPackage?.title
             titleText.text = course.learningPackage?.title
 
-            viewModel.items = course.learningPackage?.items
-
-            viewModel.setEvent(CoursePackageEvent.ListCoursesPackageClicked)
-
+            viewModel.setSharedData(course.learningPackage?.items!!)
 
         }
     }
