@@ -1,7 +1,5 @@
 package com.ulearning.ulearning_app.presentation.features.topic
 
-import android.content.Intent
-import android.net.Uri
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +13,7 @@ import com.ulearning.ulearning_app.databinding.FragmentTopicBinding
 import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.model.Topic
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
-import com.ulearning.ulearning_app.presentation.features.courses.adapter.TopicAdapter
+import com.ulearning.ulearning_app.presentation.features.courseDetail.adapter.TopicAdapter
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,7 +36,7 @@ class TopicFragment :
 
     private var courseId: Int = 0
 
-    private lateinit var course : Course
+    private lateinit var course: Course
 
     override fun onViewIsCreated(view: View) {
 
@@ -59,7 +57,7 @@ class TopicFragment :
 
         courseId = requireArguments().getInt(Config.COURSE_ID_PUT)
 
-        //course = requireArguments().getSerializable(Config.COURSE) as Course
+        // course = requireArguments().getSerializable(Config.COURSE) as Course
 
         binding.topBarInclude.title = course.title
 
@@ -80,7 +78,6 @@ class TopicFragment :
                 }
             })
         }
-
     }
 
     override fun messageFailure(failure: Failure) {
@@ -99,8 +96,7 @@ class TopicFragment :
 
         closeLoadingDialog()
 
-        val mutableTopics : MutableList<Topic> = mutableListOf()
-
+        val mutableTopics: MutableList<Topic> = mutableListOf()
 
         topics.forEach {
 
@@ -111,8 +107,7 @@ class TopicFragment :
             }
         }
 
-
-        adapter = TopicAdapter(topics = mutableTopics){ topic ->
+        adapter = TopicAdapter(topics = mutableTopics) { topic ->
             onItemSelected(topic)
         }
 

@@ -1,9 +1,8 @@
 package com.ulearning.ulearning_app.presentation.features.home.reducer
 
+import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import com.ulearning.ulearning_app.presentation.features.home.state.CourseProgressState
 import com.ulearning.ulearning_app.presentation.features.home.viewState.CourseProgressViewState
-import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
-
 
 object CourseProgressReducer {
 

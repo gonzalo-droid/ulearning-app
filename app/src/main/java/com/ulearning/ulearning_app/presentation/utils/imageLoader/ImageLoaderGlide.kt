@@ -6,7 +6,7 @@ import com.bumptech.glide.request.RequestOptions
 
 class ImageLoaderGlide : ImageLoader {
 
-    override fun loadImage(imageView: ImageView, imagePath: String, requestOptions: RequestOptions, placeHolder:Int) {
+    override fun loadImage(imageView: ImageView, imagePath: String, requestOptions: RequestOptions, placeHolder: Int) {
         Glide.with(imageView.context)
             .load(imagePath)
             .apply(requestOptions)

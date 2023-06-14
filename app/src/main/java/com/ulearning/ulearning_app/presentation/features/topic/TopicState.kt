@@ -10,7 +10,4 @@ sealed class TopicState : UiState {
     object Loading : TopicState()
 
     data class ListTopic constructor(val topics: List<Topic>) : TopicState()
-
 }
-
-

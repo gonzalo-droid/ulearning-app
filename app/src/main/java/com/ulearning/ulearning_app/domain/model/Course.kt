@@ -41,11 +41,11 @@ data class Course(
 ) : Serializable {
 
     fun formatAsynchronousHour(): String {
-        return "${this.asynchronousHour.toString()} hr"
+        return "${this.asynchronousHour} hr"
     }
 
     fun formatSelfStudyHour(): String {
-        return "${this.selfStudyHour.toString()} hr"
+        return "${this.selfStudyHour} hr"
     }
 
     fun formatModality(): String {

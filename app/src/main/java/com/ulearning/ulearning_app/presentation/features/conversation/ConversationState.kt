@@ -10,5 +10,4 @@ sealed class ConversationState : UiState {
     object Loading : ConversationState()
 
     data class Conversations constructor(val conversations: List<Conversation>) : ConversationState()
-
 }

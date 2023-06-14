@@ -40,7 +40,7 @@
     </fragment>
     <activity
         android:id="@+id/detailCourseActivity"
-        android:name="com.ulearning.ulearning_app.presentation.features.courses.DetailCourseActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.courseDetail.DetailCourseActivity"
         android:label="activity_detail_course"
         tools:layout="@layout/activity_detail_course">
 

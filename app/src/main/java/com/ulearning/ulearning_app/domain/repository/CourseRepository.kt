@@ -2,13 +2,13 @@ package com.ulearning.ulearning_app.domain.repository
 
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
-import com.ulearning.ulearning_app.data.remote.entities.response.CheckAvailableFilesResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.DownloadFileResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.FileItemResponse
 import com.ulearning.ulearning_app.domain.model.*
 
 interface CourseRepository {
 
+    suspend fun getLearningPackage(
+        learningPackageId: Int,
+    ): Either<Failure, CoursePackage>
     suspend fun getSubscriptionsPackage(
         page: Int,
         type: String,
@@ -55,5 +55,4 @@ interface CourseRepository {
         hash: String,
         name: String,
     ): Either<Failure, DownloadFile>
-
 }

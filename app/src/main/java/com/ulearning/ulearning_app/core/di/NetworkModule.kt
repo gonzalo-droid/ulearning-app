@@ -4,6 +4,16 @@ import android.content.Context
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.localebro.okhttpprofiler.OkHttpProfilerInterceptor
+import com.ulearning.ulearning_app.BuildConfig
+import com.ulearning.ulearning_app.data.remote.api.AuthApi
+import com.ulearning.ulearning_app.data.remote.api.ConversationApi
+import com.ulearning.ulearning_app.data.remote.api.CourseApi
+import com.ulearning.ulearning_app.data.remote.api.TopicApi
+import com.ulearning.ulearning_app.data.remote.network.NetworkHandler
+import com.ulearning.ulearning_app.data.remote.service.*
+import com.ulearning.ulearning_app.data.remote.utils.ConnectionUtils
+import com.ulearning.ulearning_app.data.remote.utils.ConnectionUtilsImpl
+import com.ulearning.ulearning_app.data.remote.utils.SupportInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,17 +21,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import com.ulearning.ulearning_app.BuildConfig
-import com.ulearning.ulearning_app.data.remote.api.AuthApi
-import com.ulearning.ulearning_app.data.remote.api.CourseApi
-import com.ulearning.ulearning_app.data.remote.api.ConversationApi
-import com.ulearning.ulearning_app.data.remote.api.TopicApi
-import com.ulearning.ulearning_app.data.remote.network.NetworkHandler
-import com.ulearning.ulearning_app.data.remote.service.*
-import com.ulearning.ulearning_app.data.remote.utils.ConnectionUtils
-import com.ulearning.ulearning_app.data.remote.utils.ConnectionUtilsImpl
-import com.ulearning.ulearning_app.data.remote.utils.SupportInterceptor
-
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -111,7 +110,6 @@ object NetworkModule {
         networkHandler: NetworkHandler
     ): AuthService = AuthServiceImpl(authApi, networkHandler)
 
-
     @Provides
     @Singleton
     fun provideCourseService(
@@ -132,5 +130,4 @@ object NetworkModule {
         authApi: ConversationApi,
         networkHandler: NetworkHandler
     ): ConversationService = ConversationServiceImpl(authApi, networkHandler)
-
 }

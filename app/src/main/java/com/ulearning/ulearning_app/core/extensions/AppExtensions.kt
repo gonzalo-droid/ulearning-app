@@ -15,13 +15,12 @@ import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.model.Subscription
+import com.ulearning.ulearning_app.domain.model.Teacher
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
-
 
 @SuppressLint("SimpleDateFormat")
 fun Date.dateFormat(format: String): String {
@@ -37,7 +36,6 @@ fun String.dateFormat(format: String): Date {
 
     return dateFormat.parse(this)
 }
-
 
 fun String.encode(): String {
     return android.util.Base64.encodeToString(
@@ -58,18 +56,19 @@ fun String.decode(): String {
     return String(android.util.Base64.decode(this, android.util.Base64.DEFAULT), charset("UTF-8"))
 }
 
-
 fun String.toBigDecimalReturnString(): String {
     val double = this.toDouble()
     val big = BigDecimal(double).setScale(2, BigDecimal.ROUND_HALF_UP).toDouble()
     return big.toString()
 }
 
-
 infix fun Double.decimalFormat(format: String): String = DecimalFormat(format).format(this)
 
 infix fun Int.decimalFormat(format: String): String = DecimalFormat(format).format(this)
 
+@Suppress("DEPRECATION")
+infix fun String.putListTeacher(activity: Activity) =
+    activity.intent.extras!!.getSerializable(this) as List<Teacher>
 @Suppress("DEPRECATION")
 infix fun String.putSubscription(activity: Activity) =
     activity.intent.extras!!.getSerializable(this) as Subscription
@@ -95,7 +94,6 @@ fun String.toJsonElement(): JsonElement {
     return JsonParser().parse(this)
 }
 
-
 fun lifecycleScopeCreate(activity: Activity, method: suspend () -> Unit) =
     (activity as AppCompatActivity).lifecycleScope.launch {
 
@@ -108,5 +106,4 @@ fun lifecycleScopeCreate(activity: Activity, method: suspend () -> Unit) =
 
             method()
         }
-
     }

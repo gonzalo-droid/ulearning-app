@@ -63,7 +63,6 @@ class ProfileViewModel
         }
     }
 
-
     private fun handleFailure(failure: Failure) {
         setEffect { ProfileEffect.ShowMessageFailure(failure = failure) }
     }
@@ -80,13 +79,10 @@ class ProfileViewModel
         setEffect { ProfileEffect.GoToWebView(url = url) }
     }
 
-
     companion object Events {
         val dataProfileClicked = ProfileEvent.DataProfileClicked
         val logoutClick = ProfileEvent.LogoutClick
         val paymentClick = ProfileEvent.PaymentClick
         val scanQRClick = ProfileEvent.ScanQRClick
-
-
     }
 }

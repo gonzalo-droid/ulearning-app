@@ -14,8 +14,11 @@ import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.FragmentListCoursesPackageBinding
 import com.ulearning.ulearning_app.domain.model.CoursePercentage
+import com.ulearning.ulearning_app.domain.model.LearningPackageItem
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
+import com.ulearning.ulearning_app.presentation.features.home.adapter.CoursePackageItemAdapter
+import com.ulearning.ulearning_app.presentation.features.home.adapter.CoursePackageSubscriptionAdapter
 import com.ulearning.ulearning_app.presentation.features.home.event.CoursePackageEvent
 import com.ulearning.ulearning_app.presentation.features.home.reducer.CoursePackageReducer
 import com.ulearning.ulearning_app.presentation.features.home.reducer.ListCoursesPackageReducer
@@ -24,14 +27,14 @@ import com.ulearning.ulearning_app.presentation.features.home.viewState.ListCour
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class ListCoursesPackageFragment :
     BaseFragmentWithViewModel<FragmentListCoursesPackageBinding, CoursePackageViewModel>(),
     ListCoursesPackageViewState {
 
-
-    override val binding: FragmentListCoursesPackageBinding by dataBinding(FragmentListCoursesPackageBinding::inflate)
+    override val binding: FragmentListCoursesPackageBinding by dataBinding(
+        FragmentListCoursesPackageBinding::inflate
+    )
 
     override val viewModel: CoursePackageViewModel by viewModels()
 
@@ -46,6 +49,10 @@ class ListCoursesPackageFragment :
         courseRecycler = binding.courseRecycler
 
         courseRecycler.layoutManager = LinearLayoutManager(requireActivity())
+
+        courseRecycler = binding.courseRecycler
+
+        courseRecycler.layoutManager = LinearLayoutManager(requireContext())
 
         observeUiStates()
     }
@@ -66,7 +73,6 @@ class ListCoursesPackageFragment :
                 }
             })
         }
-
     }
 
     override fun messageFailure(failure: Failure) {
@@ -80,11 +86,14 @@ class ListCoursesPackageFragment :
         showLoadingDialog()
     }
 
-    override fun getListCoursesPackage(
-        courses: List<Subscription>,
-        percentages: List<CoursePercentage>,
-    ) {
+    override fun getListCoursesPackage(items: List<LearningPackageItem>?) {
         closeLoadingDialog()
+
+        courseRecycler.adapter = CoursePackageItemAdapter(
+            items = items!!
+        ) { model ->
+            onItemSelected(model)
+        }
 
         /*
         courseRecycler.adapter =
@@ -94,16 +103,13 @@ class ListCoursesPackageFragment :
         */
     }
 
+    private fun onItemSelected(model: LearningPackageItem) {
 
-    private fun onItemSelected(model: Subscription) {
-
-        findNavController().navigate(
-            R.id.action_navigation_home_to_detailCourseActivity,
+        findNavController().navigate(R.id.action_navigation_home_to_detailCourseActivity,
             Bundle().apply {
                 putSerializable(Config.COURSE_PUT, model.course)
-                putSerializable(Config.SUBSCRIPTION_PUT, model)
+                // putSerializable(Config.SUBSCRIPTION_PUT, model)
                 putSerializable(Config.ROLE, viewModel.typeRole)
-            }
-        )
+            })
     }
 }

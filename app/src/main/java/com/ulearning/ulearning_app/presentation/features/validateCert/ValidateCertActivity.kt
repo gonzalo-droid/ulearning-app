@@ -16,10 +16,8 @@ import com.ulearning.ulearning_app.databinding.ActivityValidateCertBinding
 import com.ulearning.ulearning_app.domain.model.DownloadFile
 import com.ulearning.ulearning_app.domain.model.FileItem
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
-import com.ulearning.ulearning_app.presentation.features.courses.DetailCourseEvent
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class ValidateCertActivity :
@@ -32,7 +30,6 @@ class ValidateCertActivity :
 
     override val dataBindingViewModel = BR.validateCertViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -41,7 +38,6 @@ class ValidateCertActivity :
         binding.topBarInclude.btnBack.setOnClickListener {
             finish()
         }
-
 
         observeUiStates()
     }
@@ -54,7 +50,6 @@ class ValidateCertActivity :
                 Config.PARAM_NAME_PUT putString this@ValidateCertActivity
 
             binding.numberCertTl.editText?.setText(value)
-
         }
 
         viewModel.apply {
@@ -70,13 +65,12 @@ class ValidateCertActivity :
                 }
             })
         }
-
     }
 
     override fun downloadFilePDF(file: DownloadFile) {
         closeLoadingDialog()
         try {
-            val uri = Uri.parse(file.fileUrl);
+            val uri = Uri.parse(file.fileUrl)
 
             val request = DownloadManager.Request(uri)
                 .setTitle("U-Learning Pdf")
@@ -88,13 +82,12 @@ class ValidateCertActivity :
                     this,
                     Environment.DIRECTORY_DOCUMENTS,
                     file.filename + ".pdf"
-                );
+                )
             val dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             dm.enqueue(request)
         } catch (e: Exception) {
             messageFailure(Failure.DefaultError(R.string.error_download_pdf))
         }
-
     }
 
     override fun messageFailure(failure: Failure) {

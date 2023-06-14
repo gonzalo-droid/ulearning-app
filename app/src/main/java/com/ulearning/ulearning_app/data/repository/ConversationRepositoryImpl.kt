@@ -26,12 +26,14 @@ class ConversationRepositoryImpl
         page: Int,
         courseId: Int
     ): Either<Failure, List<Conversation>> {
-        return when (val response = service.conversations(
-            token = "${SettingRemote.BEARER} ${dataStore.token()}",
-            perPage = SettingRemote.PER_PAGE,
-            page = page,
-            courseId = courseId
-        )) {
+        return when (
+            val response = service.conversations(
+                token = "${SettingRemote.BEARER} ${dataStore.token()}",
+                perPage = SettingRemote.PER_PAGE,
+                page = page,
+                courseId = courseId
+            )
+        ) {
             is Either.Right -> {
                 Either.Right(mapper.conversationsToDomain(response.b))
             }
@@ -40,12 +42,14 @@ class ConversationRepositoryImpl
     }
 
     override suspend fun getConversationsSupport(page: Int): Either<Failure, List<Conversation>> {
-        return when (val response = service.conversationsSupport(
-            token = "${SettingRemote.BEARER} ${dataStore.token()}",
-            perPage = SettingRemote.PER_PAGE,
-            page = page,
-            toSupport = true
-        )) {
+        return when (
+            val response = service.conversationsSupport(
+                token = "${SettingRemote.BEARER} ${dataStore.token()}",
+                perPage = SettingRemote.PER_PAGE,
+                page = page,
+                toSupport = true
+            )
+        ) {
             is Either.Right -> {
                 Either.Right(mapper.conversationsToDomain(response.b))
             }
@@ -54,10 +58,12 @@ class ConversationRepositoryImpl
     }
 
     override suspend fun participantsMessage(ids: String): Either<Failure, List<User>> {
-        return when (val response = service.participantsMessage(
-            token = "${SettingRemote.BEARER} ${dataStore.token()}",
-            ids = ids
-        )) {
+        return when (
+            val response = service.participantsMessage(
+                token = "${SettingRemote.BEARER} ${dataStore.token()}",
+                ids = ids
+            )
+        ) {
             is Either.Right -> {
                 Either.Right(mapper.usersToDomain(response.b))
             }
@@ -66,10 +72,12 @@ class ConversationRepositoryImpl
     }
 
     override suspend fun getMessages(uuid: String): Either<Failure, List<Message>> {
-        return when (val response = service.messages(
-            token = "${SettingRemote.BEARER} ${dataStore.token()}",
-            uuid = uuid
-        )) {
+        return when (
+            val response = service.messages(
+                token = "${SettingRemote.BEARER} ${dataStore.token()}",
+                uuid = uuid
+            )
+        ) {
             is Either.Right -> {
                 Either.Right(mapper.messagesToDomain(response.b))
             }
@@ -83,15 +91,17 @@ class ConversationRepositoryImpl
         userIds: ArrayList<String>,
         toSupport: Boolean
     ): Either<Failure, Message> {
-        return when (val response = service.sendMessage(
-            token = "${SettingRemote.BEARER} ${dataStore.token()}",
-            body = SendMessageRequest(
-                uuid = uuid,
-                content = content,
-                userIds = userIds,
-                toSupport = toSupport
-            ),
-        )) {
+        return when (
+            val response = service.sendMessage(
+                token = "${SettingRemote.BEARER} ${dataStore.token()}",
+                body = SendMessageRequest(
+                    uuid = uuid,
+                    content = content,
+                    userIds = userIds,
+                    toSupport = toSupport
+                ),
+            )
+        ) {
             is Either.Right -> {
                 Either.Right(mapper.messageToDomain(response.b))
             }
@@ -104,14 +114,16 @@ class ConversationRepositoryImpl
         courseId: Int,
         userIds: ArrayList<Int>
     ): Either<Failure, Conversation> {
-        return when (val response = service.sendConversation(
-            token = "${SettingRemote.BEARER} ${dataStore.token()}",
-            body = SendConversationRequest(
-                content = content,
-                courseId = courseId,
-                userIds = userIds,
-            ),
-        )) {
+        return when (
+            val response = service.sendConversation(
+                token = "${SettingRemote.BEARER} ${dataStore.token()}",
+                body = SendConversationRequest(
+                    content = content,
+                    courseId = courseId,
+                    userIds = userIds,
+                ),
+            )
+        ) {
             is Either.Right -> {
                 Either.Right(mapper.conversationToDomain(response.b))
             }
@@ -124,14 +136,16 @@ class ConversationRepositoryImpl
         toSupport: Boolean,
         userIds: ArrayList<Int>
     ): Either<Failure, Conversation> {
-        return when (val response = service.sendConversationSupport(
-            token = "${SettingRemote.BEARER} ${dataStore.token()}",
-            body = SendConversationSupportRequest(
-                content = content,
-                toSupport = toSupport,
-                userIds = userIds,
-            ),
-        )) {
+        return when (
+            val response = service.sendConversationSupport(
+                token = "${SettingRemote.BEARER} ${dataStore.token()}",
+                body = SendConversationSupportRequest(
+                    content = content,
+                    toSupport = toSupport,
+                    userIds = userIds,
+                ),
+            )
+        ) {
             is Either.Right -> {
                 Either.Right(mapper.conversationToDomain(response.b))
             }
@@ -140,12 +154,14 @@ class ConversationRepositoryImpl
     }
 
     override suspend fun getUserByCourse(name: String, courseId: Int): Either<Failure, List<User>> {
-        return when (val response = service.userByCourse(
-            token = "${SettingRemote.BEARER} ${dataStore.token()}",
-            name = name,
-            courseId = courseId,
-            withoutPagination = true
-        )) {
+        return when (
+            val response = service.userByCourse(
+                token = "${SettingRemote.BEARER} ${dataStore.token()}",
+                name = name,
+                courseId = courseId,
+                withoutPagination = true
+            )
+        ) {
             is Either.Right -> {
                 Either.Right(mapper.usersToDomain(response.b))
             }
@@ -154,11 +170,13 @@ class ConversationRepositoryImpl
     }
 
     override suspend fun getUserByIds(ids: String, courseId: Int): Either<Failure, List<User>> {
-        return when (val response = service.userByIds(
-            token = "${SettingRemote.BEARER} ${dataStore.token()}",
-            ids = ids,
-            courseId = courseId
-        )) {
+        return when (
+            val response = service.userByIds(
+                token = "${SettingRemote.BEARER} ${dataStore.token()}",
+                ids = ids,
+                courseId = courseId
+            )
+        ) {
             is Either.Right -> {
                 Either.Right(mapper.usersToDomain(response.b))
             }

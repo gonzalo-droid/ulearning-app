@@ -6,6 +6,5 @@ import com.ulearning.ulearning_app.domain.model.Topic
 
 interface TopicRepository {
 
-    suspend fun getTopics(courseId : Int): Either<Failure, List<Topic>>
-
+    suspend fun getTopics(courseId: Int): Either<Failure, List<Topic>>
 }

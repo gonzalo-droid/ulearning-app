@@ -2,7 +2,6 @@ package com.ulearning.ulearning_app.presentation.model.entity
 
 import java.io.Serializable
 
-
 open class LoginFacebook constructor(
     var email: String = "",
     var name: String = "",

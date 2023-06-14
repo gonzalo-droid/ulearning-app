@@ -1,6 +1,5 @@
 package com.ulearning.ulearning_app.data.remote.entities.response
 
-
 import com.google.gson.annotations.SerializedName
 
 data class LearningPackageResponse(
@@ -21,5 +20,7 @@ data class LearningPackageResponse(
     @SerializedName("title")
     val title: String?,
     @SerializedName("type")
-    val type: String?
+    val type: String?,
+    @SerializedName("items")
+    val items: List<LearningPackageItemResponse>?,
 )

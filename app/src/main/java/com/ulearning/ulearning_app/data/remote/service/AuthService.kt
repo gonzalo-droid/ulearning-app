@@ -10,10 +10,6 @@ import com.ulearning.ulearning_app.data.remote.entities.response.FCMTokenRespons
 import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.ProfileResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.TokenResponse
-import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.POST
-
 
 interface AuthService {
 
@@ -28,5 +24,4 @@ interface AuthService {
     suspend fun loginGoogle(body: LoginGoogleRequest): Either<Failure, LoginResponse>
 
     suspend fun loginFacebook(body: LoginFacebookRequest): Either<Failure, LoginResponse>
-
 }

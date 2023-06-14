@@ -14,5 +14,4 @@ sealed class CourseProgressState : UiState {
     data class CourseTeacher constructor(val courses: List<Course>) : CourseProgressState()
 
     data class CourseRecent constructor(val courses: List<Subscription>, val percentages: List<CoursePercentage>) : CourseProgressState()
-
 }

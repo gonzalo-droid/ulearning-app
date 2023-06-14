@@ -6,7 +6,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class SupportInterceptor @Inject constructor(): Interceptor {
+class SupportInterceptor @Inject constructor() : Interceptor {
     /**
      * Interceptor class for setting of the headers for every request
      */

@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter
 import com.ulearning.ulearning_app.databinding.ItemUserBinding
 import com.ulearning.ulearning_app.domain.model.User
 
-
 @Suppress("UNREACHABLE_CODE")
 class SearchUserAdapter constructor(
     private val users: List<User>,
@@ -29,14 +28,13 @@ class SearchUserAdapter constructor(
                 .inflate(com.ulearning.ulearning_app.R.layout.item_user, parent, false)
         }
 
-        if(listItem != null){
+        if (listItem != null) {
             val user: User = users[position]
             val binding = listItem.let { ItemUserBinding.bind(it) }
 
             binding.nameText.text = user.name
             binding.emailText.text = user.email
         }
-
 
         return listItem!!
     }

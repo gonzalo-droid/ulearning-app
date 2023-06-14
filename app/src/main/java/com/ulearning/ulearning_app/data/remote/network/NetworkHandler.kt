@@ -39,7 +39,6 @@ class NetworkHandler
                                     response.errorBody()?.string()
                                 )
                             )
-
                         } else return@withContext Either.Left(
                             getErrorMessageFromServer(
                                 response.code(), response.errorBody()?.string()
@@ -152,7 +151,7 @@ class NetworkHandler
     }
 
     companion object {
-        private const val KEY_CODE = "status" //code
+        private const val KEY_CODE = "status" // code
         private const val KEY_MESSAGE = "message"
     }
 }

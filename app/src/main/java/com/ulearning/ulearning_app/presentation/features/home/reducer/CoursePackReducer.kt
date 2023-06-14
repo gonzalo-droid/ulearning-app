@@ -4,7 +4,6 @@ import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import com.ulearning.ulearning_app.presentation.features.home.state.CoursePackState
 import com.ulearning.ulearning_app.presentation.features.home.viewState.CoursePackViewState
 
-
 object CoursePackReducer {
 
     private lateinit var viewState: CoursePackViewState

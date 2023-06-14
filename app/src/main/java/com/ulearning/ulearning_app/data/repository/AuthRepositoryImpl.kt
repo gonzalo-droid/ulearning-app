@@ -33,8 +33,10 @@ class AuthRepositoryImpl
         email: String,
         password: String
     ): Either<Failure, Boolean> {
-        return when (val response =
-            service.login(LoginRequest(email = email, password = password))) {
+        return when (
+            val response =
+                service.login(LoginRequest(email = email, password = password))
+        ) {
             is Right -> {
                 val loginResponse: LoginResponse = response.b
 
@@ -50,15 +52,16 @@ class AuthRepositoryImpl
     }
 
     override suspend fun loginGoogle(data: LoginGoogle): Either<Failure, Boolean> {
-        return when (val response =
-            service.loginGoogle(
-                LoginGoogleRequest(
-                    email = data.email,
-                    name = data.name,
-                    familyName = data.familyName,
-                    givenName = data.givenName
+        return when (
+            val response =
+                service.loginGoogle(
+                    LoginGoogleRequest(
+                        email = data.email,
+                        name = data.name,
+                        familyName = data.familyName,
+                        givenName = data.givenName
+                    )
                 )
-            )
         ) {
             is Right -> {
                 val loginResponse: LoginResponse = response.b
@@ -75,16 +78,17 @@ class AuthRepositoryImpl
     }
 
     override suspend fun loginFacebook(data: LoginFacebook): Either<Failure, Boolean> {
-        return when (val response =
-            service.loginFacebook(
-                LoginFacebookRequest(
-                    email = data.email,
-                    name = data.name,
-                    firstName = data.firstName,
-                    lastName = data.lastName,
-                    picture = data.picture,
+        return when (
+            val response =
+                service.loginFacebook(
+                    LoginFacebookRequest(
+                        email = data.email,
+                        name = data.name,
+                        firstName = data.firstName,
+                        lastName = data.lastName,
+                        picture = data.picture,
+                    )
                 )
-            )
         ) {
             is Right -> {
                 val loginResponse: LoginResponse = response.b
@@ -100,11 +104,12 @@ class AuthRepositoryImpl
         }
     }
 
-
     override suspend fun profile(): Either<Failure, Profile> {
-        return when (val response = service.profile(
-            token = "${SettingRemote.BEARER} ${dataStore.token()}"
-        )) {
+        return when (
+            val response = service.profile(
+                token = "${SettingRemote.BEARER} ${dataStore.token()}"
+            )
+        ) {
             is Right -> {
                 val profile = mapper.profileToDomain(response.b)
                 profile.role?.let { dataStore.saveRole(role = it) }
@@ -155,10 +160,12 @@ class AuthRepositoryImpl
     }
 
     override suspend fun fcmToken(fcmToken: String): Either<Failure, Boolean> {
-        return when (val response = service.fcmToken(
-            token = "${SettingRemote.BEARER} ${dataStore.token()}",
-            body = FCMTokenRequest(deviceId = Config.DEVICE_ID, fcmToken = fcmToken)
-        )) {
+        return when (
+            val response = service.fcmToken(
+                token = "${SettingRemote.BEARER} ${dataStore.token()}",
+                body = FCMTokenRequest(deviceId = Config.DEVICE_ID, fcmToken = fcmToken)
+            )
+        ) {
             is Right -> {
                 Right(true)
             }
@@ -167,9 +174,11 @@ class AuthRepositoryImpl
     }
 
     override suspend fun selfAuthToken(): Either<Failure, String> {
-        return when (val response = service.selfAuthToken(
-            token = "${SettingRemote.BEARER} ${dataStore.token()}"
-        )) {
+        return when (
+            val response = service.selfAuthToken(
+                token = "${SettingRemote.BEARER} ${dataStore.token()}"
+            )
+        ) {
             is Right -> {
                 val url = "${BuildConfig.STUDENT_URL}/sessions/signin-token/${response.b.token}"
                 Right(url)

@@ -11,7 +11,6 @@ import android.util.Log
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
@@ -29,11 +28,9 @@ import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityScanQrBinding
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
-import com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity
 import com.ulearning.ulearning_app.presentation.features.validateCert.ValidateCertActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
-
 
 @AndroidEntryPoint
 class ScanQrActivity :
@@ -55,7 +52,6 @@ class ScanQrActivity :
     val PERMISSION_CAMERA = 4567
 
     var surfaceView: SurfaceView? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,7 +90,6 @@ class ScanQrActivity :
                 }
             })
         }
-
     }
 
     private fun setupControls() {
@@ -106,12 +101,11 @@ class ScanQrActivity :
         cameraSource = detector.let {
             CameraSource.Builder(this, it)
                 .setRequestedPreviewSize(1920, 1080)
-                .setAutoFocusEnabled(true) //you should add this feature
+                .setAutoFocusEnabled(true) // you should add this feature
                 .build()
         }
 
         surfaceView?.holder?.addCallback(surfaceCallBack)
-
 
         detector.setProcessor(processor)
     }
@@ -129,23 +123,23 @@ class ScanQrActivity :
                     if (!paramName.isNullOrEmpty()) {
 
                         goToDetailCert(paramName)
-
                     } else {
 
                         Handler().postDelayed({
                             binding.txtErrorScan.visibility = View.VISIBLE
                         }, 3000)
                     }
-
                 }
             }
         }
     }
 
     private fun goToDetailCert(paramName: String) {
-        startActivity(Intent(this, ValidateCertActivity::class.java).apply {
-            putExtra(Config.PARAM_NAME_PUT, paramName)
-        })
+        startActivity(
+            Intent(this, ValidateCertActivity::class.java).apply {
+                putExtra(Config.PARAM_NAME_PUT, paramName)
+            }
+        )
         finish()
     }
 
@@ -183,7 +177,6 @@ class ScanQrActivity :
         }
     }
 
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -198,14 +191,12 @@ class ScanQrActivity :
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                         if (shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
                             Log.d("getCameraPermission", "Never ask again PERMISSION_DENIED")
-
                         }
                     }
                 }
             }
         }
     }
-
 
     override fun onPause() {
         super.onPause()
@@ -218,13 +209,11 @@ class ScanQrActivity :
     }
 
     override fun messageFailure(failure: Failure) {
-
     }
 
     override fun loading() {
         showLoadingDialog()
     }
-
 
     private fun checkPermissionsCamera(): Boolean {
         val permissionState = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)

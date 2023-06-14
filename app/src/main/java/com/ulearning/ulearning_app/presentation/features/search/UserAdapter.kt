@@ -24,18 +24,16 @@ class UserAdapter constructor(
         holder.bind(users[position], onClickListener)
     }
 
-    fun updateUser(users: List<User>){
+    fun updateUser(users: List<User>) {
         this.users = users
         notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = users.size
 
-
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
 
         val binding = ItemUserBinding.bind(view)
-
 
         fun bind(model: User, onClickListener: (User) -> Unit) {
 
@@ -46,8 +44,6 @@ class UserAdapter constructor(
             itemView.setOnClickListener {
                 onClickListener(model)
             }
-
         }
-
     }
 }

@@ -1,8 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.addConversation
 
 import com.ulearning.ulearning_app.presentation.base.UiEvent
-import com.ulearning.ulearning_app.presentation.features.courses.DetailCourseEvent
-
 
 sealed class AddConversationEvent : UiEvent {
 
@@ -13,5 +11,4 @@ sealed class AddConversationEvent : UiEvent {
     object GetUsersClick : AddConversationEvent()
 
     object GetRole : AddConversationEvent()
-
 }

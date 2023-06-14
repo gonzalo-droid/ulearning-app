@@ -3,6 +3,7 @@ package com.ulearning.ulearning_app.core.di
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
+import com.ulearning.ulearning_app.UserPreference
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.data.dataStore.UserSerializableDataStore
 import com.ulearning.ulearning_app.data.dataStore.config.DataStoreConfig
@@ -12,8 +13,6 @@ import dagger.Reusable
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import com.ulearning.ulearning_app.UserPreference
-
 
 @Module
 @InstallIn(SingletonComponent::class)

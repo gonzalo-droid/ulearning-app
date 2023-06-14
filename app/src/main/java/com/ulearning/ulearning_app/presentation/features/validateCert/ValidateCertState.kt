@@ -13,5 +13,4 @@ sealed class ValidateCertState : UiState {
     data class ValidateCert constructor(val file: FileItem) : ValidateCertState()
 
     data class DownloadFilePDF constructor(val file: DownloadFile) : ValidateCertState()
-
 }

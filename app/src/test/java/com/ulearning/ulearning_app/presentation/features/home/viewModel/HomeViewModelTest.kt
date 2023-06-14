@@ -5,17 +5,15 @@ import org.junit.BeforeClass
 
 class HomeViewModelTest {
 
-
     companion object {
         @JvmStatic
         @BeforeClass
-        fun setUp(): Unit {
-
+        fun setUp() {
         }
 
         @JvmStatic
         @AfterClass
-        fun tearDown(): Unit {
+        fun tearDown() {
         }
     }
 }

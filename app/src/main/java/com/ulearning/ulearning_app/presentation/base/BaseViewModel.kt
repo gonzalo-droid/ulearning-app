@@ -24,7 +24,6 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
     private val _effect: Channel<Effect> = Channel()
     val effect = _effect.receiveAsFlow()
 
-
     init {
         subscribeEvents()
     }
@@ -45,7 +44,6 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
      */
     abstract fun handleEvent(event: Event)
 
-
     /**
      * Set new Event
      */
@@ -53,7 +51,6 @@ abstract class BaseViewModel<Event : UiEvent, State : UiState, Effect : UiEffect
         val newEvent = event
         viewModelScope.launch { _event.emit(newEvent) }
     }
-
 
     /**
      * Set new Ui State

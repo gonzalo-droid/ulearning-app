@@ -3,7 +3,6 @@ package com.ulearning.ulearning_app.presentation.features.support
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.useCase.conversation.GetConversationSupportUseCase
-import com.ulearning.ulearning_app.domain.useCase.conversation.GetConversationUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

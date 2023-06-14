@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.features.courses.DetailCourseActivity">
+    tools:context=".presentation.features.courseDetail.DetailCourseActivity">
 
     <data>
 
         <variable
             name="detailCourseViewModel"
-            type="com.ulearning.ulearning_app.presentation.features.courses.DetailCourseViewModel" />
+            type="com.ulearning.ulearning_app.presentation.features.courseDetail.DetailCourseViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

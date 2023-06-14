@@ -1,10 +1,8 @@
 package com.ulearning.ulearning_app.presentation.base
 
 import android.os.Bundle
-import android.util.Log
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
-import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.presentation.dialogs.LoadingDialog
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
@@ -32,7 +30,5 @@ abstract class BaseActivityWithViewModel<VBinding : ViewDataBinding, ViewModelTy
     open fun getUseCaseFailureFromBase(failure: Failure): MessageDesign {
 
         return BindingUtil.reducerFailure(failure)
-
     }
-
 }

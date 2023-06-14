@@ -8,12 +8,11 @@ import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursePercentageUse
 import com.ulearning.ulearning_app.domain.useCase.courses.GetCourseUseCase
 import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursesSubscriptionUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
+import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import com.ulearning.ulearning_app.presentation.features.home.event.CourseProgressEvent
 import com.ulearning.ulearning_app.presentation.features.home.state.CourseProgressState
-import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-
 
 @HiltViewModel
 class CourseProgressViewModel
@@ -56,7 +55,6 @@ class CourseProgressViewModel
         }
     }
 
-
     private fun getCoursePercentage(courseIds: String) {
 
         getCoursePercentageUseCase(
@@ -74,7 +72,6 @@ class CourseProgressViewModel
             it.either(::handleFailure, ::handleCourseRecent)
         }
     }
-
 
     private fun handleFailure(failure: Failure) {
         setEffect { HomeEffect.ShowMessageFailure(failure = failure) }
@@ -94,7 +91,6 @@ class CourseProgressViewModel
     private fun handleCoursePercentage(percentages: List<CoursePercentage>) {
         setState { CourseProgressState.CourseRecent(courses = listCourseRecent, percentages = percentages) }
     }
-
 
     companion object Events {
     }

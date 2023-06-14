@@ -23,10 +23,18 @@ interface CourseApi {
         @Header(SettingRemote.AUTHORIZATION) token: String,
         @Query("per_page") perPage: Int,
         @Query("page") page: Int,
-        @Query("classification") classification: String = "path,package",
+        @Query("classification") classification: String,
         @Query("includes") includes: String = "learning_package",
         // @Query("without_pagination") withoutPagination: Boolean = true,
     ): Response<BaseResponse<List<SubscriptionResponse>>>
+
+    // http://ulearning-api.net/api/learning-packages/1/subscriptions?includes=learning_package,learning_package_items,course
+    @GET("https://mockbin.org/bin/89417e80-4a8f-4ed4-8d47-ddf33f83e387") // learning-packages/{learningPackageId}/subscriptions
+    suspend fun learningPackage(
+        @Header(SettingRemote.AUTHORIZATION) token: String,
+        @Query("learningPackageId") learningPackageId: Int,  //@Path("learningPackageId") learningPackageId: Int,
+        @Query("includes") includes: String = "learning_package,learning_package_items,course",
+    ): Response<BaseResponse<CoursePackageResponse>>
 
     @GET("courses")
     suspend fun coursesTeacher(
@@ -81,6 +89,4 @@ interface CourseApi {
         @Header(SettingRemote.AUTHORIZATION) token: String,
         @Body request: DownloadGuestFileRequest,
     ): Response<BaseResponse<DownloadFileResponse>>
-
 }
-

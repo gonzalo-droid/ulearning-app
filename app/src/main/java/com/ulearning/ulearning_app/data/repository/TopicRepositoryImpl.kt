@@ -17,12 +17,13 @@ class TopicRepositoryImpl
     private val dataStore: DataStoreConfig
 ) : TopicRepository {
 
-
-    override suspend fun getTopics(courseId : Int): Either<Failure, List<Topic>> {
-        return when (val response = service.topics (
-            token = "${SettingRemote.BEARER} ${dataStore.token()}",
-            courseId = courseId,
-        )) {
+    override suspend fun getTopics(courseId: Int): Either<Failure, List<Topic>> {
+        return when (
+            val response = service.topics(
+                token = "${SettingRemote.BEARER} ${dataStore.token()}",
+                courseId = courseId,
+            )
+        ) {
             is Either.Right -> {
                 Either.Right(mapper.listTopicToDomain(response.b))
             }

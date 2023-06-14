@@ -51,7 +51,6 @@ class LoginViewModel
         }
     }
 
-
     fun sendDataLoginInFacebook(data: LoginFacebook) {
 
         doLoginFacebookUseCase(
@@ -81,12 +80,10 @@ class LoginViewModel
             if (it.first) {
 
                 serviceFCM()
-
             } else {
                 setEffect { LoginEffect.ShowMessageFailure(failure = it.second!!) }
             }
         }
-
     }
 
     private fun serviceFCM() {
@@ -95,11 +92,9 @@ class LoginViewModel
             user.fcmToken = firebaseToken
 
             doLogin()
-
         }, error = { error ->
 
             setEffect { LoginEffect.ShowMessageFailure(failure = error) }
-
         })
     }
 
@@ -114,7 +109,6 @@ class LoginViewModel
         ) {
             it.either(::handleFailure, ::handleLogin)
         }
-
     }
 
     private fun sendFCMToken() {
@@ -138,12 +132,10 @@ class LoginViewModel
             user.fcmToken = firebaseToken
 
             sendFCMToken()
-
         }, error = { error ->
 
             setEffect { LoginEffect.ShowMessageFailure(failure = error) }
         })
-
     }
 
     private fun handleLogin(success: Boolean) {

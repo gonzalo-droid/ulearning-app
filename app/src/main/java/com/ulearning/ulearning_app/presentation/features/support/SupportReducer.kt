@@ -1,6 +1,5 @@
 package com.ulearning.ulearning_app.presentation.features.support
 
-
 object SupportReducer {
 
     private lateinit var viewState: SupportViewState

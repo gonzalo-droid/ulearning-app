@@ -2,21 +2,25 @@ package com.ulearning.ulearning_app.data.remote.service
 
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
-import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
 import com.ulearning.ulearning_app.data.remote.entities.request.DownloadGuestFileRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.ShowGuestFileRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.*
-import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
-import retrofit2.Response
 import retrofit2.http.*
 
 interface CourseService {
+
+    suspend fun learningPackage(
+        token: String,
+        learningPackageId: Int,
+    ): Either<Failure, CoursePackageResponse>
+
     suspend fun subscriptionsPackage(
         token: String,
         perPage: Int,
         page: Int,
-        includes: String
+        classification: String,
     ): Either<Failure, List<SubscriptionResponse>>
+
     suspend fun subscriptions(
         token: String,
         perPage: Int,
@@ -28,7 +32,6 @@ interface CourseService {
         token: String,
         userId: Int,
     ): Either<Failure, List<CourseResponse>>
-
 
     suspend fun coursePercentage(
         token: String,

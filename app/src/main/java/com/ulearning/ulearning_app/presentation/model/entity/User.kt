@@ -9,7 +9,6 @@ import com.ulearning.ulearning_app.core.extensions.isMail
 import com.ulearning.ulearning_app.core.functional.Failure
 import java.io.Serializable
 
-
 open class User constructor(
     var email: String = "",
     var password: String = "",
@@ -59,18 +58,20 @@ open class User constructor(
         error: (error: Failure) -> Unit
     ) {
 
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                Log.e("FirebaseToken",task.exception?.message.toString())
-                error(
-                    Failure.DefaultError(R.string.firebase_token_message)
-                )
-                return@OnCompleteListener
-            } else {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(
+            OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.e("FirebaseToken", task.exception?.message.toString())
+                    error(
+                        Failure.DefaultError(R.string.firebase_token_message)
+                    )
+                    return@OnCompleteListener
+                } else {
 
-                response(task.result)
+                    response(task.result)
+                }
             }
-        })
+        )
     }
 
     private fun isEmailEmpty(): Boolean {

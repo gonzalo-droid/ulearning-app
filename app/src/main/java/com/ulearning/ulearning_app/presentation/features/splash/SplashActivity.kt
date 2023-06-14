@@ -14,10 +14,10 @@ import com.ulearning.ulearning_app.presentation.features.auth.LoginActivity
 import com.ulearning.ulearning_app.presentation.features.home.view.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 @SuppressLint("CustomSplashScreen")
-class SplashActivity : BaseActivityWithViewModel<ActivitySplashBinding, SplashViewModel>(),
+class SplashActivity :
+    BaseActivityWithViewModel<ActivitySplashBinding, SplashViewModel>(),
     SplashViewState {
 
     override val binding: ActivitySplashBinding by dataBinding(ActivitySplashBinding::inflate)
@@ -35,8 +35,6 @@ class SplashActivity : BaseActivityWithViewModel<ActivitySplashBinding, SplashVi
         SplashReducer.instance(splashViewState = this)
 
         observeUiStates()
-
-
     }
 
     private fun observeUiStates() {
@@ -57,7 +55,6 @@ class SplashActivity : BaseActivityWithViewModel<ActivitySplashBinding, SplashVi
             })
         }
     }
-
 
     override fun goHome() {
         startNewActivityClearStack<HomeActivity>()

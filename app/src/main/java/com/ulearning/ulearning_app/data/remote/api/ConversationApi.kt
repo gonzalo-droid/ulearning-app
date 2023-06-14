@@ -1,18 +1,15 @@
 package com.ulearning.ulearning_app.data.remote.api
 
 import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
-import com.ulearning.ulearning_app.data.remote.entities.request.LoginRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.SendConversationRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.SendConversationSupportRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.SendMessageRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.ConversationResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.LoginResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.MessageResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.UserResponse
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
 import retrofit2.Response
 import retrofit2.http.*
-
 
 interface ConversationApi {
 
@@ -24,7 +21,6 @@ interface ConversationApi {
         @Query("course_id") courseId: Int,
         @Query("includes") includes: String = "first_message",
     ): Response<BaseResponse<List<ConversationResponse>>>
-
 
     @GET("conversations")
     suspend fun conversationsSupport(
@@ -80,4 +76,3 @@ interface ConversationApi {
         @Query("course_id") courseId: Int,
     ): Response<BaseResponse<List<UserResponse>>>
 }
-

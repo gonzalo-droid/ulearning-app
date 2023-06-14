@@ -1,20 +1,24 @@
 package com.ulearning.ulearning_app.data.remote.entities.response
 
-
 import com.google.gson.annotations.SerializedName
-
 
 data class CoursePackageResponse(
     @SerializedName("amount")
     val amount: Int?,
-    @SerializedName("billing_id")
-    val billingId: Any?,
+    @SerializedName("classification")
+    val classification: String?,
+    @SerializedName("course")
+    val course: CourseResponse?,
     @SerializedName("course_id")
     val courseId: Any?,
+    @SerializedName("created_at")
+    val createdAt: String?,
     @SerializedName("deleted_at")
     val deletedAt: Any?,
     @SerializedName("finished_at")
     val finishedAt: Any?,
+    @SerializedName("group")
+    val group: GroupResponse?,
     @SerializedName("group_id")
     val groupId: Any?,
     @SerializedName("has_certificate")
@@ -31,8 +35,8 @@ data class CoursePackageResponse(
     val lastConnectionAt: Any?,
     @SerializedName("learning_package")
     val learningPackage: LearningPackageResponse?,
-    @SerializedName("next_payment_date")
-    val nextPaymentDate: Any?,
+    @SerializedName("learning_package_id")
+    val learningPackageId: Int?,
     @SerializedName("purchased_certificate")
     val purchasedCertificate: Boolean?,
     @SerializedName("purchased_record")
@@ -55,6 +59,8 @@ data class CoursePackageResponse(
     val timeSession: Int?,
     @SerializedName("type")
     val type: String?,
+    @SerializedName("user")
+    val user: UserResponse?,
     @SerializedName("user_id")
     val userId: Int?
 )

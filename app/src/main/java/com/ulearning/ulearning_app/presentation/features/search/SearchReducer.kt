@@ -1,6 +1,5 @@
 package com.ulearning.ulearning_app.presentation.features.search
 
-
 object SearchReducer {
 
     private lateinit var viewState: SearchViewState
@@ -21,7 +20,6 @@ object SearchReducer {
     fun selectEffect(effect: SearchEffect) {
         when (effect) {
             is SearchEffect.ShowMessageFailure -> viewState.messageFailure(effect.failure)
-
         }
     }
 }

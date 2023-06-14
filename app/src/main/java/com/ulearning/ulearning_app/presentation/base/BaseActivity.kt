@@ -89,7 +89,6 @@ abstract class BaseActivity<VBinding : ViewDataBinding> :
         }
     }
 
-
     protected fun showToastShort(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }

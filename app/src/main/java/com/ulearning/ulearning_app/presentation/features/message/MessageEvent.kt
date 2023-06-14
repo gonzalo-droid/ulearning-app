@@ -2,7 +2,6 @@ package com.ulearning.ulearning_app.presentation.features.message
 
 import com.ulearning.ulearning_app.presentation.base.UiEvent
 
-
 sealed class MessageEvent : UiEvent {
 
     object MessagesClicked : MessageEvent()

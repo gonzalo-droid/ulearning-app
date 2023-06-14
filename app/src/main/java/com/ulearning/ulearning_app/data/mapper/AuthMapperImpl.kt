@@ -1,6 +1,5 @@
 package com.ulearning.ulearning_app.data.mapper
 
-
 import com.ulearning.ulearning_app.data.remote.entities.response.ProfileResponse
 import com.ulearning.ulearning_app.domain.model.Profile
 import javax.inject.Singleton
@@ -33,6 +32,4 @@ class AuthMapperImpl : AuthMapper {
             )
         }
     }
-
-
 }

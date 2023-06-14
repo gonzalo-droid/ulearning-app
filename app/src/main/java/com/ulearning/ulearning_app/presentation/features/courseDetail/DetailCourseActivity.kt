@@ -1,4 +1,4 @@
-package com.ulearning.ulearning_app.presentation.features.courses
+package com.ulearning.ulearning_app.presentation.features.courseDetail
 
 import android.app.DownloadManager
 import android.content.Context
@@ -32,8 +32,8 @@ import com.ulearning.ulearning_app.domain.model.Topic
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
 import com.ulearning.ulearning_app.presentation.features.addConversation.AddConversationActivity
 import com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity
-import com.ulearning.ulearning_app.presentation.features.courses.adapter.DetailCourseTeacherAdapter
-import com.ulearning.ulearning_app.presentation.features.courses.adapter.TopicAdapter
+import com.ulearning.ulearning_app.presentation.features.courseDetail.adapter.DetailCourseTeacherAdapter
+import com.ulearning.ulearning_app.presentation.features.courseDetail.adapter.TopicAdapter
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import com.ulearning.ulearning_app.presentation.utils.imageLoader.ImageLoaderGlide
 import dagger.hilt.android.AndroidEntryPoint
@@ -62,7 +62,6 @@ class DetailCourseActivity :
     private lateinit var record: FileItem
 
     private lateinit var checkFiles: CheckAvailableFiles
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -121,10 +120,18 @@ class DetailCourseActivity :
         setDetailCourse(viewModel.course)
 
         setDetailSubscription(viewModel.subscription)
-
     }
 
     private fun setDetailSubscription(subscription: Subscription) {
+
+        if(subscription.group?.teachers?.isEmpty()!!){
+            binding.teacherTitle.visibility = View.GONE
+            binding.recycler.visibility = View.GONE
+        }else {
+            binding.teacherTitle.visibility = View.VISIBLE
+            binding.recycler.visibility = View.VISIBLE
+        }
+
         goTeacher(subscription.group?.teachers ?: arrayListOf())
     }
 
@@ -134,7 +141,6 @@ class DetailCourseActivity :
 
         val mutableTopics: MutableList<Topic> = mutableListOf()
 
-
         topics.forEach { it ->
 
             mutableTopics.add(it)
@@ -143,7 +149,6 @@ class DetailCourseActivity :
                 mutableTopics.add(child)
             }
         }
-
 
         topicAdapter = TopicAdapter(topics = mutableTopics) { topic ->
             onItemSelected(topic)
@@ -156,16 +161,18 @@ class DetailCourseActivity :
         viewModel.let {
             if (viewModel.urlWebView.isNotEmpty()) {
                 val topicUrl = "/courses/${topic.courseId}/topics/${topic.id}"
-                val url = "${viewModel.urlWebView}?return=${topicUrl}"
+                val url = "${viewModel.urlWebView}?return=$topicUrl"
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
             }
         }
     }
 
     override fun goToConversation(courseId: Int) {
-        startActivity(Intent(this, ConversationActivity::class.java).apply {
-            putExtra(Config.COURSE_ID_PUT, viewModel.course.id)
-        })
+        startActivity(
+            Intent(this, ConversationActivity::class.java).apply {
+                putExtra(Config.COURSE_ID_PUT, viewModel.course.id)
+            }
+        )
     }
 
     override fun getRole(role: String) {
@@ -200,7 +207,6 @@ class DetailCourseActivity :
                 record = it
             }
         }
-
     }
 
     override fun myCertificate(certificate: FileItem) {
@@ -215,7 +221,7 @@ class DetailCourseActivity :
         with(viewModel) {
             if (urlWebView.isNotEmpty()) {
                 val topicUrl = "/courses/${subscription.courseId}"
-                val url = "${viewModel.urlWebView}?return=${topicUrl}"
+                val url = "${viewModel.urlWebView}?return=$topicUrl"
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
             }
         }
@@ -247,7 +253,6 @@ class DetailCourseActivity :
         } catch (e: Exception) {
             messageFailure(Failure.DefaultError(R.string.error_download_pdf))
         }
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -255,7 +260,6 @@ class DetailCourseActivity :
             android.R.id.home -> {
                 finish()
             }
-
         }
         return super.onOptionsItemSelected(item)
     }
@@ -265,16 +269,16 @@ class DetailCourseActivity :
 
             if (!data.mainImage?.originalUrl.isNullOrEmpty()) {
                 ImageLoaderGlide().loadImage(
-                    imageView = binding.imageCourseIv,
+                    imageView = imageCourseIv,
                     imagePath = data.mainImage?.originalUrl!!,
                     requestOptions = RequestOptions.centerCropTransform(),
-                    placeHolder = R.mipmap.ic_logo_launcher
+                    placeHolder = R.drawable.course_test
                 )
-            }else{
-                binding.imageCourseIv.setImageResource(R.drawable.course_test)
+            } else {
+                imageCourseIv.setImageResource(R.drawable.course_test)
             }
 
-            binding.toolbarLayout.title = data.title
+            toolbarLayout.title = data.title
             titleText.text = data.title
 
             descriptionText.text = data.descriptionLarge?.html()
@@ -293,12 +297,14 @@ class DetailCourseActivity :
 
     private fun onItemUserSelected(user: Teacher) {
 
-        startActivity(Intent(this, AddConversationActivity::class.java).apply {
-            putExtra(Config.COURSE_ID_PUT, viewModel.course.id)
-            putExtra(Config.LIST_USER_IDS_PUT, "${user.id},")
-            putExtra(Config.TYPE_MESSAGE, Config.MESSAGE_COURSE)
-            putExtra(Config.ROLE, viewModel.typeRole)
-        })
+        startActivity(
+            Intent(this, AddConversationActivity::class.java).apply {
+                putExtra(Config.COURSE_ID_PUT, viewModel.course.id)
+                putExtra(Config.LIST_USER_IDS_PUT, "${user.id},")
+                putExtra(Config.TYPE_MESSAGE, Config.MESSAGE_COURSE)
+                putExtra(Config.ROLE, viewModel.typeRole)
+            }
+        )
     }
 
     override fun messageFailure(failure: Failure) {
@@ -312,5 +318,4 @@ class DetailCourseActivity :
     override fun loading() {
         showLoadingDialog()
     }
-
 }

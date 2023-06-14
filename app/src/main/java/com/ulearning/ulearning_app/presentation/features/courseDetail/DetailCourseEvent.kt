@@ -1,7 +1,6 @@
-package com.ulearning.ulearning_app.presentation.features.courses
+package com.ulearning.ulearning_app.presentation.features.courseDetail
 
 import com.ulearning.ulearning_app.presentation.base.UiEvent
-
 
 sealed class DetailCourseEvent : UiEvent {
 
@@ -28,5 +27,4 @@ sealed class DetailCourseEvent : UiEvent {
     object GetDownloadCertificate : DetailCourseEvent()
 
     object GetDownloadRecord : DetailCourseEvent()
-
 }

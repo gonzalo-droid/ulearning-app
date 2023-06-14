@@ -1,4 +1,4 @@
-package com.ulearning.ulearning_app.presentation.features.courses
+package com.ulearning.ulearning_app.presentation.features.courseDetail
 
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.CheckAvailableFiles
@@ -29,5 +29,4 @@ interface DetailCourseViewState {
     fun checkAvailableFiles(checkAvailableFiles: CheckAvailableFiles)
 
     fun downloadFilePDF(file: DownloadFile)
-
 }

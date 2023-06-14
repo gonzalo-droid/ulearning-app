@@ -12,4 +12,3 @@ data class Conversation(
     val toSupport: Boolean? = false,
     val uuid: String
 ) : Serializable
-

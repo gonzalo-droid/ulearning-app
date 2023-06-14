@@ -1,8 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.scanQr
 
 import com.ulearning.ulearning_app.core.functional.Failure
-import com.ulearning.ulearning_app.domain.model.Profile
-import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.DoLogoutUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.GetProfileUseCase
 import com.ulearning.ulearning_app.domain.useCase.auth.GetTokenUseCase
@@ -27,13 +25,10 @@ class ScanQrViewModel
         }
     }
 
-
     private fun handleFailure(failure: Failure) {
         setEffect { ScanQrEffect.ShowMessageFailure(failure = failure) }
     }
 
-
     companion object Events {
-
     }
 }

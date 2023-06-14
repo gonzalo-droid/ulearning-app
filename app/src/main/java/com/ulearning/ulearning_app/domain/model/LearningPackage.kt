@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.domain.model
 
+import java.io.Serializable
 
 data class LearningPackage(
 
@@ -20,4 +21,6 @@ data class LearningPackage(
     var title: String? = "",
 
     var type: String? = "",
-)
+
+    val items: List<LearningPackageItem>? = arrayListOf(),
+) : Serializable

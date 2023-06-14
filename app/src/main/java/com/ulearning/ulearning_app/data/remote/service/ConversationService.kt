@@ -2,20 +2,12 @@ package com.ulearning.ulearning_app.data.remote.service
 
 import com.ulearning.ulearning_app.core.functional.Either
 import com.ulearning.ulearning_app.core.functional.Failure
-import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
 import com.ulearning.ulearning_app.data.remote.entities.request.SendConversationRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.SendConversationSupportRequest
 import com.ulearning.ulearning_app.data.remote.entities.request.SendMessageRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.ConversationResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.MessageResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.UserResponse
-import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
-import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Query
-
 
 interface ConversationService {
 
@@ -48,7 +40,6 @@ interface ConversationService {
         body: SendMessageRequest
     ): Either<Failure, MessageResponse>
 
-
     suspend fun sendConversation(
         token: String,
         body: SendConversationRequest
@@ -71,5 +62,4 @@ interface ConversationService {
         ids: String,
         courseId: Int,
     ): Either<Failure, List<UserResponse>>
-
 }

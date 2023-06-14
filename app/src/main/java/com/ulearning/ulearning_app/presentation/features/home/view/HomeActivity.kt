@@ -20,6 +20,5 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         navView.setupWithNavController(navController)
     }
 
-
     override val binding: ActivityHomeBinding by dataBinding(ActivityHomeBinding::inflate)
 }

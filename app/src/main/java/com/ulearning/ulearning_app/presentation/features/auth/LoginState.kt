@@ -9,5 +9,4 @@ sealed class LoginState : UiState {
     object Loading : LoginState()
 
     data class LoginSuccess constructor(val success: Boolean) : LoginState()
-
 }

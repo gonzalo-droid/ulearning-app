@@ -9,5 +9,4 @@ class GetRoleUseCase
     BaseUseCase<String, BaseUseCase.None>() {
 
     override suspend fun run(params: None) = authRepository.getRole()
-
 }

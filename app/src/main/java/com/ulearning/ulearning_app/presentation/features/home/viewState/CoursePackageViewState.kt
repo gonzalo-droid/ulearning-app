@@ -1,8 +1,8 @@
 package com.ulearning.ulearning_app.presentation.features.home.viewState
 
 import com.ulearning.ulearning_app.core.functional.Failure
-import com.ulearning.ulearning_app.domain.model.Course
-import com.ulearning.ulearning_app.domain.model.CoursePercentage
+import com.ulearning.ulearning_app.domain.model.CoursePackage
+import com.ulearning.ulearning_app.domain.model.LearningPackageItem
 import com.ulearning.ulearning_app.domain.model.Subscription
 
 interface CoursePackageViewState {
@@ -11,6 +11,6 @@ interface CoursePackageViewState {
 
     fun loading()
 
-    fun getCoursePackage(courses: List<Subscription>)
+    fun getCoursePackage(course: CoursePackage)
 
 }

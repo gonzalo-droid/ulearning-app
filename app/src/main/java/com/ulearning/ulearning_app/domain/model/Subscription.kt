@@ -22,4 +22,3 @@ data class Subscription(
     var userId: Int? = 0,
     var learningPackage: LearningPackage? = null,
 ) : Serializable
-

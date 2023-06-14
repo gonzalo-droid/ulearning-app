@@ -1,6 +1,5 @@
 package com.ulearning.ulearning_app.presentation.features.validateCert
 
-
 object ValidateCertReducer {
 
     private lateinit var viewState: ValidateCertViewState
@@ -17,7 +16,6 @@ object ValidateCertReducer {
             is ValidateCertState.ValidateCert -> viewState.validateCert(state.file)
 
             is ValidateCertState.DownloadFilePDF -> viewState.downloadFilePDF(file = state.file)
-
         }
     }
 

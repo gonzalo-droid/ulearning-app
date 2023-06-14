@@ -1,8 +1,6 @@
 package com.ulearning.ulearning_app.data.remote.entities.response
 
-
 import com.google.gson.annotations.SerializedName
-
 
 data class CategoryResponse(
     @SerializedName("card_image")
@@ -10,7 +8,7 @@ data class CategoryResponse(
     @SerializedName("color")
     var color: String = "",
     @SerializedName("description")
-    var description: String ="",
+    var description: String = "",
     @SerializedName("id")
     var id: Int = 0,
     @SerializedName("name")

@@ -85,7 +85,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.features.courses.DetailCourseActivity"
+            android:name=".presentation.features.courseDetail.DetailCourseActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.App.Transparent" />

@@ -12,11 +12,9 @@ class SplashViewModel @Inject constructor(
     private val getSessionUseCase: GetSessionUseCase,
 ) : BaseViewModel<SplashEvent, SplashState, SplashEffect>() {
 
-
     override fun createInitialState(): SplashState {
         return SplashState.Idle
     }
-
 
     override fun handleEvent(event: SplashEvent) {
         when (event) {
@@ -24,8 +22,7 @@ class SplashViewModel @Inject constructor(
         }
     }
 
-
-    private fun verifyToken() = getSessionUseCase( BaseUseCase.None()) {
+    private fun verifyToken() = getSessionUseCase(BaseUseCase.None()) {
         it.either(::handleFailure, ::handleSession)
     }
 
@@ -34,12 +31,10 @@ class SplashViewModel @Inject constructor(
     }
 
     private fun handleSession(success: Boolean) {
-        if(success){
+        if (success) {
             setEffect { SplashEffect.GoToHome }
-        }else{
+        } else {
             setEffect { SplashEffect.GoToLogin }
         }
-
     }
-
 }

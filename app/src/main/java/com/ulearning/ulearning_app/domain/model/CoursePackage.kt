@@ -1,0 +1,36 @@
+package com.ulearning.ulearning_app.domain.model
+
+import java.io.Serializable
+
+data class CoursePackage(
+    val amount: Int? = 0,
+    val classification: String? = "",
+    val course: Course?,
+    val courseId: Any?,
+    val createdAt: String? = "",
+    val deletedAt: Any?,
+    val finishedAt: Any?,
+    val group: Group?,
+    val groupId: Any?,
+    val hasCertificate: Boolean? = false,
+    val hasDegree: Boolean? = false,
+    val hasRecord: Boolean? = false,
+    val id: Int?,
+    val isFinished: Boolean? = false,
+    val lastConnectionAt: Any?,
+    val learningPackage: LearningPackage?,
+    val learningPackageId: Int?,
+    val purchasedCertificate: Boolean? = false,
+    val purchasedRecord: Boolean? = false,
+    val rating: Any?,
+    val registeredAt: Any?,
+    val registeredBy: Int?,
+    val status: String? = "",
+    val suspendedAt: Any?,
+    val suspendedBy: Any?,
+    val suspendedReason: Any?,
+    val timeSession: Int?,
+    val type: String? = "",
+    val user: User?,
+    val userId: Int?,
+) : Serializable

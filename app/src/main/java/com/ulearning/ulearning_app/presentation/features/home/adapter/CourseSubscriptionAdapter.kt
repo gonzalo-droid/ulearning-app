@@ -28,28 +28,27 @@ class CourseSubscriptionAdapter constructor(
 
     override fun getItemCount(): Int = courses.size
 
-
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
 
         val binding = ItemCoursesBinding.bind(view)
 
         fun bind(model: Subscription, onClickListener: (Subscription) -> Unit) {
 
-            binding.progressSnackBar.visibility = if(model.isFinished!!) View.INVISIBLE else View.VISIBLE
-            binding.percentageText.visibility = if(model.isFinished!!) View.INVISIBLE else View.VISIBLE
+            binding.progressSnackBar.visibility = if (model.isFinished!!) View.INVISIBLE else View.VISIBLE
+            binding.percentageText.visibility = if (model.isFinished!!) View.INVISIBLE else View.VISIBLE
 
-            var coursePercentage : CoursePercentage? = null
+            var coursePercentage: CoursePercentage? = null
             var valueString = "0"
             var valueInt = 0
 
             percentages?.let { per ->
                 coursePercentage = per.firstOrNull { it.courseId == model.courseId }
 
-                if(!coursePercentage?.percentage.isNullOrEmpty()) {
+                if (!coursePercentage?.percentage.isNullOrEmpty()) {
                     valueString = coursePercentage?.percentage!!
-                    valueInt =coursePercentage?.percentage!!.toDouble().toInt()
+                    valueInt = coursePercentage?.percentage!!.toDouble().toInt()
                 }
-                binding.progressSnackBar.progress  = valueInt
+                binding.progressSnackBar.progress = valueInt
             }
 
             binding.categoryText.text = model.course?.category?.name
@@ -61,8 +60,6 @@ class CourseSubscriptionAdapter constructor(
             itemView.setOnClickListener {
                 onClickListener(model)
             }
-
         }
-
     }
 }

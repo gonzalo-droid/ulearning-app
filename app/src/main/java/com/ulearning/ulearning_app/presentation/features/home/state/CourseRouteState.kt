@@ -10,5 +10,4 @@ sealed class CourseRouteState : UiState {
     object Loading : CourseRouteState()
 
     data class CourseRoute constructor(val courses: List<Subscription>) : CourseRouteState()
-
 }

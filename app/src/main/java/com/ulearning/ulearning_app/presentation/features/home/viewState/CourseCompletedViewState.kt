@@ -10,5 +10,4 @@ interface CourseCompletedViewState {
     fun loading()
 
     fun getCourseCompleted(courses: List<Subscription>)
-
 }

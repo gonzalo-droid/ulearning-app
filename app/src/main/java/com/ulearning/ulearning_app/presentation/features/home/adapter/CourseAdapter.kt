@@ -8,7 +8,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.databinding.ItemCoursesBinding
 import com.ulearning.ulearning_app.domain.model.Course
-import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.utils.imageLoader.ImageLoaderGlide
 
 class CourseAdapter constructor(
@@ -28,11 +27,9 @@ class CourseAdapter constructor(
 
     override fun getItemCount(): Int = courses.size
 
-
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
 
         val binding = ItemCoursesBinding.bind(view)
-
 
         fun bind(model: Course, onClickListener: (Course) -> Unit) {
 
@@ -48,16 +45,13 @@ class CourseAdapter constructor(
                     imageView = binding.imageIv,
                     imagePath = it,
                     requestOptions = RequestOptions.centerCropTransform(),
-                    placeHolder = R.mipmap.ic_logo_launcher
+                    placeHolder = R.drawable.course_test
                 )
             }
-
 
             itemView.setOnClickListener {
                 onClickListener(model)
             }
-
         }
-
     }
 }

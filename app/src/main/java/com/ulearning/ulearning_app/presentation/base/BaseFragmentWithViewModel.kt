@@ -23,7 +23,7 @@ abstract class BaseFragmentWithViewModel<ViewDataBindingClass : ViewDataBinding,
     protected abstract val dataBindingViewModel: Int
     private lateinit var rootView: View
 
-    //Shows, hide, error message view.
+    // Shows, hide, error message view.
     private val _showErrorCause = MutableLiveData(false)
     val showErrorCause: LiveData<Boolean>
         get() = _showErrorCause
@@ -60,10 +60,9 @@ abstract class BaseFragmentWithViewModel<ViewDataBindingClass : ViewDataBinding,
     }
 
     open fun onViewIsCreated(view: View) {
-
     }
 
-    open fun getUseCaseFailureFromBase(failure: Failure) : MessageDesign {
+    open fun getUseCaseFailureFromBase(failure: Failure): MessageDesign {
 
         return BindingUtil.reducerFailure(failure)
     }

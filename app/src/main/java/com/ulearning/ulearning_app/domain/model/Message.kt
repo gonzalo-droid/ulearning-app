@@ -14,4 +14,3 @@ data class Message(
     val userIds: List<String?>? = arrayListOf(),
     val uuid: String? = ""
 ) : Serializable
-

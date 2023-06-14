@@ -7,7 +7,6 @@ import com.ulearning.ulearning_app.domain.model.FileItem
 import com.ulearning.ulearning_app.domain.useCase.courses.GetDownloadShowGuestFileUseCase
 import com.ulearning.ulearning_app.domain.useCase.courses.GetShowGuestFileUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
-import com.ulearning.ulearning_app.presentation.features.courses.DetailCourseState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -54,7 +53,6 @@ class ValidateCertViewModel
             setEffect { ValidateCertEffect.ShowMessageFailure(failure = Failure.DefaultError(R.string.number_cert_error)) }
         }
     }
-
 
     private fun handleFailure(failure: Failure) {
         setEffect { ValidateCertEffect.ShowMessageFailure(failure = failure) }

@@ -17,7 +17,6 @@ import com.ulearning.ulearning_app.presentation.features.home.state.HomeState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-
 @HiltViewModel
 class HomeViewModel
 @Inject constructor(
@@ -97,7 +96,6 @@ class HomeViewModel
             it.either(::handleFailure, ::handleCourseRecent)
         }
     }
-
 
     private fun handleFailure(failure: Failure) {
         setEffect { HomeEffect.ShowMessageFailure(failure = failure) }

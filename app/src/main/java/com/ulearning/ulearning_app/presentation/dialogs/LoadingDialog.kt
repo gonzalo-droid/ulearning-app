@@ -12,7 +12,6 @@ import androidx.fragment.app.DialogFragment
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.databinding.DialogFragmentLoadingBinding
 
-
 class LoadingDialog(var loadingText: String? = null) : DialogFragment() {
 
     lateinit var binding: DialogFragmentLoadingBinding
@@ -40,5 +39,4 @@ class LoadingDialog(var loadingText: String? = null) : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
-
 }

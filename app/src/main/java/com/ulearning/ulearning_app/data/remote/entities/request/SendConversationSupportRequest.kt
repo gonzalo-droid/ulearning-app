@@ -8,5 +8,3 @@ data class SendConversationSupportRequest(
     @SerializedName("to_support") val toSupport: Boolean,
     @SerializedName("user_ids") val userIds: ArrayList<Int>,
 ) : Serializable
-
-

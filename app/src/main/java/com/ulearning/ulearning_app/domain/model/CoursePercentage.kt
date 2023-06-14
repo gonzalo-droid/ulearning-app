@@ -5,7 +5,4 @@ import java.io.Serializable
 data class CoursePercentage(
     var percentage: String,
     var courseId: Int
-) : Serializable {
-
-
-}
+) : Serializable

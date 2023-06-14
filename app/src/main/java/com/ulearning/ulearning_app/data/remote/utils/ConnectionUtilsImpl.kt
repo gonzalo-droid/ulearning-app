@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Singleton
 class ConnectionUtilsImpl
-    @Inject constructor(private val applicationContext: Context) : ConnectionUtils {
+@Inject constructor(private val applicationContext: Context) : ConnectionUtils {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun isNetworkAvailable(): Boolean {
         try {
@@ -22,7 +22,7 @@ class ConnectionUtilsImpl
             return when {
                 actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
                 actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-                //for other device how are able to connect with Ethernet
+                // for other device how are able to connect with Ethernet
                 actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
                 else -> false
             }

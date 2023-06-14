@@ -14,9 +14,8 @@ import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityCoursePacksBinding
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
-import com.ulearning.ulearning_app.presentation.features.courses.DetailCourseActivity
+import com.ulearning.ulearning_app.presentation.features.courseDetail.DetailCourseActivity
 import com.ulearning.ulearning_app.presentation.features.home.adapter.CoursePackageSubscriptionAdapter
-import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseSubscriptionAdapter
 import com.ulearning.ulearning_app.presentation.features.home.event.CoursePackEvent
 import com.ulearning.ulearning_app.presentation.features.home.reducer.CoursePackReducer
 import com.ulearning.ulearning_app.presentation.features.home.viewModel.CoursePackViewModel
@@ -75,7 +74,6 @@ class CoursePackActivity :
                 }
             })
         }
-
     }
 
     override fun messageFailure(failure: Failure) {
@@ -107,12 +105,10 @@ class CoursePackActivity :
 
     private fun onItemSelected(model: Subscription) {
 
-        startActivity(Intent(this, DetailCourseActivity::class.java).apply {
-            putExtra(Config.COURSE_PUT, model.course)
-            putExtra(Config.SUBSCRIPTION_PUT, model)
-            putExtra(Config.ROLE, viewModel.typeRole)
-        })
-
+        startActivity(
+            Intent(this, DetailCourseActivity::class.java).apply {
+                putExtra(Config.COURSE_PACKAGE_ID_PUT, model.learningPackage?.id)
+            }
+        )
     }
-
 }

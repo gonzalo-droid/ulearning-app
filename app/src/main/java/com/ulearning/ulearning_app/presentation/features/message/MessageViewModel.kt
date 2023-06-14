@@ -1,9 +1,7 @@
 package com.ulearning.ulearning_app.presentation.features.message
 
-
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.Message
@@ -73,7 +71,6 @@ class MessageViewModel
                 it.either(::handleFailure, ::handleParticipants)
             }
         }
-
     }
 
     private fun sendMessage() {
@@ -95,7 +92,6 @@ class MessageViewModel
                 it.either(::handleFailure, ::handleMessage)
             }
         }
-
     }
 
     private fun getMessages() {
@@ -116,7 +112,6 @@ class MessageViewModel
         Handler(Looper.getMainLooper()).postDelayed({
             getMessages()
         }, 2000)
-
     }
 
     private fun handleMessages(messages: List<Message>) {
@@ -134,7 +129,6 @@ class MessageViewModel
     private fun handleUserId(userId: Int) {
         setState { MessageState.GetUserId(userId = userId) }
     }
-
 
     companion object Events {
         val sendMessageClick = MessageEvent.SendMessageClick

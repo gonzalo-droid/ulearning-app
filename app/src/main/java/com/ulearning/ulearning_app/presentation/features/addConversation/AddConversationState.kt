@@ -1,7 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.addConversation
 
 import com.ulearning.ulearning_app.domain.model.Conversation
-import com.ulearning.ulearning_app.domain.model.Message
 import com.ulearning.ulearning_app.domain.model.User
 import com.ulearning.ulearning_app.presentation.base.UiState
 
@@ -16,5 +15,4 @@ sealed class AddConversationState : UiState {
     data class UserList constructor(val users: List<User>) : AddConversationState()
 
     data class GetRole constructor(val role: String) : AddConversationState()
-
 }

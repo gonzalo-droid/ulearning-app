@@ -7,7 +7,6 @@ import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.Message
 import com.ulearning.ulearning_app.domain.model.User
 
-
 interface ConversationMapper {
 
     suspend fun conversationsToDomain(data: List<ConversationResponse>): List<Conversation>
@@ -19,5 +18,4 @@ interface ConversationMapper {
     suspend fun messageToDomain(data: MessageResponse): Message
 
     suspend fun conversationToDomain(data: ConversationResponse): Conversation
-
 }

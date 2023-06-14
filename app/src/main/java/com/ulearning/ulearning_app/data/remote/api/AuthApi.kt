@@ -10,7 +10,6 @@ import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
 import retrofit2.Response
 import retrofit2.http.*
 
-
 interface AuthApi {
 
     @POST("login")
@@ -33,7 +32,6 @@ interface AuthApi {
     suspend fun selfAuthToken(
         @Header(SettingRemote.AUTHORIZATION) token: String,
     ): Response<BaseResponse<TokenResponse>>
-
 
     @POST("login-google")
     suspend fun loginGoogle(

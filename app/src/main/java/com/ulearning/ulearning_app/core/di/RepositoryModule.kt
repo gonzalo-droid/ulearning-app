@@ -3,16 +3,16 @@ package com.ulearning.ulearning_app.core.di
 import com.ulearning.ulearning_app.data.dataStore.config.DataStoreConfig
 import com.ulearning.ulearning_app.data.mapper.*
 import com.ulearning.ulearning_app.data.remote.service.AuthService
-import com.ulearning.ulearning_app.data.remote.service.CourseService
 import com.ulearning.ulearning_app.data.remote.service.ConversationService
+import com.ulearning.ulearning_app.data.remote.service.CourseService
 import com.ulearning.ulearning_app.data.remote.service.TopicService
 import com.ulearning.ulearning_app.data.repository.AuthRepositoryImpl
-import com.ulearning.ulearning_app.data.repository.CourseRepositoryImpl
 import com.ulearning.ulearning_app.data.repository.ConversationRepositoryImpl
+import com.ulearning.ulearning_app.data.repository.CourseRepositoryImpl
 import com.ulearning.ulearning_app.data.repository.TopicRepositoryImpl
 import com.ulearning.ulearning_app.domain.repository.AuthRepository
-import com.ulearning.ulearning_app.domain.repository.CourseRepository
 import com.ulearning.ulearning_app.domain.repository.ConversationRepository
+import com.ulearning.ulearning_app.domain.repository.CourseRepository
 import com.ulearning.ulearning_app.domain.repository.TopicRepository
 import dagger.Module
 import dagger.Provides
@@ -27,7 +27,6 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideCourseMapper(): CourseMapper = CourseMapperImpl()
-
 
     @Provides
     @Singleton

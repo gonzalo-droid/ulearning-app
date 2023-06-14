@@ -33,7 +33,6 @@ class FCMService : FirebaseMessagingService() {
         message.notification?.let {
             sendNotification(title = it.title!!, body = it.body!!, data = message.data)
         }
-
     }
 
     private fun sendNotification(title: String, body: String, data: Map<String, String>) {
@@ -65,7 +64,6 @@ class FCMService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(notificationChannel)
         }
 
-
         val intent = Intent(this, HomeActivity::class.java)
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -83,7 +81,6 @@ class FCMService : FirebaseMessagingService() {
             }
         )
 
-
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.ic_chat)
             .setColor(ContextCompat.getColor(this, R.color.green))
@@ -93,13 +90,10 @@ class FCMService : FirebaseMessagingService() {
             .setSound(soundUri)
             .setContentIntent(pendingIntent)
 
-
-
         notificationManager.notify(
             0,
             notificationBuilder.build()
         )
-
     }
 
     private fun intent(data: Map<String, String>): Intent {
@@ -118,7 +112,6 @@ class FCMService : FirebaseMessagingService() {
                         conversationToDomain(conversation as ConversationResponse)
                     )
                 }
-
             } else {
                 Intent(this, HomeActivity::class.java)
             }

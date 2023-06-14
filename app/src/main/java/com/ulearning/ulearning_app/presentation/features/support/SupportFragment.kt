@@ -19,7 +19,6 @@ import com.ulearning.ulearning_app.presentation.features.conversation.Conversati
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class SupportFragment :
     BaseFragmentWithViewModel<FragmentSupportBinding, SupportViewModel>(),
@@ -48,7 +47,6 @@ class SupportFragment :
 
     private fun observeUiStates() {
 
-
         viewModel.setEvent(SupportEvent.ConversationsClicked)
 
         viewModel.apply {
@@ -64,7 +62,6 @@ class SupportFragment :
                 }
             })
         }
-
     }
 
     override fun conversations(conversations: List<Conversation>) {
@@ -73,11 +70,9 @@ class SupportFragment :
         adapter = ConversationAdapter(conversations = conversations) { conversation ->
 
             onItemSelected(conversation)
-
         }
 
         recycler.adapter = adapter
-
     }
 
     override fun newConversation() {
@@ -89,7 +84,6 @@ class SupportFragment :
                 putSerializable(Config.TYPE_MESSAGE, Config.MESSAGE_SUPPORT)
             }
         )
-
     }
 
     override fun onResume() {
@@ -119,7 +113,5 @@ class SupportFragment :
     override fun loading() {
 
         showLoadingDialog()
-
     }
-
 }

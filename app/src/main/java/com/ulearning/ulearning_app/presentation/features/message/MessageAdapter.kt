@@ -24,7 +24,6 @@ class MessageAdapter constructor(
         const val VIEW_TYPE_MESSAGE_RECEIVED = 2
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         return if (viewType == VIEW_TYPE_MESSAGE_SEND) {
@@ -38,7 +37,6 @@ class MessageAdapter constructor(
                     .inflate(R.layout.item_message_reciver, parent, false)
             )
         }
-
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -67,7 +65,6 @@ class MessageAdapter constructor(
 
         val binding = ItemMessageReciverBinding.bind(view)
 
-
         fun bind(model: Message) {
 
             binding.titleText.text = model.content
@@ -76,16 +73,13 @@ class MessageAdapter constructor(
             val time = model.publishedAt
             binding.timeText.text =
                 time?.dateFormat(Config.DATE_FORMAT_THREE)?.dateFormat(Config.DATE_FORMAT_THIRTY)
-
         }
-
     }
 
     inner class SendViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
 
         val binding = ItemMessageSendBinding.bind(view)
 
-
         fun bind(model: Message) {
 
             binding.titleText.text = model.content
@@ -94,9 +88,6 @@ class MessageAdapter constructor(
             val time = model.publishedAt
             binding.timeText.text =
                 time?.dateFormat(Config.DATE_FORMAT_THREE)?.dateFormat(Config.DATE_FORMAT_THIRTY)
-
         }
-
-
     }
 }

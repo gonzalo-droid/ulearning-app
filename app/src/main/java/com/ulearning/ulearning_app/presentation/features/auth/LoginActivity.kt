@@ -25,9 +25,9 @@ import com.ulearning.ulearning_app.presentation.model.entity.LoginGoogle
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONException
 
-
 @AndroidEntryPoint
-class LoginActivity : BaseActivityWithViewModel<ActivityLoginBinding, LoginViewModel>(),
+class LoginActivity :
+    BaseActivityWithViewModel<ActivityLoginBinding, LoginViewModel>(),
     LoginViewState {
 
     override val binding: ActivityLoginBinding by dataBinding(ActivityLoginBinding::inflate)
@@ -40,7 +40,6 @@ class LoginActivity : BaseActivityWithViewModel<ActivityLoginBinding, LoginViewM
     val FACEBOOK_SIGN_IN = 111
 
     private val callbackManager = CallbackManager.Factory.create()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +57,6 @@ class LoginActivity : BaseActivityWithViewModel<ActivityLoginBinding, LoginViewM
             loginInGoogle()
         }
 
-
         /**
          * https://developers.facebook.com/docs/graph-api/reference/user
          * params avalible
@@ -66,7 +64,7 @@ class LoginActivity : BaseActivityWithViewModel<ActivityLoginBinding, LoginViewM
 
         binding.logInFacebook.setOnClickListener {
             LoginManager.getInstance()
-                .logInWithReadPermissions(this, listOf("public_profile","email"))
+                .logInWithReadPermissions(this, listOf("public_profile", "email"))
         }
 
         viewModel.apply {
@@ -89,7 +87,6 @@ class LoginActivity : BaseActivityWithViewModel<ActivityLoginBinding, LoginViewM
         val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
 
         showSnackBar(binding.root, getString(messageDesign.idMessage))
-
     }
 
     override fun loading() {
@@ -97,66 +94,64 @@ class LoginActivity : BaseActivityWithViewModel<ActivityLoginBinding, LoginViewM
     }
 
     override fun loginInFacebook() {
-        LoginManager.getInstance().
-        registerCallback(callbackManager,
-            object : FacebookCallback<LoginResult> {
-                override fun onSuccess(result: LoginResult) {
-                    result.let {
-                        val token = it.accessToken
+        LoginManager.getInstance()
+            .registerCallback(
+                callbackManager,
+                object : FacebookCallback<LoginResult> {
+                    override fun onSuccess(result: LoginResult) {
+                        result.let {
+                            val token = it.accessToken
 
-                        val accessToken = AccessToken.getCurrentAccessToken()
-                        val isLoggedIn = accessToken != null && !accessToken.isExpired
-                        if(isLoggedIn) LoginManager.getInstance().logOut()
+                            val accessToken = AccessToken.getCurrentAccessToken()
+                            val isLoggedIn = accessToken != null && !accessToken.isExpired
+                            if (isLoggedIn) LoginManager.getInstance().logOut()
 
-                        val request = GraphRequest.newMeRequest(
-                            token
-                        ) { `object`, response ->
-                            try {
-                                /**
-                                 * https://developers.facebook.com/docs/facebook-login/android
-                                 * https://developers.facebook.com/docs/android/graph?locale=es_ES#userdata-troubleshooting
-                                 *
-                                 * get data with GraphRequest
-                                 */
+                            val request = GraphRequest.newMeRequest(
+                                token
+                            ) { `object`, response ->
+                                try {
+                                    /**
+                                     * https://developers.facebook.com/docs/facebook-login/android
+                                     * https://developers.facebook.com/docs/android/graph?locale=es_ES#userdata-troubleshooting
+                                     *
+                                     * get data with GraphRequest
+                                     */
 
-                                val email = `object`!!.getString("email")
-                                val name = `object`.getString("name")
-                                val firstName = `object`.getString("first_name")
-                                val lastName = `object`.getString("last_name")
-                                val picture = `object`.getString("picture")
-                                viewModel.sendDataLoginInFacebook(
-                                    LoginFacebook(
-                                        email = email ?: "",
-                                        name = name ?: "",
-                                        firstName = firstName ?: "",
-                                        lastName = lastName ?: "",
-                                        picture = picture ?: "",
+                                    val email = `object`!!.getString("email")
+                                    val name = `object`.getString("name")
+                                    val firstName = `object`.getString("first_name")
+                                    val lastName = `object`.getString("last_name")
+                                    val picture = `object`.getString("picture")
+                                    viewModel.sendDataLoginInFacebook(
+                                        LoginFacebook(
+                                            email = email ?: "",
+                                            name = name ?: "",
+                                            firstName = firstName ?: "",
+                                            lastName = lastName ?: "",
+                                            picture = picture ?: "",
+                                        )
                                     )
-                                )
-
-                            } catch (e: JSONException) {
-                                Log.e("SingInFacebook", "json: "+ e.message.toString())
+                                } catch (e: JSONException) {
+                                    Log.e("SingInFacebook", "json: " + e.message.toString())
+                                }
                             }
+                            val parameters = Bundle()
+                            parameters.putString("fields", "email,first_name,last_name,name,picture")
+                            request.parameters = parameters
+                            request.executeAsync()
                         }
-                        val parameters = Bundle()
-                        parameters.putString("fields", "email,first_name,last_name,name,picture")
-                        request.parameters = parameters
-                        request.executeAsync()
+                    }
 
+                    override fun onCancel() {
+                        Log.e("SingInFacebook", "onCancel")
+                    }
+
+                    override fun onError(error: FacebookException) {
+                        Log.e("SingInFacebook", "Exception: " + error.message.toString())
+                        // LoginManager.getInstance().logOut()
                     }
                 }
-
-                override fun onCancel() {
-                    Log.e("SingInFacebook", "onCancel")
-                }
-
-                override fun onError(error: FacebookException) {
-                    Log.e("SingInFacebook","Exception: "+  error.message.toString())
-                    //LoginManager.getInstance().logOut()
-                }
-
-            }
-        )
+            )
     }
 
     override fun loginInGoogle() {
@@ -194,16 +189,13 @@ class LoginActivity : BaseActivityWithViewModel<ActivityLoginBinding, LoginViewM
                             givenName = account.givenName ?: ""
                         )
                     )
-
                 }
             } catch (e: ApiException) {
                 Log.e("ApiExceptionGoogle", e.message.toString())
                 messageFailure(Failure.DefaultError(R.string.error_sign_in_google))
             }
-
         }
     }
-
 
     override fun homeActivity() {
         closeLoadingDialog()

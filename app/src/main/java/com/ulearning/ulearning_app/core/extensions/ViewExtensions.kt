@@ -28,6 +28,6 @@ fun Context.drawable(@DrawableRes drawable: Int): Drawable? {
     return AppCompatResources.getDrawable(this, drawable)
 }
 
-infix fun View.click(click:()->Unit){
-    setOnClickListener {click}
+infix fun View.click(click: () -> Unit) {
+    setOnClickListener { click }
 }

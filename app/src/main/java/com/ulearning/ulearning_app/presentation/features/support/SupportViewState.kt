@@ -12,5 +12,4 @@ interface SupportViewState {
     fun conversations(conversations: List<Conversation>)
 
     fun newConversation()
-
 }

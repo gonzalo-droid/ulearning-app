@@ -13,5 +13,4 @@ interface LoginViewState {
     fun loginInGoogle()
 
     fun homeActivity()
-
 }

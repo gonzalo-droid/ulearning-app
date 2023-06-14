@@ -17,16 +17,17 @@ import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
+import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseAdapter
 import com.ulearning.ulearning_app.presentation.features.home.event.HomeEvent
 import com.ulearning.ulearning_app.presentation.features.home.reducer.HomeReducer
-import com.ulearning.ulearning_app.presentation.features.home.viewState.HomeViewState
-import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseAdapter
 import com.ulearning.ulearning_app.presentation.features.home.viewModel.HomeViewModel
+import com.ulearning.ulearning_app.presentation.features.home.viewState.HomeViewState
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragmentWithViewModel<FragmentHomeBinding, HomeViewModel>(),
+class HomeFragment :
+    BaseFragmentWithViewModel<FragmentHomeBinding, HomeViewModel>(),
     HomeViewState {
 
     override val binding: FragmentHomeBinding by dataBinding(FragmentHomeBinding::inflate)
@@ -37,7 +38,6 @@ class HomeFragment : BaseFragmentWithViewModel<FragmentHomeBinding, HomeViewMode
 
     private lateinit var courseTeacherRecycler: RecyclerView
 
-
     override fun onViewIsCreated(view: View) {
 
         HomeReducer.instance(viewState = this)
@@ -47,7 +47,6 @@ class HomeFragment : BaseFragmentWithViewModel<FragmentHomeBinding, HomeViewMode
         courseTeacherRecycler = binding.courseTeacherRecycler
 
         courseTeacherRecycler.layoutManager = LinearLayoutManager(requireActivity())
-
 
         binding.cardProgress.setOnClickListener {
             findNavController().navigate(
@@ -90,9 +89,7 @@ class HomeFragment : BaseFragmentWithViewModel<FragmentHomeBinding, HomeViewMode
                 }
             })
         }
-
     }
-
 
     override fun messageFailure(failure: Failure) {
 
@@ -107,12 +104,14 @@ class HomeFragment : BaseFragmentWithViewModel<FragmentHomeBinding, HomeViewMode
 
     private fun onItemSelected(model: Subscription) {
 
-        findNavController().navigate(R.id.action_navigation_home_to_detailCourseActivity,
+        findNavController().navigate(
+            R.id.action_navigation_home_to_detailCourseActivity,
             Bundle().apply {
                 putSerializable(Config.COURSE_PUT, model.course)
                 putSerializable(Config.SUBSCRIPTION_PUT, model)
                 putSerializable(Config.ROLE, viewModel.typeRole)
-            })
+            }
+        )
     }
 
     override fun getCourseTeacher(courses: List<Course>) {
@@ -123,7 +122,6 @@ class HomeFragment : BaseFragmentWithViewModel<FragmentHomeBinding, HomeViewMode
 
         if (courses.isNotEmpty()) {
             binding.courseTeacherRecycler.visibility = View.VISIBLE
-
         } else {
 
             binding.courseTeacherRecycler.visibility = View.INVISIBLE
@@ -137,7 +135,6 @@ class HomeFragment : BaseFragmentWithViewModel<FragmentHomeBinding, HomeViewMode
         }
     }
 
-
     override fun getProfile(data: Profile) {
         closeLoadingDialog()
         with(binding) {
@@ -150,7 +147,6 @@ class HomeFragment : BaseFragmentWithViewModel<FragmentHomeBinding, HomeViewMode
                 viewModel.typeRole = Config.ROLE_TEACHER
 
                 viewModel.setEvent(HomeEvent.CourseTeacherClicked)
-
             } else { // student
                 studentConstraintLayout.visibility = View.VISIBLE
                 teacherConstraintLayout.visibility = View.INVISIBLE

@@ -1,6 +1,5 @@
 package com.ulearning.ulearning_app.presentation.features.addConversation
 
-
 object AddConversationReducer {
 
     private lateinit var viewState: AddConversationViewState

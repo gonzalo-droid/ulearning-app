@@ -10,5 +10,4 @@ class GetProfileUseCase
     BaseUseCase<Profile, BaseUseCase.None>() {
 
     override suspend fun run(params: None) = authRepository.profile()
-
 }

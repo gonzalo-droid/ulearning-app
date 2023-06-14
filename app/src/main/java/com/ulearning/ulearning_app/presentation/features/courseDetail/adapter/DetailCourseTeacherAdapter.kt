@@ -1,4 +1,4 @@
-package com.ulearning.ulearning_app.presentation.features.courses.adapter
+package com.ulearning.ulearning_app.presentation.features.courseDetail.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.databinding.ItemTeacherBinding
 import com.ulearning.ulearning_app.domain.model.Teacher
-import com.ulearning.ulearning_app.domain.model.Topic
 
 class DetailCourseTeacherAdapter constructor(
     private val teachers: List<Teacher>,
@@ -27,11 +26,9 @@ class DetailCourseTeacherAdapter constructor(
 
     override fun getItemCount(): Int = teachers.size
 
-
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
 
         val binding = ItemTeacherBinding.bind(view)
-
 
         fun bind(model: Teacher, onClickListener: (Teacher) -> Unit) {
 
@@ -42,8 +39,6 @@ class DetailCourseTeacherAdapter constructor(
             itemView.setOnClickListener {
                 onClickListener(model)
             }
-
         }
-
     }
 }

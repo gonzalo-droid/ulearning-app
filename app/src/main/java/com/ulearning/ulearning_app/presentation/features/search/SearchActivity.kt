@@ -2,33 +2,23 @@ package com.ulearning.ulearning_app.presentation.features.search
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
-import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
-import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.extensions.putInt
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivitySearchBinding
-import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.User
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
 import com.ulearning.ulearning_app.presentation.features.addConversation.AddConversationActivity
-import com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity
-import com.ulearning.ulearning_app.presentation.features.conversation.ConversationAdapter
-import com.ulearning.ulearning_app.presentation.features.conversation.ConversationEvent
 import com.ulearning.ulearning_app.presentation.features.message.*
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class SearchActivity :
@@ -77,7 +67,6 @@ class SearchActivity :
                     }
                     adapter.updateUser(newUser)
                 }
-
             }
         }
 
@@ -94,9 +83,7 @@ class SearchActivity :
                 }
             })
         }
-
     }
-
 
     override fun messageFailure(failure: Failure) {
 
@@ -105,13 +92,11 @@ class SearchActivity :
         val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
 
         showSnackBar(binding.root, getString(messageDesign.idMessage))
-
     }
 
     override fun loading() {
 
         showLoadingDialog()
-
     }
 
     override fun users(users: List<User>) {
@@ -128,10 +113,12 @@ class SearchActivity :
     }
 
     private fun onItemSelected(user: User) {
-        startActivity(Intent(this, AddConversationActivity::class.java).apply {
-            putExtra(Config.COURSE_ID_PUT, viewModel.courseId)
-            putExtra(Config.LIST_USER_IDS_PUT, "${user.id},")
-            putExtra(Config.TYPE_MESSAGE, Config.MESSAGE_COURSE)
-        })
+        startActivity(
+            Intent(this, AddConversationActivity::class.java).apply {
+                putExtra(Config.COURSE_ID_PUT, viewModel.courseId)
+                putExtra(Config.LIST_USER_IDS_PUT, "${user.id},")
+                putExtra(Config.TYPE_MESSAGE, Config.MESSAGE_COURSE)
+            }
+        )
     }
 }

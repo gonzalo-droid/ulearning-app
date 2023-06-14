@@ -1,17 +1,10 @@
 package com.ulearning.ulearning_app.presentation.features.search
 
-
-import android.os.Handler
-import android.os.Looper
 import com.ulearning.ulearning_app.core.functional.Failure
-import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.User
 import com.ulearning.ulearning_app.domain.useCase.conversation.GetUserByCourseUseCase
-import com.ulearning.ulearning_app.domain.useCase.conversation.SendConversationUseCase
-import com.ulearning.ulearning_app.domain.useCase.conversation.SendMessageUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 @HiltViewModel

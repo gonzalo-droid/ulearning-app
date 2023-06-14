@@ -13,12 +13,10 @@ object Config {
      */
     const val URL_WEB_VIEW = "https://miportal.pex.com.pe/pex21/afiliacion_prepago/"
 
-
     /**
      * Put extra
      */
     const val DATA_VALIDATED_DOCUMENT_PUT = "data_validated_document_put"
-
 
     const val DATE_FORMAT_ONE = "EEEE"
     const val DATE_FORMAT_TWO = "yyyy-MM-dd"
@@ -52,7 +50,6 @@ object Config {
     const val ALPHA_NUMERIC_REGEX =
         "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{8,}$"
 
-
     const val SUBSCRIPTION_PUT = "subscription"
     const val COURSE_ID_PUT = "courseId"
     const val PARAM_NAME_PUT = "paramName"
@@ -60,6 +57,7 @@ object Config {
     const val MESSAGE_UUID_PUT = "uuidMessage"
     const val CONVERSATION_PUT = "conversation"
     const val COURSE_PUT = "course"
+    const val COURSE_PACKAGE_ID_PUT = "coursePackageId"
 
     const val ROLE_TEACHER = "teacher"
     const val ROLE = "role"
@@ -69,18 +67,16 @@ object Config {
     const val MESSAGE_SUPPORT = "support"
     const val MESSAGE_COURSE = "course"
 
-
     /* 12 digits */
-     val DEVICE_ID = "${android.os.Build.BOARD.length % 10}" +
-             "${android.os.Build.DEVICE.length % 10}" +
-             "${android.os.Build.DISPLAY.length % 10}" +
-             "${android.os.Build.HOST.length % 10}" +
-             "${android.os.Build.ID.length % 10}" +
-             "${android.os.Build.MANUFACTURER.length % 10}" +
-             "${android.os.Build.MODEL.length % 10}" +
-             "${android.os.Build.PRODUCT.length % 10}" +
-             "${android.os.Build.TAGS.length % 10}" +
-             "${android.os.Build.TYPE.length % 10}" +
-             "${android.os.Build.USER.length % 10}"
-
+    val DEVICE_ID = "${android.os.Build.BOARD.length % 10}" +
+        "${android.os.Build.DEVICE.length % 10}" +
+        "${android.os.Build.DISPLAY.length % 10}" +
+        "${android.os.Build.HOST.length % 10}" +
+        "${android.os.Build.ID.length % 10}" +
+        "${android.os.Build.MANUFACTURER.length % 10}" +
+        "${android.os.Build.MODEL.length % 10}" +
+        "${android.os.Build.PRODUCT.length % 10}" +
+        "${android.os.Build.TAGS.length % 10}" +
+        "${android.os.Build.TYPE.length % 10}" +
+        "${android.os.Build.USER.length % 10}"
 }

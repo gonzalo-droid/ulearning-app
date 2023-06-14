@@ -1,8 +1,5 @@
 package com.ulearning.ulearning_app.data.remote.utils
 
-import com.google.gson.annotations.SerializedName
-
-
 class SettingRemote {
     companion object {
 

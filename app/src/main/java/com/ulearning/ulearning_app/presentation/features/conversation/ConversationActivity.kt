@@ -19,7 +19,6 @@ import com.ulearning.ulearning_app.presentation.features.search.SearchActivity
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class ConversationActivity :
     BaseActivityWithViewModel<ActivityConversationBinding, ConversationViewModel>(),
@@ -72,7 +71,6 @@ class ConversationActivity :
                 }
             })
         }
-
     }
 
     override fun conversations(conversations: List<Conversation>) {
@@ -81,25 +79,27 @@ class ConversationActivity :
         adapter = ConversationAdapter(conversations = conversations) { conversation ->
 
             onItemSelected(conversation)
-
         }
 
         recycler.adapter = adapter
-
     }
 
     override fun newConversation() {
-        startActivity(Intent(this, SearchActivity::class.java).apply {
-            putExtra(Config.COURSE_ID_PUT, viewModel.courseId)
-            putExtra(Config.TYPE_MESSAGE, Config.MESSAGE_COURSE)
-        })
+        startActivity(
+            Intent(this, SearchActivity::class.java).apply {
+                putExtra(Config.COURSE_ID_PUT, viewModel.courseId)
+                putExtra(Config.TYPE_MESSAGE, Config.MESSAGE_COURSE)
+            }
+        )
         finish()
     }
 
     private fun onItemSelected(conversation: Conversation) {
-        startActivity(Intent(this, MessageActivity::class.java).apply {
-            putExtra(Config.CONVERSATION_PUT, conversation)
-        })
+        startActivity(
+            Intent(this, MessageActivity::class.java).apply {
+                putExtra(Config.CONVERSATION_PUT, conversation)
+            }
+        )
     }
 
     override fun messageFailure(failure: Failure) {
@@ -114,6 +114,5 @@ class ConversationActivity :
     override fun loading() {
 
         showLoadingDialog()
-
     }
 }

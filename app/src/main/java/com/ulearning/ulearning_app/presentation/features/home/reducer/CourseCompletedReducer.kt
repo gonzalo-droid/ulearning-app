@@ -4,7 +4,6 @@ import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import com.ulearning.ulearning_app.presentation.features.home.state.CourseCompletedState
 import com.ulearning.ulearning_app.presentation.features.home.viewState.CourseCompletedViewState
 
-
 object CourseCompletedReducer {
 
     private lateinit var viewState: CourseCompletedViewState

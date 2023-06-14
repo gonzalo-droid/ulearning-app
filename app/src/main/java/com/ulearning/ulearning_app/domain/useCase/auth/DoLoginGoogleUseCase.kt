@@ -5,7 +5,6 @@ import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import com.ulearning.ulearning_app.presentation.model.entity.LoginGoogle
 import javax.inject.Inject
 
-
 class DoLoginGoogleUseCase
 @Inject constructor(private val authRepository: AuthRepository) :
     BaseUseCase<Boolean, DoLoginGoogleUseCase.Params>() {

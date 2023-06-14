@@ -8,5 +8,3 @@ data class SendConversationRequest(
     @SerializedName("course_id") val courseId: Int,
     @SerializedName("user_ids") val userIds: ArrayList<Int>,
 ) : Serializable
-
-

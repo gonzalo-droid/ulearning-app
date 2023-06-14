@@ -1,6 +1,5 @@
 package com.ulearning.ulearning_app.presentation.features.scanQr
 
-
 object ScanQrReducer {
 
     private lateinit var viewState: ScanQrViewState
@@ -14,7 +13,6 @@ object ScanQrReducer {
             is ScanQrState.Idle -> {}
 
             is ScanQrState.Loading -> viewState.loading()
-
         }
     }
 

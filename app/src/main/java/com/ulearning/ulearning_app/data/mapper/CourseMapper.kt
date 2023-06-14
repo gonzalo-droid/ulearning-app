@@ -1,12 +1,22 @@
 package com.ulearning.ulearning_app.data.mapper
 
-import com.ulearning.ulearning_app.core.functional.Either
-import com.ulearning.ulearning_app.core.functional.Failure
-import com.ulearning.ulearning_app.data.remote.entities.response.*
-import com.ulearning.ulearning_app.domain.model.*
-
+import com.ulearning.ulearning_app.data.remote.entities.response.CheckAvailableFilesResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.CoursePackageResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.CoursePercentageResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.CourseResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.DownloadFileResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.FileItemResponse
+import com.ulearning.ulearning_app.data.remote.entities.response.SubscriptionResponse
+import com.ulearning.ulearning_app.domain.model.CheckAvailableFiles
+import com.ulearning.ulearning_app.domain.model.Course
+import com.ulearning.ulearning_app.domain.model.CoursePackage
+import com.ulearning.ulearning_app.domain.model.CoursePercentage
+import com.ulearning.ulearning_app.domain.model.DownloadFile
+import com.ulearning.ulearning_app.domain.model.FileItem
+import com.ulearning.ulearning_app.domain.model.Subscription
 
 interface CourseMapper {
+    suspend fun coursePackageToDomain(data: CoursePackageResponse): CoursePackage
 
     suspend fun listSubscriptionToDomain(data: List<SubscriptionResponse>): List<Subscription>
 
@@ -21,5 +31,4 @@ interface CourseMapper {
     suspend fun checkAvailableFilesToDomain(data: CheckAvailableFilesResponse): CheckAvailableFiles
 
     suspend fun downloadFileToDomain(data: DownloadFileResponse): DownloadFile
-
 }

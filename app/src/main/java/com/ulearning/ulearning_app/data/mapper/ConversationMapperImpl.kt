@@ -1,8 +1,6 @@
 package com.ulearning.ulearning_app.data.mapper
 
-
 import com.ulearning.ulearning_app.data.remote.entities.response.ConversationResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.FirstMessageResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.MessageResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.UserResponse
 import com.ulearning.ulearning_app.domain.model.Conversation

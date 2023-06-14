@@ -8,5 +8,4 @@ sealed class ScanQrEffect : UiEffect {
     object Logout : ScanQrEffect()
 
     data class ShowMessageFailure constructor(val failure: Failure) : ScanQrEffect()
-
 }

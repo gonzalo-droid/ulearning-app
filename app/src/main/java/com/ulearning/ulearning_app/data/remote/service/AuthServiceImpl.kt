@@ -48,6 +48,4 @@ class AuthServiceImpl
     override suspend fun loginFacebook(body: LoginFacebookRequest): Either<Failure, LoginResponse> {
         return networkHandler.callService { authApi.loginFacebook(body) }
     }
-
-
 }

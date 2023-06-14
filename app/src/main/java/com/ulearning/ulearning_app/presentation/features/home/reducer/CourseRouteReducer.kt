@@ -4,7 +4,6 @@ import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import com.ulearning.ulearning_app.presentation.features.home.state.CourseRouteState
 import com.ulearning.ulearning_app.presentation.features.home.viewState.CourseRouteViewState
 
-
 object CourseRouteReducer {
 
     private lateinit var viewState: CourseRouteViewState

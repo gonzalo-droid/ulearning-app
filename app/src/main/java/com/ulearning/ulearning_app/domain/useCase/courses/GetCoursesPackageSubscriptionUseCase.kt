@@ -12,7 +12,7 @@ class GetCoursesPackageSubscriptionUseCase
     override suspend fun run(params: Params) = courseRepository.getSubscriptionsPackage(
         params.page,
         params.type,
-        )
+    )
 
     data class Params(val page: Int, val type: String)
 }

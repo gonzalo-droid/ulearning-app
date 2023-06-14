@@ -15,15 +15,14 @@ import com.ulearning.ulearning_app.databinding.ActivityCourseProgressBinding
 import com.ulearning.ulearning_app.domain.model.CoursePercentage
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
-import com.ulearning.ulearning_app.presentation.features.courses.DetailCourseActivity
-import com.ulearning.ulearning_app.presentation.features.home.event.CourseProgressEvent
-import com.ulearning.ulearning_app.presentation.features.home.viewState.CourseProgressViewState
+import com.ulearning.ulearning_app.presentation.features.courseDetail.DetailCourseActivity
 import com.ulearning.ulearning_app.presentation.features.home.adapter.CourseSubscriptionAdapter
+import com.ulearning.ulearning_app.presentation.features.home.event.CourseProgressEvent
 import com.ulearning.ulearning_app.presentation.features.home.reducer.CourseProgressReducer
 import com.ulearning.ulearning_app.presentation.features.home.viewModel.CourseProgressViewModel
+import com.ulearning.ulearning_app.presentation.features.home.viewState.CourseProgressViewState
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class CourseProgressActivity :
@@ -53,7 +52,6 @@ class CourseProgressActivity :
 
         courseRecycler.layoutManager = LinearLayoutManager(this@CourseProgressActivity)
 
-
         binding.noDataInclude.root.visibility = View.GONE
         binding.courseRecycler.visibility = View.INVISIBLE
         binding.skeletonInclude.root.visibility = View.VISIBLE
@@ -77,7 +75,6 @@ class CourseProgressActivity :
                 }
             })
         }
-
     }
 
     override fun messageFailure(failure: Failure) {
@@ -104,17 +101,16 @@ class CourseProgressActivity :
                 }
             binding.courseRecycler.visibility = View.VISIBLE
         }
-
     }
 
     private fun onItemSelected(model: Subscription) {
 
-        startActivity(Intent(this, DetailCourseActivity::class.java).apply {
-            putExtra(Config.COURSE_PUT, model.course)
-            putExtra(Config.SUBSCRIPTION_PUT, model)
-            putExtra(Config.ROLE, viewModel.typeRole)
-        })
-
+        startActivity(
+            Intent(this, DetailCourseActivity::class.java).apply {
+                putExtra(Config.COURSE_PUT, model.course)
+                putExtra(Config.SUBSCRIPTION_PUT, model)
+                putExtra(Config.ROLE, viewModel.typeRole)
+            }
+        )
     }
-
 }

@@ -2,7 +2,6 @@ package com.ulearning.ulearning_app.presentation.features.profile
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -19,10 +18,8 @@ import com.ulearning.ulearning_app.databinding.FragmentProfileBinding
 import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
 import com.ulearning.ulearning_app.presentation.features.auth.LoginActivity
-import com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class ProfileFragment :
@@ -65,7 +62,6 @@ class ProfileFragment :
                 }
             })
         }
-
     }
 
     override fun messageFailure(failure: Failure) {
@@ -99,7 +95,6 @@ class ProfileFragment :
 
             dateOfBirthdayInputText.editText!!.setText(date)
 
-
 /*            val imageUri: String? =
                 if (benefits.get(position).imagesUrl.isNotEmpty())
                     benefits[position].imagesUrl[0] else null
@@ -117,20 +112,18 @@ class ProfileFragment :
 
     override fun goToWebView(url: String) {
 
-        val urlPayment = "${url}?return=/payments"
+        val urlPayment = "$url?return=/payments"
         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(urlPayment)))
     }
 
     override fun logout() {
         LoginManager.getInstance().logOut()
-        
+
         closeLoadingDialog()
         requireContext().startNewActivity<LoginActivity>()
         requireActivity().finishAffinity()
     }
 
     override fun scanQr() {
-
     }
-
 }

@@ -1,6 +1,5 @@
-package com.ulearning.ulearning_app.presentation.features.courses
+package com.ulearning.ulearning_app.presentation.features.courseDetail
 
-import android.util.Log
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.*
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
@@ -24,7 +23,6 @@ class DetailCourseViewModel
     private val getMyCertificateUseCase: GetMyCertificateUseCase,
     private val getMyRecordUseCase: GetMyRecordUseCase,
 ) : BaseViewModel<DetailCourseEvent, DetailCourseState, DetailCourseEffect>() {
-
 
     lateinit var course: Course
     lateinit var subscription: Subscription
@@ -192,7 +190,6 @@ class DetailCourseViewModel
 
     private fun handleFailureNoShow(failure: Failure) {}
 
-
     private fun handleTopics(topics: List<Topic>) {
         setState { DetailCourseState.ListTopic(topics = topics) }
     }
@@ -223,7 +220,6 @@ class DetailCourseViewModel
 
         setState { DetailCourseState.DownloadFilePDF(file = file) }
     }
-
 
     companion object Events {
         val goToConversation = DetailCourseEvent.GoToConversation

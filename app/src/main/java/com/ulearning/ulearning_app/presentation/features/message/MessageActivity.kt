@@ -20,7 +20,6 @@ import com.ulearning.ulearning_app.presentation.components.adapter.UserChipAdapt
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class MessageActivity :
     BaseActivityWithViewModel<ActivityMessageBinding, MessageViewModel>(),
@@ -68,7 +67,6 @@ class MessageActivity :
             viewModel.setEvent(MessageEvent.GetUserIdClick)
 
             viewModel.setEvent(MessageEvent.GetParticipantsClick)
-
         }
 
         viewModel.apply {
@@ -84,9 +82,7 @@ class MessageActivity :
                 }
             })
         }
-
     }
-
 
     override fun messages(messages: List<Message>) {
         closeLoadingDialog()
@@ -102,10 +98,9 @@ class MessageActivity :
 
         adapter.notifyDataSetChanged()
 
-        recycler.scrollToPosition(messages.size - 1);
+        recycler.scrollToPosition(messages.size - 1)
 
-        recycler.scrollToPosition(adapter.itemCount - 1);
-
+        recycler.scrollToPosition(adapter.itemCount - 1)
     }
 
     override fun users(users: List<User>) {
@@ -143,12 +138,10 @@ class MessageActivity :
         val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
 
         showSnackBar(binding.root, getString(messageDesign.idMessage))
-
     }
 
     override fun loading() {
 
         showLoadingDialog()
-
     }
 }

@@ -43,7 +43,6 @@ class TopicViewModel
         setState { TopicState.ListTopic(topics = topics) }
     }
 
-
     companion object Events {
         val goToTopic = TopicEvent.GoToTopic
     }

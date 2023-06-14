@@ -9,5 +9,4 @@ sealed class SplashEffect : UiEffect {
     object GoToLogin : SplashEffect()
 
     object GoToHome : SplashEffect()
-
 }

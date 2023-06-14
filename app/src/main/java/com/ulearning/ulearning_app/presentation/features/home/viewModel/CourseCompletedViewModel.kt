@@ -4,12 +4,11 @@ import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursesSubscriptionUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
+import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import com.ulearning.ulearning_app.presentation.features.home.event.CourseCompletedEvent
 import com.ulearning.ulearning_app.presentation.features.home.state.CourseCompletedState
-import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-
 
 @HiltViewModel
 class CourseCompletedViewModel
@@ -28,7 +27,6 @@ class CourseCompletedViewModel
     override fun createInitialState(): CourseCompletedState {
         return CourseCompletedState.Idle
     }
-
 
     override fun handleEvent(event: CourseCompletedEvent) {
         when (event) {
@@ -49,7 +47,6 @@ class CourseCompletedViewModel
     private fun handleFailure(failure: Failure) {
         setEffect { HomeEffect.ShowMessageFailure(failure = failure) }
     }
-
 
     private fun handleCourseCompleted(courses: List<Subscription>) {
         setState { CourseCompletedState.CourseCompleted(courses = courses) }

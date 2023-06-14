@@ -17,5 +17,4 @@ interface MessageViewState {
     fun users(users: List<User>)
 
     fun userId(userId: Int)
-
 }

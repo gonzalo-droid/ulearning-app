@@ -5,26 +5,32 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
+import com.ulearning.ulearning_app.core.extensions.html
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
+import com.ulearning.ulearning_app.core.extensions.putCourse
+import com.ulearning.ulearning_app.core.extensions.putInt
+import com.ulearning.ulearning_app.core.extensions.putSubscription
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityCoursePackageBinding
+import com.ulearning.ulearning_app.domain.model.CoursePackage
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
-import com.ulearning.ulearning_app.presentation.features.courses.DetailCourseActivity
+import com.ulearning.ulearning_app.presentation.features.courseDetail.DetailCourseActivity
 import com.ulearning.ulearning_app.presentation.features.home.adapter.CoursePackageViewPagerAdapter
 import com.ulearning.ulearning_app.presentation.features.home.event.CoursePackageEvent
 import com.ulearning.ulearning_app.presentation.features.home.reducer.CoursePackageReducer
 import com.ulearning.ulearning_app.presentation.features.home.viewModel.CoursePackageViewModel
 import com.ulearning.ulearning_app.presentation.features.home.viewState.CoursePackageViewState
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
+import com.ulearning.ulearning_app.presentation.utils.imageLoader.ImageLoaderGlide
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class CoursePackageActivity :
@@ -39,7 +45,6 @@ class CoursePackageActivity :
 
     override val dataBindingViewModel = BR.coursePackageViewModel
 
-    private lateinit var courseRecycler: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,15 +61,20 @@ class CoursePackageActivity :
 
         CoursePackageReducer.instance(viewState = this)
 
-
         initTabLayout()
-
 
         observeUiStates()
     }
 
     private fun observeUiStates() {
-        viewModel.setEvent(CoursePackageEvent.CoursePackageClicked)
+
+        viewModel.let {
+            viewModel.learningPackageId =
+                Config.COURSE_PACKAGE_ID_PUT putInt this@CoursePackageActivity
+
+            viewModel.setEvent(CoursePackageEvent.CoursePackageClicked)
+        }
+
 
         viewModel.apply {
             lifecycleScopeCreate(activity = this@CoursePackageActivity, method = {
@@ -79,7 +89,6 @@ class CoursePackageActivity :
                 }
             })
         }
-
     }
 
     override fun messageFailure(failure: Failure) {
@@ -91,8 +100,29 @@ class CoursePackageActivity :
     override fun loading() {
     }
 
-    override fun getCoursePackage(courses: List<Subscription>) {
+    override fun getCoursePackage(course: CoursePackage) {
+        with(binding) {
 
+            if (!course.learningPackage?.mainImage?.originalUrl.isNullOrEmpty()) {
+                ImageLoaderGlide().loadImage(
+                    imageView = imageCourseIv,
+                    imagePath = course.learningPackage?.mainImage?.originalUrl!!,
+                    requestOptions = RequestOptions.centerCropTransform(),
+                    placeHolder = R.drawable.course_test
+                )
+            } else {
+                imageCourseIv.setImageResource(R.drawable.course_test)
+            }
+
+            toolbarLayout.title = course.learningPackage?.title
+            titleText.text = course.learningPackage?.title
+
+            viewModel.items = course.learningPackage?.items
+
+            viewModel.setEvent(CoursePackageEvent.ListCoursesPackageClicked)
+
+
+        }
     }
 
     private fun onItemSelected(model: Subscription) {
@@ -102,21 +132,18 @@ class CoursePackageActivity :
             putExtra(Config.SUBSCRIPTION_PUT, model)
             putExtra(Config.ROLE, viewModel.typeRole)
         })
-
     }
 
     private fun initTabLayout() {
         binding.viewPager.apply {
             (getChildAt(0) as RecyclerView).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-            adapter =
-                CoursePackageViewPagerAdapter(supportFragmentManager, lifecycle)
+            adapter = CoursePackageViewPagerAdapter(supportFragmentManager, lifecycle)
         }
 
-        //binding.viewPager.isSaveEnabled = false
+        // binding.viewPager.isSaveEnabled = false
 
         TabLayoutMediator(
-            binding.tabLayout,
-            binding.viewPager
+            binding.tabLayout, binding.viewPager
         ) { tab: TabLayout.Tab, position: Int ->
             when (position) {
                 COURSES -> tab.text = "Cursos"
@@ -130,7 +157,6 @@ class CoursePackageActivity :
             android.R.id.home -> {
                 finish()
             }
-
         }
         return super.onOptionsItemSelected(item)
     }

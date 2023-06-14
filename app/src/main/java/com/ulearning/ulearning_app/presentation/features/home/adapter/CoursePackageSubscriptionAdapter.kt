@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.request.RequestOptions
 import com.ulearning.ulearning_app.R
-import com.ulearning.ulearning_app.databinding.ItemCoursesBinding
 import com.ulearning.ulearning_app.databinding.ItemRouteBinding
 import com.ulearning.ulearning_app.domain.model.CoursePercentage
 import com.ulearning.ulearning_app.domain.model.Subscription
@@ -30,7 +29,6 @@ class CoursePackageSubscriptionAdapter constructor(
     }
 
     override fun getItemCount(): Int = courses.size
-
 
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -62,7 +60,7 @@ class CoursePackageSubscriptionAdapter constructor(
                     imageView = binding.imageIv,
                     imagePath = it,
                     requestOptions = RequestOptions.centerCropTransform(),
-                    placeHolder = R.mipmap.ic_logo_launcher
+                    placeHolder = R.drawable.course_test
                 )
             }
 
@@ -71,8 +69,6 @@ class CoursePackageSubscriptionAdapter constructor(
             itemView.setOnClickListener {
                 onClickListener(model)
             }
-
         }
-
     }
 }

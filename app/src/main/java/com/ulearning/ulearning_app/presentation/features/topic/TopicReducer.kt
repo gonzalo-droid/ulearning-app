@@ -1,6 +1,5 @@
 package com.ulearning.ulearning_app.presentation.features.topic
 
-
 object TopicReducer {
 
     private lateinit var viewState: TopicViewState

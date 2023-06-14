@@ -1,6 +1,5 @@
 package com.ulearning.ulearning_app.presentation.features.addConversation
 
-
 import android.os.Handler
 import android.os.Looper
 import com.ulearning.ulearning_app.R
@@ -25,7 +24,7 @@ class AddConversationViewModel
     private val sendConversationUseCase: SendConversationUseCase,
     private val sendConversationSupportUseCase: SendConversationSupportUseCase,
     private val getRoleUseCase: GetRoleUseCase,
-    ) : BaseViewModel<AddConversationEvent, AddConversationState, AddConversationEffect>() {
+) : BaseViewModel<AddConversationEvent, AddConversationState, AddConversationEffect>() {
 
     var courseId: Int = 0
 
@@ -35,7 +34,7 @@ class AddConversationViewModel
 
     var typeMessage: String = ""
 
-    var typeRole : String = ""
+    var typeRole: String = ""
 
     var messageInput = MutableStateFlow<String>("")
 
@@ -51,7 +50,7 @@ class AddConversationViewModel
         }
     }
 
-    private fun getRole() = getRoleUseCase( BaseUseCase.None()) {
+    private fun getRole() = getRoleUseCase(BaseUseCase.None()) {
         it.either(::handleFailure, ::handleRole)
     }
 
@@ -63,7 +62,6 @@ class AddConversationViewModel
                 it.either(::handleFailure, ::handleUser)
             }
         }
-
     }
 
     private fun send() {
@@ -117,8 +115,6 @@ class AddConversationViewModel
         Handler(Looper.getMainLooper()).postDelayed({
             setState { AddConversationState.DataConversation(conversation = conversation) }
         }, 2000)
-
-
     }
 
     private fun handleRole(role: String) {

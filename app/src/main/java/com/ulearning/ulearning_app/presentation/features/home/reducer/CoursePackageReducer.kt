@@ -4,7 +4,6 @@ import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import com.ulearning.ulearning_app.presentation.features.home.state.CoursePackageState
 import com.ulearning.ulearning_app.presentation.features.home.viewState.CoursePackageViewState
 
-
 object CoursePackageReducer {
 
     private lateinit var viewState: CoursePackageViewState
@@ -19,8 +18,8 @@ object CoursePackageReducer {
 
             is CoursePackageState.Loading -> viewState.loading()
 
-            is CoursePackageState.CoursePackage -> {
-                viewState.getCoursePackage(courses = state.courses)
+            is CoursePackageState.CoursePackageData -> {
+                viewState.getCoursePackage(course = state.course)
             }
         }
     }

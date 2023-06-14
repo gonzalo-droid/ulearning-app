@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
-import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.extensions.putInt
@@ -20,7 +19,6 @@ import com.ulearning.ulearning_app.domain.model.User
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
 import com.ulearning.ulearning_app.presentation.components.adapter.UserChipAdapter
 import com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity
-import com.ulearning.ulearning_app.presentation.features.support.SupportFragment
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -53,15 +51,12 @@ class AddConversationActivity :
 
         recycler.layoutManager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
 
-
         observeUiStates()
     }
 
     private fun observeUiStates() {
 
-
         viewModel.setEvent(AddConversationEvent.GetRole)
-
 
         viewModel.let {
             viewModel.typeMessage = Config.TYPE_MESSAGE putString this@AddConversationActivity
@@ -78,7 +73,6 @@ class AddConversationActivity :
                 }
 
                 viewModel.setEvent(AddConversationEvent.GetUsersClick)
-
             } else {
 
                 users(listOf())
@@ -98,9 +92,7 @@ class AddConversationActivity :
                 }
             })
         }
-
     }
-
 
     override fun messageFailure(failure: Failure) {
 
@@ -109,22 +101,22 @@ class AddConversationActivity :
         val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
 
         showSnackBar(binding.root, getString(messageDesign.idMessage))
-
     }
 
     override fun loading() {
 
         showLoadingDialog()
-
     }
 
     override fun conversation(conversation: Conversation) {
 
-        if(viewModel.typeMessage == Config.MESSAGE_COURSE){
+        if (viewModel.typeMessage == Config.MESSAGE_COURSE) {
             closeLoadingDialog()
-            startActivity(Intent(this, ConversationActivity::class.java).apply {
-                putExtra(Config.COURSE_ID_PUT, viewModel.courseId)
-            })
+            startActivity(
+                Intent(this, ConversationActivity::class.java).apply {
+                    putExtra(Config.COURSE_ID_PUT, viewModel.courseId)
+                }
+            )
         }
         finish()
     }
@@ -132,9 +124,9 @@ class AddConversationActivity :
     override fun users(users: List<User>) {
         closeLoadingDialog()
 
-        val support : List<User> = listOf ()
+        val support: List<User> = listOf()
 
-        val list   = users.ifEmpty { support.plusElement (User(name = "Soporte plataforma")) }
+        val list = users.ifEmpty { support.plusElement(User(name = "Soporte plataforma")) }
 
         adapter = UserChipAdapter(users = list)
 
@@ -143,7 +135,7 @@ class AddConversationActivity :
 
     override fun getRole(role: String) {
         viewModel.typeRole = role
-        if (viewModel.typeRole == Config.ROLE_TEACHER){
+        if (viewModel.typeRole == Config.ROLE_TEACHER) {
             binding.switches.switchLayout.visibility = View.VISIBLE
             setSettingSwitch()
         } else {

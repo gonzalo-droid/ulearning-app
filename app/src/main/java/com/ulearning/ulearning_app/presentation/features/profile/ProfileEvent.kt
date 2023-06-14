@@ -2,7 +2,6 @@ package com.ulearning.ulearning_app.presentation.features.profile
 
 import com.ulearning.ulearning_app.presentation.base.UiEvent
 
-
 sealed class ProfileEvent : UiEvent {
 
     object DataProfileClicked : ProfileEvent()
@@ -12,5 +11,4 @@ sealed class ProfileEvent : UiEvent {
     object PaymentClick : ProfileEvent()
 
     object ScanQRClick : ProfileEvent()
-
 }

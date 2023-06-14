@@ -1,8 +1,7 @@
-package com.ulearning.ulearning_app.presentation.features.courses
+package com.ulearning.ulearning_app.presentation.features.courseDetail
 
 import com.ulearning.ulearning_app.domain.model.*
 import com.ulearning.ulearning_app.presentation.base.UiState
-import com.ulearning.ulearning_app.presentation.features.topic.TopicState
 
 sealed class DetailCourseState : UiState {
 

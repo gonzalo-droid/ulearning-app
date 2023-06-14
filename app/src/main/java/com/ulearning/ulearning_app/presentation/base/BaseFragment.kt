@@ -115,5 +115,4 @@ abstract class BaseFragment<ViewDataBindingClass : ViewDataBinding> : Fragment()
     protected fun logDebug(message: Any?) {
         Log.d(this.javaClass.simpleName, "LOG DEBUG: $message")
     }
-
 }

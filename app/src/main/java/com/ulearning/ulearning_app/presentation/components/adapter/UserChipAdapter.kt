@@ -25,17 +25,13 @@ class UserChipAdapter constructor(
 
     override fun getItemCount(): Int = users.size
 
-
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
 
         val binding = ItemChipUserBinding.bind(view)
 
-
         fun bind(model: User) {
 
             binding.nameTitle.text = model.name
-
         }
-
     }
 }

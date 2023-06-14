@@ -9,5 +9,4 @@ class GetUserIdUseCase
     BaseUseCase<Int, BaseUseCase.None>() {
 
     override suspend fun run(params: None) = authRepository.getUserId()
-
 }

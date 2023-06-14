@@ -1,8 +1,6 @@
 package com.ulearning.ulearning_app.data.remote.entities.response
 
-
 import com.google.gson.annotations.SerializedName
-import com.ulearning.ulearning_app.domain.model.Teacher
 
 data class GroupResponse(
     @SerializedName("course")

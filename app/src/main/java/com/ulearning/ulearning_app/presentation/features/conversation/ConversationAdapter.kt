@@ -28,23 +28,19 @@ class ConversationAdapter constructor(
 
     override fun getItemCount(): Int = conversations.size
 
-
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
 
         val binding = ItemConversationBinding.bind(view)
 
-
         fun bind(model: Conversation, onClickListener: (Conversation) -> Unit) {
 
-            binding.titleText.text  = model.firstMessage?.content
+            binding.titleText.text = model.firstMessage?.content
 
             binding.timeText.text = model.firstMessage?.publishedAt?.dateFormat(Config.DATE_FORMAT_THREE)?.dateFormat(Config.DATE_FORMAT_NINETEEN)
 
             itemView.setOnClickListener {
                 onClickListener(model)
             }
-
         }
-
     }
 }

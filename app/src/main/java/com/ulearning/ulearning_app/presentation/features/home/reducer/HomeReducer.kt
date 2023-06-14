@@ -4,7 +4,6 @@ import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import com.ulearning.ulearning_app.presentation.features.home.state.HomeState
 import com.ulearning.ulearning_app.presentation.features.home.viewState.HomeViewState
 
-
 object HomeReducer {
 
     private lateinit var viewState: HomeViewState

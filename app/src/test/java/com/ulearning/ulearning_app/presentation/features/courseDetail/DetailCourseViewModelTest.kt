@@ -1,4 +1,4 @@
-package com.ulearning.ulearning_app.presentation.features.courses
+package com.ulearning.ulearning_app.presentation.features.courseDetail
 
 import com.ulearning.ulearning_app.presentation.model.entity.User
 import org.junit.AfterClass
@@ -8,7 +8,6 @@ import org.junit.Test
 
 class DetailCourseViewModelTest {
 
-
     @Test
     fun login_verifyUser_returnTrue() {
 
@@ -17,19 +16,17 @@ class DetailCourseViewModelTest {
         val result = user.verifyLogin()
 
         Assert.assertTrue(result.first)
-
     }
 
     companion object {
         @JvmStatic
         @BeforeClass
-        fun setUp(): Unit {
-
+        fun setUp() {
         }
 
         @JvmStatic
         @AfterClass
-        fun tearDown(): Unit {
+        fun tearDown() {
         }
     }
 }

@@ -9,5 +9,4 @@ class GetSessionUseCase
     BaseUseCase<Boolean, BaseUseCase.None>() {
 
     override suspend fun run(params: None) = authRepository.session()
-
 }

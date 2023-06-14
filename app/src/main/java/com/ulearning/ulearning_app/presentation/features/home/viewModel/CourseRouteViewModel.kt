@@ -3,14 +3,12 @@ package com.ulearning.ulearning_app.presentation.features.home.viewModel
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursesPackageSubscriptionUseCase
-import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursesSubscriptionUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
+import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import com.ulearning.ulearning_app.presentation.features.home.event.CourseRouteEvent
 import com.ulearning.ulearning_app.presentation.features.home.state.CourseRouteState
-import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-
 
 @HiltViewModel
 class CourseRouteViewModel
@@ -40,7 +38,7 @@ class CourseRouteViewModel
         setState { CourseRouteState.Loading }
 
         getCoursesPackageSubscriptionUseCase(
-            GetCoursesPackageSubscriptionUseCase.Params(page = page, type = "learning_package")
+            GetCoursesPackageSubscriptionUseCase.Params(page = page, type = "path")
         ) {
             it.either(::handleFailure, ::handleCourseRoute)
         }
@@ -49,7 +47,6 @@ class CourseRouteViewModel
     private fun handleFailure(failure: Failure) {
         setEffect { HomeEffect.ShowMessageFailure(failure = failure) }
     }
-
 
     private fun handleCourseRoute(courses: List<Subscription>) {
         setState { CourseRouteState.CourseRoute(courses = courses) }

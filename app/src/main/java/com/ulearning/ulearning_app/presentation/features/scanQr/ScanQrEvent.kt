@@ -2,7 +2,6 @@ package com.ulearning.ulearning_app.presentation.features.scanQr
 
 import com.ulearning.ulearning_app.presentation.base.UiEvent
 
-
 sealed class ScanQrEvent : UiEvent {
 
     object DataProfileClicked : ScanQrEvent()
@@ -12,5 +11,4 @@ sealed class ScanQrEvent : UiEvent {
     object PaymentClick : ScanQrEvent()
 
     object ScanQRClick : ScanQrEvent()
-
 }

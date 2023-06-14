@@ -11,5 +11,4 @@ interface CourseProgressViewState {
     fun loading()
 
     fun getCourseRecent(courses: List<Subscription>, percentages: List<CoursePercentage>)
-
 }

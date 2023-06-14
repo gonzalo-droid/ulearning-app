@@ -17,5 +17,4 @@ sealed class MessageState : UiState {
     data class GetParticipants constructor(val users: List<User>) : MessageState()
 
     data class GetUserId constructor(val userId: Int) : MessageState()
-
 }

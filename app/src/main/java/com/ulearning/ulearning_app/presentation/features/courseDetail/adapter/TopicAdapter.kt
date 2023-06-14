@@ -1,4 +1,4 @@
-package com.ulearning.ulearning_app.presentation.features.courses.adapter
+package com.ulearning.ulearning_app.presentation.features.courseDetail.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.databinding.ItemTopicBinding
-import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.Topic
 
 class TopicAdapter constructor(
@@ -27,19 +26,17 @@ class TopicAdapter constructor(
 
     override fun getItemCount(): Int = topics.size
 
-
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
 
         val binding = ItemTopicBinding.bind(view)
 
+        fun bind(model: Topic, position: Int, onClickListener: (Topic) -> Unit) {
 
-        fun bind(model: Topic, position : Int, onClickListener: (Topic) -> Unit) {
+            binding.titleText.text = model.title
 
-            binding.titleText.text  = model.title
+            binding.dividerTopic.visibility = if ((position + 1) == itemCount) View.INVISIBLE else View.VISIBLE
 
-            binding.dividerTopic.visibility = if((position+1) == itemCount) View.INVISIBLE else View.VISIBLE
-
-            val icon = if( model.parentId == null ) R.drawable.ic_flag  else R.drawable.ic_check_circle
+            val icon = if (model.parentId == null) R.drawable.ic_flag else R.drawable.ic_check_circle
 
             binding.topicImage.setImageResource(icon)
 
