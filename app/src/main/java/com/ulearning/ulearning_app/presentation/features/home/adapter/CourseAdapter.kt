@@ -35,7 +35,7 @@ class CourseAdapter constructor(
 
             binding.progressSnackBar.visibility = View.INVISIBLE
             binding.percentageText.visibility = View.INVISIBLE
-
+            binding.requiredText.visibility = View.GONE
             binding.categoryText.text = model.category?.name
 
             binding.titleText.text = model.title

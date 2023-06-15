@@ -26,24 +26,27 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DetailCoursesPackageFragment :
-    BaseFragmentWithViewModel<FragmentDetailCoursePackageBinding, CoursePackageViewModel>(),
-    DetailCoursesPackageViewState {
+    BaseFragmentWithViewModel<FragmentDetailCoursePackageBinding, CoursePackageViewModel>() {
 
-    override val binding: FragmentDetailCoursePackageBinding by dataBinding(FragmentDetailCoursePackageBinding::inflate)
+    override val binding: FragmentDetailCoursePackageBinding by dataBinding(
+        FragmentDetailCoursePackageBinding::inflate
+    )
 
     override val viewModel: CoursePackageViewModel by viewModels()
 
     override val dataBindingViewModel = BR.coursePackageViewModel
 
+
+    private lateinit var data: LearningPackage
+
     override fun onViewIsCreated(view: View) {
 
-        DetailCoursesPackageReducer.instance(viewState = this)
+        arguments?.let {
+            data = it.getSerializable(DETAIL_COURSES) as LearningPackage
+        }
 
-        // observeUiStates()
-
-        val data : LearningPackage? = (requireActivity() as CoursePackageActivity).returnLearningPackage()
-        if(data != null){
-            with(binding){
+        if (::data.isInitialized) {
+            with(binding) {
                 titleText.text = data.title
                 shortDescriptionTv.text = data.descriptionShort
                 largeDescriptionTv.text = data.descriptionLarge
@@ -52,45 +55,18 @@ class DetailCoursesPackageFragment :
         }
     }
 
-    private fun observeUiStates() {
-        viewModel.setEvent(CoursePackageEvent.ListCoursesPackageClicked)
+    companion object {
 
-        viewModel.apply {
-            lifecycleScopeCreate(activity = requireActivity(), method = {
-                state.collect { state ->
-                    DetailCoursesPackageReducer.selectState(state)
-                }
-            })
+        const val DETAIL_COURSES = "detailCourses"
 
-            lifecycleScopeCreate(activity = requireActivity(), method = {
-                effect.collect { effect ->
-                    DetailCoursesPackageReducer.selectEffect(effect)
-                }
-            })
+        @JvmStatic
+        fun newInstance(
+            data: LearningPackage,
+        ): DetailCoursesPackageFragment = DetailCoursesPackageFragment().apply {
+            arguments = Bundle().apply {
+                putSerializable(DETAIL_COURSES, data)
+            }
         }
     }
-
-    override fun messageFailure(failure: Failure) {
-
-        val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
-
-        showSnackBar(binding.root, getString(messageDesign.idMessage))
-    }
-
-    override fun loading() {
-        showLoadingDialog()
-    }
-
-
-    private fun onItemSelected(model: Subscription) {
-
-        findNavController().navigate(
-            R.id.action_navigation_home_to_detailCourseActivity,
-            Bundle().apply {
-                putSerializable(Config.COURSE_PUT, model.course)
-                putSerializable(Config.SUBSCRIPTION_PUT, model)
-                putSerializable(Config.ROLE, viewModel.typeRole)
-            }
-        )
-    }
 }
+

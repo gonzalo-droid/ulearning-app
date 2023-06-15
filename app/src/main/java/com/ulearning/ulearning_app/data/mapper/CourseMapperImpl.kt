@@ -40,8 +40,8 @@ class CourseMapperImpl : CourseMapper {
                 learningPackage = LearningPackage(
                     amount = null,
                     code = null,
-                    descriptionLarge = null,
-                    descriptionShort = null,
+                    descriptionLarge = it.learningPackage?.descriptionLarge,
+                    descriptionShort = it.learningPackage?.descriptionShort,
                     id = it.learningPackage?.id,
                     isShop = null,
                     mainImage = it.learningPackage?.mainImage?.let { mainImage ->
@@ -52,7 +52,9 @@ class CourseMapperImpl : CourseMapper {
                     },
                     title = it.learningPackage?.title,
                     type = it.learningPackage?.type,
-                    items = it.learningPackage?.items?.let { items -> listCoursePackageItemToDomain(items) },
+                    items = it.learningPackage?.items?.let { items ->
+                        listCoursePackageItemToDomain(items)
+                    },
                 ),
                 learningPackageId = it.learningPackageId,
                 purchasedCertificate = null,
@@ -86,53 +88,52 @@ class CourseMapperImpl : CourseMapper {
 
     override suspend fun listSubscriptionToDomain(data: List<SubscriptionResponse>): List<Subscription> {
         return data.map {
-            Subscription(
-                course = if (it.courseId != null) Course(
-                    category = if (it.course?.category != null) Category(
-                        color = it.course?.category?.color,
-                        description = it.course?.category?.description,
-                        id = it.course?.category?.id,
-                        name = it.course?.category?.name,
-                        type = it.course?.category?.type
-                    ) else null,
-                    categoryId = it.course?.categoryId,
-                    descriptionLarge = it.course?.descriptionLarge,
-                    descriptionShort = it.course?.descriptionShort,
-                    mainImage = if (it.course?.mainImage != null) MainImage(
-                        originalUrl = it.course?.mainImage?.originalUrl,
-                        previewUrl = it.course?.mainImage?.previewUrl,
-                    ) else null,
-                    title = it.course?.title,
-                    id = it.course?.id,
-                    lessonsCount = it.course?.lessonsCount,
-                    modality = it.course?.modality,
-                    asynchronousHour = it.course?.asynchronousHour,
-                    amount = 0,
-                    benefits = null,
-                    certificate = it.course?.certificate,
-                    code = null,
-                    currency = null,
-                    duration = null,
-                    externalId = null,
-                    externalLink = null,
-                    groups = listOf(),
-                    instructions = null,
-                    languageId = null,
-                    methodology = null,
-                    nature = null,
-                    origin = null,
-                    politicsLink = null,
-                    presentationLink = null,
-                    ratingAverage = null,
-                    ratingCount = null,
-                    record = it.course?.record,
-                    selfStudyHour = it.course?.selfStudyHour,
-                    slug = null,
-                    studentsCount = null,
-                    syllabusLink = it.course?.syllabusLink,
-                    synchronousHour = it.course?.synchronousHour,
-                    target = null,
+            Subscription(course = if (it.courseId != null) Course(
+                category = if (it.course?.category != null) Category(
+                    color = it.course?.category?.color,
+                    description = it.course?.category?.description,
+                    id = it.course?.category?.id,
+                    name = it.course?.category?.name,
+                    type = it.course?.category?.type
                 ) else null,
+                categoryId = it.course?.categoryId,
+                descriptionLarge = it.course?.descriptionLarge,
+                descriptionShort = it.course?.descriptionShort,
+                mainImage = if (it.course?.mainImage != null) MainImage(
+                    originalUrl = it.course?.mainImage?.originalUrl,
+                    previewUrl = it.course?.mainImage?.previewUrl,
+                ) else null,
+                title = it.course?.title,
+                id = it.course?.id,
+                lessonsCount = it.course?.lessonsCount,
+                modality = it.course?.modality,
+                asynchronousHour = it.course?.asynchronousHour,
+                amount = 0,
+                benefits = null,
+                certificate = it.course?.certificate,
+                code = null,
+                currency = null,
+                duration = null,
+                externalId = null,
+                externalLink = null,
+                groups = listOf(),
+                instructions = null,
+                languageId = null,
+                methodology = null,
+                nature = null,
+                origin = null,
+                politicsLink = null,
+                presentationLink = null,
+                ratingAverage = null,
+                ratingCount = null,
+                record = it.course?.record,
+                selfStudyHour = it.course?.selfStudyHour,
+                slug = null,
+                studentsCount = null,
+                syllabusLink = it.course?.syllabusLink,
+                synchronousHour = it.course?.synchronousHour,
+                target = null,
+            ) else null,
                 user = User(
                     name = it.userResponse?.name,
                 ),
@@ -172,8 +173,7 @@ class CourseMapperImpl : CourseMapper {
                         title = it.learningPackage.title,
                         type = it.learningPackage.type,
                     )
-                }
-            )
+                })
         }
     }
 

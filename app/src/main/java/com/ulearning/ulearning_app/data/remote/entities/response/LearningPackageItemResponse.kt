@@ -6,6 +6,6 @@ data class LearningPackageItemResponse(
     @SerializedName("course") val course: CourseResponse?,
     @SerializedName("course_id") val courseId: Int?,
     @SerializedName("id") val id: Int?,
-    @SerializedName("is_required") val isRequired: Boolean?,
+    @SerializedName("is_required") val isRequired: Boolean = false,
     @SerializedName("learning_package_id") val learningPackageId: Int?,
 )

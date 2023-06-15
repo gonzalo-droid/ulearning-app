@@ -1,8 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.home.view
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -12,20 +10,15 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.ulearning.ulearning_app.BR
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
-import com.ulearning.ulearning_app.core.extensions.html
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
-import com.ulearning.ulearning_app.core.extensions.putCourse
 import com.ulearning.ulearning_app.core.extensions.putInt
-import com.ulearning.ulearning_app.core.extensions.putSubscription
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityCoursePackageBinding
 import com.ulearning.ulearning_app.domain.model.CoursePackage
 import com.ulearning.ulearning_app.domain.model.LearningPackage
 import com.ulearning.ulearning_app.domain.model.LearningPackageItem
-import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
-import com.ulearning.ulearning_app.presentation.features.courseDetail.DetailCourseActivity
 import com.ulearning.ulearning_app.presentation.features.home.adapter.CoursePackageViewPagerAdapter
 import com.ulearning.ulearning_app.presentation.features.home.event.CoursePackageEvent
 import com.ulearning.ulearning_app.presentation.features.home.reducer.CoursePackageReducer
@@ -93,15 +86,18 @@ class CoursePackageActivity :
     }
 
     override fun messageFailure(failure: Failure) {
+        closeLoadingDialog()
         val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
 
         showSnackBar(binding.root, getString(messageDesign.idMessage))
     }
 
     override fun loading() {
+        showLoadingDialog()
     }
 
     override fun getCoursePackage(course: CoursePackage) {
+        closeLoadingDialog()
         with(binding) {
 
             if (!course.learningPackage?.mainImage?.originalUrl.isNullOrEmpty()) {
@@ -120,33 +116,24 @@ class CoursePackageActivity :
 
             viewModel.setSharedData(course.learningPackage?.items!!)
 
-            initTabLayout()
+            initTabLayout(course.learningPackage)
 
         }
     }
 
-    fun returnListCourse(): List<LearningPackageItem>? {
-        return viewModel.items?.value ?: arrayListOf()
-    }
-
-    fun returnLearningPackage(): LearningPackage? {
-        return viewModel.learningPackage?.value
-    }
-
-    private fun initTabLayout() {
+    private fun initTabLayout(learningPackage: LearningPackage) {
         binding.viewPager.apply {
             (getChildAt(0) as RecyclerView).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-            adapter = CoursePackageViewPagerAdapter(supportFragmentManager, lifecycle)
+            adapter =
+                CoursePackageViewPagerAdapter(supportFragmentManager, lifecycle, learningPackage)
         }
-
-        // binding.viewPager.isSaveEnabled = false
 
         TabLayoutMediator(
             binding.tabLayout, binding.viewPager
         ) { tab: TabLayout.Tab, position: Int ->
             when (position) {
                 COURSES -> tab.text = "Cursos"
-                DETAIL -> tab.text = "Descripcion"
+                DETAIL -> tab.text = "Descripción"
             }
         }.attach()
     }

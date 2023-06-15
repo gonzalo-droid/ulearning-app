@@ -9,7 +9,9 @@
     tools:ignore="RtlSymmetry">
 
     <TextView
-        android:id="@+id/categoryText"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:id="@+id/requiredText"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/dimen10"
@@ -18,7 +20,7 @@
         android:elevation="@dimen/dimen25"
         android:gravity="center"
         android:paddingHorizontal="@dimen/dimen6"
-        android:text="Mini cursos"
+        android:text="Requerido"
         android:textAppearance="@style/readex_10_regular"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,22 +68,39 @@
                 app:trackColor="@color/green" />
 
             <TextView
-                android:id="@+id/titleText"
+                android:id="@+id/categoryText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dimen10"
                 android:layout_marginTop="@dimen/dimen40"
                 android:layout_marginBottom="@dimen/dimen10"
-                android:text="Nombre del curso"
-                android:textAppearance="@style/readex_20_regular"
+                android:text="MiniCursos"
+                android:textAppearance="@style/readex_12_regular"
                 android:textColor="@color/blue"
                 android:maxLines="3"
                 android:ellipsize="end"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen10"
+                android:layout_marginBottom="@dimen/dimen10"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:text="Nombre del curso"
+                android:textAppearance="@style/readex_20_regular"
+                android:textColor="@color/blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/categoryText"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView

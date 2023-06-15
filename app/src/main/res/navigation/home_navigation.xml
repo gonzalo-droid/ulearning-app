@@ -97,4 +97,13 @@
         android:name="com.ulearning.ulearning_app.presentation.features.home.view.CoursePackActivity"
         android:label="activity_course_packs"
         tools:layout="@layout/activity_course_packs" />
+    <fragment
+        android:id="@+id/listCoursesPackageFragment"
+        android:name="com.ulearning.ulearning_app.presentation.features.home.view.ListCoursesPackageFragment"
+        android:label="fragment_list_courses_package"
+        tools:layout="@layout/fragment_list_courses_package" >
+        <action
+            android:id="@+id/action_listCoursesPackageFragment_to_detailCourseActivity"
+            app:destination="@id/detailCourseActivity" />
+    </fragment>
 </navigation>

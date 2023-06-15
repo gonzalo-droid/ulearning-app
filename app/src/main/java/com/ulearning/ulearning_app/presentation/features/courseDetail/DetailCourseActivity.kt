@@ -130,9 +130,9 @@ class DetailCourseActivity :
         }else {
             binding.teacherTitle.visibility = View.VISIBLE
             binding.recycler.visibility = View.VISIBLE
+            goTeacher(subscription.group?.teachers ?: arrayListOf())
         }
 
-        goTeacher(subscription.group?.teachers ?: arrayListOf())
     }
 
     override fun getTopics(topics: List<Topic>) {

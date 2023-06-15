@@ -106,7 +106,7 @@ class CoursePackActivity :
     private fun onItemSelected(model: Subscription) {
 
         startActivity(
-            Intent(this, DetailCourseActivity::class.java).apply {
+            Intent(this, CoursePackageActivity::class.java).apply {
                 putExtra(Config.COURSE_PACKAGE_ID_PUT, model.learningPackage?.id)
             }
         )

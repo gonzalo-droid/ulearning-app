@@ -12,6 +12,7 @@ sealed class CoursePackageState : UiState {
 
     object Loading : CoursePackageState()
 
+
     data class CoursePackageData constructor(val course: CoursePackage) : CoursePackageState()
     data class ListCoursesPackage constructor(
         val items: List<LearningPackageItem>?

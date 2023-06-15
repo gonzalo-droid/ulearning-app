@@ -31,7 +31,7 @@ import javax.inject.Singleton
 object NetworkModule {
 
     @Suppress("PrivatePropertyName")
-    private val TIMEOUT: Long = 30
+    private val TIMEOUT: Long = 10
 
     @Provides
     @Singleton
@@ -62,16 +62,18 @@ object NetworkModule {
         interceptor.level =
             if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
 
-        val builder = OkHttpClient.Builder()
-        builder.addInterceptor(interceptor)
-            .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
-            .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
-            .readTimeout(TIMEOUT, TimeUnit.SECONDS)
+        val client = OkHttpClient.Builder()
+            .connectTimeout(TIMEOUT, TimeUnit.MINUTES)
+            .writeTimeout(TIMEOUT, TimeUnit.MINUTES)
+            .readTimeout(TIMEOUT, TimeUnit.MINUTES)
+            .addInterceptor(interceptor).addInterceptor { chain ->
+                chain.proceed(chain.request().newBuilder().build())
+            }
             .addInterceptor(authInterceptor)
 
-        if (BuildConfig.DEBUG) { builder.addInterceptor(OkHttpProfilerInterceptor()) }
+        if (BuildConfig.DEBUG) { client.addInterceptor(OkHttpProfilerInterceptor()) }
 
-        return builder.build()
+        return client.build()
     }
 
     @Provides

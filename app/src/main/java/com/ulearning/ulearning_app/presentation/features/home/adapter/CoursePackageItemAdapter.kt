@@ -35,9 +35,12 @@ class CoursePackageItemAdapter constructor(
         fun bind(model: LearningPackageItem, onClickListener: (LearningPackageItem) -> Unit) {
 
             binding.progressSnackBar.visibility = View.INVISIBLE
+
             binding.percentageText.visibility = View.INVISIBLE
 
-            binding.categoryText.visibility = View.GONE
+            binding.requiredText.visibility = if (model.isRequired) View.VISIBLE else View.GONE
+
+            binding.categoryText.text = model.course?.category?.name
 
             binding.titleText.text = model.course?.title
 

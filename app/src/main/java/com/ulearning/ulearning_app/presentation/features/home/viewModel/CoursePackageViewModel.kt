@@ -39,6 +39,7 @@ class CoursePackageViewModel
 
     fun setSharedData(data: List<LearningPackageItem>) {
         _items.postValue(data)
+
     }
 
     fun setSharedLearningPackage(data: LearningPackage) {
@@ -62,9 +63,7 @@ class CoursePackageViewModel
     }
 
     private fun getListCoursesPackageClicked(){
-        setState { CoursePackageState.Loading }
 
-        // handleListCourseComplete(items)
     }
 
     private fun getCoursePackageUseCase() {
@@ -84,14 +83,6 @@ class CoursePackageViewModel
     private fun handleCourseComplete(course: CoursePackage) {
         setState { CoursePackageState.CoursePackageData(course = course) }
     }
-
-    private fun handleListCourseComplete(items: MutableLiveData<List<LearningPackageItem>>) {
-
-
-        // setState { CoursePackageState.ListCoursesPackage(items = items) }
-        // Log.d("TagItems", "handleListCourseComplete "+ items?.size.toString())
-    }
-
 
     companion object Events
 }

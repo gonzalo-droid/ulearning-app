@@ -31,8 +31,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ListCoursesPackageFragment :
-    BaseFragmentWithViewModel<FragmentListCoursesPackageBinding, CoursePackageViewModel>(),
-    ListCoursesPackageViewState {
+    BaseFragmentWithViewModel<FragmentListCoursesPackageBinding, CoursePackageViewModel>(){
 
     override val binding: FragmentListCoursesPackageBinding by dataBinding(
         FragmentListCoursesPackageBinding::inflate
@@ -44,9 +43,14 @@ class ListCoursesPackageFragment :
 
     private lateinit var courseRecycler: RecyclerView
 
+    private var items: ArrayList<LearningPackageItem> = arrayListOf()
+
     override fun onViewIsCreated(view: View) {
 
-        ListCoursesPackageReducer.instance(viewState = this@ListCoursesPackageFragment)
+        arguments?.let {
+            items = it.getSerializable(LIST_COURSES) as ArrayList<LearningPackageItem>
+        }
+
 
         courseRecycler = binding.courseRecycler
 
@@ -57,33 +61,6 @@ class ListCoursesPackageFragment :
     }
 
     private fun observeUiStates() {
-
-        val list : List<LearningPackageItem>? = (requireActivity() as CoursePackageActivity).returnListCourse()
-        if(!list.isNullOrEmpty()){
-            courseRecycler.adapter = CoursePackageItemAdapter(
-                items = list
-            ) { model ->
-                onItemSelected(model)
-            }
-            Log.d("TagItems", "getListCoursesPackage "+ list.first().course?.title )
-
-        }
-
-    }
-
-    override fun messageFailure(failure: Failure) {
-
-        val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
-
-        showSnackBar(binding.root, getString(messageDesign.idMessage))
-    }
-
-    override fun loading() {
-        showLoadingDialog()
-    }
-
-    override fun getListCoursesPackage(items: List<LearningPackageItem>?) {
-        closeLoadingDialog()
         courseRecycler.adapter = CoursePackageItemAdapter(
             items = items!!
         ) { model ->
@@ -93,11 +70,47 @@ class ListCoursesPackageFragment :
 
     private fun onItemSelected(model: LearningPackageItem) {
 
-        findNavController().navigate(R.id.action_navigation_home_to_detailCourseActivity,
+
+        val subscription = Subscription(
+            amount = null,
+            course = null,
+            courseId = 0,
+            group = null,
+            groupId = null,
+            hasCertificate = null,
+            hasDegree = null,
+            hasRecord = null,
+            id = null,
+            isFinished = null,
+            purchasedCertificate = null,
+            purchasedRecord = null,
+            status = null,
+            timeSession = null,
+            type = null,
+            user = null,
+            userId = null,
+            learningPackage = null
+        )
+        findNavController().navigate(
+            R.id.action_listCoursesPackageFragment_to_detailCourseActivity,
             Bundle().apply {
                 putSerializable(Config.COURSE_PUT, model.course)
-                // putSerializable(Config.SUBSCRIPTION_PUT, model)
-                putSerializable(Config.ROLE, viewModel.typeRole)
+                putSerializable(Config.SUBSCRIPTION_PUT, subscription)
             })
+    }
+
+
+    companion object {
+
+        const val LIST_COURSES = "listCourses"
+
+        @JvmStatic
+        fun newInstance(
+            list: ArrayList<LearningPackageItem>,
+        ): ListCoursesPackageFragment = ListCoursesPackageFragment().apply {
+            arguments = Bundle().apply {
+                putSerializable(LIST_COURSES, list)
+            }
+        }
     }
 }
