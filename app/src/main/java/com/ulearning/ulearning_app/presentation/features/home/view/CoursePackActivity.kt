@@ -14,7 +14,6 @@ import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityCoursePacksBinding
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
-import com.ulearning.ulearning_app.presentation.features.courseDetail.DetailCourseActivity
 import com.ulearning.ulearning_app.presentation.features.home.adapter.CoursePackageSubscriptionAdapter
 import com.ulearning.ulearning_app.presentation.features.home.event.CoursePackEvent
 import com.ulearning.ulearning_app.presentation.features.home.reducer.CoursePackReducer

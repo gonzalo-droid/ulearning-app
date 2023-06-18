@@ -18,7 +18,7 @@ interface CourseApi {
         @Query("is_finished") isFinished: Boolean,
     ): Response<BaseResponse<List<SubscriptionResponse>>>
 
-    @GET("https://mockbin.org/bin/2afbba16-5d35-4018-849a-1d7436295976") // subscriptions
+    @GET("subscriptions") // https://mockbin.org/bin/2afbba16-5d35-4018-849a-1d7436295976
     suspend fun subscriptionsPackage(
         @Header(SettingRemote.AUTHORIZATION) token: String,
         @Query("per_page") perPage: Int,
@@ -28,11 +28,12 @@ interface CourseApi {
         // @Query("without_pagination") withoutPagination: Boolean = true,
     ): Response<BaseResponse<List<SubscriptionResponse>>>
 
-    // http://ulearning-api.net/api/learning-packages/1/subscriptions?includes=learning_package,learning_package_items,course
-    @GET("https://mockbin.org/bin/89417e80-4a8f-4ed4-8d47-ddf33f83e387") // learning-packages/{learningPackageId}/subscriptions
+    // http://ulearning-api.net/api/learning-packages/1/subscriptions
+    // ?includes=learning_package,learning_package_items,course
+    @GET("learning-packages/{learningPackageId}/subscriptions") // https://mockbin.org/bin/89417e80-4a8f-4ed4-8d47-ddf33f83e387
     suspend fun learningPackage(
         @Header(SettingRemote.AUTHORIZATION) token: String,
-        @Query("learningPackageId") learningPackageId: Int,  //@Path("learningPackageId") learningPackageId: Int,
+        @Path("learningPackageId") learningPackageId: Int,
         @Query("includes") includes: String = "learning_package,learning_package_items,course",
     ): Response<BaseResponse<CoursePackageResponse>>
 

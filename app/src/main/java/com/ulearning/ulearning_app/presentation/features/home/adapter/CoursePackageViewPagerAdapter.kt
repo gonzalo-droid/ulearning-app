@@ -21,8 +21,10 @@ class CoursePackageViewPagerAdapter(
     override fun createFragment(position: Int): Fragment {
         return if (position == 0) {
             ListCoursesPackageFragment.newInstance(
-                (items.items
-                    ?: arrayListOf<LearningPackageItem>()) as ArrayList<LearningPackageItem>
+                (
+                    items.items
+                        ?: arrayListOf<LearningPackageItem>()
+                    ) as ArrayList<LearningPackageItem>
             )
         } else {
             DetailCoursesPackageFragment.newInstance(items)

@@ -1,6 +1,5 @@
 package com.ulearning.ulearning_app.presentation.features.home.viewModel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ulearning.ulearning_app.core.functional.Failure
@@ -13,9 +12,7 @@ import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import com.ulearning.ulearning_app.presentation.features.home.event.CoursePackageEvent
 import com.ulearning.ulearning_app.presentation.features.home.state.CoursePackageState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.ArrayList
 import javax.inject.Inject
-
 
 @HiltViewModel
 class CoursePackageViewModel
@@ -32,14 +29,11 @@ class CoursePackageViewModel
     private val _items = MutableLiveData<List<LearningPackageItem>>()
     val items: LiveData<List<LearningPackageItem>> = _items
 
-
     private val _learningPackage = MutableLiveData<LearningPackage>()
     val learningPackage: LiveData<LearningPackage> = _learningPackage
 
-
     fun setSharedData(data: List<LearningPackageItem>) {
         _items.postValue(data)
-
     }
 
     fun setSharedLearningPackage(data: LearningPackage) {
@@ -62,8 +56,7 @@ class CoursePackageViewModel
         }
     }
 
-    private fun getListCoursesPackageClicked(){
-
+    private fun getListCoursesPackageClicked() {
     }
 
     private fun getCoursePackageUseCase() {

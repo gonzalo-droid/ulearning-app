@@ -3,7 +3,6 @@ package com.ulearning.ulearning_app.presentation.features.home.reducer
 import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
 import com.ulearning.ulearning_app.presentation.features.home.state.CoursePackageState
 import com.ulearning.ulearning_app.presentation.features.home.viewState.DetailCoursesPackageViewState
-import com.ulearning.ulearning_app.presentation.features.home.viewState.ListCoursesPackageViewState
 
 object DetailCoursesPackageReducer {
 

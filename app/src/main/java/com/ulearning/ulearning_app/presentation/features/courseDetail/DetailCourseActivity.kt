@@ -124,15 +124,14 @@ class DetailCourseActivity :
 
     private fun setDetailSubscription(subscription: Subscription) {
 
-        if(subscription.group?.teachers?.isEmpty()!!){
+        if (subscription.group?.teachers?.isEmpty()!!) {
             binding.teacherTitle.visibility = View.GONE
             binding.recycler.visibility = View.GONE
-        }else {
+        } else {
             binding.teacherTitle.visibility = View.VISIBLE
             binding.recycler.visibility = View.VISIBLE
             goTeacher(subscription.group?.teachers ?: arrayListOf())
         }
-
     }
 
     override fun getTopics(topics: List<Topic>) {

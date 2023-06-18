@@ -17,7 +17,6 @@ import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityCoursePackageBinding
 import com.ulearning.ulearning_app.domain.model.CoursePackage
 import com.ulearning.ulearning_app.domain.model.LearningPackage
-import com.ulearning.ulearning_app.domain.model.LearningPackageItem
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
 import com.ulearning.ulearning_app.presentation.features.home.adapter.CoursePackageViewPagerAdapter
 import com.ulearning.ulearning_app.presentation.features.home.event.CoursePackageEvent
@@ -40,7 +39,6 @@ class CoursePackageActivity :
     override val viewModel: CoursePackageViewModel by viewModels()
 
     override val dataBindingViewModel = BR.coursePackageViewModel
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +66,6 @@ class CoursePackageActivity :
 
             viewModel.setEvent(CoursePackageEvent.CoursePackageClicked)
         }
-
 
         viewModel.apply {
             lifecycleScopeCreate(activity = this@CoursePackageActivity, method = {
@@ -117,7 +114,6 @@ class CoursePackageActivity :
             viewModel.setSharedData(course.learningPackage?.items!!)
 
             initTabLayout(course.learningPackage)
-
         }
     }
 

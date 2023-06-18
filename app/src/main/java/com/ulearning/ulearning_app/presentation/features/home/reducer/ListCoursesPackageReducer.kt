@@ -20,7 +20,7 @@ object ListCoursesPackageReducer {
             is CoursePackageState.Loading -> viewState.loading()
 
             is CoursePackageState.ListCoursesPackage -> {
-                Log.d("TagItems", "ListCoursesPackage "+ state.items?.size.toString())
+                Log.d("TagItems", "ListCoursesPackage " + state.items?.size.toString())
                 viewState.getListCoursesPackage(items = state.items)
             }
 

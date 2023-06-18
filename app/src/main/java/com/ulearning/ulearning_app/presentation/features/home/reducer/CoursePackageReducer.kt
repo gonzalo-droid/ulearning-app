@@ -22,7 +22,7 @@ object CoursePackageReducer {
             is CoursePackageState.CoursePackageData -> {
                 viewState.getCoursePackage(course = state.course)
             }
-            else -> { Log.d("TagItems", "ListCoursesPackage CoursePackageReducer")}
+            else -> { Log.d("TagItems", "ListCoursesPackage CoursePackageReducer") }
         }
     }
 

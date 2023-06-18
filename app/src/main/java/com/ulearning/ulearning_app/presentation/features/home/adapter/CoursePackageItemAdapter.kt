@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.request.RequestOptions
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.databinding.ItemCoursesBinding
-import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.model.LearningPackageItem
 import com.ulearning.ulearning_app.presentation.utils.imageLoader.ImageLoaderGlide
 
