@@ -138,7 +138,7 @@ class DetailCourseActivity :
 
         closeLoadingDialog()
 
-        binding.topicBtn.visibility = if(topics.isEmpty()) View.INVISIBLE else View.VISIBLE
+        binding.topicBtn.visibility = if (topics.isEmpty()) View.INVISIBLE else View.VISIBLE
 
         val mutableTopics: MutableList<Topic> = mutableListOf()
 

@@ -3,7 +3,6 @@ package com.ulearning.ulearning_app.presentation.features.home.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ulearning.ulearning_app.core.functional.Failure
-import com.ulearning.ulearning_app.domain.model.CoursePackage
 import com.ulearning.ulearning_app.domain.model.LearningPackage
 import com.ulearning.ulearning_app.domain.model.LearningPackageItem
 import com.ulearning.ulearning_app.domain.model.Subscription
@@ -40,7 +39,7 @@ class CoursePackageViewModel
         _items.postValue(data)
     }
 
-    fun setCoursePackage(data :Subscription){
+    fun setCoursePackage(data: Subscription) {
         _coursePackage.postValue(data)
     }
 

@@ -1,6 +1,5 @@
 package com.ulearning.ulearning_app.domain.useCase.courses
 
-import com.ulearning.ulearning_app.domain.model.CoursePackage
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.repository.CourseRepository
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase

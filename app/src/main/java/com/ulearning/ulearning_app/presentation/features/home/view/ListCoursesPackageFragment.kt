@@ -3,16 +3,12 @@ package com.ulearning.ulearning_app.presentation.features.home.view
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulearning.ulearning_app.BR
-import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.core.extensions.dataBinding
-import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.FragmentListCoursesPackageBinding
 import com.ulearning.ulearning_app.domain.model.LearningPackageItem
-import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
 import com.ulearning.ulearning_app.presentation.features.home.adapter.CoursePackageItemAdapter
 import com.ulearning.ulearning_app.presentation.features.home.viewModel.CoursePackageViewModel
@@ -58,7 +54,6 @@ class ListCoursesPackageFragment :
     private fun onItemSelected(model: LearningPackageItem) {
 
         (requireActivity() as CoursePackageActivity).goToDetailCourse(model)
-
     }
 
     companion object {

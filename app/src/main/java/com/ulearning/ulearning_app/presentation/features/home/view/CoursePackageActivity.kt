@@ -16,12 +16,10 @@ import com.ulearning.ulearning_app.core.extensions.putInt
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityCoursePackageBinding
-import com.ulearning.ulearning_app.domain.model.CoursePackage
 import com.ulearning.ulearning_app.domain.model.LearningPackage
 import com.ulearning.ulearning_app.domain.model.LearningPackageItem
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
-import com.ulearning.ulearning_app.presentation.features.addConversation.AddConversationActivity
 import com.ulearning.ulearning_app.presentation.features.courseDetail.DetailCourseActivity
 import com.ulearning.ulearning_app.presentation.features.home.adapter.CoursePackageViewPagerAdapter
 import com.ulearning.ulearning_app.presentation.features.home.event.CoursePackageEvent
@@ -125,9 +123,9 @@ class CoursePackageActivity :
         }
     }
 
-    fun goToDetailCourse(model: LearningPackageItem){
+    fun goToDetailCourse(model: LearningPackageItem) {
 
-        if(viewModel.getCoursePackage() != null) {
+        if (viewModel.getCoursePackage() != null) {
             startActivity(
                 Intent(this, DetailCourseActivity::class.java).apply {
                     putExtra(Config.COURSE_PUT, model.course)
@@ -135,7 +133,6 @@ class CoursePackageActivity :
                 }
             )
         }
-
     }
     private fun initTabLayout(learningPackage: LearningPackage) {
         binding.viewPager.apply {
