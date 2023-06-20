@@ -42,7 +42,7 @@ android {
             dimension 'versionFlavor'
             buildConfigField 'boolean', 'IS_SHOW_LOG', 'true'
             buildConfigField 'boolean', 'DEBUG', 'true'
-            buildConfigField 'String', 'BASE_URL', '"https://sandbox.api.ulearning.com.pe/api/"'
+            buildConfigField 'String', 'BASE_URL', '"https://www.sandbox.api.ulearning.com.pe/api/"'
             buildConfigField 'String', 'STUDENT_URL', '"https://student.ulearning.com.pe"'
         }
 
