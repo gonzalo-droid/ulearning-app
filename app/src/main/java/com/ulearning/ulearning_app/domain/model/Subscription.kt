@@ -21,4 +21,5 @@ data class Subscription(
     var user: User? = null,
     var userId: Int? = 0,
     var learningPackage: LearningPackage? = null,
+    val learningPackageId: Int? = 0,
 ) : Serializable

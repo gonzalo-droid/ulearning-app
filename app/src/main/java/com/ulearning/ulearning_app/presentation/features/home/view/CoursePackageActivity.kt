@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.home.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
@@ -17,7 +18,11 @@ import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityCoursePackageBinding
 import com.ulearning.ulearning_app.domain.model.CoursePackage
 import com.ulearning.ulearning_app.domain.model.LearningPackage
+import com.ulearning.ulearning_app.domain.model.LearningPackageItem
+import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
+import com.ulearning.ulearning_app.presentation.features.addConversation.AddConversationActivity
+import com.ulearning.ulearning_app.presentation.features.courseDetail.DetailCourseActivity
 import com.ulearning.ulearning_app.presentation.features.home.adapter.CoursePackageViewPagerAdapter
 import com.ulearning.ulearning_app.presentation.features.home.event.CoursePackageEvent
 import com.ulearning.ulearning_app.presentation.features.home.reducer.CoursePackageReducer
@@ -93,8 +98,11 @@ class CoursePackageActivity :
         showLoadingDialog()
     }
 
-    override fun getCoursePackage(course: CoursePackage) {
+    override fun getCoursePackage(course: Subscription) {
         closeLoadingDialog()
+
+        viewModel.setCoursePackage(course)
+
         with(binding) {
 
             if (!course.learningPackage?.mainImage?.originalUrl.isNullOrEmpty()) {
@@ -108,15 +116,27 @@ class CoursePackageActivity :
                 imageCourseIv.setImageResource(R.drawable.course_test)
             }
 
-            toolbarLayout.title = course.learningPackage?.title
+            toolbarLayout.title = " "
             titleText.text = course.learningPackage?.title
 
             viewModel.setSharedData(course.learningPackage?.items!!)
 
-            initTabLayout(course.learningPackage)
+            initTabLayout(course.learningPackage!!)
         }
     }
 
+    fun goToDetailCourse(model: LearningPackageItem){
+
+        if(viewModel.getCoursePackage() != null) {
+            startActivity(
+                Intent(this, DetailCourseActivity::class.java).apply {
+                    putExtra(Config.COURSE_PUT, model.course)
+                    putExtra(Config.SUBSCRIPTION_PUT, viewModel.getCoursePackage())
+                }
+            )
+        }
+
+    }
     private fun initTabLayout(learningPackage: LearningPackage) {
         binding.viewPager.apply {
             (getChildAt(0) as RecyclerView).overScrollMode = RecyclerView.OVER_SCROLL_NEVER

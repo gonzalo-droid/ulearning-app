@@ -6,6 +6,7 @@ import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.CoursePackage
 import com.ulearning.ulearning_app.domain.model.LearningPackage
 import com.ulearning.ulearning_app.domain.model.LearningPackageItem
+import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.domain.useCase.courses.GetCoursePackageUseCase
 import com.ulearning.ulearning_app.presentation.base.BaseViewModel
 import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
@@ -26,6 +27,9 @@ class CoursePackageViewModel
 
     var typeRole: String = ""
 
+    private val _coursePackage = MutableLiveData<Subscription>()
+    val coursePackage: LiveData<Subscription> = _coursePackage
+
     private val _items = MutableLiveData<List<LearningPackageItem>>()
     val items: LiveData<List<LearningPackageItem>> = _items
 
@@ -36,14 +40,13 @@ class CoursePackageViewModel
         _items.postValue(data)
     }
 
-    fun setSharedLearningPackage(data: LearningPackage) {
-        _learningPackage.postValue(data)
+    fun setCoursePackage(data :Subscription){
+        _coursePackage.postValue(data)
     }
-    /*
-    fun getSharedData(): LiveData<List<LearningPackageItem>> {
-        return sharedData
+
+    fun getCoursePackage(): Subscription? {
+        return coursePackage.value
     }
-    */
 
     override fun createInitialState(): CoursePackageState {
         return CoursePackageState.Idle
@@ -73,7 +76,7 @@ class CoursePackageViewModel
         setEffect { HomeEffect.ShowMessageFailure(failure = failure) }
     }
 
-    private fun handleCourseComplete(course: CoursePackage) {
+    private fun handleCourseComplete(course: Subscription) {
         setState { CoursePackageState.CoursePackageData(course = course) }
     }
 

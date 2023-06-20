@@ -57,33 +57,8 @@ class ListCoursesPackageFragment :
 
     private fun onItemSelected(model: LearningPackageItem) {
 
-        val subscription = Subscription(
-            amount = null,
-            course = null,
-            courseId = 0,
-            group = null,
-            groupId = null,
-            hasCertificate = null,
-            hasDegree = null,
-            hasRecord = null,
-            id = null,
-            isFinished = null,
-            purchasedCertificate = null,
-            purchasedRecord = null,
-            status = null,
-            timeSession = null,
-            type = null,
-            user = null,
-            userId = null,
-            learningPackage = null
-        )
-        findNavController().navigate(
-            R.id.action_listCoursesPackageFragment_to_detailCourseActivity,
-            Bundle().apply {
-                putSerializable(Config.COURSE_PUT, model.course)
-                putSerializable(Config.SUBSCRIPTION_PUT, subscription)
-            }
-        )
+        (requireActivity() as CoursePackageActivity).goToDetailCourse(model)
+
     }
 
     companion object {

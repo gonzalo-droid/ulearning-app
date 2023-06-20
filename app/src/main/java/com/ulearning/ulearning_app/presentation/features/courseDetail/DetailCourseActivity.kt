@@ -124,7 +124,7 @@ class DetailCourseActivity :
 
     private fun setDetailSubscription(subscription: Subscription) {
 
-        if (subscription.group?.teachers?.isEmpty()!!) {
+        if (subscription.group?.teachers.isNullOrEmpty()) {
             binding.teacherTitle.visibility = View.GONE
             binding.recycler.visibility = View.GONE
         } else {
@@ -187,8 +187,8 @@ class DetailCourseActivity :
                 setEvent(DetailCourseEvent.GetCheckAvailableFiles)
                 setEvent(DetailCourseEvent.GetMyFiles)
                 withCertificate =
-                    subscription.course?.certificate!! || subscription.purchasedCertificate!!
-                withRecord = subscription.course?.record!! || subscription.purchasedRecord!!
+                    subscription.hasCertificate!! || subscription.purchasedCertificate!!
+                withRecord = subscription?.hasCertificate!! || subscription.purchasedRecord!!
 
                 binding.downloadCertText.text =
                     if (!withCertificate) getString(R.string.buy_cert) else getString(R.string.download_cert)

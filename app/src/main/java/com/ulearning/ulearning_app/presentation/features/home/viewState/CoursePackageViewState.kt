@@ -2,6 +2,7 @@ package com.ulearning.ulearning_app.presentation.features.home.viewState
 
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.CoursePackage
+import com.ulearning.ulearning_app.domain.model.Subscription
 
 interface CoursePackageViewState {
 
@@ -9,5 +10,5 @@ interface CoursePackageViewState {
 
     fun loading()
 
-    fun getCoursePackage(course: CoursePackage)
+    fun getCoursePackage(course: Subscription)
 }

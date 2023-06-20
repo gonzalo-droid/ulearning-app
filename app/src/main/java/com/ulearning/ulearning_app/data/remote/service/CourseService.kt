@@ -12,7 +12,7 @@ interface CourseService {
     suspend fun learningPackage(
         token: String,
         learningPackageId: Int,
-    ): Either<Failure, CoursePackageResponse>
+    ): Either<Failure, SubscriptionResponse>
 
     suspend fun subscriptionsPackage(
         token: String,

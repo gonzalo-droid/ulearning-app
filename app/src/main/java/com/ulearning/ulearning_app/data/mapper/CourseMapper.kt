@@ -16,9 +16,9 @@ import com.ulearning.ulearning_app.domain.model.FileItem
 import com.ulearning.ulearning_app.domain.model.Subscription
 
 interface CourseMapper {
-    suspend fun coursePackageToDomain(data: CoursePackageResponse): CoursePackage
+    suspend fun subscriptionToDomain(data: SubscriptionResponse): Subscription
 
-    suspend fun listSubscriptionToDomain(data: List<SubscriptionResponse>): List<Subscription>
+    suspend fun listSubscriptionsToDomain(data: List<SubscriptionResponse>): List<Subscription>
 
     suspend fun listCourseToDomain(data: List<CourseResponse>): List<Course>
 
