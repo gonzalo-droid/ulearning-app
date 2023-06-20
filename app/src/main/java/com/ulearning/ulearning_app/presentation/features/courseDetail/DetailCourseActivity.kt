@@ -138,6 +138,8 @@ class DetailCourseActivity :
 
         closeLoadingDialog()
 
+        binding.topicBtn.visibility = if(topics.isEmpty()) View.INVISIBLE else View.VISIBLE
+
         val mutableTopics: MutableList<Topic> = mutableListOf()
 
         topics.forEach { it ->
@@ -277,7 +279,7 @@ class DetailCourseActivity :
                 imageCourseIv.setImageResource(R.drawable.course_test)
             }
 
-            toolbarLayout.title = data.title
+            toolbarLayout.title = " "
             titleText.text = data.title
 
             descriptionText.text = data.descriptionLarge?.html()
