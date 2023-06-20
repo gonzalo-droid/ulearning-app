@@ -1,6 +1,8 @@
 package com.ulearning.ulearning_app.presentation.features.home.view
 
 import android.os.Bundle
+import android.text.Html
+import android.text.Spanned
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.ulearning.ulearning_app.BR
@@ -33,11 +35,15 @@ class DetailCoursesPackageFragment :
 
         if (::data.isInitialized) {
             with(binding) {
-                titleText.text = data.title
-                shortDescriptionTv.text = data.descriptionShort
-                largeDescriptionTv.text = data.descriptionLarge
+                shortDescriptionTv.text = data.descriptionShort?.let { parseHtmlToString(it) }
+                largeDescriptionTv.text = data.descriptionLarge?.let { parseHtmlToString(it) }
             }
         }
+    }
+
+    private fun parseHtmlToString(html: String): String {
+        val spanned: Spanned = Html.fromHtml(html)
+        return spanned.toString()
     }
 
     companion object {
