@@ -51,6 +51,7 @@ object Config {
         "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{8,}$"
 
     const val SUBSCRIPTION_PUT = "subscription"
+    const val PERCENTAGE_PUT = "percentage"
     const val COURSE_ID_PUT = "courseId"
     const val PARAM_NAME_PUT = "paramName"
     const val LIST_USER_IDS_PUT = "listUserIds"

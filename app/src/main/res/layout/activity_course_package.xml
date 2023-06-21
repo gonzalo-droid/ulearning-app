@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-tools:context=".presentation.features.home.view.CoursePackageActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.features.home.view.CoursePackageActivity">
 
-<data>
+    <data>
 
-    <variable
-        name="coursePackageViewModel"
-        type="com.ulearning.ulearning_app.presentation.features.home.viewModel.CoursePackageViewModel" />
-</data>
+        <variable
+            name="coursePackageViewModel"
+            type="com.ulearning.ulearning_app.presentation.features.home.viewModel.CoursePackageViewModel" />
+    </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -94,12 +94,35 @@ tools:context=".presentation.features.home.view.CoursePackageActivity">
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimen15"
-                    android:text="Curso de computación"
+                    tools:text="Curso de computación"
                     android:textAppearance="@style/readex_20_regular"
-                    app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
+                    app:layout_constraintEnd_toStartOf="@+id/progressBar"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/progressBar"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:max="100"
+                    android:progress="0"
+                    app:trackColor="@color/green"
+                    app:indicatorColor="@color/blue"
+                    app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
+                    app:layout_constraintTop_toTopOf="@+id/titleText" />
+
+                <TextView
+                    android:id="@+id/percentageText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    tools:text="0 %"
+                    android:textAppearance="@style/readex_10_regular"
+                    app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                    app:layout_constraintEnd_toEndOf="@+id/progressBar"
+                    app:layout_constraintStart_toStartOf="@+id/progressBar"
+                    app:layout_constraintTop_toTopOf="@+id/progressBar" />
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -138,8 +161,6 @@ tools:context=".presentation.features.home.view.CoursePackageActivity">
                         app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

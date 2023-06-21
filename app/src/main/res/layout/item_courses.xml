@@ -8,24 +8,6 @@
     android:layout_marginBottom="@dimen/dimen10"
     tools:ignore="RtlSymmetry">
 
-    <TextView
-        android:visibility="gone"
-        tools:visibility="visible"
-        android:id="@+id/requiredText"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/dimen10"
-        android:layout_marginEnd="@dimen/dimen10"
-        android:background="@drawable/bg_rounded_blue"
-        android:elevation="@dimen/dimen25"
-        android:gravity="center"
-        android:paddingHorizontal="@dimen/dimen6"
-        android:text="Requerido"
-        android:textAppearance="@style/readex_10_regular"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView5"
         style="?attr/materialCardViewElevatedStyle"
@@ -54,6 +36,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:id="@+id/requiredText"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/dimen10"
+                android:layout_marginEnd="@dimen/dimen10"
+                android:background="@drawable/bg_rounded_blue"
+                android:elevation="@dimen/dimen25"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/dimen6"
+                android:text="Requerido"
+                android:textAppearance="@style/readex_10_regular"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/progressSnackBar"
                 android:layout_width="match_parent"
@@ -72,18 +72,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dimen10"
-                android:layout_marginTop="@dimen/dimen40"
-                android:layout_marginBottom="@dimen/dimen10"
-                android:text="MiniCursos"
-                android:textAppearance="@style/readex_12_regular"
-                android:textColor="@color/blue"
-                android:maxLines="3"
                 android:ellipsize="end"
+                android:maxLines="3"
+                android:text="MiniCursos"
+                android:textAppearance="@style/readex_12_medium"
+                android:textColor="@color/blue"
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/requiredText" />
 
             <TextView
                 android:id="@+id/titleText"

@@ -20,9 +20,12 @@ object CoursePackageReducer {
             is CoursePackageState.Loading -> viewState.loading()
 
             is CoursePackageState.CoursePackageData -> {
-                viewState.getCoursePackage(course = state.course)
+                viewState.getCoursePackage(course = state.course!!, percentages = state.percentages)
             }
-            else -> { Log.d("TagItems", "ListCoursesPackage CoursePackageReducer") }
+
+            else -> {
+                Log.d("TagItems", "ListCoursesPackage CoursePackageReducer")
+            }
         }
     }
 
