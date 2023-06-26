@@ -45,14 +45,32 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/courseRecycler"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="@dimen/dimen8"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="@+id/guideline28"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
             app:layout_constraintTop_toBottomOf="@+id/topBarInclude"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/item_courses" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progressBar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:max="100"
+            android:foregroundGravity="bottom"
+            android:layout_marginBottom="10dp"
+            android:progress="0"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/guideline28"
+            app:layout_constraintStart_toStartOf="@+id/guideline27"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1"
+            app:trackColor="@color/blue"
+            tools:visibility="visible" />
 
         <include
             android:id="@+id/skeletonInclude"

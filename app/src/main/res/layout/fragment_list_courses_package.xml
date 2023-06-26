@@ -20,7 +20,7 @@ tools:context=".presentation.features.home.view.ListCoursesPackageFragment">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/courseRecycler"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="@dimen/dimen8"
         android:layout_marginHorizontal="@dimen/dimen5"
         android:orientation="vertical"
@@ -28,6 +28,7 @@ tools:context=".presentation.features.home.view.ListCoursesPackageFragment">
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_courses" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

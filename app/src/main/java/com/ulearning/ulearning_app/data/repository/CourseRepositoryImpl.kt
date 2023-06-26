@@ -60,7 +60,7 @@ class CourseRepositoryImpl
         return when (
             val response = service.subscriptions(
                 token = "${SettingRemote.BEARER} ${dataStore.token()}",
-                perPage = 30,
+                perPage = 5,
                 page = page,
                 isFinished = isFinished
             )

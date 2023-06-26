@@ -3,6 +3,7 @@ package com.ulearning.ulearning_app.presentation.features.home.view
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -39,6 +40,15 @@ class CourseProgressActivity :
 
     private lateinit var courseRecycler: RecyclerView
 
+    lateinit var mLayoutManager: LinearLayoutManager
+
+    lateinit var mAdapter : CourseSubscriptionAdapter
+
+    private var totalItemCount = 0
+    private var visibleItemCount = 0
+    private var pastVisibleItems = 0
+    private var loading = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -50,7 +60,8 @@ class CourseProgressActivity :
 
         courseRecycler = binding.courseRecycler
 
-        courseRecycler.layoutManager = LinearLayoutManager(this@CourseProgressActivity)
+        mLayoutManager = LinearLayoutManager(this@CourseProgressActivity)
+        courseRecycler.layoutManager = mLayoutManager
 
         binding.noDataInclude.root.visibility = View.GONE
         binding.courseRecycler.visibility = View.INVISIBLE
@@ -95,22 +106,50 @@ class CourseProgressActivity :
             binding.noDataInclude.root.visibility = View.VISIBLE
         } else {
             binding.noDataInclude.root.visibility = View.GONE
-            courseRecycler.adapter =
-                CourseSubscriptionAdapter(courses = courses, percentages = percentages) { model ->
-                    onItemSelected(model)
-                }
             binding.courseRecycler.visibility = View.VISIBLE
+
+            mAdapter = CourseSubscriptionAdapter(courses = courses, percentages = percentages) { model ->
+                onItemSelected(model)
+            }
+            courseRecycler.adapter = mAdapter
+
+            // workDayList.addAll(it.results)
+
+            setupPagination()
         }
+    }
+
+    private fun setupPagination() {
+        binding.courseRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy > 0) {
+                    visibleItemCount = mLayoutManager.childCount
+                    totalItemCount  = mLayoutManager.itemCount
+                    pastVisibleItems = mLayoutManager.findFirstVisibleItemPosition()
+
+                    if(loading){
+                        if(visibleItemCount + pastVisibleItems >= totalItemCount){
+                            loading = false
+                            Toast.makeText(this@CourseProgressActivity,
+                            "This is the last item",
+                            Toast.LENGTH_LONG).show()
+
+                            mAdapter!!.notifyDataSetChanged()
+                            loading = true
+                        }
+                    }
+                }
+            }
+        })
     }
 
     private fun onItemSelected(model: Subscription) {
 
-        startActivity(
-            Intent(this, DetailCourseActivity::class.java).apply {
-                putExtra(Config.COURSE_PUT, model.course)
-                putExtra(Config.SUBSCRIPTION_PUT, model)
-                putExtra(Config.ROLE, viewModel.typeRole)
-            }
-        )
+        startActivity(Intent(this, DetailCourseActivity::class.java).apply {
+            putExtra(Config.COURSE_PUT, model.course)
+            putExtra(Config.SUBSCRIPTION_PUT, model)
+            putExtra(Config.ROLE, viewModel.typeRole)
+        })
     }
 }

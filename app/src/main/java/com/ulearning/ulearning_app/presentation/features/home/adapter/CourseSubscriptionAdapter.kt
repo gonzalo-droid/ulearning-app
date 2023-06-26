@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.home.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,8 @@ class CourseSubscriptionAdapter constructor(
     private val onClickListener: (Subscription) -> Unit
 ) : RecyclerView.Adapter<CourseSubscriptionAdapter.CustomViewHolder>() {
 
+    private var coursesList: List<Subscription> = arrayListOf()
+    private val percentagesList: List<CoursePercentage> = arrayListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         return CustomViewHolder(
             LayoutInflater.from(parent.context)
@@ -27,6 +30,13 @@ class CourseSubscriptionAdapter constructor(
     }
 
     override fun getItemCount(): Int = courses.size
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(list: ArrayList<Subscription>, oldCount: Int, tvShowListSize: Int) {
+        this.coursesList = list
+        notifyDataSetChanged()
+        notifyItemRangeInserted(oldCount, tvShowListSize)
+    }
 
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
 
