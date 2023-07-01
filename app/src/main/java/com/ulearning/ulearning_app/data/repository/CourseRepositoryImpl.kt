@@ -18,7 +18,7 @@ class CourseRepositoryImpl
     private val mapper: CourseMapper,
     private val dataStore: DataStoreConfig,
 ) : CourseRepository {
-    override suspend fun getLearningPackage(learningPackageId: Int): Either<Failure, CoursePackage> {
+    override suspend fun getLearningPackage(learningPackageId: Int): Either<Failure, Subscription> {
         return when (
             val response = service.learningPackage(
                 token = "${SettingRemote.BEARER} ${dataStore.token()}",
@@ -26,7 +26,7 @@ class CourseRepositoryImpl
             )
         ) {
             is Either.Right -> {
-                Either.Right(mapper.coursePackageToDomain(response.b))
+                Either.Right(mapper.subscriptionToDomain(response.b))
             }
 
             is Either.Left -> Either.Left(response.a)
@@ -46,7 +46,7 @@ class CourseRepositoryImpl
             )
         ) {
             is Either.Right -> {
-                Either.Right(mapper.listSubscriptionToDomain(response.b))
+                Either.Right(mapper.listSubscriptionsToDomain(response.b))
             }
 
             is Either.Left -> Either.Left(response.a)
@@ -66,7 +66,7 @@ class CourseRepositoryImpl
             )
         ) {
             is Either.Right -> {
-                Either.Right(mapper.listSubscriptionToDomain(response.b))
+                Either.Right(mapper.listSubscriptionsToDomain(response.b))
             }
 
             is Either.Left -> Either.Left(response.a)

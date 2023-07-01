@@ -25,9 +25,12 @@ data class SubscriptionResponse(
     @SerializedName("status") var status: String? = "",
     @SerializedName("suspended_at") var suspendedAt: Any? = null,
     @SerializedName("suspended_by") var suspendedBy: Any? = null,
+    @SerializedName("suspended_reason") val suspendedReason: Any?,
     @SerializedName("time_session") var timeSession: Int? = 0,
     @SerializedName("type") var type: String? = "",
     @SerializedName("user") var userResponse: UserResponse? = null,
     @SerializedName("user_id") var userId: Int? = 0,
-    @SerializedName("learning_package") val learningPackage: LearningPackageResponse?,
+    @SerializedName("classification") val classification: String?,
+    @SerializedName("learning_package") val learningPackage: LearningPackageResponse? = null,
+    @SerializedName("learning_package_id") val learningPackageId: Int? = null,
 )

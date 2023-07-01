@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.home.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
@@ -15,9 +16,12 @@ import com.ulearning.ulearning_app.core.extensions.putInt
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
 import com.ulearning.ulearning_app.databinding.ActivityCoursePackageBinding
-import com.ulearning.ulearning_app.domain.model.CoursePackage
+import com.ulearning.ulearning_app.domain.model.CoursePercentage
 import com.ulearning.ulearning_app.domain.model.LearningPackage
+import com.ulearning.ulearning_app.domain.model.LearningPackageItem
+import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.BaseActivityWithViewModel
+import com.ulearning.ulearning_app.presentation.features.courseDetail.DetailCourseActivity
 import com.ulearning.ulearning_app.presentation.features.home.adapter.CoursePackageViewPagerAdapter
 import com.ulearning.ulearning_app.presentation.features.home.event.CoursePackageEvent
 import com.ulearning.ulearning_app.presentation.features.home.reducer.CoursePackageReducer
@@ -93,8 +97,12 @@ class CoursePackageActivity :
         showLoadingDialog()
     }
 
-    override fun getCoursePackage(course: CoursePackage) {
+    override fun getCoursePackage(course: Subscription, percentages: List<CoursePercentage>?) {
         closeLoadingDialog()
+
+        viewModel.setCoursePackage(course)
+        viewModel.setPercentages(percentages)
+
         with(binding) {
 
             if (!course.learningPackage?.mainImage?.originalUrl.isNullOrEmpty()) {
@@ -108,20 +116,56 @@ class CoursePackageActivity :
                 imageCourseIv.setImageResource(R.drawable.course_test)
             }
 
-            toolbarLayout.title = course.learningPackage?.title
+            toolbarLayout.title = " "
             titleText.text = course.learningPackage?.title
 
             viewModel.setSharedData(course.learningPackage?.items!!)
 
-            initTabLayout(course.learningPackage)
+            initTabLayout(course.learningPackage!!, percentages?.let { ArrayList(it) })
+
+            calculatePercentage(viewModel.getPercentages())
         }
     }
 
-    private fun initTabLayout(learningPackage: LearningPackage) {
+    private fun calculatePercentage(percentages: List<CoursePercentage>?) {
+        val total = 100.0
+        var resultText = "0"
+        var resultNumber = 0.0
+        percentages?.let {
+            if (it.isNotEmpty()) {
+                val item = total / percentages.size
+                var result = 0.0
+                it.forEach { value ->
+                    result += (item.times(value.toString().toDouble())) / 100
+                }
+                resultNumber = result
+                resultText = result.toString()
+            }
+        }
+
+        binding.percentageText.text = "$resultText %"
+        binding.progressBar.progress = resultNumber.toInt()
+    }
+
+    fun goToDetailCourse(model: LearningPackageItem) {
+
+        if (viewModel.getCoursePackage() != null) {
+            startActivity(Intent(this, DetailCourseActivity::class.java).apply {
+                putExtra(Config.COURSE_PUT, model.course)
+                putExtra(Config.SUBSCRIPTION_PUT, viewModel.getCoursePackage())
+            })
+        }
+    }
+
+    private fun initTabLayout(
+        learningPackage: LearningPackage,
+        percentages: ArrayList<CoursePercentage>?,
+    ) {
         binding.viewPager.apply {
             (getChildAt(0) as RecyclerView).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-            adapter =
-                CoursePackageViewPagerAdapter(supportFragmentManager, lifecycle, learningPackage)
+            adapter = CoursePackageViewPagerAdapter(
+                supportFragmentManager, lifecycle, learningPackage, percentages
+            )
         }
 
         TabLayoutMediator(

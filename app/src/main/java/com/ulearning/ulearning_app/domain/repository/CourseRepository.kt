@@ -8,7 +8,7 @@ interface CourseRepository {
 
     suspend fun getLearningPackage(
         learningPackageId: Int,
-    ): Either<Failure, CoursePackage>
+    ): Either<Failure, Subscription>
     suspend fun getSubscriptionsPackage(
         page: Int,
         type: String,

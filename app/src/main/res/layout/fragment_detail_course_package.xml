@@ -32,32 +32,19 @@ tools:context=".presentation.features.home.view.DetailCoursesPackageFragment">
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.06" />
 
-
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen15"
-        android:text="Curso de computación"
-        android:textAppearance="@style/readex_20_regular"
-        app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/shortDescriptionTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:layout_marginTop="@dimen/dimen10"
+        android:layout_marginTop="@dimen/dimen15"
         android:gravity="left"
         android:text="aaaaa aaaaa aaaaa aaaaa aaaaa"
-        android:textAppearance="@style/readex_12_light"
+        android:textAppearance="@style/readex_14_light"
         app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/leftGuideLine"
-        app:layout_constraintTop_toBottomOf="@+id/titleText" />
+        app:layout_constraintTop_toTopOf="parent"  />
 
 
     <TextView
@@ -68,7 +55,7 @@ tools:context=".presentation.features.home.view.DetailCoursesPackageFragment">
         android:layout_marginTop="@dimen/dimen10"
         android:gravity="left"
         android:text="aaaaa aaaaa aaaaa aaaaa aaaaa"
-        android:textAppearance="@style/readex_12_light"
+        android:textAppearance="@style/readex_14_light"
         app:layout_constraintEnd_toEndOf="@+id/rightGuideLine"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/leftGuideLine"

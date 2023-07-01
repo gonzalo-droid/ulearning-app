@@ -19,7 +19,7 @@ class CourseServiceImpl
     override suspend fun learningPackage(
         token: String,
         learningPackageId: Int,
-    ): Either<Failure, CoursePackageResponse> {
+    ): Either<Failure, SubscriptionResponse> {
         return networkHandler.callServiceBase {
             courseApi.learningPackage(
                 token,

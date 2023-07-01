@@ -6,37 +6,90 @@ import javax.inject.Singleton
 
 @Singleton
 class CourseMapperImpl : CourseMapper {
-    override suspend fun coursePackageToDomain(data: CoursePackageResponse): CoursePackage {
+    private suspend fun listCoursePackageItemToDomain(data: List<LearningPackageItemResponse>): List<LearningPackageItem> {
+        return data.map {
+            LearningPackageItem(
+                course = it.course?.let { course -> courseToDomain(course) },
+                courseId = it.courseId,
+                id = it.id,
+                isRequired = it.isRequired,
+                learningPackageId = it.learningPackageId
+            )
+        }
+    }
+
+    override suspend fun subscriptionToDomain(data: SubscriptionResponse): Subscription {
         return data.let {
-            CoursePackage(
-                amount = null,
-                classification = it.classification,
-                course = null,
-                courseId = null,
-                createdAt = null,
-                deletedAt = null,
-                finishedAt = null,
-                group = Group(
-                    courseId = null,
-                    dateStart = null,
-                    dateUntil = null,
-                    id = null,
-                    isSuspended = null,
-                    isUnlimited = null,
-                    membersCount = null,
-                    name = null,
+            Subscription(
+                course = if (it.courseId != null) Course(
+                    category = if (it.course?.category != null) Category(
+                        color = it.course?.category?.color,
+                        description = it.course?.category?.description,
+                        id = it.course?.category?.id,
+                        name = it.course?.category?.name,
+                        type = it.course?.category?.type
+                    ) else null,
+                    categoryId = it.course?.categoryId,
+                    descriptionLarge = it.course?.descriptionLarge,
+                    descriptionShort = it.course?.descriptionShort,
+                    mainImage = if (it.course?.mainImage != null) MainImage(
+                        originalUrl = it.course?.mainImage?.originalUrl,
+                        previewUrl = it.course?.mainImage?.previewUrl,
+                    ) else null,
+                    title = it.course?.title,
+                    id = it.course?.id,
+                    lessonsCount = it.course?.lessonsCount,
+                    modality = it.course?.modality,
+                    asynchronousHour = it.course?.asynchronousHour,
+                    amount = 0,
+                    benefits = null,
+                    certificate = it.course?.certificate,
+                    code = null,
+                    currency = null,
+                    duration = null,
+                    externalId = null,
+                    externalLink = null,
+                    groups = listOf(),
+                    instructions = null,
+                    languageId = null,
+                    methodology = null,
+                    nature = null,
+                    origin = null,
+                    politicsLink = null,
+                    presentationLink = null,
+                    ratingAverage = null,
+                    ratingCount = null,
+                    record = it.course?.record,
+                    selfStudyHour = it.course?.selfStudyHour,
+                    slug = null,
                     studentsCount = null,
-                    teachers = listOf(),
-                    teachersCount = null,
-                    vacancies = null
+                    syllabusLink = it.course?.syllabusLink,
+                    synchronousHour = it.course?.synchronousHour,
+                    target = null,
+                ) else null,
+                user = User(
+                    name = it.userResponse?.name,
                 ),
-                groupId = null,
-                hasCertificate = null,
-                hasDegree = null,
-                hasRecord = null,
-                id = null,
-                isFinished = null,
-                lastConnectionAt = null,
+                courseId = it.courseId,
+                group = if (it.groupId != null) Group(
+                    id = it.group?.id,
+                    name = it.group?.name,
+                    teachers = if (!it.group?.teachers.isNullOrEmpty()) listTeacherToDomain(it.group?.teachers) else arrayListOf(),
+                ) else null,
+                groupId = it.groupId,
+                isFinished = it.isFinished,
+                amount = it.amount,
+                hasCertificate = it.hasCertificate,
+                hasDegree = it.hasDegree,
+                hasRecord = it.hasRecord,
+                id = it.id,
+                purchasedCertificate = it.purchasedCertificate,
+                purchasedRecord = it.purchasedRecord,
+                status = it.status,
+                timeSession = it.timeSession,
+                type = it.status,
+                userId = it.userId,
+                learningPackageId = it.learningPackageId,
                 learningPackage = LearningPackage(
                     amount = null,
                     code = null,
@@ -56,37 +109,11 @@ class CourseMapperImpl : CourseMapper {
                         listCoursePackageItemToDomain(items)
                     },
                 ),
-                learningPackageId = it.learningPackageId,
-                purchasedCertificate = null,
-                purchasedRecord = null,
-                rating = null,
-                registeredAt = null,
-                registeredBy = null,
-                status = null,
-                suspendedAt = null,
-                suspendedBy = null,
-                suspendedReason = null,
-                timeSession = null,
-                type = null,
-                user = null,
-                userId = null
             )
         }
     }
 
-    private suspend fun listCoursePackageItemToDomain(data: List<LearningPackageItemResponse>): List<LearningPackageItem> {
-        return data.map {
-            LearningPackageItem(
-                course = it.course?.let { course -> courseToDomain(course) },
-                courseId = it.courseId,
-                id = it.id,
-                isRequired = it.isRequired,
-                learningPackageId = it.learningPackageId
-            )
-        }
-    }
-
-    override suspend fun listSubscriptionToDomain(data: List<SubscriptionResponse>): List<Subscription> {
+    override suspend fun listSubscriptionsToDomain(data: List<SubscriptionResponse>): List<Subscription> {
         return data.map {
             Subscription(
                 course = if (it.courseId != null) Course(
