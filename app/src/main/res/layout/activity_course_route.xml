@@ -44,13 +44,14 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/courseRecycler"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="@dimen/dimen8"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="@+id/guideline28"
             app:layout_constraintStart_toStartOf="@+id/guideline27"
             app:layout_constraintTop_toBottomOf="@+id/topBarInclude"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/item_route" />
 
         <include
