@@ -229,7 +229,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:maxLines="2"
-                        android:text="Total de sesiones"
+                        android:text="Sesiones"
                         android:textAppearance="@style/readex_12_light"
                         android:textColor="@color/blue"
                         app:layout_constraintEnd_toEndOf="parent"

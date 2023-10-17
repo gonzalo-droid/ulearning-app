@@ -47,12 +47,9 @@ class DetailCourseViewModel
             DetailCourseEvent.GetToken -> getToken()
             DetailCourseEvent.GetRole -> getRole()
             DetailCourseEvent.GetCheckAvailableFiles -> getCheckAvailableFiles()
-
             DetailCourseEvent.GetDownloadCertificate -> downloadCertificatePDF()
             DetailCourseEvent.GetDownloadRecord -> downloadRecordPDF()
-
             DetailCourseEvent.GetMyFiles -> getMyFiles()
-
             DetailCourseEvent.GoToCertificate -> goCertificate()
             DetailCourseEvent.GoToRecord -> goRecord()
         }

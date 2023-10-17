@@ -19,12 +19,12 @@ class ConversationRepositoryImpl
 @Inject constructor(
     private val service: ConversationService,
     private val mapper: ConversationMapper,
-    private val dataStore: DataStoreConfig
+    private val dataStore: DataStoreConfig,
 ) : ConversationRepository {
 
     override suspend fun getConversations(
         page: Int,
-        courseId: Int
+        courseId: Int,
     ): Either<Failure, List<Conversation>> {
         return when (
             val response = service.conversations(
@@ -37,6 +37,7 @@ class ConversationRepositoryImpl
             is Either.Right -> {
                 Either.Right(mapper.conversationsToDomain(response.b))
             }
+
             is Either.Left -> Either.Left(response.a)
         }
     }
@@ -53,6 +54,7 @@ class ConversationRepositoryImpl
             is Either.Right -> {
                 Either.Right(mapper.conversationsToDomain(response.b))
             }
+
             is Either.Left -> Either.Left(response.a)
         }
     }
@@ -67,6 +69,7 @@ class ConversationRepositoryImpl
             is Either.Right -> {
                 Either.Right(mapper.usersToDomain(response.b))
             }
+
             is Either.Left -> Either.Left(response.a)
         }
     }
@@ -81,6 +84,7 @@ class ConversationRepositoryImpl
             is Either.Right -> {
                 Either.Right(mapper.messagesToDomain(response.b))
             }
+
             is Either.Left -> Either.Left(response.a)
         }
     }
@@ -89,7 +93,7 @@ class ConversationRepositoryImpl
         uuid: String,
         content: String,
         userIds: ArrayList<String>,
-        toSupport: Boolean
+        toSupport: Boolean,
     ): Either<Failure, Message> {
         return when (
             val response = service.sendMessage(
@@ -105,6 +109,7 @@ class ConversationRepositoryImpl
             is Either.Right -> {
                 Either.Right(mapper.messageToDomain(response.b))
             }
+
             is Either.Left -> Either.Left(response.a)
         }
     }
@@ -112,7 +117,7 @@ class ConversationRepositoryImpl
     override suspend fun sendConversation(
         content: String,
         courseId: Int,
-        userIds: ArrayList<Int>
+        userIds: ArrayList<Int>,
     ): Either<Failure, Conversation> {
         return when (
             val response = service.sendConversation(
@@ -127,6 +132,7 @@ class ConversationRepositoryImpl
             is Either.Right -> {
                 Either.Right(mapper.conversationToDomain(response.b))
             }
+
             is Either.Left -> Either.Left(response.a)
         }
     }
@@ -134,7 +140,7 @@ class ConversationRepositoryImpl
     override suspend fun sendConversationSupport(
         content: String,
         toSupport: Boolean,
-        userIds: ArrayList<Int>
+        userIds: ArrayList<Int>,
     ): Either<Failure, Conversation> {
         return when (
             val response = service.sendConversationSupport(
@@ -149,6 +155,7 @@ class ConversationRepositoryImpl
             is Either.Right -> {
                 Either.Right(mapper.conversationToDomain(response.b))
             }
+
             is Either.Left -> Either.Left(response.a)
         }
     }
@@ -165,6 +172,7 @@ class ConversationRepositoryImpl
             is Either.Right -> {
                 Either.Right(mapper.usersToDomain(response.b))
             }
+
             is Either.Left -> Either.Left(response.a)
         }
     }
@@ -180,6 +188,7 @@ class ConversationRepositoryImpl
             is Either.Right -> {
                 Either.Right(mapper.usersToDomain(response.b))
             }
+
             is Either.Left -> Either.Left(response.a)
         }
     }
