@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.request.RequestOptions
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.databinding.ItemCoursesBinding
 import com.ulearning.ulearning_app.domain.model.CoursePercentage
 import com.ulearning.ulearning_app.domain.model.Subscription
+import com.ulearning.ulearning_app.presentation.utils.imageLoader.ImageLoaderGlide
 
 class CourseSubscriptionAdapter constructor(
     private val courses: List<Subscription>,
@@ -36,6 +38,16 @@ class CourseSubscriptionAdapter constructor(
 
             binding.progressSnackBar.visibility = if (model.isFinished!!) View.INVISIBLE else View.VISIBLE
             binding.percentageText.visibility = if (model.isFinished!!) View.INVISIBLE else View.VISIBLE
+
+            model.course?.mainImage?.originalUrl?.let {
+                ImageLoaderGlide().loadImage(
+                    imageView = binding.imageIv,
+                    imagePath = it,
+                    requestOptions = RequestOptions.centerCropTransform(),
+                    placeHolder = R.drawable.course_test
+                )
+            }
+
 
             var coursePercentage: CoursePercentage? = null
             var valueString = "0"
