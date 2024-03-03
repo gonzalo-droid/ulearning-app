@@ -2,15 +2,15 @@ package com.ulearning.ulearning_app.data.dataStore.config
 
 import android.content.Context
 import androidx.datastore.core.DataStore
+import com.ulearning.ulearning_app.UserPreference
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-import pe.com.pex.UserPreference
 import javax.inject.Inject
 
 class DataStoreConfig @Inject constructor(
-        private val context: Context,
-        private val dataStore: DataStore<UserPreference>
-    ){
+    private val context: Context,
+    private val dataStore: DataStore<UserPreference>
+) {
 
     suspend fun saveToken(token: String) {
 
@@ -28,11 +28,27 @@ class DataStoreConfig @Inject constructor(
         }
     }
 
+    suspend fun saveRole(role: String) {
 
+        dataStore.updateData { update ->
 
+            update.toBuilder().setRole(role).build()
+        }
+    }
+
+    suspend fun saveId(id: Int) {
+
+        dataStore.updateData { update ->
+
+            update.toBuilder().setId(id).build()
+        }
+    }
 
     fun token(): String = runBlocking { dataStore.data.first().token }
 
     fun userName(): String = runBlocking { dataStore.data.first().username }
 
+    fun role(): String = runBlocking { dataStore.data.first().role }
+
+    fun id(): Int = runBlocking { dataStore.data.first().id }
 }

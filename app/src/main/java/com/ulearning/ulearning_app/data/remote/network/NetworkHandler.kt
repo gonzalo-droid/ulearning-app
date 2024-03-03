@@ -14,13 +14,6 @@ import javax.inject.Singleton
 import javax.net.ssl.SSLException
 import javax.net.ssl.SSLHandshakeException
 
-/**
- * Network handler
- *
- * @property networkUtils
- * @constructor Create empty Network handler
- */
-
 @Singleton
 class NetworkHandler
 @Inject constructor(val networkUtils: ConnectionUtils) {
@@ -41,9 +34,11 @@ class NetworkHandler
                             response.body()?.let {
                                 return@withContext Either.Right(it)
                             } ?: return@withContext Either.Left(
-                                getErrorMessageFromServer(response.code(), response.errorBody()?.string())
+                                getErrorMessageFromServer(
+                                    response.code(),
+                                    response.errorBody()?.string()
+                                )
                             )
-
                         } else return@withContext Either.Left(
                             getErrorMessageFromServer(
                                 response.code(), response.errorBody()?.string()
@@ -69,11 +64,7 @@ class NetworkHandler
                     withContext(Dispatchers.IO) {
                         val response = retrofitCall.invoke()
                         if (response.isSuccessful && response.body() != null) {
-                            if(response.body()!!.success){
-                                return@withContext Either.Right(response.body()!!.data)
-                            }else{
-                                return@withContext Either.Left(Failure.DefaultError(message = response.body()!!.message))
-                            }
+                            return@withContext Either.Right(response.body()!!.data)
                         } else {
                             return@withContext Either.Left(
                                 getErrorMessageFromServer(
@@ -90,6 +81,31 @@ class NetworkHandler
         }
     }
 
+    suspend inline fun <T> callServiceBaseList(
+        crossinline retrofitCall: suspend () -> Response<BaseResponse<List<T>>>
+    ): Either<Failure, List<T>> {
+        return when (networkUtils.isNetworkAvailable()) {
+            true -> {
+                try {
+                    withContext(Dispatchers.IO) {
+                        val response = retrofitCall.invoke()
+                        if (response.isSuccessful && response.body() != null) {
+                            return@withContext Either.Right(response.body()!!.data)
+                        } else {
+                            return@withContext Either.Left(
+                                getErrorMessageFromServer(
+                                    response.code(), response.errorBody()?.string()
+                                )
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    return Either.Left(parseException(e))
+                }
+            }
+            false -> Either.Left(Failure.NoNetworkDetected)
+        }
+    }
 
     /**
      * Parse Server Error to [Failure.ServerBodyError] if [errorBody] [isServerErrorValid].
@@ -135,7 +151,7 @@ class NetworkHandler
     }
 
     companion object {
-        private const val KEY_CODE = "status" //code
+        private const val KEY_CODE = "status" // code
         private const val KEY_MESSAGE = "message"
     }
 }

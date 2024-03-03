@@ -1,0 +1,55 @@
+package com.ulearning.ulearning_app.presentation.features.search
+
+import com.ulearning.ulearning_app.core.functional.Failure
+import com.ulearning.ulearning_app.domain.model.User
+import com.ulearning.ulearning_app.domain.useCase.conversation.GetUserByCourseUseCase
+import com.ulearning.ulearning_app.presentation.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+
+@HiltViewModel
+class SearchViewModel
+@Inject constructor(
+    private val getUserByCourseUseCase: GetUserByCourseUseCase,
+) : BaseViewModel<SearchEvent, SearchState, SearchEffect>() {
+
+    var courseId: Int = 1
+
+    var search: String = ""
+
+    lateinit var listUser: List<User>
+
+    lateinit var user: User
+
+    override fun createInitialState(): SearchState {
+        return SearchState.Idle
+    }
+
+    override fun handleEvent(event: SearchEvent) {
+        when (event) {
+            SearchEvent.GetUsersClick -> searchUser(search)
+            else -> {}
+        }
+    }
+
+    private fun searchUser(search: String) {
+        setState { SearchState.Loading }
+        getUserByCourseUseCase(
+            GetUserByCourseUseCase.Params(name = search, courseId = courseId)
+        ) {
+            it.either(::handleFailure, ::handleUser)
+        }
+    }
+
+    private fun handleUser(users: List<User>) {
+        setState { SearchState.UserList(users = users) }
+    }
+
+    private fun handleFailure(failure: Failure) {
+        setEffect { SearchEffect.ShowMessageFailure(failure = failure) }
+    }
+
+    companion object Events {
+        val sendConversationClick = SearchEvent.SendConversationClick
+    }
+}

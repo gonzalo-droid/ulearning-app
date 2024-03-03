@@ -1,10 +1,8 @@
 package com.ulearning.ulearning_app.data.dataStore
 
-
 import androidx.datastore.core.Serializer
 import androidx.datastore.preferences.protobuf.InvalidProtocolBufferException
-import pe.com.pex.UserPreference
-
+import com.ulearning.ulearning_app.UserPreference
 import java.io.InputStream
 import java.io.OutputStream
 

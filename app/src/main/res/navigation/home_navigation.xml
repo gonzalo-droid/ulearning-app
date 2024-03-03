@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation"
+    app:startDestination="@id/navigation_home">
+
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.ulearning.ulearning_app.presentation.features.home.view.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/action_navigation_home_to_courseCompletedActivity"
+            app:destination="@id/courseCompletedActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_courseProgressActivity"
+            app:destination="@id/courseProgressActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_detailCourseActivity"
+            app:destination="@id/detailCourseActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_courseRouteActivity"
+            app:destination="@id/courseRouteActivity" />
+        <action
+            android:id="@+id/action_navigation_home_to_coursePacksActivity"
+            app:destination="@id/coursePacksActivity" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.ulearning.ulearning_app.presentation.features.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_scanQrActivity"
+            app:destination="@id/scanQrActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/detailCourseActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.courseDetail.DetailCourseActivity"
+        android:label="activity_detail_course"
+        tools:layout="@layout/activity_detail_course">
+
+    </activity>
+
+    <activity
+        android:id="@+id/conversationActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.conversation.ConversationActivity"
+        android:label="activity_conversation"
+        tools:layout="@layout/activity_conversation" />
+    <fragment
+        android:id="@+id/navigation_support"
+        android:name="com.ulearning.ulearning_app.presentation.features.support.SupportFragment"
+        android:label="fragment_support"
+        tools:layout="@layout/fragment_support">
+        <action
+            android:id="@+id/action_navigation_support_to_messageActivity"
+            app:destination="@id/messageActivity" />
+        <action
+            android:id="@+id/action_navigation_support_to_addConversationActivity"
+            app:destination="@id/addConversationActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/messageActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.message.MessageActivity"
+        android:label="activity_message"
+        tools:layout="@layout/activity_message" />
+    <activity
+        android:id="@+id/addConversationActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.addConversation.AddConversationActivity"
+        android:label="AddConversationActivity" />
+    <activity
+        android:id="@+id/scanQrActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.scanQr.ScanQrActivity"
+        android:label="activity_scan_qr"
+        tools:layout="@layout/activity_scan_qr" />
+    <activity
+        android:id="@+id/courseCompletedActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.home.view.CourseCompletedActivity"
+        android:label="activity_course_completed"
+        tools:layout="@layout/activity_course_completed" />
+    <activity
+        android:id="@+id/courseProgressActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.home.view.CourseProgressActivity"
+        android:label="activity_course_progress"
+        tools:layout="@layout/activity_course_progress" />
+    <activity
+        android:id="@+id/courseRouteActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.home.view.CourseRouteActivity"
+        android:label="activity_course_route"
+        tools:layout="@layout/activity_course_route" />
+    <activity
+        android:id="@+id/coursePacksActivity"
+        android:name="com.ulearning.ulearning_app.presentation.features.home.view.CoursePackActivity"
+        android:label="activity_course_packs"
+        tools:layout="@layout/activity_course_packs" />
+    <fragment
+        android:id="@+id/listCoursesPackageFragment"
+        android:name="com.ulearning.ulearning_app.presentation.features.home.view.ListCoursesPackageFragment"
+        android:label="fragment_list_courses_package"
+        tools:layout="@layout/fragment_list_courses_package" >
+        <action
+            android:id="@+id/action_listCoursesPackageFragment_to_detailCourseActivity"
+            app:destination="@id/detailCourseActivity" />
+    </fragment>
+</navigation>

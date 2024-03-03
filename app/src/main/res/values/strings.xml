@@ -1,5 +1,157 @@
 <resources>
+
+
+    <!--
+    How to sigIn with facebook
+    https://developers.facebook.com/docs/facebook-login/android
+    -->
+    <string name="facebook_app_id">743887196605416</string>
+    <string name="fb_login_protocol_scheme">fb743887196605416</string>
+    <string name="facebook_client_token">5bdc9a20f0126221a8d9598c3d2c2c52</string>
+
     <string name="app_name">ulearning_app</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="label_loading">Cargando…</string>
+    <string name="email">email</string>
+    <string name="password">contraseña</string>
+
+    <string name="error_user_message">Error, inténtelo nuevamente</string>
+
+    <string name="error_credentials">Credenciales incorrectas</string>
+
+    <string name="error_no_internet">Sin conexión a internet</string>
+
+    <string name="error_server">Error en el servidor</string>
+
+    <string name="fail">fail</string>
+    <string name="success">success</string>
+
+    <string name="email_fail">Email incorrecto</string>
+    <string name="password_fail">Contraseña incorrecto</string>
+    <string name="data_success">Información correcta</string>
+    <string name="login_fail">Credenciales incorrectas</string>
+
+    <string name="failure_message">Debe ingresar un mensaje</string>
+
+    <string name="firebase_token_message">Hubo problemas para conectarse con el servicio de notificaciones</string>
+    <string name="home_title">Inicio</string>
+    <string name="course_title">Cursos</string>
+    <string name="profile_title">Perfil</string>
+    <string name="support_title">Soporte</string>
+
+    <string name="continue_learning">Continua aprendiendo</string>
+    <string name="see_more">ver más</string>
+    <string name="my_courses">Mis cursos</string>
+
+    <string name="home_welcome_msg">Hola,</string>
+
+    <string name="name">nombre</string>
+    <string name="last_name">apellidos</string>
+    <string name="last_name_father">apellido paterno</string>
+    <string name="last_name_mother">apellido materno</string>
+    <string name="phone">celular</string>
+    <string name="date_of_birthday">fecha de nacimiento</string>
+    <string name="plan">plan</string>
+
+    <string name="dni">DNI</string>
+
+    <string name="number_document">Número de documento</string>
+
+    <string name="document_type">Tipo de documento</string>
+
+    <string name="logout">Cerrar sesión</string>
+    <string name="title_activity_detail_course">DetailCourseActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    </string>
+    <string name="log_in">Ingresar</string>
+
+    <string name="notification_channel_id">ulearning_notification</string>
+
+
+    <string name="notification_channel_description">Ulearning messages</string>
+    <string name="my_payments">Mis pagos</string>
+    <string name="message_title">Mensajería</string>
+    <string name="topic_title">Temario</string>
+    <string name="teachers">Nuestros docentes</string>
+    <string name="new_message">Nuevo mensaje</string>
+    <string name="message_input">Mensaje</string>
+    <string name="search_user_input">Buscar usuario</string>
+    <string name="search_title">Buscar</string>
+    <string name="new_chat">Nueva conversación</string>
+    <string name="search_input">Buscar...</string>
+    <string name="send">Enviar</string>
+    <string name="for_send">Para:</string>
+    <string name="to_support">Soporte de plataforma</string>
+    <string name="continue_btn">Continuar</string>
+    <string name="enter_message_text">Ingrese un mensaje</string>
+
+    <string name="allow_response">Admite respuestas</string>
+    <string name="not_allow_response">No admite respuestas</string>
+
+    <string name="not_see_all_messages">Solo puede ver los mensajes del autor</string>
+    <string name="see_all_messages">Puede ver todos los mensajes de los participantes</string>
+
+    <string name="reception_all">Mensaje para TODOS los integrantes DEL CURSO</string>
+    <string name="reception_one">Mensaje individual</string>
+
+    <string name="send_now_message">Enviar ahora</string>
+    <string name="schedule_message">Programar</string>
+    <string name="platform_message">Mensajería a plataforma</string>
+
+    <string name="course_progress">En progreso</string>
+    <string name="course_complete">Completados</string>
+    <string name="course_route">Rutas de aprendizaje</string>
+    <string name="course_pack">Packs de cursos</string>
+
+    <string name="message_empty_course_completed">Aún no completas tus cursos.</string>
+    <string name="message_empty_course_progress">Aún no incias tus cursos</string>
+    <string name="message_empty_course_route">Aún no inicias tus rutas de aprendizaje</string>
+    <string name="message_empty_course_pack">Aún no inicias tus packs de cursos</string>
+
+    <string name="no_data">Sin resultados encontrados</string>
+
+    <string name="course_percentage_value">%1$s </string>
+    <string name="hour_learn_title">Horas de \naprendizaje</string>
+
+    <string name="download_cert">Descargar certificado</string>
+    <string name="buy_cert">Comprar certificado</string>
+
+    <string name="buy_record">Comprar certificado</string>
+    <string name="download_record">Descargar constancia</string>
+
+    <string name="error_download_pdf">Ocurrió un error en la descarga, por favor intentelo más tarde</string>
+    <string name="number_certificate">N° de certificado *</string>
+    <string name="validate">Validar</string>
+    <string name="code_cert">Código de verificación para descarga</string>
+    <string name="item_number_cert">N° de certificado digital: %1$s</string>
+    <string name="item_name">Participante: %1$s</string>
+    <string name="item_hour">Horas de aprendizaje: %1$s</string>
+    <string name="item_score">Puntaje: %1$s</string>
+    <string name="subTile_card_course">Completaste el curso de %1$s</string>
+    <string name="title_download_cert">Descargue su certificado</string>
+    <string name="number_cert_error">N° de certificado es obligatorio</string>
+
+
+    <string name="support_platform">Soporte plataforma</string>
+
+    <string name="error_sign_in_google">Error al ingresar con Google, por favor intentelo nuevamente</string>
+    <string name="error_sign_in_facebook">Error al ingresar con Facebook, por favor intentelo nuevamente</string>
+    <string name="keep_learning_progress">Sigue estudiando</string>
+    <string name="completed_subtitle">Revisa tus certificados</string>
+    <string name="course_pack_title">Paquetes de cursos</string>
+    <string name="course_pack_subtitle">Cursos asociados</string>
+    <string name="course_route_title">Rutas de aprendizaje</string>
+    <string name="course_route_subtitle">Sigue la ruta de estudio</string>
+    <string name="title_activity_course_completed">CourseCompletedActivity</string>
+
+
 </resources>
