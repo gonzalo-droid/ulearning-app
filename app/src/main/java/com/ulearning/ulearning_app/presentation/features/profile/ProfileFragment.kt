@@ -18,8 +18,11 @@ import com.ulearning.ulearning_app.databinding.FragmentProfileBinding
 import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
 import com.ulearning.ulearning_app.presentation.features.auth.LoginActivity
+import com.ulearning.ulearning_app.presentation.features.payment.PaymentActivity
+import com.ulearning.ulearning_app.presentation.features.search.SearchActivity
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.io.path.Path
 
 @AndroidEntryPoint
 class ProfileFragment :
@@ -95,14 +98,14 @@ class ProfileFragment :
 
             dateOfBirthdayInputText.editText!!.setText(date)
 
-/*            val imageUri: String? =
-                if (benefits.get(position).imagesUrl.isNotEmpty())
-                    benefits[position].imagesUrl[0] else null
+            /*            val imageUri: String? =
+                            if (benefits.get(position).imagesUrl.isNotEmpty())
+                                benefits[position].imagesUrl[0] else null
 
-            Picasso.with(itemView.context).load(imageUri).fit().centerCrop()
-                .placeholder(R.drawable.benefits_placeholder)
-                .error(R.drawable.benefits_placeholder)
-                .into(binding.imageView)*/
+                        Picasso.with(itemView.context).load(imageUri).fit().centerCrop()
+                            .placeholder(R.drawable.benefits_placeholder)
+                            .error(R.drawable.benefits_placeholder)
+                            .into(binding.imageView)*/
 
             if (data.role.equals(Config.ROLE_TEACHER)) {
                 paymentBtn.visibility = View.GONE
@@ -112,8 +115,12 @@ class ProfileFragment :
 
     override fun goToWebView(url: String) {
 
-        val urlPayment = "$url?return=/payments"
-        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(urlPayment)))
+        // val urlPayment = "$url?return=/payments"
+        //startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(urlPayment)))
+
+        startActivity(Intent(requireActivity(), PaymentActivity::class.java).apply {
+//            putExtra(Config.PARAM_NAME_PUT, paramName)
+        })
     }
 
     override fun logout() {

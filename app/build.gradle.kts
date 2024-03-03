@@ -100,6 +100,7 @@ android {
 
 dependencies {
 
+    implementation("androidx.activity:activity:1.8.0")
     val constraintLyout = "2.1.3"
     val hilt = "2.41"
     val hiltAnotationProcesor = "1.0.0"

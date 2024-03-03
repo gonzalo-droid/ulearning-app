@@ -8,6 +8,7 @@ import com.ulearning.ulearning_app.BuildConfig
 import com.ulearning.ulearning_app.data.remote.api.AuthApi
 import com.ulearning.ulearning_app.data.remote.api.ConversationApi
 import com.ulearning.ulearning_app.data.remote.api.CourseApi
+import com.ulearning.ulearning_app.data.remote.api.ProfileApi
 import com.ulearning.ulearning_app.data.remote.api.TopicApi
 import com.ulearning.ulearning_app.data.remote.network.NetworkHandler
 import com.ulearning.ulearning_app.data.remote.service.*
@@ -71,7 +72,9 @@ object NetworkModule {
             }
             .addInterceptor(authInterceptor)
 
-        if (BuildConfig.DEBUG) { client.addInterceptor(OkHttpProfilerInterceptor()) }
+        if (BuildConfig.DEBUG) {
+            client.addInterceptor(OkHttpProfilerInterceptor())
+        }
 
         return client.build()
     }
@@ -107,6 +110,13 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    fun provideProfileApi(
+        retrofit: Retrofit
+    ): ProfileApi = retrofit.create(ProfileApi::class.java)
+
+    // Services
+    @Provides
+    @Singleton
     fun provideAuthService(
         authApi: AuthApi,
         networkHandler: NetworkHandler
@@ -132,4 +142,11 @@ object NetworkModule {
         authApi: ConversationApi,
         networkHandler: NetworkHandler
     ): ConversationService = ConversationServiceImpl(authApi, networkHandler)
+
+    @Provides
+    @Singleton
+    fun provideProfileService(
+        api: ProfileApi,
+        networkHandler: NetworkHandler
+    ): ProfileService = ProfileServiceImpl(api, networkHandler)
 }

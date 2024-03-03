@@ -5,14 +5,17 @@ import com.ulearning.ulearning_app.data.mapper.*
 import com.ulearning.ulearning_app.data.remote.service.AuthService
 import com.ulearning.ulearning_app.data.remote.service.ConversationService
 import com.ulearning.ulearning_app.data.remote.service.CourseService
+import com.ulearning.ulearning_app.data.remote.service.ProfileService
 import com.ulearning.ulearning_app.data.remote.service.TopicService
 import com.ulearning.ulearning_app.data.repository.AuthRepositoryImpl
 import com.ulearning.ulearning_app.data.repository.ConversationRepositoryImpl
 import com.ulearning.ulearning_app.data.repository.CourseRepositoryImpl
+import com.ulearning.ulearning_app.data.repository.ProfileRepositoryImpl
 import com.ulearning.ulearning_app.data.repository.TopicRepositoryImpl
 import com.ulearning.ulearning_app.domain.repository.AuthRepository
 import com.ulearning.ulearning_app.domain.repository.ConversationRepository
 import com.ulearning.ulearning_app.domain.repository.CourseRepository
+import com.ulearning.ulearning_app.domain.repository.ProfileRepository
 import com.ulearning.ulearning_app.domain.repository.TopicRepository
 import dagger.Module
 import dagger.Provides
@@ -39,6 +42,10 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideConversationMapper(): ConversationMapper = ConversationMapperImpl()
+
+    @Provides
+    @Singleton
+    fun provideProfileMapper(): ProfileMapper = ProfileMapperImpl()
 
     @Provides
     @Singleton
@@ -71,4 +78,12 @@ object RepositoryModule {
         mapper: ConversationMapper,
         dataStore: DataStoreConfig
     ): ConversationRepository = ConversationRepositoryImpl(service, mapper, dataStore)
+
+    @Provides
+    @Singleton
+    fun provideProfileRepository(
+        service: ProfileService,
+        mapper: ProfileMapper,
+        dataStore: DataStoreConfig
+    ): ProfileRepository = ProfileRepositoryImpl(service, mapper, dataStore)
 }

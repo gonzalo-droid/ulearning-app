@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.home.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
@@ -129,8 +130,8 @@ class CoursePackageActivity :
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun calculatePercentage(percentages: List<CoursePercentage>?) {
-        val total = 100.0
         var resultText = "0"
         var resultNumber = 0.0
         percentages?.let {

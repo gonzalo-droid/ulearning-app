@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.profile
 
+import android.util.Log
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
@@ -76,7 +77,11 @@ class ProfileViewModel
     }
 
     private fun handleToken(url: String) {
-        setEffect { ProfileEffect.GoToWebView(url = url) }
+        // TODO() REMOVER AL ENVIAR A PROD
+        Log.d("urlWebView token",url)
+        val sandbox = url.replace("student.ulearning","sandbox.student.ulearning")
+        Log.d("urlWebView sandbox",sandbox)
+        setEffect { ProfileEffect.GoToWebView(url = sandbox) }
     }
 
     companion object Events {

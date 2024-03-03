@@ -114,6 +114,7 @@
 
     <string name="message_empty_course_completed">Aún no completas tus cursos.</string>
     <string name="message_empty_course_progress">Aún no incias tus cursos</string>
+    <string name="message_empty_payments">Aún no cuenta con pagos pendientes</string>
     <string name="message_empty_course_route">Aún no inicias tus rutas de aprendizaje</string>
     <string name="message_empty_course_pack">Aún no inicias tus packs de cursos</string>
 
