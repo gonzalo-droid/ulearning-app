@@ -47,6 +47,7 @@ class AddConversationViewModel
             AddConversationEvent.SendConversationClick -> send()
             AddConversationEvent.GetUsersClick -> getUsers()
             AddConversationEvent.GetRole -> getRole()
+            else -> {}
         }
     }
 

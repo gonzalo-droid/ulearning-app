@@ -24,6 +24,8 @@ object HomeReducer {
             is HomeState.CourseTeacher -> {
                 viewState.getCourseTeacher(courses = state.courses)
             }
+
+            else -> {}
         }
     }
 

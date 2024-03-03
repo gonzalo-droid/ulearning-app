@@ -14,12 +14,14 @@ object SearchReducer {
 
             is SearchState.Loading -> viewState.loading()
             is SearchState.UserList -> viewState.users(state.users)
+            else -> {}
         }
     }
 
     fun selectEffect(effect: SearchEffect) {
         when (effect) {
             is SearchEffect.ShowMessageFailure -> viewState.messageFailure(effect.failure)
+            else -> {}
         }
     }
 }
