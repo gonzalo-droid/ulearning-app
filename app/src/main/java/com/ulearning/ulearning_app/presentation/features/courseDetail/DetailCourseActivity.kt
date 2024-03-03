@@ -275,6 +275,8 @@ class DetailCourseActivity :
                     requestOptions = RequestOptions.centerCropTransform(),
                     placeHolder = R.drawable.course_test
                 )
+
+                imageCourseIv.alpha = 0.5f
             } else {
                 imageCourseIv.setImageResource(R.drawable.course_test)
             }
