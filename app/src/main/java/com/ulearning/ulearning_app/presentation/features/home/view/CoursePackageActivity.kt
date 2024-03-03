@@ -134,12 +134,11 @@ class CoursePackageActivity :
         var resultNumber = 0.0
         percentages?.let {
             if (it.isNotEmpty()) {
-                val item = total / percentages.size
                 var result = 0.0
                 it.forEach { value ->
-                    result += (item.times(value.toString().toDouble())) / 100
+                    result += if (value.percentage.toInt() < 100) value.percentage.toInt() else 100
                 }
-                resultNumber = result
+                resultNumber = result / percentages.size
                 resultText = result.toString()
             }
         }
@@ -148,12 +147,13 @@ class CoursePackageActivity :
         binding.progressBar.progress = resultNumber.toInt()
     }
 
-    fun goToDetailCourse(model: LearningPackageItem) {
+    fun goToDetailCourse(model: LearningPackageItem, percentage:Int) {
 
         if (viewModel.getCoursePackage() != null) {
             startActivity(Intent(this, DetailCourseActivity::class.java).apply {
                 putExtra(Config.COURSE_PUT, model.course)
                 putExtra(Config.SUBSCRIPTION_PUT, viewModel.getCoursePackage())
+                putExtra(Config.PERCENTAGE_PUT, percentage)
             })
         }
     }

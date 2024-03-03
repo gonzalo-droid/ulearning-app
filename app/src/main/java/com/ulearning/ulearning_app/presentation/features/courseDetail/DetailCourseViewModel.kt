@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.courseDetail
 
+import android.util.Log
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.domain.model.*
 import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
@@ -174,7 +175,12 @@ class DetailCourseViewModel
     }
 
     private fun handleToken(url: String) {
-        urlWebView = url
+        // TODO() REMOVER AL ENVIAR A PROD
+        Log.d("urlWebView token",url)
+        val sandbox = url.replace("student.ulearning","sandbox.student.ulearning")
+        Log.d("urlWebView sandbox",sandbox)
+
+        urlWebView = sandbox
     }
 
     private fun getDetailCourse() {

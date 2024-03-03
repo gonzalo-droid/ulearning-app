@@ -49,14 +49,14 @@ class ListCoursesPackageFragment :
     private fun observeUiStates() {
         courseRecycler.adapter = CoursePackageItemAdapter(
             items = items, percentages = percentages
-        ) { model ->
-            onItemSelected(model)
+        ) { model, percentage ->
+            onItemSelected(model, percentage)
         }
     }
 
-    private fun onItemSelected(model: LearningPackageItem) {
+    private fun onItemSelected(model: LearningPackageItem, percentage: Int) {
 
-        (requireActivity() as CoursePackageActivity).goToDetailCourse(model)
+        (requireActivity() as CoursePackageActivity).goToDetailCourse(model, percentage)
     }
 
     companion object {

@@ -11,10 +11,10 @@ import com.ulearning.ulearning_app.domain.model.CoursePercentage
 import com.ulearning.ulearning_app.domain.model.LearningPackageItem
 import com.ulearning.ulearning_app.presentation.utils.imageLoader.ImageLoaderGlide
 
-class CoursePackageItemAdapter constructor(
+class CoursePackageItemAdapter (
     private val items: List<LearningPackageItem> = arrayListOf(),
     private val percentages: List<CoursePercentage>? = listOf(),
-    private val onClickListener: (LearningPackageItem) -> Unit,
+    private val onClickListener: (LearningPackageItem,Int) -> Unit,
 ) : RecyclerView.Adapter<CoursePackageItemAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -33,7 +33,7 @@ class CoursePackageItemAdapter constructor(
 
         val binding = ItemCoursesBinding.bind(view)
 
-        fun bind(model: LearningPackageItem, onClickListener: (LearningPackageItem) -> Unit) {
+        fun bind(model: LearningPackageItem, onClickListener: (LearningPackageItem,Int) -> Unit) {
 
             val coursePercentage: CoursePercentage? = percentages?.firstOrNull { it.courseId == model.courseId }
             val value = !coursePercentage?.percentage.isNullOrEmpty()
@@ -59,7 +59,7 @@ class CoursePackageItemAdapter constructor(
             }
 
             itemView.setOnClickListener {
-                onClickListener(model)
+                onClickListener(model,valueInt)
             }
         }
     }
