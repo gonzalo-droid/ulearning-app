@@ -1,9 +1,8 @@
 pluginManagement {
     repositories {
-        maven { url 'https://jitpack.io' }
-        gradlePluginPortal()
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
 dependencyResolutionManagement {
@@ -11,8 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
     }
 }
 rootProject.name = "ulearning_app"
-include("app")
+include(":app")

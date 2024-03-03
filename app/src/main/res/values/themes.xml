@@ -16,7 +16,6 @@
 
         <!-- Status bar color. -->
         <item name="android:statusBarColor" >@android:color/transparent</item>
-
     </style>
 
     <style name="Theme.App.Transparent" parent="Theme.Ulearning.App">

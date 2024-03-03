@@ -22,6 +22,7 @@ class ScanQrViewModel
 
     override fun handleEvent(event: ScanQrEvent) {
         when (event) {
+            else -> {}
         }
     }
 

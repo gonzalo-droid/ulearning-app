@@ -28,6 +28,7 @@ class SearchViewModel
     override fun handleEvent(event: SearchEvent) {
         when (event) {
             SearchEvent.GetUsersClick -> searchUser(search)
+            else -> {}
         }
     }
 

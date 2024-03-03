@@ -28,9 +28,10 @@ class LoginViewModel
     }
 
     override fun handleEvent(event: LoginEvent) {
-        when (event) {
+           when (event) {
             LoginEvent.LoginClicked -> verifyLogin()
-        }
+               else -> {}
+           }
     }
 
     private fun loginInFacebook() {

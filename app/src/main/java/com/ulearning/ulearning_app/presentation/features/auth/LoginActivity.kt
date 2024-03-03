@@ -44,6 +44,8 @@ class LoginActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+
         LoginReducer.instance(viewState = this)
 
         loginInFacebook()

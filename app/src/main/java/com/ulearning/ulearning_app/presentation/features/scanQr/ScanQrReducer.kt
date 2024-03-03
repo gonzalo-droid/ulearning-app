@@ -19,6 +19,7 @@ object ScanQrReducer {
     fun selectEffect(effect: ScanQrEffect) {
         when (effect) {
             is ScanQrEffect.ShowMessageFailure -> viewState.messageFailure(effect.failure)
+            else -> {}
         }
     }
 }
