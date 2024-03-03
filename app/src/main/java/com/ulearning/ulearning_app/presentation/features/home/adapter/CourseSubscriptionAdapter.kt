@@ -11,10 +11,10 @@ import com.ulearning.ulearning_app.domain.model.CoursePercentage
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.utils.imageLoader.ImageLoaderGlide
 
-class CourseSubscriptionAdapter constructor(
+class CourseSubscriptionAdapter(
     private val courses: List<Subscription>,
     private val percentages: List<CoursePercentage>? = listOf(),
-    private val onClickListener: (Subscription) -> Unit
+    private val onClickListener: (Subscription, Int) -> Unit
 ) : RecyclerView.Adapter<CourseSubscriptionAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -34,10 +34,12 @@ class CourseSubscriptionAdapter constructor(
 
         val binding = ItemCoursesBinding.bind(view)
 
-        fun bind(model: Subscription, onClickListener: (Subscription) -> Unit) {
+        fun bind(model: Subscription, onClickListener: (Subscription, Int) -> Unit) {
 
-            binding.progressSnackBar.visibility = if (model.isFinished!!) View.INVISIBLE else View.VISIBLE
-            binding.percentageText.visibility = if (model.isFinished!!) View.INVISIBLE else View.VISIBLE
+            binding.progressSnackBar.visibility =
+                if (model.isFinished!!) View.INVISIBLE else View.VISIBLE
+            binding.percentageText.visibility =
+                if (model.isFinished!!) View.INVISIBLE else View.VISIBLE
 
             model.course?.mainImage?.originalUrl?.let {
                 ImageLoaderGlide().loadImage(
@@ -70,7 +72,7 @@ class CourseSubscriptionAdapter constructor(
             binding.titleText.text = model.course!!.title
 
             itemView.setOnClickListener {
-                onClickListener(model)
+                onClickListener(model, valueInt)
             }
         }
     }

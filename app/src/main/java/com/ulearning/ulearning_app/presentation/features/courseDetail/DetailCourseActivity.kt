@@ -1,5 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.courseDetail
 
+import android.annotation.SuppressLint
 import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
@@ -18,6 +19,7 @@ import com.ulearning.ulearning_app.core.extensions.dataBinding
 import com.ulearning.ulearning_app.core.extensions.html
 import com.ulearning.ulearning_app.core.extensions.lifecycleScopeCreate
 import com.ulearning.ulearning_app.core.extensions.putCourse
+import com.ulearning.ulearning_app.core.extensions.putInt
 import com.ulearning.ulearning_app.core.extensions.putSubscription
 import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.core.utils.Config
@@ -63,6 +65,8 @@ class DetailCourseActivity :
 
     private lateinit var checkFiles: CheckAvailableFiles
 
+    private var percentage: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -95,6 +99,8 @@ class DetailCourseActivity :
 
             viewModel.subscription =
                 Config.SUBSCRIPTION_PUT putSubscription this@DetailCourseActivity
+
+            percentage = Config.PERCENTAGE_PUT putInt this@DetailCourseActivity
         }
 
         viewModel.apply {
@@ -265,6 +271,7 @@ class DetailCourseActivity :
         return super.onOptionsItemSelected(item)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setDetailCourse(data: Course) {
         with(binding) {
 
@@ -288,6 +295,10 @@ class DetailCourseActivity :
             timeText.text = data.formatSelfStudyHour()
             modalityText.text = data.formatModality()
             topicText.text = data.lessonsCount.toString()
+
+            // percentage
+            binding.percentageText.text = "$percentage %"
+            binding.progressBar.progress = percentage
         }
     }
 

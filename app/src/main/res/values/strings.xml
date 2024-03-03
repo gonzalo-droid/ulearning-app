@@ -120,7 +120,7 @@
     <string name="no_data">Sin resultados encontrados</string>
 
     <string name="course_percentage_value">%1$s </string>
-    <string name="hour_learn_title">Horas de aprendizaje</string>
+    <string name="hour_learn_title">Horas de \naprendizaje</string>
 
     <string name="download_cert">Descargar certificado</string>
     <string name="buy_cert">Comprar certificado</string>
