@@ -1,6 +1,7 @@
 package com.ulearning.ulearning_app.data.remote.api
 
 import com.ulearning.ulearning_app.data.remote.entities.BaseResponse
+import com.ulearning.ulearning_app.data.remote.entities.request.ProfileRequest
 import com.ulearning.ulearning_app.data.remote.entities.response.*
 import com.ulearning.ulearning_app.data.remote.utils.SettingRemote
 import retrofit2.Response
@@ -13,4 +14,10 @@ interface ProfileApi {
         @Query("per_page") perPage: Int = 50,
         @Query("page") page: Int,
     ): Response<BaseResponse<List<PaymentResponse>>>
+
+    @POST("self-update")
+    suspend fun profileUpdate(
+        @Header(SettingRemote.AUTHORIZATION) token: String,
+        @Body body: ProfileRequest
+    ): Response<BaseResponse<ProfileResponse>>
 }

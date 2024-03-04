@@ -1,8 +1,9 @@
-package com.ulearning.ulearning_app.data.remote.entities.response
+package com.ulearning.ulearning_app.data.remote.entities.request
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-data class ProfileResponse(
+data class ProfileRequest(
     @SerializedName("address")
     val address: String? = "",
     @SerializedName("avatar")
@@ -29,19 +30,14 @@ data class ProfileResponse(
     val lastName: String? = "",
     @SerializedName("name")
     val name: String? = "",
-    @SerializedName("permissions")
-    val permissions: List<String?>? = arrayListOf(),
     @SerializedName("phone")
     val phone: String? = "",
     @SerializedName("phone_code")
     val phoneCode: String? = "",
-    @SerializedName("plan")
-    val plan: Any? = null,
     @SerializedName("role")
     val role: String? = "",
     @SerializedName("second_last_name")
     val secondLastName: String? = "",
-    @SerializedName("suspended_at")
-    val suspendedAt: String? = "",
-)
+) : Serializable
+
 
