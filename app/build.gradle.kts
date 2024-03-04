@@ -58,7 +58,7 @@ android {
             buildConfigField(
                 "String",
                 "BASE_URL",
-                "\"https://www.sandbox.api.ulearning.com.pe/api/\""
+                "\"https://sandbox.api.ulearning.com.pe/api/\""
             )
             buildConfigField("String", "STUDENT_URL", "\"https://student.ulearning.com.pe\"")
         }

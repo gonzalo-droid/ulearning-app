@@ -15,6 +15,7 @@ interface ConversationRepository {
 
     suspend fun getConversationsSupport(
         page: Int,
+        toSupport: Boolean
     ): Either<Failure, List<Conversation>>
 
     suspend fun participantsMessage(

@@ -10,7 +10,7 @@ class GetConversationSupportUseCase
     BaseUseCase<List<Conversation>, GetConversationSupportUseCase.Params>() {
 
     override suspend fun run(params: Params) =
-        conversationRepository.getConversationsSupport(params.page)
+        conversationRepository.getConversationsSupport(params.page, params.toSupport)
 
-    data class Params(val page: Int)
+    data class Params(val page: Int, val toSupport:Boolean)
 }

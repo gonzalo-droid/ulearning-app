@@ -42,13 +42,13 @@ class ConversationRepositoryImpl
         }
     }
 
-    override suspend fun getConversationsSupport(page: Int): Either<Failure, List<Conversation>> {
+    override suspend fun getConversationsSupport(page: Int, toSupport: Boolean): Either<Failure, List<Conversation>> {
         return when (
             val response = service.conversationsSupport(
                 token = "${SettingRemote.BEARER} ${dataStore.token()}",
                 perPage = SettingRemote.PER_PAGE,
                 page = page,
-                toSupport = true
+                toSupport = toSupport
             )
         ) {
             is Either.Right -> {

@@ -85,7 +85,7 @@ class MessageViewModel
                     uuid = conversation.uuid,
                     content = messageInput.value.trim(),
                     userIds = ids as ArrayList<String>,
-                    toSupport = conversation.toSupport!!
+                    toSupport = false
 
                 )
             ) {

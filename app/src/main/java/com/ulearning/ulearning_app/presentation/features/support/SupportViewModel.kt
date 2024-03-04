@@ -36,6 +36,7 @@ class SupportViewModel
         getConversationSupportUseCase(
             GetConversationSupportUseCase.Params(
                 page = page,
+                toSupport = true
             )
         ) {
             it.either(::handleFailure, ::handleConversations)

@@ -119,7 +119,7 @@ class ProfileFragment :
         //startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(urlPayment)))
 
         startActivity(Intent(requireActivity(), PaymentActivity::class.java).apply {
-//            putExtra(Config.PARAM_NAME_PUT, paramName)
+//
         })
     }
 
