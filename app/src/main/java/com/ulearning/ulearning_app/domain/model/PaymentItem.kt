@@ -7,4 +7,8 @@ data class PaymentItem(
     var title: String? = "",
     var amount: Double? = 0.0,
     var payable: Double? = 0.0,
-) : Serializable
+) : Serializable {
+    fun moneyFormat(): String {
+        return "S/ $payable"
+    }
+}

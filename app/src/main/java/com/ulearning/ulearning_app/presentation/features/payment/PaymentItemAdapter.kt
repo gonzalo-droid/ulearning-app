@@ -7,19 +7,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.request.RequestOptions
 import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.databinding.ItemCoursesBinding
+import com.ulearning.ulearning_app.databinding.ItemDetailPaymentBinding
 import com.ulearning.ulearning_app.databinding.ItemPaymentBinding
 import com.ulearning.ulearning_app.domain.model.CoursePercentage
 import com.ulearning.ulearning_app.domain.model.Payment
+import com.ulearning.ulearning_app.domain.model.PaymentItem
 import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.utils.imageLoader.ImageLoaderGlide
 
-class PaymentAdapter(
-    private val items: List<Payment> = arrayListOf(), private val onClickListener: (Payment) -> Unit
-) : RecyclerView.Adapter<PaymentAdapter.CustomViewHolder>() {
+class PaymentItemAdapter(
+    private val items: List<PaymentItem> = arrayListOf(),
+    private val onClickListener: (Payment) -> Unit
+) : RecyclerView.Adapter<PaymentItemAdapter.CustomViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         return CustomViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_payment, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_detail_payment, parent, false)
         )
     }
 
@@ -31,16 +34,12 @@ class PaymentAdapter(
 
     inner class CustomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        val binding = ItemPaymentBinding.bind(view)
+        val binding = ItemDetailPaymentBinding.bind(view)
 
-        fun bind(model: Payment, onClickListener: (Payment) -> Unit) {
+        fun bind(model: PaymentItem, onClickListener: (Payment) -> Unit) {
 
             binding.amountTv.text = model.moneyFormat()
-            binding.statusTv.text = model.statusFormat()
-
-            itemView.setOnClickListener {
-                 onClickListener(model)
-            }
+            binding.titleTv.text = model.title
         }
     }
 }

@@ -114,6 +114,7 @@ class PaymentActivity :
 
 
     private fun onItemSelected(model: Payment) {
-
+        val bottomSheetFragment = BottomSheetPaymentItemFragment.newInstance(model)
+        bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
     }
 }
