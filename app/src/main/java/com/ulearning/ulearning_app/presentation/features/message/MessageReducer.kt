@@ -1,7 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.message
 
 object MessageReducer {
-
     private lateinit var viewState: MessageViewState
 
     fun instance(viewState: MessageViewState) {

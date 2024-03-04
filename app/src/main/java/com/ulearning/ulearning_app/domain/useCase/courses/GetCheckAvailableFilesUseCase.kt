@@ -6,11 +6,10 @@ import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import javax.inject.Inject
 
 class GetCheckAvailableFilesUseCase
-@Inject constructor(private val courseRepository: CourseRepository) :
+    @Inject
+    constructor(private val courseRepository: CourseRepository) :
     BaseUseCase<CheckAvailableFiles, GetCheckAvailableFilesUseCase.Params>() {
+        override suspend fun run(params: Params) = courseRepository.checkAvailableFiles(params.subscriptionId)
 
-    override suspend fun run(params: Params) =
-        courseRepository.checkAvailableFiles(params.subscriptionId)
-
-    data class Params(val subscriptionId: Int)
-}
+        data class Params(val subscriptionId: Int)
+    }

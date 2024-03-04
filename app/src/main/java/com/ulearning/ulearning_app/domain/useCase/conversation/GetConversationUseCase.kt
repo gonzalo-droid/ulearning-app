@@ -6,11 +6,10 @@ import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import javax.inject.Inject
 
 class GetConversationUseCase
-@Inject constructor(private val conversationRepository: ConversationRepository) :
+    @Inject
+    constructor(private val conversationRepository: ConversationRepository) :
     BaseUseCase<List<Conversation>, GetConversationUseCase.Params>() {
+        override suspend fun run(params: Params) = conversationRepository.getConversations(params.page, params.courseId)
 
-    override suspend fun run(params: Params) =
-        conversationRepository.getConversations(params.page, params.courseId)
-
-    data class Params(val page: Int, val courseId: Int)
-}
+        data class Params(val page: Int, val courseId: Int)
+    }

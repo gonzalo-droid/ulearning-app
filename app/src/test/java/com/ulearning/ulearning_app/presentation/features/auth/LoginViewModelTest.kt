@@ -12,13 +12,11 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class LoginViewModelTest {
-
     private lateinit var doLoginUseCase: DoLoginUseCase
     private lateinit var repository: AuthRepository
 
     @BeforeClass
     fun setUp() {
-
         doLoginUseCase = DoLoginUseCase(repository)
     }
 
@@ -28,7 +26,6 @@ class LoginViewModelTest {
 
     @Test
     fun login_verifyUser_returnTrue() {
-
         val user = User("gonzalo@gmail.com", "123321")
 
         val result = user.verifyLogin()
@@ -38,7 +35,6 @@ class LoginViewModelTest {
 
     @Test
     fun addNewTask_setsNewTaskEvent() {
-
         // Given a fresh ViewModel
     }
 }

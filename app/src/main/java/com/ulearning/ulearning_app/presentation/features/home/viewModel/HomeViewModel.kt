@@ -19,111 +19,110 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel
-@Inject constructor(
-    private val getCoursesSubscriptionUseCase: GetCoursesSubscriptionUseCase,
-    private val getProfileUseCase: GetProfileUseCase,
-    private val getCourseUseCase: GetCourseUseCase,
-    private val getCoursePercentageUseCase: GetCoursePercentageUseCase,
-) : BaseViewModel<HomeEvent, HomeState, HomeEffect>() {
+    @Inject
+    constructor(
+        private val getCoursesSubscriptionUseCase: GetCoursesSubscriptionUseCase,
+        private val getProfileUseCase: GetProfileUseCase,
+        private val getCourseUseCase: GetCourseUseCase,
+        private val getCoursePercentageUseCase: GetCoursePercentageUseCase,
+    ) : BaseViewModel<HomeEvent, HomeState, HomeEffect>() {
+        private val isFinished = true
 
-    private val isFinished = true
+        private val page = 1
 
-    private val page = 1
+        private val courseIds = arrayListOf<Int>()
 
-    private val courseIds = arrayListOf<Int>()
+        private var listCourseRecent = listOf<Subscription>()
 
-    private var listCourseRecent = listOf<Subscription>()
+        var userId = 1
 
-    var userId = 1
+        var typeRole: String = ""
 
-    var typeRole: String = ""
+        override fun createInitialState(): HomeState {
+            return HomeState.Idle
+        }
 
-    override fun createInitialState(): HomeState {
-        return HomeState.Idle
-    }
+        override fun handleEvent(event: HomeEvent) {
+            when (event) {
+                HomeEvent.CourseRecentClicked -> getCourseRecent()
+                HomeEvent.CourseCompleteClicked -> getCourseComplete()
+                HomeEvent.DataProfileClicked -> getProfile()
+                HomeEvent.CourseTeacherClicked -> getCourseTeacher()
+            }
+        }
 
-    override fun handleEvent(event: HomeEvent) {
-        when (event) {
-            HomeEvent.CourseRecentClicked -> getCourseRecent()
-            HomeEvent.CourseCompleteClicked -> getCourseComplete()
-            HomeEvent.DataProfileClicked -> getProfile()
-            HomeEvent.CourseTeacherClicked -> getCourseTeacher()
+        private fun getProfile() {
+            getProfileUseCase(
+                BaseUseCase.None(),
+            ) {
+                it.either(::handleFailure, ::handleProfile)
+            }
+        }
+
+        private fun getCourseTeacher() {
+            setState { HomeState.Loading }
+
+            getCourseUseCase(
+                GetCourseUseCase.Params(userId = userId),
+            ) {
+                it.either(::handleFailure, ::handleCourseTeacher)
+            }
+        }
+
+        private fun getCourseComplete() {
+            setState { HomeState.Loading }
+
+            getCoursesSubscriptionUseCase(
+                GetCoursesSubscriptionUseCase.Params(page = page, isFinished = isFinished),
+            ) {
+                it.either(::handleFailure, ::handleCourseComplete)
+            }
+        }
+
+        private fun getCoursePercentage(courseIds: String) {
+            getCoursePercentageUseCase(
+                GetCoursePercentageUseCase.Params(courseIds = courseIds),
+            ) {
+                it.either(::handleFailure, ::handleCoursePercentage)
+            }
+        }
+
+        private fun getCourseRecent() {
+            setState { HomeState.Loading }
+            getCoursesSubscriptionUseCase(
+                GetCoursesSubscriptionUseCase.Params(page = page, isFinished = !isFinished),
+            ) {
+                it.either(::handleFailure, ::handleCourseRecent)
+            }
+        }
+
+        private fun handleFailure(failure: Failure) {
+            setEffect { HomeEffect.ShowMessageFailure(failure = failure) }
+        }
+
+        private fun handleCourseTeacher(courses: List<Course>) {
+            setState { HomeState.CourseTeacher(courses = courses) }
+        }
+
+        private fun handleCourseComplete(courses: List<Subscription>) {
+            setState { HomeState.CourseCompleted(courses = courses) }
+        }
+
+        private fun handleCourseRecent(courses: List<Subscription>) {
+            courses.forEach { courseIds.add(it.courseId) }
+            getCoursePercentage(courseIds.joinToString())
+
+            listCourseRecent = courses
+        }
+
+        private fun handleCoursePercentage(percentages: List<CoursePercentage>) {
+            setState { HomeState.CourseRecent(courses = listCourseRecent, percentages = percentages) }
+        }
+
+        private fun handleProfile(data: Profile) {
+            setState { HomeState.DatProfile(data = data) }
+        }
+
+        companion object Events {
         }
     }
-
-    private fun getProfile() {
-        getProfileUseCase(
-            BaseUseCase.None()
-        ) {
-            it.either(::handleFailure, ::handleProfile)
-        }
-    }
-
-    private fun getCourseTeacher() {
-        setState { HomeState.Loading }
-
-        getCourseUseCase(
-            GetCourseUseCase.Params(userId = userId)
-        ) {
-            it.either(::handleFailure, ::handleCourseTeacher)
-        }
-    }
-
-    private fun getCourseComplete() {
-        setState { HomeState.Loading }
-
-        getCoursesSubscriptionUseCase(
-            GetCoursesSubscriptionUseCase.Params(page = page, isFinished = isFinished)
-        ) {
-            it.either(::handleFailure, ::handleCourseComplete)
-        }
-    }
-
-    private fun getCoursePercentage(courseIds: String) {
-
-        getCoursePercentageUseCase(
-            GetCoursePercentageUseCase.Params(courseIds = courseIds)
-        ) {
-            it.either(::handleFailure, ::handleCoursePercentage)
-        }
-    }
-
-    private fun getCourseRecent() {
-        setState { HomeState.Loading }
-        getCoursesSubscriptionUseCase(
-            GetCoursesSubscriptionUseCase.Params(page = page, isFinished = !isFinished)
-        ) {
-            it.either(::handleFailure, ::handleCourseRecent)
-        }
-    }
-
-    private fun handleFailure(failure: Failure) {
-        setEffect { HomeEffect.ShowMessageFailure(failure = failure) }
-    }
-
-    private fun handleCourseTeacher(courses: List<Course>) {
-        setState { HomeState.CourseTeacher(courses = courses) }
-    }
-
-    private fun handleCourseComplete(courses: List<Subscription>) {
-        setState { HomeState.CourseCompleted(courses = courses) }
-    }
-
-    private fun handleCourseRecent(courses: List<Subscription>) {
-        courses.forEach { courseIds.add(it.courseId) }
-        getCoursePercentage(courseIds.joinToString())
-
-        listCourseRecent = courses
-    }
-
-    private fun handleCoursePercentage(percentages: List<CoursePercentage>) {
-        setState { HomeState.CourseRecent(courses = listCourseRecent, percentages = percentages) }
-    }
-
-    private fun handleProfile(data: Profile) {
-        setState { HomeState.DatProfile(data = data) }
-    }
-
-    companion object Events {
-    }
-}

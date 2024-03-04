@@ -8,33 +8,35 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SplashViewModel @Inject constructor(
-    private val getSessionUseCase: GetSessionUseCase,
-) : BaseViewModel<SplashEvent, SplashState, SplashEffect>() {
+class SplashViewModel
+    @Inject
+    constructor(
+        private val getSessionUseCase: GetSessionUseCase,
+    ) : BaseViewModel<SplashEvent, SplashState, SplashEffect>() {
+        override fun createInitialState(): SplashState {
+            return SplashState.Idle
+        }
 
-    override fun createInitialState(): SplashState {
-        return SplashState.Idle
-    }
+        override fun handleEvent(event: SplashEvent) {
+            when (event) {
+                SplashEvent.GotoActivity -> verifyToken()
+            }
+        }
 
-    override fun handleEvent(event: SplashEvent) {
-        when (event) {
-            SplashEvent.GotoActivity -> verifyToken()
+        private fun verifyToken() =
+            getSessionUseCase(BaseUseCase.None()) {
+                it.either(::handleFailure, ::handleSession)
+            }
+
+        private fun handleFailure(failure: Failure) {
+            setEffect { SplashEffect.ShowMessageFailure(failure = failure) }
+        }
+
+        private fun handleSession(success: Boolean) {
+            if (success) {
+                setEffect { SplashEffect.GoToHome }
+            } else {
+                setEffect { SplashEffect.GoToLogin }
+            }
         }
     }
-
-    private fun verifyToken() = getSessionUseCase(BaseUseCase.None()) {
-        it.either(::handleFailure, ::handleSession)
-    }
-
-    private fun handleFailure(failure: Failure) {
-        setEffect { SplashEffect.ShowMessageFailure(failure = failure) }
-    }
-
-    private fun handleSession(success: Boolean) {
-        if (success) {
-            setEffect { SplashEffect.GoToHome }
-        } else {
-            setEffect { SplashEffect.GoToLogin }
-        }
-    }
-}

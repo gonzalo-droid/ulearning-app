@@ -12,45 +12,45 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CoursePackViewModel
-@Inject constructor(
-    private val getCoursesPackageSubscriptionUseCase: GetCoursesPackageSubscriptionUseCase,
-) : BaseViewModel<CoursePackEvent, CoursePackState, HomeEffect>() {
+    @Inject
+    constructor(
+        private val getCoursesPackageSubscriptionUseCase: GetCoursesPackageSubscriptionUseCase,
+    ) : BaseViewModel<CoursePackEvent, CoursePackState, HomeEffect>() {
+        private val isFinished = true
 
-    private val isFinished = true
+        private val page = 1
 
-    private val page = 1
+        var userId = 1
 
-    var userId = 1
+        var typeRole: String = ""
 
-    var typeRole: String = ""
-
-    override fun createInitialState(): CoursePackState {
-        return CoursePackState.Idle
-    }
-
-    override fun handleEvent(event: CoursePackEvent) {
-        when (event) {
-            CoursePackEvent.CoursePackClicked -> getPacks()
+        override fun createInitialState(): CoursePackState {
+            return CoursePackState.Idle
         }
-    }
 
-    private fun getPacks() {
-        setState { CoursePackState.Loading }
-
-        getCoursesPackageSubscriptionUseCase(
-            GetCoursesPackageSubscriptionUseCase.Params(page = page, type = "package")
-        ) {
-            it.either(::handleFailure, ::handleCourseComplete)
+        override fun handleEvent(event: CoursePackEvent) {
+            when (event) {
+                CoursePackEvent.CoursePackClicked -> getPacks()
+            }
         }
-    }
 
-    private fun handleFailure(failure: Failure) {
-        setEffect { HomeEffect.ShowMessageFailure(failure = failure) }
-    }
+        private fun getPacks() {
+            setState { CoursePackState.Loading }
 
-    private fun handleCourseComplete(courses: List<Subscription>) {
-        setState { CoursePackState.CoursePack(courses = courses) }
-    }
+            getCoursesPackageSubscriptionUseCase(
+                GetCoursesPackageSubscriptionUseCase.Params(page = page, type = "package"),
+            ) {
+                it.either(::handleFailure, ::handleCourseComplete)
+            }
+        }
 
-    companion object Events
-}
+        private fun handleFailure(failure: Failure) {
+            setEffect { HomeEffect.ShowMessageFailure(failure = failure) }
+        }
+
+        private fun handleCourseComplete(courses: List<Subscription>) {
+            setState { CoursePackState.CoursePack(courses = courses) }
+        }
+
+        companion object Events
+    }

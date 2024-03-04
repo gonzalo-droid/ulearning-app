@@ -45,14 +45,17 @@ abstract class BaseFragmentWithViewModel<ViewDataBindingClass : ViewDataBinding,
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         rootView = binding.root
         binding.setVariable(dataBindingViewModel, viewModel)
         return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this.viewLifecycleOwner
         binding.executePendingBindings()
@@ -63,7 +66,6 @@ abstract class BaseFragmentWithViewModel<ViewDataBindingClass : ViewDataBinding,
     }
 
     open fun getUseCaseFailureFromBase(failure: Failure): MessageDesign {
-
         return BindingUtil.reducerFailure(failure)
     }
 }

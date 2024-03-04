@@ -4,7 +4,6 @@ import com.ulearning.ulearning_app.domain.model.Topic
 import com.ulearning.ulearning_app.presentation.base.UiState
 
 sealed class TopicState : UiState {
-
     object Idle : TopicState()
 
     object Loading : TopicState()

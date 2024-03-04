@@ -14,5 +14,5 @@ data class Group(
     var studentsCount: Int? = 0,
     var teachers: List<Teacher>? = arrayListOf(),
     var teachersCount: Int? = 0,
-    var vacancies: Int? = 0
+    var vacancies: Int? = 0,
 ) : Serializable

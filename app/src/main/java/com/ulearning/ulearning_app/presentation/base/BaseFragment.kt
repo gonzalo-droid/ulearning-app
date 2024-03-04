@@ -23,7 +23,7 @@ abstract class BaseFragment<ViewDataBindingClass : ViewDataBinding> : Fragment()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         configureHideKeyboar(binding.root)
         return binding.root
@@ -57,19 +57,19 @@ abstract class BaseFragment<ViewDataBindingClass : ViewDataBinding> : Fragment()
     protected fun showSnackBar(
         rootView: View,
         contentText: Any,
-        duration: Int = Snackbar.LENGTH_LONG
+        duration: Int = Snackbar.LENGTH_LONG,
     ) {
-        val text = when (contentText) {
-            is String -> contentText
-            is Int -> getString(contentText)
-            else -> ""
-        }
+        val text =
+            when (contentText) {
+                is String -> contentText
+                is Int -> getString(contentText)
+                else -> ""
+            }
         Snackbar.make(rootView, text, duration).show()
     }
 
     @SuppressLint("ClickableViewAccessibility")
     open fun configureHideKeyboar(view: View) {
-
         if (view !is EditText) {
             view.setOnTouchListener { v, _ ->
                 v.hideKeyboard()
@@ -89,18 +89,19 @@ abstract class BaseFragment<ViewDataBindingClass : ViewDataBinding> : Fragment()
         Snackbar.make(
             requireActivity().findViewById(android.R.id.content),
             message,
-            Snackbar.LENGTH_LONG
+            Snackbar.LENGTH_LONG,
         ).show()
     }
 
     protected fun showToast(message: Any?) {
-        val textToShow = when (message) {
-            is Int -> getString(message)
-            is String -> message
-            else -> {
-                ""
+        val textToShow =
+            when (message) {
+                is Int -> getString(message)
+                is String -> message
+                else -> {
+                    ""
+                }
             }
-        }
         Toast.makeText(requireContext(), textToShow, Toast.LENGTH_LONG).show()
     }
 

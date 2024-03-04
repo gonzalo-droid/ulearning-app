@@ -5,7 +5,6 @@ import com.ulearning.ulearning_app.presentation.features.home.state.CourseProgre
 import com.ulearning.ulearning_app.presentation.features.home.viewState.CourseProgressViewState
 
 object CourseProgressReducer {
-
     private lateinit var viewState: CourseProgressViewState
 
     fun instance(viewState: CourseProgressViewState) {

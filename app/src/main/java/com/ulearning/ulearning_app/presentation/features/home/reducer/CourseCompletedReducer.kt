@@ -5,7 +5,6 @@ import com.ulearning.ulearning_app.presentation.features.home.state.CourseComple
 import com.ulearning.ulearning_app.presentation.features.home.viewState.CourseCompletedViewState
 
 object CourseCompletedReducer {
-
     private lateinit var viewState: CourseCompletedViewState
 
     fun instance(viewState: CourseCompletedViewState) {

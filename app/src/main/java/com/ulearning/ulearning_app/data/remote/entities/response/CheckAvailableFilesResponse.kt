@@ -6,5 +6,5 @@ data class CheckAvailableFilesResponse(
     @SerializedName("certificate")
     val certificate: Boolean? = false,
     @SerializedName("record")
-    val record: Boolean? = false
+    val record: Boolean? = false,
 )

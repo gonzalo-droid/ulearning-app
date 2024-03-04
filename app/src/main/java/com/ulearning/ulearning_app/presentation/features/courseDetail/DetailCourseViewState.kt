@@ -7,7 +7,6 @@ import com.ulearning.ulearning_app.domain.model.FileItem
 import com.ulearning.ulearning_app.domain.model.Topic
 
 interface DetailCourseViewState {
-
     fun messageFailure(failure: Failure)
 
     fun loading()

@@ -5,5 +5,5 @@ import java.io.Serializable
 data class Plan(
     var id: Int? = 0,
     var type: String? = "",
-    var userId: Int? = 0
+    var userId: Int? = 0,
 ) : Serializable

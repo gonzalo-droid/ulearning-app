@@ -6,7 +6,6 @@ import com.ulearning.ulearning_app.presentation.features.home.state.CoursePackag
 import com.ulearning.ulearning_app.presentation.features.home.viewState.CoursePackageViewState
 
 object CoursePackageReducer {
-
     private lateinit var viewState: CoursePackageViewState
 
     fun instance(viewState: CoursePackageViewState) {

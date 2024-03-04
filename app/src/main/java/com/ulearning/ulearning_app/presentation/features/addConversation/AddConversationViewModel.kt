@@ -19,118 +19,114 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AddConversationViewModel
-@Inject constructor(
-    private val getUsersByIdsUseCase: GetUsersByIdsUseCase,
-    private val sendConversationUseCase: SendConversationUseCase,
-    private val sendConversationSupportUseCase: SendConversationSupportUseCase,
-    private val getRoleUseCase: GetRoleUseCase,
-) : BaseViewModel<AddConversationEvent, AddConversationState, AddConversationEffect>() {
+    @Inject
+    constructor(
+        private val getUsersByIdsUseCase: GetUsersByIdsUseCase,
+        private val sendConversationUseCase: SendConversationUseCase,
+        private val sendConversationSupportUseCase: SendConversationSupportUseCase,
+        private val getRoleUseCase: GetRoleUseCase,
+    ) : BaseViewModel<AddConversationEvent, AddConversationState, AddConversationEffect>() {
+        var courseId: Int = 0
 
-    var courseId: Int = 0
+        var listUserIds: ArrayList<Int> = arrayListOf<Int>()
 
-    var listUserIds: ArrayList<Int> = arrayListOf<Int>()
+        var textUserIds: String = ""
 
-    var textUserIds: String = ""
+        var typeMessage: String = ""
 
-    var typeMessage: String = ""
+        var typeRole: String = ""
 
-    var typeRole: String = ""
+        var messageInput = MutableStateFlow<String>("")
 
-    var messageInput = MutableStateFlow<String>("")
-
-    override fun createInitialState(): AddConversationState {
-        return AddConversationState.Idle
-    }
-
-    override fun handleEvent(event: AddConversationEvent) {
-        when (event) {
-            AddConversationEvent.SendConversationClick -> send()
-            AddConversationEvent.GetUsersClick -> getUsers()
-            AddConversationEvent.GetRole -> getRole()
-            else -> {}
+        override fun createInitialState(): AddConversationState {
+            return AddConversationState.Idle
         }
-    }
 
-    private fun getRole() = getRoleUseCase(BaseUseCase.None()) {
-        it.either(::handleFailure, ::handleRole)
-    }
-
-    private fun getUsers() {
-        if (textUserIds.isNotEmpty() && courseId != 0) {
-            getUsersByIdsUseCase(
-                GetUsersByIdsUseCase.Params(ids = textUserIds, courseId = courseId)
-            ) {
-                it.either(::handleFailure, ::handleUser)
+        override fun handleEvent(event: AddConversationEvent) {
+            when (event) {
+                AddConversationEvent.SendConversationClick -> send()
+                AddConversationEvent.GetUsersClick -> getUsers()
+                AddConversationEvent.GetRole -> getRole()
+                else -> {}
             }
         }
-    }
 
-    private fun send() {
-
-        if (typeMessage == Config.MESSAGE_COURSE) {
-            sendConversation()
-        } else {
-            sendConversationSupport()
-        }
-    }
-
-    private fun sendConversationSupport() {
-
-        if (messageInput.value.isNotEmpty()) {
-
-            sendConversationSupportUseCase(
-                SendConversationSupportUseCase.Params(
-                    content = messageInput.value.trim(),
-                    toSupport = true,
-                    userIds = listUserIds
-                )
-            ) {
-                it.either(::handleFailure, ::handleConversation)
+        private fun getRole() =
+            getRoleUseCase(BaseUseCase.None()) {
+                it.either(::handleFailure, ::handleRole)
             }
-        } else {
-            setEffect { AddConversationEffect.ShowMessageFailure(Failure.DefaultError(R.string.failure_message)) }
-        }
-    }
 
-    private fun sendConversation() {
-
-        if (messageInput.value.isNotEmpty() && listUserIds.isNotEmpty()) {
-
-            sendConversationUseCase(
-                SendConversationUseCase.Params(
-                    content = messageInput.value.trim(),
-                    courseId = courseId,
-                    userIds = listUserIds
-                )
-            ) {
-                it.either(::handleFailure, ::handleConversation)
+        private fun getUsers() {
+            if (textUserIds.isNotEmpty() && courseId != 0) {
+                getUsersByIdsUseCase(
+                    GetUsersByIdsUseCase.Params(ids = textUserIds, courseId = courseId),
+                ) {
+                    it.either(::handleFailure, ::handleUser)
+                }
             }
-        } else {
-            setEffect { AddConversationEffect.ShowMessageFailure(Failure.DefaultError(R.string.failure_message)) }
+        }
+
+        private fun send() {
+            if (typeMessage == Config.MESSAGE_COURSE) {
+                sendConversation()
+            } else {
+                sendConversationSupport()
+            }
+        }
+
+        private fun sendConversationSupport() {
+            if (messageInput.value.isNotEmpty()) {
+                sendConversationSupportUseCase(
+                    SendConversationSupportUseCase.Params(
+                        content = messageInput.value.trim(),
+                        toSupport = true,
+                        userIds = listUserIds,
+                    ),
+                ) {
+                    it.either(::handleFailure, ::handleConversation)
+                }
+            } else {
+                setEffect { AddConversationEffect.ShowMessageFailure(Failure.DefaultError(R.string.failure_message)) }
+            }
+        }
+
+        private fun sendConversation() {
+            if (messageInput.value.isNotEmpty() && listUserIds.isNotEmpty()) {
+                sendConversationUseCase(
+                    SendConversationUseCase.Params(
+                        content = messageInput.value.trim(),
+                        courseId = courseId,
+                        userIds = listUserIds,
+                    ),
+                ) {
+                    it.either(::handleFailure, ::handleConversation)
+                }
+            } else {
+                setEffect { AddConversationEffect.ShowMessageFailure(Failure.DefaultError(R.string.failure_message)) }
+            }
+        }
+
+        private fun handleConversation(conversation: Conversation) {
+            setState { AddConversationState.Loading }
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                setState { AddConversationState.DataConversation(conversation = conversation) }
+            }, 2000)
+        }
+
+        private fun handleRole(role: String) {
+            setState { AddConversationState.GetRole(role = role) }
+        }
+
+        private fun handleUser(users: List<User>) {
+            setState { AddConversationState.UserList(users = users) }
+        }
+
+        private fun handleFailure(failure: Failure) {
+            setEffect { AddConversationEffect.ShowMessageFailure(failure = failure) }
+        }
+
+        companion object Events {
+            val sendConversationClick = AddConversationEvent.SendConversationClick
         }
     }
-
-    private fun handleConversation(conversation: Conversation) {
-        setState { AddConversationState.Loading }
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            setState { AddConversationState.DataConversation(conversation = conversation) }
-        }, 2000)
-    }
-
-    private fun handleRole(role: String) {
-        setState { AddConversationState.GetRole(role = role) }
-    }
-
-    private fun handleUser(users: List<User>) {
-        setState { AddConversationState.UserList(users = users) }
-    }
-
-    private fun handleFailure(failure: Failure) {
-        setEffect { AddConversationEffect.ShowMessageFailure(failure = failure) }
-    }
-
-    companion object Events {
-        val sendConversationClick = AddConversationEvent.SendConversationClick
-    }
-}

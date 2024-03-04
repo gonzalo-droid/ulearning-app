@@ -18,119 +18,114 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MessageViewModel
-@Inject constructor(
-    private val getMessageUseCase: GetMessageUseCase,
-    private val sendMessageUseCase: SendMessageUseCase,
-    private val getParticipantsMessageUseCase: GetParticipantsMessageUseCase,
-    private val getUserIdUseCase: GetUserIdUseCase,
-) : BaseViewModel<MessageEvent, MessageState, MessageEffect>() {
+    @Inject
+    constructor(
+        private val getMessageUseCase: GetMessageUseCase,
+        private val sendMessageUseCase: SendMessageUseCase,
+        private val getParticipantsMessageUseCase: GetParticipantsMessageUseCase,
+        private val getUserIdUseCase: GetUserIdUseCase,
+    ) : BaseViewModel<MessageEvent, MessageState, MessageEffect>() {
+        var page: Int = 1
 
-    var page: Int = 1
+        var userId: Int = 0
 
-    var userId: Int = 0
+        var messageInput = MutableStateFlow<String>("")
 
-    var messageInput = MutableStateFlow<String>("")
+        var userIds = ""
 
-    var userIds = ""
+        lateinit var conversation: Conversation
 
-    lateinit var conversation: Conversation
-
-    override fun createInitialState(): MessageState {
-        return MessageState.Idle
-    }
-
-    override fun handleEvent(event: MessageEvent) {
-        when (event) {
-            MessageEvent.MessagesClicked -> getMessages()
-            MessageEvent.SendMessageClick -> sendMessage()
-            MessageEvent.GetParticipantsClick -> getParticipants()
-            MessageEvent.GetUserIdClick -> getUserId()
+        override fun createInitialState(): MessageState {
+            return MessageState.Idle
         }
-    }
 
-    private fun getUserId() {
-        getUserIdUseCase(
-            BaseUseCase.None()
-        ) {
-            it.either(::handleFailure, ::handleUserId)
-        }
-    }
-
-    private fun getParticipants() {
-
-        if (conversation.toSupport!!) {
-            setState { MessageState.SupportUser }
-        } else {
-            val list = conversation.firstMessage?.userIds?.joinToString(",") ?: ""
-
-            getParticipantsMessageUseCase(
-                GetParticipantsMessageUseCase.Params(
-                    userIds = list
-                )
-            ) {
-                it.either(::handleFailure, ::handleParticipants)
+        override fun handleEvent(event: MessageEvent) {
+            when (event) {
+                MessageEvent.MessagesClicked -> getMessages()
+                MessageEvent.SendMessageClick -> sendMessage()
+                MessageEvent.GetParticipantsClick -> getParticipants()
+                MessageEvent.GetUserIdClick -> getUserId()
             }
         }
-    }
 
-    private fun sendMessage() {
+        private fun getUserId() {
+            getUserIdUseCase(
+                BaseUseCase.None(),
+            ) {
+                it.either(::handleFailure, ::handleUserId)
+            }
+        }
 
-        val ids = conversation.firstMessage?.userIds
+        private fun getParticipants() {
+            if (conversation.toSupport!!) {
+                setState { MessageState.SupportUser }
+            } else {
+                val list = conversation.firstMessage?.userIds?.joinToString(",") ?: ""
 
-        if (messageInput.value.isNotEmpty()) {
+                getParticipantsMessageUseCase(
+                    GetParticipantsMessageUseCase.Params(
+                        userIds = list,
+                    ),
+                ) {
+                    it.either(::handleFailure, ::handleParticipants)
+                }
+            }
+        }
 
-            sendMessageUseCase(
+        private fun sendMessage() {
+            val ids = conversation.firstMessage?.userIds
 
-                SendMessageUseCase.Params(
+            if (messageInput.value.isNotEmpty()) {
+                sendMessageUseCase(
+                    SendMessageUseCase.Params(
+                        uuid = conversation.uuid,
+                        content = messageInput.value.trim(),
+                        userIds = ids as ArrayList<String>,
+                        toSupport = false,
+                    ),
+                ) {
+                    it.either(::handleFailure, ::handleMessage)
+                }
+            }
+        }
+
+        private fun getMessages() {
+            setState { MessageState.Loading }
+
+            getMessageUseCase(
+                GetMessageUseCase.Params(
                     uuid = conversation.uuid,
-                    content = messageInput.value.trim(),
-                    userIds = ids as ArrayList<String>,
-                    toSupport = false
-
-                )
+                ),
             ) {
-                it.either(::handleFailure, ::handleMessage)
+                it.either(::handleFailure, ::handleMessages)
             }
         }
-    }
 
-    private fun getMessages() {
-        setState { MessageState.Loading }
+        private fun handleMessage(message: Message) {
+            messageInput.value = ""
 
-        getMessageUseCase(
-            GetMessageUseCase.Params(
-                uuid = conversation.uuid
-            )
-        ) {
-            it.either(::handleFailure, ::handleMessages)
+            Handler(Looper.getMainLooper()).postDelayed({
+                getMessages()
+            }, 2000)
+        }
+
+        private fun handleMessages(messages: List<Message>) {
+            setState { MessageState.Messages(messages = messages) }
+        }
+
+        private fun handleParticipants(users: List<User>) {
+            setState { MessageState.GetParticipants(users = users) }
+        }
+
+        private fun handleFailure(failure: Failure) {
+            setEffect { MessageEffect.ShowMessageFailure(failure = failure) }
+        }
+
+        private fun handleUserId(userId: Int) {
+            setState { MessageState.GetUserId(userId = userId) }
+        }
+
+        companion object Events {
+            val sendMessageClick = MessageEvent.SendMessageClick
         }
     }
-
-    private fun handleMessage(message: Message) {
-        messageInput.value = ""
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            getMessages()
-        }, 2000)
-    }
-
-    private fun handleMessages(messages: List<Message>) {
-        setState { MessageState.Messages(messages = messages) }
-    }
-
-    private fun handleParticipants(users: List<User>) {
-        setState { MessageState.GetParticipants(users = users) }
-    }
-
-    private fun handleFailure(failure: Failure) {
-        setEffect { MessageEffect.ShowMessageFailure(failure = failure) }
-    }
-
-    private fun handleUserId(userId: Int) {
-        setState { MessageState.GetUserId(userId = userId) }
-    }
-
-    companion object Events {
-        val sendMessageClick = MessageEvent.SendMessageClick
-    }
-}

@@ -1,7 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.profile
 
 object ProfileReducer {
-
     private lateinit var viewState: ProfileViewState
 
     fun instance(viewState: ProfileViewState) {

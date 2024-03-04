@@ -8,5 +8,5 @@ data class Category(
     var description: String? = "",
     var id: Int? = 0,
     var name: String? = "",
-    var type: String? = ""
+    var type: String? = "",
 ) : Serializable

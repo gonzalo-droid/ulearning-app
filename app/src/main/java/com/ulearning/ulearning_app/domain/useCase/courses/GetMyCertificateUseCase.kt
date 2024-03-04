@@ -6,11 +6,10 @@ import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import javax.inject.Inject
 
 class GetMyCertificateUseCase
-@Inject constructor(private val courseRepository: CourseRepository) :
+    @Inject
+    constructor(private val courseRepository: CourseRepository) :
     BaseUseCase<FileItem, GetMyCertificateUseCase.Params>() {
+        override suspend fun run(params: Params) = courseRepository.myCertificates(params.subscriptionId)
 
-    override suspend fun run(params: Params) =
-        courseRepository.myCertificates(params.subscriptionId)
-
-    data class Params(val subscriptionId: Int)
-}
+        data class Params(val subscriptionId: Int)
+    }

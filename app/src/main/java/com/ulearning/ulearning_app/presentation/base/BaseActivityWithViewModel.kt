@@ -10,7 +10,6 @@ import com.ulearning.ulearning_app.presentation.utils.BindingUtil
 
 abstract class BaseActivityWithViewModel<VBinding : ViewDataBinding, ViewModelType : ViewModel> :
     BaseActivity<VBinding>() {
-
     protected abstract val viewModel: ViewModelType
 
     protected abstract val dataBindingViewModel: Int
@@ -28,7 +27,6 @@ abstract class BaseActivityWithViewModel<VBinding : ViewDataBinding, ViewModelTy
     }
 
     open fun getUseCaseFailureFromBase(failure: Failure): MessageDesign {
-
         return BindingUtil.reducerFailure(failure)
     }
 }

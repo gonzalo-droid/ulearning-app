@@ -4,7 +4,6 @@ import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.presentation.base.UiState
 
 sealed class ProfileState : UiState {
-
     object Idle : ProfileState()
 
     object Loading : ProfileState()

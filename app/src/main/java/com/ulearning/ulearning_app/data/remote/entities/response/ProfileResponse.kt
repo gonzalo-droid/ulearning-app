@@ -42,5 +42,5 @@ data class ProfileResponse(
     @SerializedName("second_last_name")
     val secondLastName: String? = "",
     @SerializedName("suspended_at")
-    val suspendedAt: String? = ""
+    val suspendedAt: String? = "",
 )

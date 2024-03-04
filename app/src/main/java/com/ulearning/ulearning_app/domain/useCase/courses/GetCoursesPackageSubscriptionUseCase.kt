@@ -6,13 +6,14 @@ import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import javax.inject.Inject
 
 class GetCoursesPackageSubscriptionUseCase
-@Inject constructor(private val courseRepository: CourseRepository) :
+    @Inject
+    constructor(private val courseRepository: CourseRepository) :
     BaseUseCase<List<Subscription>, GetCoursesPackageSubscriptionUseCase.Params>() {
+        override suspend fun run(params: Params) =
+            courseRepository.getSubscriptionsPackage(
+                params.page,
+                params.type,
+            )
 
-    override suspend fun run(params: Params) = courseRepository.getSubscriptionsPackage(
-        params.page,
-        params.type,
-    )
-
-    data class Params(val page: Int, val type: String)
-}
+        data class Params(val page: Int, val type: String)
+    }

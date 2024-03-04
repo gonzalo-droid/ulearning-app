@@ -29,7 +29,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment :
     BaseFragmentWithViewModel<FragmentHomeBinding, HomeViewModel>(),
     HomeViewState {
-
     override val binding: FragmentHomeBinding by dataBinding(FragmentHomeBinding::inflate)
 
     override val viewModel: HomeViewModel by viewModels()
@@ -39,7 +38,6 @@ class HomeFragment :
     private lateinit var courseTeacherRecycler: RecyclerView
 
     override fun onViewIsCreated(view: View) {
-
         HomeReducer.instance(viewState = this)
 
         observeUiStates()
@@ -50,25 +48,29 @@ class HomeFragment :
 
         binding.cardProgress.setOnClickListener {
             findNavController().navigate(
-                R.id.action_navigation_home_to_courseProgressActivity, Bundle()
+                R.id.action_navigation_home_to_courseProgressActivity,
+                Bundle(),
             )
         }
 
         binding.cardCompleted.setOnClickListener {
             findNavController().navigate(
-                R.id.action_navigation_home_to_courseCompletedActivity, Bundle()
+                R.id.action_navigation_home_to_courseCompletedActivity,
+                Bundle(),
             )
         }
 
         binding.cardPacks.setOnClickListener {
             findNavController().navigate(
-                R.id.action_navigation_home_to_coursePacksActivity, Bundle()
+                R.id.action_navigation_home_to_coursePacksActivity,
+                Bundle(),
             )
         }
 
         binding.cardRoutes.setOnClickListener {
             findNavController().navigate(
-                R.id.action_navigation_home_to_courseRouteActivity, Bundle()
+                R.id.action_navigation_home_to_courseRouteActivity,
+                Bundle(),
             )
         }
     }
@@ -92,7 +94,6 @@ class HomeFragment :
     }
 
     override fun messageFailure(failure: Failure) {
-
         val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
 
         showSnackBar(binding.root, getString(messageDesign.idMessage))
@@ -103,36 +104,36 @@ class HomeFragment :
     }
 
     private fun onItemSelected(model: Subscription) {
-
         findNavController().navigate(
             R.id.action_navigation_home_to_detailCourseActivity,
             Bundle().apply {
                 putSerializable(Config.COURSE_PUT, model.course)
                 putSerializable(Config.SUBSCRIPTION_PUT, model)
                 putSerializable(Config.ROLE, viewModel.typeRole)
-            }
+            },
         )
     }
 
     override fun getCourseTeacher(courses: List<Course>) {
         closeLoadingDialog()
-        val subs = Subscription(
-            courseId = 0,
-        )
+        val subs =
+            Subscription(
+                courseId = 0,
+            )
 
         if (courses.isNotEmpty()) {
             binding.courseTeacherRecycler.visibility = View.VISIBLE
         } else {
-
             binding.courseTeacherRecycler.visibility = View.INVISIBLE
         }
 
-        courseTeacherRecycler.adapter = CourseAdapter(courses = courses) { model ->
-            run {
-                subs.course = model
-                onItemSelected(subs)
+        courseTeacherRecycler.adapter =
+            CourseAdapter(courses = courses) { model ->
+                run {
+                    subs.course = model
+                    onItemSelected(subs)
+                }
             }
-        }
     }
 
     override fun getProfile(data: Profile) {

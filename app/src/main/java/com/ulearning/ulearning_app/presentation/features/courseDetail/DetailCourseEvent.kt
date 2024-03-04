@@ -3,7 +3,6 @@ package com.ulearning.ulearning_app.presentation.features.courseDetail
 import com.ulearning.ulearning_app.presentation.base.UiEvent
 
 sealed class DetailCourseEvent : UiEvent {
-
     object DataDetailCourseClicked : DetailCourseEvent()
 
     object GetTopic : DetailCourseEvent()

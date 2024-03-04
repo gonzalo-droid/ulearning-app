@@ -24,7 +24,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class SearchActivity :
     BaseActivityWithViewModel<ActivitySearchBinding, SearchViewModel>(),
     SearchViewState {
-
     override val binding: ActivitySearchBinding by dataBinding(ActivitySearchBinding::inflate)
 
     override val viewModel: SearchViewModel by viewModels()
@@ -52,7 +51,6 @@ class SearchActivity :
     }
 
     private fun observeUiStates() {
-
         viewModel.let {
             viewModel.courseId = Config.COURSE_ID_PUT putInt this@SearchActivity
         }
@@ -62,9 +60,10 @@ class SearchActivity :
         binding.searchEdit.addTextChangedListener { filter ->
             with(viewModel) {
                 if (listUser.isNotEmpty()) {
-                    val newUser = listUser.filter { user ->
-                        user.name!!.lowercase().contains(filter.toString().lowercase())
-                    }
+                    val newUser =
+                        listUser.filter { user ->
+                            user.name!!.lowercase().contains(filter.toString().lowercase())
+                        }
                     adapter.updateUser(newUser)
                 }
             }
@@ -86,7 +85,6 @@ class SearchActivity :
     }
 
     override fun messageFailure(failure: Failure) {
-
         closeLoadingDialog()
 
         val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
@@ -95,7 +93,6 @@ class SearchActivity :
     }
 
     override fun loading() {
-
         showLoadingDialog()
     }
 
@@ -104,10 +101,11 @@ class SearchActivity :
 
         viewModel.listUser = users
 
-        adapter = UserAdapter(users = users) { user ->
+        adapter =
+            UserAdapter(users = users) { user ->
 
-            onItemSelected(user)
-        }
+                onItemSelected(user)
+            }
 
         recycler.adapter = adapter
     }
@@ -118,7 +116,7 @@ class SearchActivity :
                 putExtra(Config.COURSE_ID_PUT, viewModel.courseId)
                 putExtra(Config.LIST_USER_IDS_PUT, "${user.id},")
                 putExtra(Config.TYPE_MESSAGE, Config.MESSAGE_COURSE)
-            }
+            },
         )
     }
 }

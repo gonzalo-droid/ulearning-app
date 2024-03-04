@@ -9,7 +9,6 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface CourseApi {
-
     @GET("subscriptions")
     suspend fun subscription(
         @Header(SettingRemote.AUTHORIZATION) token: String,

@@ -20,5 +20,5 @@ data class ConversationResponse(
     @SerializedName("to_support")
     val toSupport: Boolean? = false,
     @SerializedName("uuid")
-    val uuid: String
+    val uuid: String,
 )

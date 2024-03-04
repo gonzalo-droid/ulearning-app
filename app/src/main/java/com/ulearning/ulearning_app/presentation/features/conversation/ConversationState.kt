@@ -4,7 +4,6 @@ import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.presentation.base.UiState
 
 sealed class ConversationState : UiState {
-
     object Idle : ConversationState()
 
     object Loading : ConversationState()

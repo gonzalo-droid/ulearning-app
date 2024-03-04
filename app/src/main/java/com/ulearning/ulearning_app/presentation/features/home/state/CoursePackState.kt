@@ -4,7 +4,6 @@ import com.ulearning.ulearning_app.domain.model.Subscription
 import com.ulearning.ulearning_app.presentation.base.UiState
 
 sealed class CoursePackState : UiState {
-
     object Idle : CoursePackState()
 
     object Loading : CoursePackState()

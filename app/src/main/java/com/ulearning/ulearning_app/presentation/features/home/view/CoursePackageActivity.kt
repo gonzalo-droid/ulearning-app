@@ -36,9 +36,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class CoursePackageActivity :
     BaseActivityWithViewModel<ActivityCoursePackageBinding, CoursePackageViewModel>(),
     CoursePackageViewState {
-
     override val binding: ActivityCoursePackageBinding by dataBinding(
-        ActivityCoursePackageBinding::inflate
+        ActivityCoursePackageBinding::inflate,
     )
 
     override val viewModel: CoursePackageViewModel by viewModels()
@@ -64,7 +63,6 @@ class CoursePackageActivity :
     }
 
     private fun observeUiStates() {
-
         viewModel.let {
             viewModel.learningPackageId =
                 Config.COURSE_PACKAGE_ID_PUT putInt this@CoursePackageActivity
@@ -98,26 +96,27 @@ class CoursePackageActivity :
         showLoadingDialog()
     }
 
-    override fun getCoursePackage(course: Subscription, percentages: List<CoursePercentage>?) {
+    override fun getCoursePackage(
+        course: Subscription,
+        percentages: List<CoursePercentage>?,
+    ) {
         closeLoadingDialog()
 
         viewModel.setCoursePackage(course)
         viewModel.setPercentages(percentages)
 
         with(binding) {
-
             if (!course.learningPackage?.mainImage?.originalUrl.isNullOrEmpty()) {
                 ImageLoaderGlide().loadImage(
                     imageView = imageCourseIv,
                     imagePath = course.learningPackage?.mainImage?.originalUrl!!,
                     requestOptions = RequestOptions.centerCropTransform(),
-                    placeHolder = R.drawable.course_test
+                    placeHolder = R.drawable.course_test,
                 )
             } else {
                 imageCourseIv.setImageResource(R.drawable.course_test)
             }
             imageCourseIv.alpha = 0.5f
-
 
             toolbarLayout.title = " "
             titleText.text = course.learningPackage?.title
@@ -149,14 +148,18 @@ class CoursePackageActivity :
         binding.progressBar.progress = resultNumber.toInt()
     }
 
-    fun goToDetailCourse(model: LearningPackageItem, percentage:Int) {
-
+    fun goToDetailCourse(
+        model: LearningPackageItem,
+        percentage: Int,
+    ) {
         if (viewModel.getCoursePackage() != null) {
-            startActivity(Intent(this, DetailCourseActivity::class.java).apply {
-                putExtra(Config.COURSE_PUT, model.course)
-                putExtra(Config.SUBSCRIPTION_PUT, viewModel.getCoursePackage())
-                putExtra(Config.PERCENTAGE_PUT, percentage)
-            })
+            startActivity(
+                Intent(this, DetailCourseActivity::class.java).apply {
+                    putExtra(Config.COURSE_PUT, model.course)
+                    putExtra(Config.SUBSCRIPTION_PUT, viewModel.getCoursePackage())
+                    putExtra(Config.PERCENTAGE_PUT, percentage)
+                },
+            )
         }
     }
 
@@ -166,13 +169,15 @@ class CoursePackageActivity :
     ) {
         binding.viewPager.apply {
             (getChildAt(0) as RecyclerView).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-            adapter = CoursePackageViewPagerAdapter(
-                supportFragmentManager, lifecycle, learningPackage, percentages
-            )
+            adapter =
+                CoursePackageViewPagerAdapter(
+                    supportFragmentManager, lifecycle, learningPackage, percentages,
+                )
         }
 
         TabLayoutMediator(
-            binding.tabLayout, binding.viewPager
+            binding.tabLayout,
+            binding.viewPager,
         ) { tab: TabLayout.Tab, position: Int ->
             when (position) {
                 COURSES -> tab.text = "Cursos"

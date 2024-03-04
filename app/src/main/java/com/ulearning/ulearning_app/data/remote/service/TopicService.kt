@@ -5,7 +5,6 @@ import com.ulearning.ulearning_app.core.functional.Failure
 import com.ulearning.ulearning_app.data.remote.entities.response.TopicResponse
 
 interface TopicService {
-
     suspend fun topics(
         token: String,
         courseId: Int,

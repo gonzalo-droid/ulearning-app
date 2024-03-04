@@ -5,7 +5,6 @@ import com.ulearning.ulearning_app.domain.model.Course
 import com.ulearning.ulearning_app.domain.model.Profile
 
 interface HomeViewState {
-
     fun messageFailure(failure: Failure)
 
     fun loading()

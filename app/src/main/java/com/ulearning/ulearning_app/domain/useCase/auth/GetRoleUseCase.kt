@@ -5,8 +5,8 @@ import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import javax.inject.Inject
 
 class GetRoleUseCase
-@Inject constructor(private val authRepository: AuthRepository) :
+    @Inject
+    constructor(private val authRepository: AuthRepository) :
     BaseUseCase<String, BaseUseCase.None>() {
-
-    override suspend fun run(params: None) = authRepository.getRole()
-}
+        override suspend fun run(params: None) = authRepository.getRole()
+    }

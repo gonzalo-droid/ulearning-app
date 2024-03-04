@@ -17,35 +17,35 @@ import javax.inject.Singleton
 
 @Singleton
 class AuthServiceImpl
-@Inject constructor(
-    private val authApi: AuthApi,
-    private val networkHandler: NetworkHandler
-) : AuthService {
+    @Inject
+    constructor(
+        private val authApi: AuthApi,
+        private val networkHandler: NetworkHandler,
+    ) : AuthService {
+        override suspend fun login(body: LoginRequest): Either<Failure, LoginResponse> {
+            return networkHandler.callService { authApi.login(body) }
+        }
 
-    override suspend fun login(body: LoginRequest): Either<Failure, LoginResponse> {
-        return networkHandler.callService { authApi.login(body) }
-    }
+        override suspend fun profile(token: String): Either<Failure, ProfileResponse> {
+            return networkHandler.callServiceBase { authApi.profile(token) }
+        }
 
-    override suspend fun profile(token: String): Either<Failure, ProfileResponse> {
-        return networkHandler.callServiceBase { authApi.profile(token) }
-    }
+        override suspend fun fcmToken(
+            token: String,
+            body: FCMTokenRequest,
+        ): Either<Failure, FCMTokenResponse> {
+            return networkHandler.callServiceBase { authApi.fcmToken(token, body) }
+        }
 
-    override suspend fun fcmToken(
-        token: String,
-        body: FCMTokenRequest
-    ): Either<Failure, FCMTokenResponse> {
-        return networkHandler.callServiceBase { authApi.fcmToken(token, body) }
-    }
+        override suspend fun selfAuthToken(token: String): Either<Failure, TokenResponse> {
+            return networkHandler.callServiceBase { authApi.selfAuthToken(token) }
+        }
 
-    override suspend fun selfAuthToken(token: String): Either<Failure, TokenResponse> {
-        return networkHandler.callServiceBase { authApi.selfAuthToken(token) }
-    }
+        override suspend fun loginGoogle(body: LoginGoogleRequest): Either<Failure, LoginResponse> {
+            return networkHandler.callService { authApi.loginGoogle(body) }
+        }
 
-    override suspend fun loginGoogle(body: LoginGoogleRequest): Either<Failure, LoginResponse> {
-        return networkHandler.callService { authApi.loginGoogle(body) }
+        override suspend fun loginFacebook(body: LoginFacebookRequest): Either<Failure, LoginResponse> {
+            return networkHandler.callService { authApi.loginFacebook(body) }
+        }
     }
-
-    override suspend fun loginFacebook(body: LoginFacebookRequest): Either<Failure, LoginResponse> {
-        return networkHandler.callService { authApi.loginFacebook(body) }
-    }
-}

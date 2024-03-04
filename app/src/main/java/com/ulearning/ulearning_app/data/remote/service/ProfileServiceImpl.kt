@@ -10,17 +10,18 @@ import javax.inject.Singleton
 
 @Singleton
 class ProfileServiceImpl
-@Inject constructor(
-    private val api: ProfileApi,
-    private val networkHandler: NetworkHandler
-) : ProfileService {
-    override suspend fun payments(
-        token: String,
-        perPage: Int,
-        page: Int
-    ): Either<Failure, List<PaymentResponse>> {
-        return networkHandler.callServiceBaseList {
-            api.payments(token = token, perPage = perPage, page = page)
+    @Inject
+    constructor(
+        private val api: ProfileApi,
+        private val networkHandler: NetworkHandler,
+    ) : ProfileService {
+        override suspend fun payments(
+            token: String,
+            perPage: Int,
+            page: Int,
+        ): Either<Failure, List<PaymentResponse>> {
+            return networkHandler.callServiceBaseList {
+                api.payments(token = token, perPage = perPage, page = page)
+            }
         }
     }
-}

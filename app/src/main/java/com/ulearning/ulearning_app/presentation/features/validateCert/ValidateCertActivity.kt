@@ -23,7 +23,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class ValidateCertActivity :
     BaseActivityWithViewModel<ActivityValidateCertBinding, ValidateCertViewModel>(),
     ValidateCertViewState {
-
     override val binding: ActivityValidateCertBinding by dataBinding(ActivityValidateCertBinding::inflate)
 
     override val viewModel: ValidateCertViewModel by viewModels()
@@ -72,17 +71,18 @@ class ValidateCertActivity :
         try {
             val uri = Uri.parse(file.fileUrl)
 
-            val request = DownloadManager.Request(uri)
-                .setTitle("U-Learning Pdf")
-                .setDescription("Descargando...")
-                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI)
-                .setVisibleInDownloadsUi(true)
-                .setDestinationInExternalFilesDir(
-                    this,
-                    Environment.DIRECTORY_DOCUMENTS,
-                    file.filename + ".pdf"
-                )
+            val request =
+                DownloadManager.Request(uri)
+                    .setTitle("U-Learning Pdf")
+                    .setDescription("Descargando...")
+                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                    .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI)
+                    .setVisibleInDownloadsUi(true)
+                    .setDestinationInExternalFilesDir(
+                        this,
+                        Environment.DIRECTORY_DOCUMENTS,
+                        file.filename + ".pdf",
+                    )
             val dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             dm.enqueue(request)
         } catch (e: Exception) {

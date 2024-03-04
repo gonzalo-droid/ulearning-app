@@ -28,9 +28,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class CourseProgressActivity :
     BaseActivityWithViewModel<ActivityCourseProgressBinding, CourseProgressViewModel>(),
     CourseProgressViewState {
-
     override val binding: ActivityCourseProgressBinding by dataBinding(
-        ActivityCourseProgressBinding::inflate
+        ActivityCourseProgressBinding::inflate,
     )
 
     override val viewModel: CourseProgressViewModel by viewModels()
@@ -87,7 +86,10 @@ class CourseProgressActivity :
         binding.skeletonInclude.root.visibility = View.VISIBLE
     }
 
-    override fun getCourseRecent(courses: List<Subscription>, percentages: List<CoursePercentage>) {
+    override fun getCourseRecent(
+        courses: List<Subscription>,
+        percentages: List<CoursePercentage>,
+    ) {
         binding.skeletonInclude.root.visibility = View.INVISIBLE
 
         if (courses.isEmpty()) {
@@ -98,7 +100,7 @@ class CourseProgressActivity :
             courseRecycler.adapter =
                 CourseSubscriptionAdapter(
                     courses = courses,
-                    percentages = percentages
+                    percentages = percentages,
                 ) { model, percentage ->
                     onItemSelected(model, percentage)
                 }
@@ -106,15 +108,17 @@ class CourseProgressActivity :
         }
     }
 
-    private fun onItemSelected(model: Subscription, percentage: Int) {
-
+    private fun onItemSelected(
+        model: Subscription,
+        percentage: Int,
+    ) {
         startActivity(
             Intent(this, DetailCourseActivity::class.java).apply {
                 putExtra(Config.COURSE_PUT, model.course)
                 putExtra(Config.SUBSCRIPTION_PUT, model)
                 putExtra(Config.ROLE, viewModel.typeRole)
                 putExtra(Config.PERCENTAGE_PUT, percentage)
-            }
+            },
         )
     }
 }

@@ -1,7 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.courseDetail
 
 object DetailCourseReducer {
-
     private lateinit var viewState: DetailCourseViewState
 
     fun instance(viewState: DetailCourseViewState) {
@@ -24,12 +23,14 @@ object DetailCourseReducer {
             is DetailCourseState.DownloadFilePDF -> viewState.downloadFilePDF(file = state.file)
             is DetailCourseState.GetRole -> viewState.getRole(role = state.role)
 
-            is DetailCourseState.GenerateCertificatePayment -> viewState.generateCertificatePayment(
-                url = state.url
-            )
-            is DetailCourseState.GenerateRecordPayment -> viewState.generateCertificatePayment(
-                url = state.url
-            )
+            is DetailCourseState.GenerateCertificatePayment ->
+                viewState.generateCertificatePayment(
+                    url = state.url,
+                )
+            is DetailCourseState.GenerateRecordPayment ->
+                viewState.generateCertificatePayment(
+                    url = state.url,
+                )
 
             is DetailCourseState.MyCertificate -> viewState.myCertificate(certificate = state.certificate)
             is DetailCourseState.MyRecord -> viewState.myRecord(record = state.record)

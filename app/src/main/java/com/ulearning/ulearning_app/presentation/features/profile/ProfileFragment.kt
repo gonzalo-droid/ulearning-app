@@ -1,7 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.profile
 
 import android.content.Intent
-import android.net.Uri
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -19,16 +18,13 @@ import com.ulearning.ulearning_app.domain.model.Profile
 import com.ulearning.ulearning_app.presentation.base.BaseFragmentWithViewModel
 import com.ulearning.ulearning_app.presentation.features.auth.LoginActivity
 import com.ulearning.ulearning_app.presentation.features.payment.PaymentActivity
-import com.ulearning.ulearning_app.presentation.features.search.SearchActivity
 import com.ulearning.ulearning_app.presentation.model.design.MessageDesign
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.io.path.Path
 
 @AndroidEntryPoint
 class ProfileFragment :
     BaseFragmentWithViewModel<FragmentProfileBinding, ProfileViewModel>(),
     ProfileViewState {
-
     override val binding: FragmentProfileBinding by dataBinding(FragmentProfileBinding::inflate)
 
     override val viewModel: ProfileViewModel by viewModels()
@@ -36,7 +32,6 @@ class ProfileFragment :
     override val dataBindingViewModel = BR.profileViewModel
 
     override fun onViewIsCreated(view: View) {
-
         ProfileReducer.instance(viewState = this)
         binding.paymentBtn.visibility = View.VISIBLE
         observeUiStates()
@@ -46,7 +41,6 @@ class ProfileFragment :
         viewModel.setEvent(ProfileEvent.DataProfileClicked)
 
         binding.scanQrBtn.setOnClickListener {
-
             findNavController().navigate(
                 R.id.action_navigation_profile_to_scanQrActivity,
             )
@@ -92,9 +86,12 @@ class ProfileFragment :
             numberDocumentText.text = data.documentNumber
 
             val date =
-                if (data.dateOfBirth.isNullOrEmpty()) ""
-                else data.dateOfBirth.dateFormat(Config.DATE_FORMAT_TWO)
-                    .dateFormat(Config.DATE_FORMAT_FIFTEEN)
+                if (data.dateOfBirth.isNullOrEmpty()) {
+                    ""
+                } else {
+                    data.dateOfBirth.dateFormat(Config.DATE_FORMAT_TWO)
+                        .dateFormat(Config.DATE_FORMAT_FIFTEEN)
+                }
 
             dateOfBirthdayInputText.editText!!.setText(date)
 
@@ -114,13 +111,14 @@ class ProfileFragment :
     }
 
     override fun goToWebView(url: String) {
-
         // val urlPayment = "$url?return=/payments"
-        //startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(urlPayment)))
+        // startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(urlPayment)))
 
-        startActivity(Intent(requireActivity(), PaymentActivity::class.java).apply {
+        startActivity(
+            Intent(requireActivity(), PaymentActivity::class.java).apply {
 //
-        })
+            },
+        )
     }
 
     override fun logout() {

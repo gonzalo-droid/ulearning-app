@@ -7,7 +7,6 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface ProfileApi {
-
     @GET("payments")
     suspend fun payments(
         @Header(SettingRemote.AUTHORIZATION) token: String,

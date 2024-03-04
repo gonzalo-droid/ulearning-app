@@ -1,11 +1,9 @@
 package com.ulearning.ulearning_app.presentation.features.splash
 
 object SplashReducer {
-
     private lateinit var viewState: SplashViewState
 
     fun instance(splashViewState: SplashViewState) {
-
         viewState = splashViewState
     }
 

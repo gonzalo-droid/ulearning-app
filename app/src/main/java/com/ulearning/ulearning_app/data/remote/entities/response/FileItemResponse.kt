@@ -25,7 +25,6 @@ data class FileItemResponse(
     val userId: Int? = 0,
     @SerializedName("year")
     val year: Int? = 0,
-
 /*    @SerializedName("deleted_at")
     val deletedAt: Any? = Any(),
     @SerializedName("updated_at")

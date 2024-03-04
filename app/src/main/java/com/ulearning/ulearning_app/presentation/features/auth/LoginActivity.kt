@@ -29,7 +29,6 @@ import org.json.JSONException
 class LoginActivity :
     BaseActivityWithViewModel<ActivityLoginBinding, LoginViewModel>(),
     LoginViewState {
-
     override val binding: ActivityLoginBinding by dataBinding(ActivityLoginBinding::inflate)
 
     override val viewModel: LoginViewModel by viewModels()
@@ -49,7 +48,6 @@ class LoginActivity :
     }
 
     private fun observeUiStates() {
-
         binding.logInGoogle.setOnClickListener {
             loginInGoogle()
         }
@@ -103,35 +101,36 @@ class LoginActivity :
                             val isLoggedIn = accessToken != null && !accessToken.isExpired
                             if (isLoggedIn) LoginManager.getInstance().logOut()
 
-                            val request = GraphRequest.newMeRequest(
-                                token
-                            ) { `object`, response ->
-                                try {
-                                    /**
-                                     * https://developers.facebook.com/docs/facebook-login/android
-                                     * https://developers.facebook.com/docs/android/graph?locale=es_ES#userdata-troubleshooting
-                                     *
-                                     * get data with GraphRequest
-                                     */
+                            val request =
+                                GraphRequest.newMeRequest(
+                                    token,
+                                ) { `object`, response ->
+                                    try {
+                                        /**
+                                         * https://developers.facebook.com/docs/facebook-login/android
+                                         * https://developers.facebook.com/docs/android/graph?locale=es_ES#userdata-troubleshooting
+                                         *
+                                         * get data with GraphRequest
+                                         */
 
-                                    val email = `object`!!.getString("email")
-                                    val name = `object`.getString("name")
-                                    val firstName = `object`.getString("first_name")
-                                    val lastName = `object`.getString("last_name")
-                                    val picture = `object`.getString("picture")
-                                    viewModel.sendDataLoginInFacebook(
-                                        LoginFacebook(
-                                            email = email ?: "",
-                                            name = name ?: "",
-                                            firstName = firstName ?: "",
-                                            lastName = lastName ?: "",
-                                            picture = picture ?: "",
+                                        val email = `object`!!.getString("email")
+                                        val name = `object`.getString("name")
+                                        val firstName = `object`.getString("first_name")
+                                        val lastName = `object`.getString("last_name")
+                                        val picture = `object`.getString("picture")
+                                        viewModel.sendDataLoginInFacebook(
+                                            LoginFacebook(
+                                                email = email ?: "",
+                                                name = name ?: "",
+                                                firstName = firstName ?: "",
+                                                lastName = lastName ?: "",
+                                                picture = picture ?: "",
+                                            ),
                                         )
-                                    )
-                                } catch (e: JSONException) {
-                                    Log.e("SingInFacebook", "json: " + e.message.toString())
+                                    } catch (e: JSONException) {
+                                        Log.e("SingInFacebook", "json: " + e.message.toString())
+                                    }
                                 }
-                            }
                             val parameters = Bundle()
                             parameters.putString("fields", "email,first_name,last_name,name,picture")
                             request.parameters = parameters
@@ -147,16 +146,16 @@ class LoginActivity :
                         Log.e("SingInFacebook", "Exception: " + error.message.toString())
                         // LoginManager.getInstance().logOut()
                     }
-                }
+                },
             )
     }
 
     override fun loginInGoogle() {
-
-        val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
+        val googleConf =
+            GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
 
         val googleClient = GoogleSignIn.getClient(this, googleConf)
 
@@ -165,8 +164,11 @@ class LoginActivity :
         startActivityForResult(googleClient.signInIntent, GOOGLE_SIGN_IN)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?,
+    ) {
         callbackManager.onActivityResult(requestCode, resultCode, data)
 
         super.onActivityResult(requestCode, resultCode, data)
@@ -183,8 +185,8 @@ class LoginActivity :
                             email = account.email ?: "",
                             name = account.displayName ?: "",
                             familyName = account.familyName ?: "",
-                            givenName = account.givenName ?: ""
-                        )
+                            givenName = account.givenName ?: "",
+                        ),
                     )
                 }
             } catch (e: ApiException) {

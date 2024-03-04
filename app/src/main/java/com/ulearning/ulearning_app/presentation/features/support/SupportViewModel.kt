@@ -9,49 +9,49 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SupportViewModel
-@Inject constructor(
-    private val getConversationSupportUseCase: GetConversationSupportUseCase
-) : BaseViewModel<SupportEvent, SupportState, SupportEffect>() {
+    @Inject
+    constructor(
+        private val getConversationSupportUseCase: GetConversationSupportUseCase,
+    ) : BaseViewModel<SupportEvent, SupportState, SupportEffect>() {
+        var page: Int = 1
+        var courseId: Int = 0
 
-    var page: Int = 1
-    var courseId: Int = 0
+        override fun createInitialState(): SupportState {
+            return SupportState.Idle
+        }
 
-    override fun createInitialState(): SupportState {
-        return SupportState.Idle
-    }
+        override fun handleEvent(event: SupportEvent) {
+            when (event) {
+                SupportEvent.AddConversationClick -> addConversation()
+                SupportEvent.ConversationsClicked -> getConversations()
+            }
+        }
 
-    override fun handleEvent(event: SupportEvent) {
-        when (event) {
-            SupportEvent.AddConversationClick -> addConversation()
-            SupportEvent.ConversationsClicked -> getConversations()
+        private fun addConversation() {
+            setEffect { SupportEffect.GoToNewConversation }
+        }
+
+        private fun getConversations() {
+            setState { SupportState.Loading }
+            getConversationSupportUseCase(
+                GetConversationSupportUseCase.Params(
+                    page = page,
+                    toSupport = true,
+                ),
+            ) {
+                it.either(::handleFailure, ::handleConversations)
+            }
+        }
+
+        private fun handleConversations(conversations: List<Conversation>) {
+            setState { SupportState.Conversations(conversations = conversations) }
+        }
+
+        private fun handleFailure(failure: Failure) {
+            setEffect { SupportEffect.ShowMessageFailure(failure = failure) }
+        }
+
+        companion object Events {
+            val addConversationClick = SupportEvent.AddConversationClick
         }
     }
-
-    private fun addConversation() {
-        setEffect { SupportEffect.GoToNewConversation }
-    }
-
-    private fun getConversations() {
-        setState { SupportState.Loading }
-        getConversationSupportUseCase(
-            GetConversationSupportUseCase.Params(
-                page = page,
-                toSupport = true
-            )
-        ) {
-            it.either(::handleFailure, ::handleConversations)
-        }
-    }
-
-    private fun handleConversations(conversations: List<Conversation>) {
-        setState { SupportState.Conversations(conversations = conversations) }
-    }
-
-    private fun handleFailure(failure: Failure) {
-        setEffect { SupportEffect.ShowMessageFailure(failure = failure) }
-    }
-
-    companion object Events {
-        val addConversationClick = SupportEvent.AddConversationClick
-    }
-}

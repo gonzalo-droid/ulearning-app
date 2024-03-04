@@ -13,7 +13,7 @@ inline fun <reified T : Activity> Context.startNewActivityClearStack() {
     this.startActivity(
         Intent(this, T::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        }
+        },
     )
 }
 
@@ -23,7 +23,7 @@ inline fun <reified T : Activity> Context.startNewActivity() {
 
 inline fun <reified T : Activity> Context.startNewActivity(
     vararg extras: Pair<String, Any>?,
-    clearStack: Boolean = false
+    clearStack: Boolean = false,
 ) {
     this.startActivity(
         Intent(this, T::class.java).apply {
@@ -41,18 +41,23 @@ inline fun <reified T : Activity> Context.startNewActivity(
                         is Boolean -> this.putExtra(pairNotNull.first, pairValue)
                         is Bundle -> this.putExtra(pairNotNull.first, pairValue)
                         is Parcelable -> this.putExtra(pairNotNull.first, pairValue)
-                        is Array<*> -> when {
-                            pairValue.isArrayOf<CharSequence>() -> this.putExtra(
-                                pairNotNull.first,
-                                pairValue
-                            )
-                            pairValue.isArrayOf<String>() -> this.putExtra(pairNotNull.first, pairValue)
-                            pairValue.isArrayOf<Parcelable>() -> this.putExtra(
-                                pairNotNull.first,
-                                pairValue
-                            )
-                            else -> throw IllegalArgumentException("Intent extra ${pairNotNull.first} has wrong type ${pairValue.javaClass.name}")
-                        }
+                        is Array<*> ->
+                            when {
+                                pairValue.isArrayOf<CharSequence>() ->
+                                    this.putExtra(
+                                        pairNotNull.first,
+                                        pairValue,
+                                    )
+                                pairValue.isArrayOf<String>() -> this.putExtra(pairNotNull.first, pairValue)
+                                pairValue.isArrayOf<Parcelable>() ->
+                                    this.putExtra(
+                                        pairNotNull.first,
+                                        pairValue,
+                                    )
+                                else -> throw IllegalArgumentException(
+                                    "Intent extra ${pairNotNull.first} has wrong type ${pairValue.javaClass.name}",
+                                )
+                            }
                         is IntArray -> this.putExtra(pairNotNull.first, pairValue)
                         is LongArray -> this.putExtra(pairNotNull.first, pairValue)
                         is FloatArray -> this.putExtra(pairNotNull.first, pairValue)
@@ -61,18 +66,23 @@ inline fun <reified T : Activity> Context.startNewActivity(
                         is ShortArray -> this.putExtra(pairNotNull.first, pairValue)
                         is BooleanArray -> this.putExtra(pairNotNull.first, pairValue)
                         is Serializable -> this.putExtra(pairNotNull.first, pairValue)
-                        else -> throw IllegalArgumentException("Intent extra ${pairNotNull?.first} has wrong type ${pairValue?.javaClass?.name}")
+                        else -> throw IllegalArgumentException(
+                            "Intent extra ${pairNotNull?.first} has wrong type ${pairValue?.javaClass?.name}",
+                        )
                     }
                     return@forEach
                 }
             }
-            if (clearStack)
+            if (clearStack) {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        }
+            }
+        },
     )
 }
 
-fun Context.dpToPx(@Dimension(unit = Dimension.DP) dp: Int): Int {
+fun Context.dpToPx(
+    @Dimension(unit = Dimension.DP) dp: Int,
+): Int {
     val r = this.resources
     return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), r.displayMetrics).toInt()
 }

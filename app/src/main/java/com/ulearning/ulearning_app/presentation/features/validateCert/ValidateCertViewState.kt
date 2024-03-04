@@ -5,7 +5,6 @@ import com.ulearning.ulearning_app.domain.model.DownloadFile
 import com.ulearning.ulearning_app.domain.model.FileItem
 
 interface ValidateCertViewState {
-
     fun messageFailure(failure: Failure)
 
     fun loading()

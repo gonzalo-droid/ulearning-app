@@ -11,10 +11,9 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface AuthApi {
-
     @POST("login")
     suspend fun login(
-        @Body request: LoginRequest
+        @Body request: LoginRequest,
     ): Response<LoginResponse>
 
     @GET("profile")
@@ -25,7 +24,7 @@ interface AuthApi {
     @POST("fcm-token")
     suspend fun fcmToken(
         @Header(SettingRemote.AUTHORIZATION) token: String,
-        @Body request: FCMTokenRequest
+        @Body request: FCMTokenRequest,
     ): Response<BaseResponse<FCMTokenResponse>>
 
     @POST("self-auth-token")
@@ -35,11 +34,11 @@ interface AuthApi {
 
     @POST("login-google")
     suspend fun loginGoogle(
-        @Body request: LoginGoogleRequest
+        @Body request: LoginGoogleRequest,
     ): Response<LoginResponse>
 
     @POST("login-facebook")
     suspend fun loginFacebook(
-        @Body request: LoginFacebookRequest
+        @Body request: LoginFacebookRequest,
     ): Response<LoginResponse>
 }

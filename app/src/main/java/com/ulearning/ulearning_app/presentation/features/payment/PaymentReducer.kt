@@ -1,11 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.payment
 
-import com.ulearning.ulearning_app.presentation.features.home.HomeEffect
-import com.ulearning.ulearning_app.presentation.features.home.state.CourseProgressState
-import com.ulearning.ulearning_app.presentation.features.home.viewState.CourseProgressViewState
-
 object PaymentReducer {
-
     private lateinit var viewState: PaymentViewState
 
     fun instance(viewState: PaymentViewState) {

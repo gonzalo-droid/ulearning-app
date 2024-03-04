@@ -17,21 +17,21 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 object DataStore {
-
     private val Context.dataStore: DataStore<UserPreference> by dataStore(
         fileName = Config.NAME_DATA_STORE,
-        serializer = UserSerializableDataStore
+        serializer = UserSerializableDataStore,
     )
 
     @Provides
     @Reusable
-    fun provideProtoDataStore(@ApplicationContext context: Context) =
-        context.dataStore
+    fun provideProtoDataStore(
+        @ApplicationContext context: Context,
+    ) = context.dataStore
 
     @Provides
     @Reusable
     internal fun providesDataStoreConfig(
         @ApplicationContext context: Context,
-        dataStore: DataStore<UserPreference>
+        dataStore: DataStore<UserPreference>,
     ) = DataStoreConfig(context, dataStore)
 }

@@ -23,7 +23,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class ConversationActivity :
     BaseActivityWithViewModel<ActivityConversationBinding, ConversationViewModel>(),
     ConversationViewState {
-
     override val binding: ActivityConversationBinding by dataBinding(ActivityConversationBinding::inflate)
 
     override val viewModel: ConversationViewModel by viewModels()
@@ -51,7 +50,6 @@ class ConversationActivity :
     }
 
     private fun observeUiStates() {
-
         viewModel.let {
             viewModel.courseId = Config.COURSE_ID_PUT putInt this@ConversationActivity
         }
@@ -76,10 +74,11 @@ class ConversationActivity :
     override fun conversations(conversations: List<Conversation>) {
         closeLoadingDialog()
 
-        adapter = ConversationAdapter(conversations = conversations) { conversation ->
+        adapter =
+            ConversationAdapter(conversations = conversations) { conversation ->
 
-            onItemSelected(conversation)
-        }
+                onItemSelected(conversation)
+            }
 
         recycler.adapter = adapter
     }
@@ -89,7 +88,7 @@ class ConversationActivity :
             Intent(this, SearchActivity::class.java).apply {
                 putExtra(Config.COURSE_ID_PUT, viewModel.courseId)
                 putExtra(Config.TYPE_MESSAGE, Config.MESSAGE_COURSE)
-            }
+            },
         )
         finish()
     }
@@ -98,12 +97,11 @@ class ConversationActivity :
         startActivity(
             Intent(this, MessageActivity::class.java).apply {
                 putExtra(Config.CONVERSATION_PUT, conversation)
-            }
+            },
         )
     }
 
     override fun messageFailure(failure: Failure) {
-
         closeLoadingDialog()
 
         val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
@@ -112,7 +110,6 @@ class ConversationActivity :
     }
 
     override fun loading() {
-
         showLoadingDialog()
     }
 }

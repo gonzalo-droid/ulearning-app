@@ -12,45 +12,45 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CourseRouteViewModel
-@Inject constructor(
-    private val getCoursesPackageSubscriptionUseCase: GetCoursesPackageSubscriptionUseCase,
-) : BaseViewModel<CourseRouteEvent, CourseRouteState, HomeEffect>() {
+    @Inject
+    constructor(
+        private val getCoursesPackageSubscriptionUseCase: GetCoursesPackageSubscriptionUseCase,
+    ) : BaseViewModel<CourseRouteEvent, CourseRouteState, HomeEffect>() {
+        private val isFinished = true
 
-    private val isFinished = true
+        private val page = 1
 
-    private val page = 1
+        var userId = 1
 
-    var userId = 1
+        var typeRole: String = ""
 
-    var typeRole: String = ""
-
-    override fun createInitialState(): CourseRouteState {
-        return CourseRouteState.Idle
-    }
-
-    override fun handleEvent(event: CourseRouteEvent) {
-        when (event) {
-            CourseRouteEvent.CourseRouteClicked -> getRoutes()
+        override fun createInitialState(): CourseRouteState {
+            return CourseRouteState.Idle
         }
-    }
 
-    private fun getRoutes() {
-        setState { CourseRouteState.Loading }
-
-        getCoursesPackageSubscriptionUseCase(
-            GetCoursesPackageSubscriptionUseCase.Params(page = page, type = "path")
-        ) {
-            it.either(::handleFailure, ::handleCourseRoute)
+        override fun handleEvent(event: CourseRouteEvent) {
+            when (event) {
+                CourseRouteEvent.CourseRouteClicked -> getRoutes()
+            }
         }
-    }
 
-    private fun handleFailure(failure: Failure) {
-        setEffect { HomeEffect.ShowMessageFailure(failure = failure) }
-    }
+        private fun getRoutes() {
+            setState { CourseRouteState.Loading }
 
-    private fun handleCourseRoute(courses: List<Subscription>) {
-        setState { CourseRouteState.CourseRoute(courses = courses) }
-    }
+            getCoursesPackageSubscriptionUseCase(
+                GetCoursesPackageSubscriptionUseCase.Params(page = page, type = "path"),
+            ) {
+                it.either(::handleFailure, ::handleCourseRoute)
+            }
+        }
 
-    companion object Events
-}
+        private fun handleFailure(failure: Failure) {
+            setEffect { HomeEffect.ShowMessageFailure(failure = failure) }
+        }
+
+        private fun handleCourseRoute(courses: List<Subscription>) {
+            setState { CourseRouteState.CourseRoute(courses = courses) }
+        }
+
+        companion object Events
+    }

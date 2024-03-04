@@ -16,9 +16,6 @@ plugins {
     id("com.google.firebase.appdistribution")
 }
 
-
-
-
 android {
     namespace = "com.ulearning.ulearning_app"
     compileSdk = 34
@@ -38,7 +35,7 @@ android {
             isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
         getByName("debug") {
@@ -46,7 +43,6 @@ android {
             isDebuggable = true
         }
     }
-
 
     flavorDimensions("versionFlavor")
 
@@ -58,7 +54,7 @@ android {
             buildConfigField(
                 "String",
                 "BASE_URL",
-                "\"https://sandbox.api.ulearning.com.pe/api/\""
+                "\"https://sandbox.api.ulearning.com.pe/api/\"",
             )
             buildConfigField("String", "STUDENT_URL", "\"https://student.ulearning.com.pe\"")
         }
@@ -74,7 +70,6 @@ android {
 
     // email : "one_student@gmail.com"
     // password : "ulearning2022"
-
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -127,7 +122,7 @@ dependencies {
     implementation("androidx.datastore:datastore-core:1.0.0")
     implementation("com.google.protobuf:protobuf-javalite:3.23.0")
     implementation("com.google.protobuf:protobuf-kotlin-lite:3.23.0")
-    //navigation
+    // navigation
     implementation("androidx.navigation:navigation-ui-ktx:2.5.1")
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.1")
     implementation("com.google.android.gms:play-services-vision:20.1.3")
@@ -153,63 +148,62 @@ dependencies {
 
     // facebook
     implementation("com.facebook.android:facebook-login:latest.release")
-    //HILT
+    // HILT
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-compiler:2.48")
     implementation("androidx.preference:preference-ktx:1.2.1")
-    //material
+    // material
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation("androidx.annotation:annotation:1.3.0")
     implementation("com.google.android.material:material:1.5.0")
 
     // testing
     testImplementation("org.junit.jupiter:junit-jupiter")
-    //kotlin coroutines test
-    /**
+    // kotlin coroutines test
+    /*
      * kotlinx-coroutines-test: Esta biblioteca se utiliza para probar las funciones asincrónicas
      * que se implementan con Kotlin Coroutines en Android. Por ejemplo, si tienes una función
      * que usa Coroutines para hacer una llamada a la red y deseas probarla,
      * puedes usar kotlinx-coroutines-test para escribir pruebas para esa función. Ejemplo:*/
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
 
-    /**
+    /*
      * Hamcrest: Hamcrest es una biblioteca de aserciones para pruebas unitarias en Java y Kotlin.
      * Puedes usar Hamcrest para escribir aserciones más expresivas en tus pruebas unitarias*/
     testImplementation("org.hamcrest:hamcrest:2.2")
 
-    /**
+    /*
      * androidx.arch.core:core-testing: Esta biblioteca se utiliza para probar los componentes
      * de Arquitectura de Android, como LiveData y ViewModel. Con esta biblioteca, puedes simular
      * cambios de datos y observar cómo los componentes de Arquitectura reaccionan a esos cambios*/
     testImplementation("androidx.arch.core:core-testing:2.2.0")
 
-    /**
+    /*
      * com.squareup.okhttp3:mockwebserver: Esta biblioteca se utiliza para simular respuestas de
      * red en pruebas unitarias de Android. Por ejemplo, si tienes una función que hace una llamada
      * a una API, puedes usar mockwebserver para simular la respuesta de esa API en tus pruebas unitarias*/
     testImplementation("com.squareup.okhttp3:mockwebserver:4.9.3")
 
-    /**
+    /*
      * io.mockk:mockk: Esta biblioteca se utiliza para crear objetos simulados en pruebas unitarias
      * de Kotlin. Puedes usar mockk para simular objetos que dependen de otros objetos o
      * para simular interacciones de usuario en tus pruebas unitarias.*/
     testImplementation("io.mockk:mockk:1.12.5")
 
-    /**
+    /*
      * org.mockito:mockito-core: Esta biblioteca se utiliza para crear objetos simulados en
      * pruebas unitarias de Java y Kotlin. Puedes usar Mockito para simular objetos que dependen
      * de otros objetos o para simular interacciones de usuario en tus pruebas unitari*/
     testImplementation("org.mockito:mockito-core:4.2.0")
 
-    /**
+    /*
      * This is a library that provides Kotlin extensions and functions to use JUnit 4 or JUnit 5
      * in Android tests. The version being used in this project is 1.1.5.*/
     testImplementation("androidx.test.ext:junit-ktx:1.1.5")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
 
-
-    /**
+    /*
      * This is a library that provides Kotlin extensions and functions for
      * testing Android components and interactions with the Android framework.
      * The version being used in this project is 1.5.0.
@@ -223,18 +217,19 @@ dependencies {
     testImplementation("org.robolectric:robolectric:4.7.3")
 
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
 }
 
 protobuf {
     protoc {
-        artifact = if (osdetector.os == "osx") {
-            // support both Apple Silicon and Intel chipsets
-            val arch = System.getProperty("os.arch")
-            val suffix = if (arch == "x86_64") "x86_64" else "aarch_64"
-            "com.google.protobuf:protoc:3.21.7:osx-$suffix"
-        } else
-            "com.google.protobuf:protoc:3.21.7"
+        artifact =
+            if (osdetector.os == "osx") {
+                // support both Apple Silicon and Intel chipsets
+                val arch = System.getProperty("os.arch")
+                val suffix = if (arch == "x86_64") "x86_64" else "aarch_64"
+                "com.google.protobuf:protoc:3.21.7:osx-$suffix"
+            } else {
+                "com.google.protobuf:protoc:3.21.7"
+            }
     }
     plugins {
         generateProtoTasks {

@@ -42,5 +42,5 @@ data class MainImageResponse(
     @SerializedName("updated_at")
     var updatedAt: String? = "",
     @SerializedName("uuid")
-    var uuid: String? = ""
+    var uuid: String? = "",
 )

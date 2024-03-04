@@ -18,9 +18,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ListCoursesPackageFragment :
     BaseFragmentWithViewModel<FragmentListCoursesPackageBinding, CoursePackageViewModel>() {
-
     override val binding: FragmentListCoursesPackageBinding by dataBinding(
-        FragmentListCoursesPackageBinding::inflate
+        FragmentListCoursesPackageBinding::inflate,
     )
 
     override val viewModel: CoursePackageViewModel by viewModels()
@@ -33,7 +32,6 @@ class ListCoursesPackageFragment :
     private var percentages: ArrayList<CoursePercentage> = arrayListOf()
 
     override fun onViewIsCreated(view: View) {
-
         arguments?.let {
             items = it.getSerializable(LIST_COURSES) as ArrayList<LearningPackageItem>
             percentages = it.getSerializable(LIST_PERCENTAGES) as ArrayList<CoursePercentage>
@@ -47,20 +45,22 @@ class ListCoursesPackageFragment :
     }
 
     private fun observeUiStates() {
-        courseRecycler.adapter = CoursePackageItemAdapter(
-            items = items, percentages = percentages
-        ) { model, percentage ->
-            onItemSelected(model, percentage)
-        }
+        courseRecycler.adapter =
+            CoursePackageItemAdapter(
+                items = items, percentages = percentages,
+            ) { model, percentage ->
+                onItemSelected(model, percentage)
+            }
     }
 
-    private fun onItemSelected(model: LearningPackageItem, percentage: Int) {
-
+    private fun onItemSelected(
+        model: LearningPackageItem,
+        percentage: Int,
+    ) {
         (requireActivity() as CoursePackageActivity).goToDetailCourse(model, percentage)
     }
 
     companion object {
-
         const val LIST_COURSES = "listCourses"
         const val LIST_PERCENTAGES = "percentages"
 
@@ -68,11 +68,13 @@ class ListCoursesPackageFragment :
         fun newInstance(
             list: ArrayList<LearningPackageItem>?,
             percentages: ArrayList<CoursePercentage>? = arrayListOf(),
-        ): ListCoursesPackageFragment = ListCoursesPackageFragment().apply {
-            arguments = Bundle().apply {
-                putSerializable(LIST_COURSES, list)
-                putSerializable(LIST_PERCENTAGES, percentages)
+        ): ListCoursesPackageFragment =
+            ListCoursesPackageFragment().apply {
+                arguments =
+                    Bundle().apply {
+                        putSerializable(LIST_COURSES, list)
+                        putSerializable(LIST_PERCENTAGES, percentages)
+                    }
             }
-        }
     }
 }

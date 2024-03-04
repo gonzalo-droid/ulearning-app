@@ -20,5 +20,5 @@ data class FileInfoResponse(
     @SerializedName("title")
     val title: String? = "",
     @SerializedName("topics")
-    val topics: String? = ""
+    val topics: String? = "",
 )

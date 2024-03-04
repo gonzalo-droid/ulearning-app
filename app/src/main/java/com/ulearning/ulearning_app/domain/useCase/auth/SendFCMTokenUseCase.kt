@@ -5,10 +5,10 @@ import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import javax.inject.Inject
 
 class SendFCMTokenUseCase
-@Inject constructor(private val authRepository: AuthRepository) :
+    @Inject
+    constructor(private val authRepository: AuthRepository) :
     BaseUseCase<Boolean, SendFCMTokenUseCase.Params>() {
+        override suspend fun run(params: Params) = authRepository.fcmToken(params.fcmToken)
 
-    override suspend fun run(params: Params) = authRepository.fcmToken(params.fcmToken)
-
-    data class Params(val fcmToken: String)
-}
+        data class Params(val fcmToken: String)
+    }

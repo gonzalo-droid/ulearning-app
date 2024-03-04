@@ -2,10 +2,8 @@ package com.ulearning.ulearning_app.data.mapper
 
 import com.ulearning.ulearning_app.data.remote.entities.response.PaymentItemResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.PaymentResponse
-import com.ulearning.ulearning_app.data.remote.entities.response.TopicResponse
 import com.ulearning.ulearning_app.domain.model.Payment
 import com.ulearning.ulearning_app.domain.model.PaymentItem
-import com.ulearning.ulearning_app.domain.model.Topic
 import javax.inject.Singleton
 
 @Singleton
@@ -32,7 +30,7 @@ class ProfileMapperImpl : ProfileMapper {
                 paymentId = it.paymentId,
                 title = it.title,
                 amount = it.amount,
-                payable = it.payable
+                payable = it.payable,
             )
         }
     }

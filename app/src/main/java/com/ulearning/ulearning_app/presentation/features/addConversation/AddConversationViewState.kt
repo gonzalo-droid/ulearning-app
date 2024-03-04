@@ -5,7 +5,6 @@ import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.domain.model.User
 
 interface AddConversationViewState {
-
     fun messageFailure(failure: Failure)
 
     fun loading()

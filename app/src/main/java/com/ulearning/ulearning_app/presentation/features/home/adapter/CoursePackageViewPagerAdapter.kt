@@ -14,17 +14,18 @@ class CoursePackageViewPagerAdapter(
     fragmentManager: FragmentManager,
     lifecycle: Lifecycle,
     learningPackage: LearningPackage,
-    percentages: ArrayList<CoursePercentage>?
+    percentages: ArrayList<CoursePercentage>?,
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
-
     var data = learningPackage
     private var percentagesCourses = percentages
+
     override fun getItemCount() = 2
 
     override fun createFragment(position: Int): Fragment {
         return if (position == 0) {
             ListCoursesPackageFragment.newInstance(
-                list = data.items as ArrayList<LearningPackageItem>?, percentages = percentagesCourses
+                list = data.items as ArrayList<LearningPackageItem>?,
+                percentages = percentagesCourses,
             )
         } else {
             DetailCoursesPackageFragment.newInstance(data)

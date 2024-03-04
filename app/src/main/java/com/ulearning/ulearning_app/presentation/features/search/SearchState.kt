@@ -5,7 +5,6 @@ import com.ulearning.ulearning_app.domain.model.User
 import com.ulearning.ulearning_app.presentation.base.UiState
 
 sealed class SearchState : UiState {
-
     object Idle : SearchState()
 
     object Loading : SearchState()

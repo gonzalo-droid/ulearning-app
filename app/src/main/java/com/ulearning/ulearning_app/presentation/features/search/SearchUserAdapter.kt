@@ -12,20 +12,24 @@ import com.ulearning.ulearning_app.domain.model.User
 class SearchUserAdapter constructor(
     private val users: List<User>,
     context: Context,
-    resource: Int
+    resource: Int,
 ) : ArrayAdapter<User>(
-    context,
-    resource
-) {
-
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        context,
+        resource,
+    ) {
+    override fun getView(
+        position: Int,
+        convertView: View?,
+        parent: ViewGroup,
+    ): View {
         return super.getView(position, convertView, parent)
 
         var listItem = convertView
 
         if (listItem == null) {
-            listItem = LayoutInflater.from(parent.context)
-                .inflate(com.ulearning.ulearning_app.R.layout.item_user, parent, false)
+            listItem =
+                LayoutInflater.from(parent.context)
+                    .inflate(com.ulearning.ulearning_app.R.layout.item_user, parent, false)
         }
 
         if (listItem != null) {

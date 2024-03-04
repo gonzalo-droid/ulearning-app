@@ -10,28 +10,34 @@ import com.ulearning.ulearning_app.domain.model.Teacher
 
 class DetailCourseTeacherAdapter constructor(
     private val teachers: List<Teacher>,
-    private val onClickListener: (Teacher) -> Unit
+    private val onClickListener: (Teacher) -> Unit,
 ) : RecyclerView.Adapter<DetailCourseTeacherAdapter.CustomViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): CustomViewHolder {
         return CustomViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_teacher, parent, false)
+                .inflate(R.layout.item_teacher, parent, false),
         )
     }
 
-    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: CustomViewHolder,
+        position: Int,
+    ) {
         holder.bind(teachers[position], onClickListener)
     }
 
     override fun getItemCount(): Int = teachers.size
 
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
-
         val binding = ItemTeacherBinding.bind(view)
 
-        fun bind(model: Teacher, onClickListener: (Teacher) -> Unit) {
-
+        fun bind(
+            model: Teacher,
+            onClickListener: (Teacher) -> Unit,
+        ) {
             binding.nameText.text = "${model.firstName} ${model.lastName}"
 
             binding.roleText.text = model.formatSubtype()

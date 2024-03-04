@@ -10,17 +10,22 @@ import com.ulearning.ulearning_app.domain.model.User
 
 class UserAdapter constructor(
     private var users: List<User>,
-    private val onClickListener: (User) -> Unit
+    private val onClickListener: (User) -> Unit,
 ) : RecyclerView.Adapter<UserAdapter.CustomViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): CustomViewHolder {
         return CustomViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_user, parent, false)
+                .inflate(R.layout.item_user, parent, false),
         )
     }
 
-    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: CustomViewHolder,
+        position: Int,
+    ) {
         holder.bind(users[position], onClickListener)
     }
 
@@ -32,11 +37,12 @@ class UserAdapter constructor(
     override fun getItemCount(): Int = users.size
 
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
-
         val binding = ItemUserBinding.bind(view)
 
-        fun bind(model: User, onClickListener: (User) -> Unit) {
-
+        fun bind(
+            model: User,
+            onClickListener: (User) -> Unit,
+        ) {
             binding.nameText.text = model.name
 
             binding.emailText.text = model.email

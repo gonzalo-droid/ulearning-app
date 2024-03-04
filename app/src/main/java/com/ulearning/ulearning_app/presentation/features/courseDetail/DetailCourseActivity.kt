@@ -45,7 +45,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class DetailCourseActivity :
     BaseActivityWithViewModel<ActivityDetailCourseBinding, DetailCourseViewModel>(),
     DetailCourseViewState {
-
     override val binding: ActivityDetailCourseBinding by dataBinding(ActivityDetailCourseBinding::inflate)
 
     override val viewModel: DetailCourseViewModel by viewModels()
@@ -130,7 +129,6 @@ class DetailCourseActivity :
     }
 
     private fun setDetailSubscription(subscription: Subscription) {
-
         if (subscription.group?.teachers.isNullOrEmpty()) {
             binding.teacherTitle.visibility = View.GONE
             binding.recycler.visibility = View.GONE
@@ -142,7 +140,6 @@ class DetailCourseActivity :
     }
 
     override fun getTopics(topics: List<Topic>) {
-
         closeLoadingDialog()
 
         binding.topicBtn.visibility = if (topics.isEmpty()) View.INVISIBLE else View.VISIBLE
@@ -158,9 +155,10 @@ class DetailCourseActivity :
             }
         }
 
-        topicAdapter = TopicAdapter(topics = mutableTopics) { topic ->
-            onItemSelected(topic)
-        }
+        topicAdapter =
+            TopicAdapter(topics = mutableTopics) { topic ->
+                onItemSelected(topic)
+            }
 
         topicRecycler.adapter = topicAdapter
     }
@@ -170,7 +168,7 @@ class DetailCourseActivity :
             if (viewModel.urlWebView.isNotEmpty()) {
                 val topicUrl = "/courses/${topic.courseId}/topics/${topic.id}"
                 val url = "${viewModel.urlWebView}?return=$topicUrl"
-                Log.d("urlWebView",url)
+                Log.d("urlWebView", url)
                 startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
             }
         }
@@ -180,7 +178,7 @@ class DetailCourseActivity :
         startActivity(
             Intent(this, ConversationActivity::class.java).apply {
                 putExtra(Config.COURSE_ID_PUT, viewModel.course.id)
-            }
+            },
         )
     }
 
@@ -207,7 +205,6 @@ class DetailCourseActivity :
     }
 
     override fun myFiles(files: List<FileItem>) {
-
         files.forEach {
             if (it.type === "certificate") {
                 certificate = it
@@ -250,13 +247,16 @@ class DetailCourseActivity :
         try {
             val uri = Uri.parse(file.fileUrl)
 
-            val request = DownloadManager.Request(uri).setTitle("U-Learning Pdf")
-                .setDescription("Descargando...")
-                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI)
-                .setVisibleInDownloadsUi(true).setDestinationInExternalFilesDir(
-                    this, Environment.DIRECTORY_DOCUMENTS, file.filename + ".pdf"
-                )
+            val request =
+                DownloadManager.Request(uri).setTitle("U-Learning Pdf")
+                    .setDescription("Descargando...")
+                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                    .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE or DownloadManager.Request.NETWORK_WIFI)
+                    .setVisibleInDownloadsUi(true).setDestinationInExternalFilesDir(
+                        this,
+                        Environment.DIRECTORY_DOCUMENTS,
+                        file.filename + ".pdf",
+                    )
             val dm = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             dm.enqueue(request)
         } catch (e: Exception) {
@@ -276,13 +276,12 @@ class DetailCourseActivity :
     @SuppressLint("SetTextI18n")
     private fun setDetailCourse(data: Course) {
         with(binding) {
-
             if (!data.mainImage?.originalUrl.isNullOrEmpty()) {
                 ImageLoaderGlide().loadImage(
                     imageView = imageCourseIv,
                     imagePath = data.mainImage?.originalUrl!!,
                     requestOptions = RequestOptions.centerCropTransform(),
-                    placeHolder = R.drawable.course_test
+                    placeHolder = R.drawable.course_test,
                 )
             } else {
                 imageCourseIv.setImageResource(R.drawable.course_test)
@@ -304,21 +303,21 @@ class DetailCourseActivity :
     }
 
     private fun goTeacher(list: List<Teacher>) {
-        adapter = DetailCourseTeacherAdapter(teachers = list) { user ->
-            onItemUserSelected(user)
-        }
+        adapter =
+            DetailCourseTeacherAdapter(teachers = list) { user ->
+                onItemUserSelected(user)
+            }
         recycler.adapter = adapter
     }
 
     private fun onItemUserSelected(user: Teacher) {
-
         startActivity(
             Intent(this, AddConversationActivity::class.java).apply {
                 putExtra(Config.COURSE_ID_PUT, viewModel.course.id)
                 putExtra(Config.LIST_USER_IDS_PUT, "${user.id},")
                 putExtra(Config.TYPE_MESSAGE, Config.MESSAGE_COURSE)
                 putExtra(Config.ROLE, viewModel.typeRole)
-            }
+            },
         )
     }
 

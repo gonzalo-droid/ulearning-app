@@ -7,48 +7,45 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
-class DataStoreConfig @Inject constructor(
-    private val context: Context,
-    private val dataStore: DataStore<UserPreference>
-) {
+class DataStoreConfig
+    @Inject
+    constructor(
+        private val context: Context,
+        private val dataStore: DataStore<UserPreference>,
+    ) {
+        suspend fun saveToken(token: String) {
+            dataStore.updateData { update ->
 
-    suspend fun saveToken(token: String) {
-
-        dataStore.updateData { update ->
-
-            update.toBuilder().setToken(token).build()
+                update.toBuilder().setToken(token).build()
+            }
         }
-    }
 
-    suspend fun saveUserName(userName: String) {
+        suspend fun saveUserName(userName: String) {
+            dataStore.updateData { update ->
 
-        dataStore.updateData { update ->
-
-            update.toBuilder().setUsername(userName).build()
+                update.toBuilder().setUsername(userName).build()
+            }
         }
-    }
 
-    suspend fun saveRole(role: String) {
+        suspend fun saveRole(role: String) {
+            dataStore.updateData { update ->
 
-        dataStore.updateData { update ->
-
-            update.toBuilder().setRole(role).build()
+                update.toBuilder().setRole(role).build()
+            }
         }
-    }
 
-    suspend fun saveId(id: Int) {
+        suspend fun saveId(id: Int) {
+            dataStore.updateData { update ->
 
-        dataStore.updateData { update ->
-
-            update.toBuilder().setId(id).build()
+                update.toBuilder().setId(id).build()
+            }
         }
+
+        fun token(): String = runBlocking { dataStore.data.first().token }
+
+        fun userName(): String = runBlocking { dataStore.data.first().username }
+
+        fun role(): String = runBlocking { dataStore.data.first().role }
+
+        fun id(): Int = runBlocking { dataStore.data.first().id }
     }
-
-    fun token(): String = runBlocking { dataStore.data.first().token }
-
-    fun userName(): String = runBlocking { dataStore.data.first().username }
-
-    fun role(): String = runBlocking { dataStore.data.first().role }
-
-    fun id(): Int = runBlocking { dataStore.data.first().id }
-}

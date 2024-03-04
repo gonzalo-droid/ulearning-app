@@ -6,11 +6,10 @@ import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import javax.inject.Inject
 
 class GetDownloadShowGuestFileUseCase
-@Inject constructor(private val courseRepository: CourseRepository) :
+    @Inject
+    constructor(private val courseRepository: CourseRepository) :
     BaseUseCase<DownloadFile, GetDownloadShowGuestFileUseCase.Params>() {
+        override suspend fun run(params: Params) = courseRepository.downloadGuestFile(params.hash, params.name)
 
-    override suspend fun run(params: Params) =
-        courseRepository.downloadGuestFile(params.hash, params.name)
-
-    data class Params(val hash: String, val name: String)
-}
+        data class Params(val hash: String, val name: String)
+    }

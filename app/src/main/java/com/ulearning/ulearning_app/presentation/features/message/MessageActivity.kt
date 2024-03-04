@@ -24,7 +24,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MessageActivity :
     BaseActivityWithViewModel<ActivityMessageBinding, MessageViewModel>(),
     MessageViewState {
-
     override val binding: ActivityMessageBinding by dataBinding(ActivityMessageBinding::inflate)
 
     override val viewModel: MessageViewModel by viewModels()
@@ -60,7 +59,6 @@ class MessageActivity :
     }
 
     private fun observeUiStates() {
-
         viewModel.let {
             viewModel.conversation = Config.CONVERSATION_PUT putConversation this@MessageActivity
 
@@ -91,7 +89,7 @@ class MessageActivity :
             MessageAdapter(
                 messages = messages.reversed(),
                 conversation = viewModel.conversation,
-                userId = viewModel.userId
+                userId = viewModel.userId,
             )
 
         recycler.adapter = adapter
@@ -121,18 +119,18 @@ class MessageActivity :
 
         adapterUser =
             UserChipAdapter(
-                users = userList.plusElement(
-                    User(
-                        name = getString(R.string.support_platform)
-                    )
-                )
+                users =
+                    userList.plusElement(
+                        User(
+                            name = getString(R.string.support_platform),
+                        ),
+                    ),
             )
 
         recyclerUser.adapter = adapterUser
     }
 
     override fun messageFailure(failure: Failure) {
-
         closeLoadingDialog()
 
         val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
@@ -141,7 +139,6 @@ class MessageActivity :
     }
 
     override fun loading() {
-
         showLoadingDialog()
     }
 }

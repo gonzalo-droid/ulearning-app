@@ -5,5 +5,5 @@ import java.io.Serializable
 
 data class LoginResponse(
     @SerializedName("token") val token: String,
-    @SerializedName("expired_at") val expiredDate: String
+    @SerializedName("expired_at") val expiredDate: String,
 ) : Serializable

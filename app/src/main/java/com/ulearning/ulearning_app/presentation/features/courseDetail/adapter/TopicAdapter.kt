@@ -10,28 +10,35 @@ import com.ulearning.ulearning_app.domain.model.Topic
 
 class TopicAdapter constructor(
     private val topics: List<Topic>,
-    private val onClickListener: (Topic) -> Unit
+    private val onClickListener: (Topic) -> Unit,
 ) : RecyclerView.Adapter<TopicAdapter.CustomViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): CustomViewHolder {
         return CustomViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_topic, parent, false)
+                .inflate(R.layout.item_topic, parent, false),
         )
     }
 
-    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: CustomViewHolder,
+        position: Int,
+    ) {
         holder.bind(topics[position], position, onClickListener)
     }
 
     override fun getItemCount(): Int = topics.size
 
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
-
         val binding = ItemTopicBinding.bind(view)
 
-        fun bind(model: Topic, position: Int, onClickListener: (Topic) -> Unit) {
-
+        fun bind(
+            model: Topic,
+            position: Int,
+            onClickListener: (Topic) -> Unit,
+        ) {
             binding.titleText.text = model.title
 
             binding.dividerTopic.visibility = if ((position + 1) == itemCount) View.INVISIBLE else View.VISIBLE

@@ -8,7 +8,6 @@ import com.ulearning.ulearning_app.data.remote.entities.response.*
 import retrofit2.http.*
 
 interface CourseService {
-
     suspend fun learningPackage(
         token: String,
         learningPackageId: Int,

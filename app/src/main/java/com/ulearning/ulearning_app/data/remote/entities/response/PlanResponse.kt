@@ -8,5 +8,5 @@ data class PlanResponse(
     @SerializedName("type")
     var type: String? = "",
     @SerializedName("user_id")
-    var userId: Int? = 0
+    var userId: Int? = 0,
 )

@@ -14,5 +14,5 @@ data class TeacherResponse(
     @SerializedName("subtype")
     val subtype: String? = "",
     @SerializedName("type")
-    val type: String? = ""
+    val type: String? = "",
 )

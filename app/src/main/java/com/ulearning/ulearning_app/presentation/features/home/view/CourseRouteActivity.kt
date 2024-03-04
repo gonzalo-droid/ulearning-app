@@ -26,9 +26,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class CourseRouteActivity :
     BaseActivityWithViewModel<ActivityCourseRouteBinding, CourseRouteViewModel>(),
     CourseRouteViewState {
-
     override val binding: ActivityCourseRouteBinding by dataBinding(
-        ActivityCourseRouteBinding::inflate
+        ActivityCourseRouteBinding::inflate,
     )
 
     override val viewModel: CourseRouteViewModel by viewModels()
@@ -92,21 +91,21 @@ class CourseRouteActivity :
             binding.noDataInclude.root.visibility = View.VISIBLE
         } else {
             binding.noDataInclude.root.visibility = View.GONE
-            courseRecycler.adapter = CoursePackageSubscriptionAdapter(
-                courses = courses, type = "route"
-            ) { model ->
-                onItemSelected(model)
-            }
+            courseRecycler.adapter =
+                CoursePackageSubscriptionAdapter(
+                    courses = courses, type = "route",
+                ) { model ->
+                    onItemSelected(model)
+                }
             binding.courseRecycler.visibility = View.VISIBLE
         }
     }
 
     private fun onItemSelected(model: Subscription) {
-
         startActivity(
             Intent(this, CoursePackageActivity::class.java).apply {
                 putExtra(Config.COURSE_PACKAGE_ID_PUT, model.learningPackage?.id)
-            }
+            },
         )
     }
 }

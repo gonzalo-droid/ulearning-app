@@ -6,10 +6,10 @@ import com.ulearning.ulearning_app.presentation.model.entity.LoginGoogle
 import javax.inject.Inject
 
 class DoLoginGoogleUseCase
-@Inject constructor(private val authRepository: AuthRepository) :
+    @Inject
+    constructor(private val authRepository: AuthRepository) :
     BaseUseCase<Boolean, DoLoginGoogleUseCase.Params>() {
+        override suspend fun run(params: Params) = authRepository.loginGoogle(params.data)
 
-    override suspend fun run(params: Params) = authRepository.loginGoogle(params.data)
-
-    data class Params(val data: LoginGoogle)
-}
+        data class Params(val data: LoginGoogle)
+    }

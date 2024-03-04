@@ -19,13 +19,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class SplashActivity :
     BaseActivityWithViewModel<ActivitySplashBinding, SplashViewModel>(),
     SplashViewState {
-
     override val binding: ActivitySplashBinding by dataBinding(ActivitySplashBinding::inflate)
     override val viewModel: SplashViewModel by viewModels()
     override val dataBindingViewModel = BR.splashViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         val screenSplash = installSplashScreen()
 
         super.onCreate(savedInstanceState)
@@ -38,7 +36,6 @@ class SplashActivity :
     }
 
     private fun observeUiStates() {
-
         viewModel.setEvent(SplashEvent.GotoActivity)
 
         viewModel.apply {

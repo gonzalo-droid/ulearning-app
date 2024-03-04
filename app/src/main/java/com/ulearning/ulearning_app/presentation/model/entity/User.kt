@@ -17,37 +17,30 @@ open class User constructor(
     var phone: String = "",
     var fcmToken: String = "",
 ) : Serializable {
-
     fun verifyLogin(): Pair<Boolean, Failure?> {
-
         return when {
-
             isEmailEmpty() -> {
-
                 Pair(
                     false,
-                    Failure.DefaultError(R.string.email_fail)
+                    Failure.DefaultError(R.string.email_fail),
                 )
             }
             !isEmail() -> {
-
                 Pair(
                     false,
-                    Failure.DefaultError(R.string.email_fail)
+                    Failure.DefaultError(R.string.email_fail),
                 )
             }
             isPasswordEmpty() -> {
-
                 Pair(
                     false,
-                    Failure.DefaultError(R.string.password_fail)
+                    Failure.DefaultError(R.string.password_fail),
                 )
             }
             else -> {
-
                 Pair(
                     true,
-                    null
+                    null,
                 )
             }
         }
@@ -55,47 +48,40 @@ open class User constructor(
 
     fun serviceTokenFirebase(
         response: (firebaseToken: String) -> Unit,
-        error: (error: Failure) -> Unit
+        error: (error: Failure) -> Unit,
     ) {
-
         FirebaseMessaging.getInstance().token.addOnCompleteListener(
             OnCompleteListener { task ->
                 if (!task.isSuccessful) {
                     Log.e("FirebaseToken", task.exception?.message.toString())
                     error(
-                        Failure.DefaultError(R.string.firebase_token_message)
+                        Failure.DefaultError(R.string.firebase_token_message),
                     )
                     return@OnCompleteListener
                 } else {
-
                     response(task.result)
                 }
-            }
+            },
         )
     }
 
     private fun isEmailEmpty(): Boolean {
-
         return email.isEmpty()
     }
 
     private fun isPasswordEmpty(): Boolean {
-
         return password.isEmpty()
     }
 
     private fun isEmail(): Boolean {
-
         return email.isMail()
     }
 
     private fun isAlphaNumeric(): Boolean {
-
         return password.isAlphaNumeric()
     }
 
     protected fun isPhoneEmpty(): Boolean {
-
         return phone.isEmpty()
     }
 }

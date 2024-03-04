@@ -4,7 +4,6 @@ import org.junit.AfterClass
 import org.junit.BeforeClass
 
 class HomeViewModelTest {
-
     companion object {
         @JvmStatic
         @BeforeClass

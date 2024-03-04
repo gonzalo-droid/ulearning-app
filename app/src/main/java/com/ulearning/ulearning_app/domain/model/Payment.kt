@@ -11,9 +11,8 @@ data class Payment(
     var isConfirmed: Boolean? = false,
     var confirmedAt: String? = "",
     var paymentCode: String? = "",
-    var items: List<PaymentItem> = arrayListOf()
+    var items: List<PaymentItem> = arrayListOf(),
 ) : Serializable {
-
     fun moneyFormat(): String {
         return "${typeCurrency()} $payable"
     }
@@ -36,4 +35,3 @@ data class Payment(
         }
     }
 }
-

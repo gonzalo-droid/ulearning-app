@@ -1,7 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.auth
 
 object LoginReducer {
-
     private lateinit var viewState: LoginViewState
 
     fun instance(viewState: LoginViewState) {

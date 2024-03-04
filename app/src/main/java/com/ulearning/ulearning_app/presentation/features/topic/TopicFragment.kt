@@ -21,7 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class TopicFragment :
     BaseFragmentWithViewModel<FragmentTopicBinding, TopicViewModel>(),
     TopicViewState {
-
     // TODO, this fragment and flow is not implemented
 
     override val binding: FragmentTopicBinding by dataBinding(FragmentTopicBinding::inflate)
@@ -39,7 +38,6 @@ class TopicFragment :
     private lateinit var course: Course
 
     override fun onViewIsCreated(view: View) {
-
         TopicReducer.instance(viewState = this)
 
         binding.topBarInclude.btnBack.setOnClickListener {
@@ -54,7 +52,6 @@ class TopicFragment :
     }
 
     private fun observeUiStates() {
-
         courseId = requireArguments().getInt(Config.COURSE_ID_PUT)
 
         // course = requireArguments().getSerializable(Config.COURSE) as Course
@@ -93,13 +90,11 @@ class TopicFragment :
     }
 
     override fun getTopics(topics: List<Topic>) {
-
         closeLoadingDialog()
 
         val mutableTopics: MutableList<Topic> = mutableListOf()
 
         topics.forEach {
-
             mutableTopics.add(it)
 
             it.children!!.reversed().forEach { child ->
@@ -107,9 +102,10 @@ class TopicFragment :
             }
         }
 
-        adapter = TopicAdapter(topics = mutableTopics) { topic ->
-            onItemSelected(topic)
-        }
+        adapter =
+            TopicAdapter(topics = mutableTopics) { topic ->
+                onItemSelected(topic)
+            }
 
         recycler.adapter = adapter
     }

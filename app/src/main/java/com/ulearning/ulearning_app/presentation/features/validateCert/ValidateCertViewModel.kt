@@ -12,63 +12,61 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ValidateCertViewModel
-@Inject constructor(
-    private val getShowGuestFileUseCase: GetShowGuestFileUseCase,
-    private val getDownloadShowGuestFileUseCase: GetDownloadShowGuestFileUseCase,
-) : BaseViewModel<ValidateCertEvent, ValidateCertState, ValidateCertEffect>() {
+    @Inject
+    constructor(
+        private val getShowGuestFileUseCase: GetShowGuestFileUseCase,
+        private val getDownloadShowGuestFileUseCase: GetDownloadShowGuestFileUseCase,
+    ) : BaseViewModel<ValidateCertEvent, ValidateCertState, ValidateCertEffect>() {
+        var numberCert: String = ""
+        var codeCert: String = ""
+        lateinit var file: DownloadFile
 
-    var numberCert: String = ""
-    var codeCert: String = ""
-    lateinit var file: DownloadFile
+        override fun createInitialState(): ValidateCertState {
+            return ValidateCertState.Idle
+        }
 
-    override fun createInitialState(): ValidateCertState {
-        return ValidateCertState.Idle
-    }
+        override fun handleEvent(event: ValidateCertEvent) {
+            when (event) {
+                ValidateCertEvent.VerifyCertClick -> sendValidateCert()
+            }
+        }
 
-    override fun handleEvent(event: ValidateCertEvent) {
-        when (event) {
-            ValidateCertEvent.VerifyCertClick -> sendValidateCert()
+        private fun sendValidateCert() {
+            if (numberCert.isNotEmpty() && codeCert.isEmpty()) {
+                setState { ValidateCertState.Loading }
+                getShowGuestFileUseCase(
+                    GetShowGuestFileUseCase.Params(name = numberCert),
+                ) {
+                    it.either(::handleFailure, ::handleValidateCert)
+                }
+            } else if (numberCert.isNotEmpty() && codeCert.isNotEmpty()) {
+                setState { ValidateCertState.Loading }
+                getDownloadShowGuestFileUseCase(
+                    GetDownloadShowGuestFileUseCase.Params(
+                        name = numberCert.trim(),
+                        hash = codeCert.trim(),
+                    ),
+                ) {
+                    it.either(::handleFailure, ::handleDownloadShowGuest)
+                }
+            } else {
+                setEffect { ValidateCertEffect.ShowMessageFailure(failure = Failure.DefaultError(R.string.number_cert_error)) }
+            }
+        }
+
+        private fun handleFailure(failure: Failure) {
+            setEffect { ValidateCertEffect.ShowMessageFailure(failure = failure) }
+        }
+
+        private fun handleValidateCert(file: FileItem) {
+            setState { ValidateCertState.ValidateCert(file = file) }
+        }
+
+        private fun handleDownloadShowGuest(file: DownloadFile) {
+            setState { ValidateCertState.DownloadFilePDF(file = file) }
+        }
+
+        companion object Events {
+            val verifyCodeCert = ValidateCertEvent.VerifyCertClick
         }
     }
-
-    private fun sendValidateCert() {
-        if (numberCert.isNotEmpty() && codeCert.isEmpty()) {
-            setState { ValidateCertState.Loading }
-            getShowGuestFileUseCase(
-                GetShowGuestFileUseCase.Params(name = numberCert)
-            ) {
-                it.either(::handleFailure, ::handleValidateCert)
-            }
-        } else if (numberCert.isNotEmpty() && codeCert.isNotEmpty()) {
-            setState { ValidateCertState.Loading }
-            getDownloadShowGuestFileUseCase(
-                GetDownloadShowGuestFileUseCase.Params(
-                    name = numberCert.trim(),
-                    hash = codeCert.trim()
-                )
-            ) {
-                it.either(::handleFailure, ::handleDownloadShowGuest)
-            }
-        } else {
-            setEffect { ValidateCertEffect.ShowMessageFailure(failure = Failure.DefaultError(R.string.number_cert_error)) }
-        }
-    }
-
-    private fun handleFailure(failure: Failure) {
-        setEffect { ValidateCertEffect.ShowMessageFailure(failure = failure) }
-    }
-
-    private fun handleValidateCert(file: FileItem) {
-
-        setState { ValidateCertState.ValidateCert(file = file) }
-    }
-
-    private fun handleDownloadShowGuest(file: DownloadFile) {
-
-        setState { ValidateCertState.DownloadFilePDF(file = file) }
-    }
-
-    companion object Events {
-        val verifyCodeCert = ValidateCertEvent.VerifyCertClick
-    }
-}

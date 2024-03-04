@@ -1,7 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.scanQr
 
 object ScanQrReducer {
-
     private lateinit var viewState: ScanQrViewState
 
     fun instance(viewState: ScanQrViewState) {

@@ -6,8 +6,8 @@ import com.ulearning.ulearning_app.domain.useCase.BaseUseCase
 import javax.inject.Inject
 
 class GetProfileUseCase
-@Inject constructor(private val authRepository: AuthRepository) :
+    @Inject
+    constructor(private val authRepository: AuthRepository) :
     BaseUseCase<Profile, BaseUseCase.None>() {
-
-    override suspend fun run(params: None) = authRepository.profile()
-}
+        override suspend fun run(params: None) = authRepository.profile()
+    }

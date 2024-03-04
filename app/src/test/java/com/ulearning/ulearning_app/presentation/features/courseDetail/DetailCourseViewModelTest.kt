@@ -7,10 +7,8 @@ import org.junit.BeforeClass
 import org.junit.Test
 
 class DetailCourseViewModelTest {
-
     @Test
     fun login_verifyUser_returnTrue() {
-
         val user = User("gonzalo@gmail.com", "123321")
 
         val result = user.verifyLogin()

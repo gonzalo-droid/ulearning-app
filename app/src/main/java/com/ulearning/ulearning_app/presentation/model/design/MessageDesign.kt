@@ -11,7 +11,9 @@ class MessageDesign private constructor(
         var state: Int? = null,
     ) {
         fun idMessage(idMessage: Int) = apply { this.idMessage = idMessage }
+
         fun state(state: Int) = apply { this.state = state }
+
         fun build() = MessageDesign(idMessage, state)
     }
 }

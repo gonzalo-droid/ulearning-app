@@ -13,8 +13,8 @@ import com.ulearning.ulearning_app.R
 import com.ulearning.ulearning_app.databinding.DialogFragmentLoadingBinding
 
 class LoadingDialog(var loadingText: String? = null) : DialogFragment() {
-
     lateinit var binding: DialogFragmentLoadingBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         isCancelable = false
@@ -23,7 +23,7 @@ class LoadingDialog(var loadingText: String? = null) : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = DialogFragmentLoadingBinding.inflate(layoutInflater)
 
@@ -36,7 +36,10 @@ class LoadingDialog(var loadingText: String? = null) : DialogFragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?,
+    ) {
         super.onViewCreated(view, savedInstanceState)
     }
 }

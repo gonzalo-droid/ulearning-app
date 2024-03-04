@@ -30,7 +30,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-
     @Suppress("PrivatePropertyName")
     private val TIMEOUT: Long = 10
 
@@ -50,9 +49,10 @@ object NetworkModule {
     @Provides
     @Singleton
     fun providesGsonConverterFactory(): GsonConverterFactory {
-        val gson = GsonBuilder().setLenient()
-            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_DASHES).serializeNulls()
-            .create()
+        val gson =
+            GsonBuilder().setLenient()
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_DASHES).serializeNulls()
+                .create()
         return GsonConverterFactory.create(gson)
     }
 
@@ -63,14 +63,15 @@ object NetworkModule {
         interceptor.level =
             if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
 
-        val client = OkHttpClient.Builder()
-            .connectTimeout(TIMEOUT, TimeUnit.MINUTES)
-            .writeTimeout(TIMEOUT, TimeUnit.MINUTES)
-            .readTimeout(TIMEOUT, TimeUnit.MINUTES)
-            .addInterceptor(interceptor).addInterceptor { chain ->
-                chain.proceed(chain.request().newBuilder().build())
-            }
-            .addInterceptor(authInterceptor)
+        val client =
+            OkHttpClient.Builder()
+                .connectTimeout(TIMEOUT, TimeUnit.MINUTES)
+                .writeTimeout(TIMEOUT, TimeUnit.MINUTES)
+                .readTimeout(TIMEOUT, TimeUnit.MINUTES)
+                .addInterceptor(interceptor).addInterceptor { chain ->
+                    chain.proceed(chain.request().newBuilder().build())
+                }
+                .addInterceptor(authInterceptor)
 
         if (BuildConfig.DEBUG) {
             client.addInterceptor(OkHttpProfilerInterceptor())
@@ -81,72 +82,63 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideConnection(@ApplicationContext appContext: Context): ConnectionUtils =
-        ConnectionUtilsImpl(appContext)
+    fun provideConnection(
+        @ApplicationContext appContext: Context,
+    ): ConnectionUtils = ConnectionUtilsImpl(appContext)
 
     @Provides
     @Singleton
-    fun provideAuthApi(
-        retrofit: Retrofit
-    ): AuthApi = retrofit.create(AuthApi::class.java)
+    fun provideAuthApi(retrofit: Retrofit): AuthApi = retrofit.create(AuthApi::class.java)
 
     @Provides
     @Singleton
-    fun provideCourseApi(
-        retrofit: Retrofit
-    ): CourseApi = retrofit.create(CourseApi::class.java)
+    fun provideCourseApi(retrofit: Retrofit): CourseApi = retrofit.create(CourseApi::class.java)
 
     @Provides
     @Singleton
-    fun provideTopicApi(
-        retrofit: Retrofit
-    ): TopicApi = retrofit.create(TopicApi::class.java)
+    fun provideTopicApi(retrofit: Retrofit): TopicApi = retrofit.create(TopicApi::class.java)
 
     @Provides
     @Singleton
-    fun provideConversationApi(
-        retrofit: Retrofit
-    ): ConversationApi = retrofit.create(ConversationApi::class.java)
+    fun provideConversationApi(retrofit: Retrofit): ConversationApi = retrofit.create(ConversationApi::class.java)
 
     @Provides
     @Singleton
-    fun provideProfileApi(
-        retrofit: Retrofit
-    ): ProfileApi = retrofit.create(ProfileApi::class.java)
+    fun provideProfileApi(retrofit: Retrofit): ProfileApi = retrofit.create(ProfileApi::class.java)
 
     // Services
     @Provides
     @Singleton
     fun provideAuthService(
         authApi: AuthApi,
-        networkHandler: NetworkHandler
+        networkHandler: NetworkHandler,
     ): AuthService = AuthServiceImpl(authApi, networkHandler)
 
     @Provides
     @Singleton
     fun provideCourseService(
         authApi: CourseApi,
-        networkHandler: NetworkHandler
+        networkHandler: NetworkHandler,
     ): CourseService = CourseServiceImpl(authApi, networkHandler)
 
     @Provides
     @Singleton
     fun provideTopicService(
         authApi: TopicApi,
-        networkHandler: NetworkHandler
+        networkHandler: NetworkHandler,
     ): TopicService = TopicServiceImpl(authApi, networkHandler)
 
     @Provides
     @Singleton
     fun provideConversationService(
         authApi: ConversationApi,
-        networkHandler: NetworkHandler
+        networkHandler: NetworkHandler,
     ): ConversationService = ConversationServiceImpl(authApi, networkHandler)
 
     @Provides
     @Singleton
     fun provideProfileService(
         api: ProfileApi,
-        networkHandler: NetworkHandler
+        networkHandler: NetworkHandler,
     ): ProfileService = ProfileServiceImpl(api, networkHandler)
 }

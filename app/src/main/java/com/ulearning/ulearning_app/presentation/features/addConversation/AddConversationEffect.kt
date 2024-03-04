@@ -5,7 +5,6 @@ import com.ulearning.ulearning_app.domain.model.Conversation
 import com.ulearning.ulearning_app.presentation.base.UiEffect
 
 sealed class AddConversationEffect : UiEffect {
-
     data class ShowMessageFailure constructor(val failure: Failure) : AddConversationEffect()
 
     data class GoToConversation constructor(val conversation: Conversation) : AddConversationEffect()

@@ -7,19 +7,14 @@ import com.ulearning.ulearning_app.presentation.model.entity.LoginFacebook
 import com.ulearning.ulearning_app.presentation.model.entity.LoginGoogle
 
 interface AuthRepository {
-
     suspend fun login(
         email: String,
         password: String,
     ): Either<Failure, Boolean>
 
-    suspend fun loginGoogle(
-        data: LoginGoogle,
-    ): Either<Failure, Boolean>
+    suspend fun loginGoogle(data: LoginGoogle): Either<Failure, Boolean>
 
-    suspend fun loginFacebook(
-        data: LoginFacebook,
-    ): Either<Failure, Boolean>
+    suspend fun loginFacebook(data: LoginFacebook): Either<Failure, Boolean>
 
     suspend fun profile(): Either<Failure, Profile>
 
@@ -31,9 +26,7 @@ interface AuthRepository {
 
     suspend fun getUserId(): Either<Failure, Int>
 
-    suspend fun fcmToken(
-        fcmToken: String,
-    ): Either<Failure, Boolean>
+    suspend fun fcmToken(fcmToken: String): Either<Failure, Boolean>
 
     suspend fun selfAuthToken(): Either<Failure, String>
 }

@@ -20,5 +20,5 @@ data class Profile(
     val plan: Any? = null,
     val role: String? = "",
     val secondLastName: String? = "",
-    val suspendedAt: String? = ""
+    val suspendedAt: String? = "",
 )

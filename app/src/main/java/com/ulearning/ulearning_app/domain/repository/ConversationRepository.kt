@@ -7,30 +7,25 @@ import com.ulearning.ulearning_app.domain.model.Message
 import com.ulearning.ulearning_app.domain.model.User
 
 interface ConversationRepository {
-
     suspend fun getConversations(
         page: Int,
-        courseId: Int
+        courseId: Int,
     ): Either<Failure, List<Conversation>>
 
     suspend fun getConversationsSupport(
         page: Int,
-        toSupport: Boolean
+        toSupport: Boolean,
     ): Either<Failure, List<Conversation>>
 
-    suspend fun participantsMessage(
-        ids: String,
-    ): Either<Failure, List<User>>
+    suspend fun participantsMessage(ids: String): Either<Failure, List<User>>
 
-    suspend fun getMessages(
-        uuid: String
-    ): Either<Failure, List<Message>>
+    suspend fun getMessages(uuid: String): Either<Failure, List<Message>>
 
     suspend fun sendMessages(
         uuid: String,
         content: String,
         userIds: ArrayList<String>,
-        toSupport: Boolean
+        toSupport: Boolean,
     ): Either<Failure, Message>
 
     suspend fun sendConversation(

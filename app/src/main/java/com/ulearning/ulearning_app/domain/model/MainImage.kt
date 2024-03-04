@@ -7,5 +7,5 @@ data class MainImage(
     var previewUrl: String? = "",
     var responsiveImages: List<Any>? = arrayListOf(),
     var size: Int? = 0,
-    var uuid: String? = ""
+    var uuid: String? = "",
 ) : Serializable

@@ -7,7 +7,6 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface TopicApi {
-
     @GET("topics_preview/{${SettingRemote.COURSE_ID}}")
     suspend fun topics(
         @Header(SettingRemote.AUTHORIZATION) token: String,

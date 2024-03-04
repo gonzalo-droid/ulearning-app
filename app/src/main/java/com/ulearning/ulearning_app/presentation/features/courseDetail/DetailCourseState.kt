@@ -4,7 +4,6 @@ import com.ulearning.ulearning_app.domain.model.*
 import com.ulearning.ulearning_app.presentation.base.UiState
 
 sealed class DetailCourseState : UiState {
-
     object Idle : DetailCourseState()
 
     object Loading : DetailCourseState()

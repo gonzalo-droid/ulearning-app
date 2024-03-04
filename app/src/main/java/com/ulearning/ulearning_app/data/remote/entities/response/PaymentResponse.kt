@@ -1,7 +1,6 @@
 package com.ulearning.ulearning_app.data.remote.entities.response
 
 import com.google.gson.annotations.SerializedName
-import java.math.BigDecimal
 
 data class PaymentResponse(
     @SerializedName("id")
@@ -21,5 +20,5 @@ data class PaymentResponse(
     @SerializedName("payment_ode")
     var paymentCode: String,
     @SerializedName("items")
-    var items: ArrayList<PaymentItemResponse> = arrayListOf()
+    var items: ArrayList<PaymentItemResponse> = arrayListOf(),
 )

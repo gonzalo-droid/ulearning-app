@@ -11,30 +11,36 @@ import com.ulearning.ulearning_app.domain.model.CoursePercentage
 import com.ulearning.ulearning_app.domain.model.LearningPackageItem
 import com.ulearning.ulearning_app.presentation.utils.imageLoader.ImageLoaderGlide
 
-class CoursePackageItemAdapter (
+class CoursePackageItemAdapter(
     private val items: List<LearningPackageItem> = arrayListOf(),
     private val percentages: List<CoursePercentage>? = listOf(),
-    private val onClickListener: (LearningPackageItem,Int) -> Unit,
+    private val onClickListener: (LearningPackageItem, Int) -> Unit,
 ) : RecyclerView.Adapter<CoursePackageItemAdapter.CustomViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): CustomViewHolder {
         return CustomViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_courses, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_courses, parent, false),
         )
     }
 
-    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: CustomViewHolder,
+        position: Int,
+    ) {
         holder.bind(items[position], onClickListener)
     }
 
     override fun getItemCount(): Int = items.size
 
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
-
         val binding = ItemCoursesBinding.bind(view)
 
-        fun bind(model: LearningPackageItem, onClickListener: (LearningPackageItem,Int) -> Unit) {
-
+        fun bind(
+            model: LearningPackageItem,
+            onClickListener: (LearningPackageItem, Int) -> Unit,
+        ) {
             val coursePercentage: CoursePercentage? = percentages?.firstOrNull { it.courseId == model.courseId }
             val value = !coursePercentage?.percentage.isNullOrEmpty()
             val valueString = if (value) coursePercentage?.percentage!! else "0"
@@ -54,12 +60,12 @@ class CoursePackageItemAdapter (
                     imageView = binding.imageIv,
                     imagePath = it,
                     requestOptions = RequestOptions.centerCropTransform(),
-                    placeHolder = R.drawable.course_test
+                    placeHolder = R.drawable.course_test,
                 )
             }
 
             itemView.setOnClickListener {
-                onClickListener(model,valueInt)
+                onClickListener(model, valueInt)
             }
         }
     }

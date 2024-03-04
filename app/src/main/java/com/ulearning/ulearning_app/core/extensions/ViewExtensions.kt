@@ -24,7 +24,9 @@ fun View.hideKeyboard() {
     imm.hideSoftInputFromWindow(windowToken, 0)
 }
 
-fun Context.drawable(@DrawableRes drawable: Int): Drawable? {
+fun Context.drawable(
+    @DrawableRes drawable: Int,
+): Drawable? {
     return AppCompatResources.getDrawable(this, drawable)
 }
 

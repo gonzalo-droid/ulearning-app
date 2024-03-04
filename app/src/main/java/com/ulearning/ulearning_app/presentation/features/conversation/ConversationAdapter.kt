@@ -12,28 +12,34 @@ import com.ulearning.ulearning_app.domain.model.Conversation
 
 class ConversationAdapter constructor(
     private val conversations: List<Conversation>,
-    private val onClickListener: (Conversation) -> Unit
+    private val onClickListener: (Conversation) -> Unit,
 ) : RecyclerView.Adapter<ConversationAdapter.CustomViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): CustomViewHolder {
         return CustomViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_conversation, parent, false)
+                .inflate(R.layout.item_conversation, parent, false),
         )
     }
 
-    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: CustomViewHolder,
+        position: Int,
+    ) {
         holder.bind(conversations[position], onClickListener)
     }
 
     override fun getItemCount(): Int = conversations.size
 
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
-
         val binding = ItemConversationBinding.bind(view)
 
-        fun bind(model: Conversation, onClickListener: (Conversation) -> Unit) {
-
+        fun bind(
+            model: Conversation,
+            onClickListener: (Conversation) -> Unit,
+        ) {
             binding.titleText.text = model.firstMessage?.content
 
             binding.timeText.text = model.firstMessage?.publishedAt?.dateFormat(Config.DATE_FORMAT_THREE)?.dateFormat(Config.DATE_FORMAT_NINETEEN)

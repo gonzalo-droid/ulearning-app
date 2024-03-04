@@ -8,5 +8,5 @@ data class DownloadFileResponse(
     @SerializedName("filename")
     val filename: String? = "",
     @SerializedName("file_url")
-    val fileUrl: String? = ""
+    val fileUrl: String? = "",
 )

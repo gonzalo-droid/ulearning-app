@@ -12,7 +12,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class AuthRepositoryImplTest {
-
     private lateinit var service: AuthApi
 
     companion object {
@@ -21,10 +20,11 @@ class AuthRepositoryImplTest {
         @BeforeClass
         @JvmStatic
         fun setupCommon() {
-            retrofit = Retrofit.Builder()
-                .baseUrl("https://api.ulearning.com.pe/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+            retrofit =
+                Retrofit.Builder()
+                    .baseUrl("https://api.ulearning.com.pe/api/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
         }
     }
 
@@ -36,9 +36,10 @@ class AuthRepositoryImplTest {
     @Test
     fun `login return success test`() {
         runBlocking {
-            val result = service.login(
-                LoginRequest(email = "admin@gmail.com", password = "ulearning2022")
-            )
+            val result =
+                service.login(
+                    LoginRequest(email = "admin@gmail.com", password = "ulearning2022"),
+                )
 
             assertThat(result.body()!!.token.isNotEmpty(), `is`(true))
         }
@@ -49,7 +50,7 @@ class AuthRepositoryImplTest {
         runBlocking {
             try {
                 service.login(
-                    LoginRequest(email = "qwr", password = "qrwr")
+                    LoginRequest(email = "qwr", password = "qrwr"),
                 )
             } catch (e: Exception) {
                 assertThat(e, `is`(false))

@@ -16,142 +16,146 @@ import javax.net.ssl.SSLHandshakeException
 
 @Singleton
 class NetworkHandler
-@Inject constructor(val networkUtils: ConnectionUtils) {
-
-    /**
-     * Invoke the retrofit endpoint service in IO Context and after the response has been invoked
-     * verify if its successful and if has a valid body.
-     */
-    suspend inline fun <T> callService(
-        crossinline retrofitCall: suspend () -> Response<T>
-    ): Either<Failure, T> {
-        return when (networkUtils.isNetworkAvailable()) {
-            true -> {
-                try {
-                    withContext(Dispatchers.IO) {
-                        val response = retrofitCall.invoke()
-                        if (response.isSuccessful) {
-                            response.body()?.let {
-                                return@withContext Either.Right(it)
-                            } ?: return@withContext Either.Left(
-                                getErrorMessageFromServer(
-                                    response.code(),
-                                    response.errorBody()?.string()
+    @Inject
+    constructor(val networkUtils: ConnectionUtils) {
+        /**
+         * Invoke the retrofit endpoint service in IO Context and after the response has been invoked
+         * verify if its successful and if has a valid body.
+         */
+        suspend inline fun <T> callService(crossinline retrofitCall: suspend () -> Response<T>): Either<Failure, T> {
+            return when (networkUtils.isNetworkAvailable()) {
+                true -> {
+                    try {
+                        withContext(Dispatchers.IO) {
+                            val response = retrofitCall.invoke()
+                            if (response.isSuccessful) {
+                                response.body()?.let {
+                                    return@withContext Either.Right(it)
+                                } ?: return@withContext Either.Left(
+                                    getErrorMessageFromServer(
+                                        response.code(),
+                                        response.errorBody()?.string(),
+                                    ),
                                 )
-                            )
-                        } else return@withContext Either.Left(
-                            getErrorMessageFromServer(
-                                response.code(), response.errorBody()?.string()
-                            )
-                        )
-                    }
-                } catch (e: Exception) {
-                    Either.Left(parseException(e))
-                }
-            }
-            false -> {
-                Either.Left(Failure.NoNetworkDetected)
-            }
-        }
-    }
-
-    suspend inline fun <T> callServiceBase(
-        crossinline retrofitCall: suspend () -> Response<BaseResponse<T>>
-    ): Either<Failure, T> {
-        return when (networkUtils.isNetworkAvailable()) {
-            true -> {
-                try {
-                    withContext(Dispatchers.IO) {
-                        val response = retrofitCall.invoke()
-                        if (response.isSuccessful && response.body() != null) {
-                            return@withContext Either.Right(response.body()!!.data)
-                        } else {
-                            return@withContext Either.Left(
-                                getErrorMessageFromServer(
-                                    response.code(), response.errorBody()?.string()
+                            } else {
+                                return@withContext Either.Left(
+                                    getErrorMessageFromServer(
+                                        response.code(),
+                                        response.errorBody()?.string(),
+                                    ),
                                 )
-                            )
+                            }
                         }
+                    } catch (e: Exception) {
+                        Either.Left(parseException(e))
                     }
-                } catch (e: Exception) {
-                    return Either.Left(parseException(e))
+                }
+                false -> {
+                    Either.Left(Failure.NoNetworkDetected)
                 }
             }
-            false -> Either.Left(Failure.NoNetworkDetected)
         }
-    }
 
-    suspend inline fun <T> callServiceBaseList(
-        crossinline retrofitCall: suspend () -> Response<BaseResponse<List<T>>>
-    ): Either<Failure, List<T>> {
-        return when (networkUtils.isNetworkAvailable()) {
-            true -> {
-                try {
-                    withContext(Dispatchers.IO) {
-                        val response = retrofitCall.invoke()
-                        if (response.isSuccessful && response.body() != null) {
-                            return@withContext Either.Right(response.body()!!.data)
-                        } else {
-                            return@withContext Either.Left(
-                                getErrorMessageFromServer(
-                                    response.code(), response.errorBody()?.string()
+        suspend inline fun <T> callServiceBase(crossinline retrofitCall: suspend () -> Response<BaseResponse<T>>): Either<Failure, T> {
+            return when (networkUtils.isNetworkAvailable()) {
+                true -> {
+                    try {
+                        withContext(Dispatchers.IO) {
+                            val response = retrofitCall.invoke()
+                            if (response.isSuccessful && response.body() != null) {
+                                return@withContext Either.Right(response.body()!!.data)
+                            } else {
+                                return@withContext Either.Left(
+                                    getErrorMessageFromServer(
+                                        response.code(),
+                                        response.errorBody()?.string(),
+                                    ),
                                 )
-                            )
+                            }
                         }
+                    } catch (e: Exception) {
+                        return Either.Left(parseException(e))
                     }
-                } catch (e: Exception) {
-                    return Either.Left(parseException(e))
                 }
+                false -> Either.Left(Failure.NoNetworkDetected)
             }
-            false -> Either.Left(Failure.NoNetworkDetected)
         }
-    }
 
-    /**
-     * Parse Server Error to [Failure.ServerBodyError] if [errorBody] [isServerErrorValid].
-     * @return [Failure] object.
-     */
-    suspend fun getErrorMessageFromServer(code: Int, errorBody: String?): Failure {
-        return if (errorBody != null) {
-            return withContext(Dispatchers.IO) {
-                val serverErrorJson = JSONObject(errorBody)
-                when {
-                    isServerErrorValid(serverErrorJson.toString()) -> {
-                        if (code == 401 || code == 403) {
-                            return@withContext Failure.UnauthorizedOrForbidden(serverErrorJson[KEY_MESSAGE].toString())
-                        } else {
-                            return@withContext Failure.ServerBodyError(
-                                code,
-                                serverErrorJson[KEY_MESSAGE].toString()
-                            )
+        suspend inline fun <T> callServiceBaseList(
+            crossinline retrofitCall: suspend () -> Response<BaseResponse<List<T>>>,
+        ): Either<Failure, List<T>> {
+            return when (networkUtils.isNetworkAvailable()) {
+                true -> {
+                    try {
+                        withContext(Dispatchers.IO) {
+                            val response = retrofitCall.invoke()
+                            if (response.isSuccessful && response.body() != null) {
+                                return@withContext Either.Right(response.body()!!.data)
+                            } else {
+                                return@withContext Either.Left(
+                                    getErrorMessageFromServer(
+                                        response.code(),
+                                        response.errorBody()?.string(),
+                                    ),
+                                )
+                            }
                         }
+                    } catch (e: Exception) {
+                        return Either.Left(parseException(e))
                     }
-                    serverErrorJson.toString().contains("\"$KEY_MESSAGE\"") -> {
-                        return@withContext Failure.ServiceUncaughtFailure(serverErrorJson[KEY_MESSAGE].toString())
-                    }
-                    else -> return@withContext Failure.None
                 }
+                false -> Either.Left(Failure.NoNetworkDetected)
             }
-        } else {
-            Failure.None
+        }
+
+        /**
+         * Parse Server Error to [Failure.ServerBodyError] if [errorBody] [isServerErrorValid].
+         * @return [Failure] object.
+         */
+        suspend fun getErrorMessageFromServer(
+            code: Int,
+            errorBody: String?,
+        ): Failure {
+            return if (errorBody != null) {
+                return withContext(Dispatchers.IO) {
+                    val serverErrorJson = JSONObject(errorBody)
+                    when {
+                        isServerErrorValid(serverErrorJson.toString()) -> {
+                            if (code == 401 || code == 403) {
+                                return@withContext Failure.UnauthorizedOrForbidden(serverErrorJson[KEY_MESSAGE].toString())
+                            } else {
+                                return@withContext Failure.ServerBodyError(
+                                    code,
+                                    serverErrorJson[KEY_MESSAGE].toString(),
+                                )
+                            }
+                        }
+                        serverErrorJson.toString().contains("\"$KEY_MESSAGE\"") -> {
+                            return@withContext Failure.ServiceUncaughtFailure(serverErrorJson[KEY_MESSAGE].toString())
+                        }
+                        else -> return@withContext Failure.None
+                    }
+                }
+            } else {
+                Failure.None
+            }
+        }
+
+        private fun isServerErrorValid(error: String): Boolean {
+            return error.contains("\"$KEY_MESSAGE\"")
+        }
+
+        fun parseException(throwable: Throwable): Failure {
+            return when (throwable) {
+                is SocketTimeoutException -> Failure.TimeOut
+                is SSLException -> Failure.NetworkConnectionLostSuddenly
+                is SSLHandshakeException -> Failure.SSLError
+                else -> Failure.ServiceUncaughtFailure(throwable.message.toString())
+            }
+        }
+
+        companion object {
+            private const val KEY_CODE = "status" // code
+            private const val KEY_MESSAGE = "message"
         }
     }
-
-    private fun isServerErrorValid(error: String): Boolean {
-        return error.contains("\"$KEY_MESSAGE\"")
-    }
-
-    fun parseException(throwable: Throwable): Failure {
-        return when (throwable) {
-            is SocketTimeoutException -> Failure.TimeOut
-            is SSLException -> Failure.NetworkConnectionLostSuddenly
-            is SSLHandshakeException -> Failure.SSLError
-            else -> Failure.ServiceUncaughtFailure(throwable.message.toString())
-        }
-    }
-
-    companion object {
-        private const val KEY_CODE = "status" // code
-        private const val KEY_MESSAGE = "message"
-    }
-}

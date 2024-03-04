@@ -1,7 +1,6 @@
 package com.ulearning.ulearning_app.core.utils
 
 object Config {
-
     /**
      * DataStore
      */
@@ -68,16 +67,17 @@ object Config {
     const val MESSAGE_SUPPORT = "support"
     const val MESSAGE_COURSE = "course"
 
-    /* 12 digits */
-    val DEVICE_ID = "${android.os.Build.BOARD.length % 10}" +
-        "${android.os.Build.DEVICE.length % 10}" +
-        "${android.os.Build.DISPLAY.length % 10}" +
-        "${android.os.Build.HOST.length % 10}" +
-        "${android.os.Build.ID.length % 10}" +
-        "${android.os.Build.MANUFACTURER.length % 10}" +
-        "${android.os.Build.MODEL.length % 10}" +
-        "${android.os.Build.PRODUCT.length % 10}" +
-        "${android.os.Build.TAGS.length % 10}" +
-        "${android.os.Build.TYPE.length % 10}" +
-        "${android.os.Build.USER.length % 10}"
+    // 12 digits
+    val DEVICE_ID =
+        "${android.os.Build.BOARD.length % 10}" +
+            "${android.os.Build.DEVICE.length % 10}" +
+            "${android.os.Build.DISPLAY.length % 10}" +
+            "${android.os.Build.HOST.length % 10}" +
+            "${android.os.Build.ID.length % 10}" +
+            "${android.os.Build.MANUFACTURER.length % 10}" +
+            "${android.os.Build.MODEL.length % 10}" +
+            "${android.os.Build.PRODUCT.length % 10}" +
+            "${android.os.Build.TAGS.length % 10}" +
+            "${android.os.Build.TYPE.length % 10}" +
+            "${android.os.Build.USER.length % 10}"
 }

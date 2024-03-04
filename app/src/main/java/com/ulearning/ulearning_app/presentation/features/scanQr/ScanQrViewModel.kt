@@ -10,26 +10,26 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ScanQrViewModel
-@Inject constructor(
-    private val getProfileUseCase: GetProfileUseCase,
-    private val doLogoutUseCase: DoLogoutUseCase,
-    private val getTokenUseCase: GetTokenUseCase,
-) : BaseViewModel<ScanQrEvent, ScanQrState, ScanQrEffect>() {
+    @Inject
+    constructor(
+        private val getProfileUseCase: GetProfileUseCase,
+        private val doLogoutUseCase: DoLogoutUseCase,
+        private val getTokenUseCase: GetTokenUseCase,
+    ) : BaseViewModel<ScanQrEvent, ScanQrState, ScanQrEffect>() {
+        override fun createInitialState(): ScanQrState {
+            return ScanQrState.Idle
+        }
 
-    override fun createInitialState(): ScanQrState {
-        return ScanQrState.Idle
-    }
+        override fun handleEvent(event: ScanQrEvent) {
+            when (event) {
+                else -> {}
+            }
+        }
 
-    override fun handleEvent(event: ScanQrEvent) {
-        when (event) {
-            else -> {}
+        private fun handleFailure(failure: Failure) {
+            setEffect { ScanQrEffect.ShowMessageFailure(failure = failure) }
+        }
+
+        companion object Events {
         }
     }
-
-    private fun handleFailure(failure: Failure) {
-        setEffect { ScanQrEffect.ShowMessageFailure(failure = failure) }
-    }
-
-    companion object Events {
-    }
-}

@@ -1,7 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.validateCert
 
 object ValidateCertReducer {
-
     private lateinit var viewState: ValidateCertViewState
 
     fun instance(viewState: ValidateCertViewState) {

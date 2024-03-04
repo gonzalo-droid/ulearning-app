@@ -27,7 +27,7 @@ class AddConversationActivity :
     BaseActivityWithViewModel<ActivityAddConversationBinding, AddConversationViewModel>(),
     AddConversationViewState {
     override val binding: ActivityAddConversationBinding by dataBinding(
-        ActivityAddConversationBinding::inflate
+        ActivityAddConversationBinding::inflate,
     )
 
     override val viewModel: AddConversationViewModel by viewModels()
@@ -55,14 +55,12 @@ class AddConversationActivity :
     }
 
     private fun observeUiStates() {
-
         viewModel.setEvent(AddConversationEvent.GetRole)
 
         viewModel.let {
             viewModel.typeMessage = Config.TYPE_MESSAGE putString this@AddConversationActivity
 
             if (viewModel.typeMessage == Config.MESSAGE_COURSE) {
-
                 viewModel.courseId = Config.COURSE_ID_PUT putInt this@AddConversationActivity
 
                 viewModel.textUserIds =
@@ -74,7 +72,6 @@ class AddConversationActivity :
 
                 viewModel.setEvent(AddConversationEvent.GetUsersClick)
             } else {
-
                 users(listOf())
             }
         }
@@ -95,7 +92,6 @@ class AddConversationActivity :
     }
 
     override fun messageFailure(failure: Failure) {
-
         closeLoadingDialog()
 
         val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
@@ -104,18 +100,16 @@ class AddConversationActivity :
     }
 
     override fun loading() {
-
         showLoadingDialog()
     }
 
     override fun conversation(conversation: Conversation) {
-
         if (viewModel.typeMessage == Config.MESSAGE_COURSE) {
             closeLoadingDialog()
             startActivity(
                 Intent(this, ConversationActivity::class.java).apply {
                     putExtra(Config.COURSE_ID_PUT, viewModel.courseId)
-                }
+                },
             )
         }
         finish()

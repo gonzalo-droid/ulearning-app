@@ -22,5 +22,5 @@ data class MessageResponse(
     @SerializedName("user_ids")
     val userIds: List<String?>? = arrayListOf(),
     @SerializedName("uuid")
-    val uuid: String? = ""
+    val uuid: String? = "",
 )

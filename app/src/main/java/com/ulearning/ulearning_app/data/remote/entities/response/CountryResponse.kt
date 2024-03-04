@@ -10,5 +10,5 @@ data class CountryResponse(
     @SerializedName("name")
     var name: String = "",
     @SerializedName("phone_code")
-    var phoneCode: String = ""
+    var phoneCode: String = "",
 )

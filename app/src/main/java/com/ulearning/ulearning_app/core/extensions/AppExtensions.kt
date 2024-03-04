@@ -24,14 +24,12 @@ import java.util.*
 
 @SuppressLint("SimpleDateFormat")
 fun Date.dateFormat(format: String): String {
-
     return SimpleDateFormat(format).format(this)
 }
 
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 @SuppressLint("SimpleDateFormat")
 fun String.dateFormat(format: String): Date {
-
     val dateFormat = SimpleDateFormat(format)
 
     return dateFormat.parse(this)
@@ -40,7 +38,7 @@ fun String.dateFormat(format: String): Date {
 fun String.encode(): String {
     return android.util.Base64.encodeToString(
         this.toByteArray(charset("UTF-8")),
-        android.util.Base64.DEFAULT
+        android.util.Base64.DEFAULT,
     )
 }
 
@@ -67,19 +65,16 @@ infix fun Double.decimalFormat(format: String): String = DecimalFormat(format).f
 infix fun Int.decimalFormat(format: String): String = DecimalFormat(format).format(this)
 
 @Suppress("DEPRECATION")
-infix fun String.putListTeacher(activity: Activity) =
-    activity.intent.extras!!.getSerializable(this) as List<Teacher>
-@Suppress("DEPRECATION")
-infix fun String.putSubscription(activity: Activity) =
-    activity.intent.extras!!.getSerializable(this) as Subscription
+infix fun String.putListTeacher(activity: Activity) = activity.intent.extras!!.getSerializable(this) as List<Teacher>
 
 @Suppress("DEPRECATION")
-infix fun String.putCourse(activity: Activity) =
-    activity.intent.extras!!.getSerializable(this) as Course
+infix fun String.putSubscription(activity: Activity) = activity.intent.extras!!.getSerializable(this) as Subscription
 
 @Suppress("DEPRECATION")
-infix fun String.putConversation(activity: Activity) =
-    activity.intent.extras!!.getSerializable(this) as Conversation
+infix fun String.putCourse(activity: Activity) = activity.intent.extras!!.getSerializable(this) as Course
+
+@Suppress("DEPRECATION")
+infix fun String.putConversation(activity: Activity) = activity.intent.extras!!.getSerializable(this) as Conversation
 
 infix fun String.putString(activity: Activity) = activity.intent.extras!!.getString(this)!!
 
@@ -90,20 +85,19 @@ fun String.isMail(): Boolean = this.matches(Regex(Config.EMAIL_REGEX))
 fun String.isAlphaNumeric(): Boolean = this.matches(Regex(Config.ALPHA_NUMERIC_REGEX))
 
 fun String.toJsonElement(): JsonElement {
-
     return JsonParser().parse(this)
 }
 
-fun lifecycleScopeCreate(activity: Activity, method: suspend () -> Unit) =
-    (activity as AppCompatActivity).lifecycleScope.launch {
-
-        /**
-         * Api implements repeatOnLifecycle
-         *
-         * source: https://medium.com/androiddevelopers/repeatonlifecycle-api-design-story-8670d1a7d333
-         */
-        activity.repeatOnLifecycle(Lifecycle.State.CREATED) {
-
-            method()
-        }
+fun lifecycleScopeCreate(
+    activity: Activity,
+    method: suspend () -> Unit,
+) = (activity as AppCompatActivity).lifecycleScope.launch {
+    /**
+     * Api implements repeatOnLifecycle
+     *
+     * source: https://medium.com/androiddevelopers/repeatonlifecycle-api-design-story-8670d1a7d333
+     */
+    activity.repeatOnLifecycle(Lifecycle.State.CREATED) {
+        method()
     }
+}

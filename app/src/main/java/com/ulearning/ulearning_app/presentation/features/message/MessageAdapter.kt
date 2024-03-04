@@ -18,28 +18,32 @@ class MessageAdapter constructor(
     private val conversation: Conversation,
     private val userId: Int,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
     companion object {
         const val VIEW_TYPE_MESSAGE_SEND = 1
         const val VIEW_TYPE_MESSAGE_RECEIVED = 2
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): RecyclerView.ViewHolder {
         return if (viewType == VIEW_TYPE_MESSAGE_SEND) {
             SendViewHolder(
                 LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_message_send, parent, false)
+                    .inflate(R.layout.item_message_send, parent, false),
             )
         } else {
             ReceiverViewHolder(
                 LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_message_reciver, parent, false)
+                    .inflate(R.layout.item_message_reciver, parent, false),
             )
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: RecyclerView.ViewHolder,
+        position: Int,
+    ) {
         val message: Message = messages[position]
 
         when (holder.itemViewType) {
@@ -62,11 +66,9 @@ class MessageAdapter constructor(
     override fun getItemCount(): Int = messages.size
 
     inner class ReceiverViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
-
         val binding = ItemMessageReciverBinding.bind(view)
 
         fun bind(model: Message) {
-
             binding.titleText.text = model.content
             binding.nameText.text = model.sendBy.name
 
@@ -77,11 +79,9 @@ class MessageAdapter constructor(
     }
 
     inner class SendViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
-
         val binding = ItemMessageSendBinding.bind(view)
 
         fun bind(model: Message) {
-
             binding.titleText.text = model.content
             binding.nameText.text = model.sendBy.name
 

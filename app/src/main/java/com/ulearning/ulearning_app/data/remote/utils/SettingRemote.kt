@@ -2,7 +2,6 @@ package com.ulearning.ulearning_app.data.remote.utils
 
 class SettingRemote {
     companion object {
-
         const val PASSWORD = "password"
 
         const val HEADER_AUTH_KEY = "AUTH-KEY-PEX"

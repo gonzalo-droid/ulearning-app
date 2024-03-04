@@ -39,7 +39,6 @@ data class Course(
     var target: String? = "",
     var title: String? = "",
 ) : Serializable {
-
     fun formatAsynchronousHour(): String {
         return "${this.asynchronousHour} hr"
     }

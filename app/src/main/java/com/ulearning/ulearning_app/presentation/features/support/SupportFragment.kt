@@ -23,7 +23,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class SupportFragment :
     BaseFragmentWithViewModel<FragmentSupportBinding, SupportViewModel>(),
     SupportViewState {
-
     override val binding: FragmentSupportBinding by dataBinding(FragmentSupportBinding::inflate)
 
     override val viewModel: SupportViewModel by viewModels()
@@ -35,7 +34,6 @@ class SupportFragment :
     private lateinit var adapter: ConversationAdapter
 
     override fun onViewIsCreated(view: View) {
-
         SupportReducer.instance(viewState = this)
 
         recycler = binding.recycler
@@ -46,7 +44,6 @@ class SupportFragment :
     }
 
     private fun observeUiStates() {
-
         viewModel.setEvent(SupportEvent.ConversationsClicked)
 
         viewModel.apply {
@@ -67,22 +64,22 @@ class SupportFragment :
     override fun conversations(conversations: List<Conversation>) {
         closeLoadingDialog()
 
-        adapter = ConversationAdapter(conversations = conversations) { conversation ->
+        adapter =
+            ConversationAdapter(conversations = conversations) { conversation ->
 
-            onItemSelected(conversation)
-        }
+                onItemSelected(conversation)
+            }
 
         recycler.adapter = adapter
     }
 
     override fun newConversation() {
-
         findNavController().navigate(
             R.id.action_navigation_support_to_addConversationActivity,
             Bundle().apply {
                 putSerializable(Config.COURSE_ID_PUT, viewModel.courseId)
                 putSerializable(Config.TYPE_MESSAGE, Config.MESSAGE_SUPPORT)
-            }
+            },
         )
     }
 
@@ -92,17 +89,15 @@ class SupportFragment :
     }
 
     private fun onItemSelected(conversation: Conversation) {
-
         findNavController().navigate(
             R.id.action_navigation_support_to_messageActivity,
             Bundle().apply {
                 putSerializable(Config.CONVERSATION_PUT, conversation)
-            }
+            },
         )
     }
 
     override fun messageFailure(failure: Failure) {
-
         closeLoadingDialog()
 
         val messageDesign: MessageDesign = getUseCaseFailureFromBase(failure)
@@ -111,7 +106,6 @@ class SupportFragment :
     }
 
     override fun loading() {
-
         showLoadingDialog()
     }
 }

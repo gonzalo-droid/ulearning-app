@@ -14,28 +14,34 @@ import com.ulearning.ulearning_app.presentation.utils.imageLoader.ImageLoaderGli
 class CourseSubscriptionAdapter(
     private val courses: List<Subscription>,
     private val percentages: List<CoursePercentage>? = listOf(),
-    private val onClickListener: (Subscription, Int) -> Unit
+    private val onClickListener: (Subscription, Int) -> Unit,
 ) : RecyclerView.Adapter<CourseSubscriptionAdapter.CustomViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): CustomViewHolder {
         return CustomViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_courses, parent, false)
+                .inflate(R.layout.item_courses, parent, false),
         )
     }
 
-    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: CustomViewHolder,
+        position: Int,
+    ) {
         holder.bind(courses[position], onClickListener)
     }
 
     override fun getItemCount(): Int = courses.size
 
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
-
         val binding = ItemCoursesBinding.bind(view)
 
-        fun bind(model: Subscription, onClickListener: (Subscription, Int) -> Unit) {
-
+        fun bind(
+            model: Subscription,
+            onClickListener: (Subscription, Int) -> Unit,
+        ) {
             binding.progressSnackBar.visibility =
                 if (model.isFinished!!) View.INVISIBLE else View.VISIBLE
             binding.percentageText.visibility =
@@ -46,10 +52,9 @@ class CourseSubscriptionAdapter(
                     imageView = binding.imageIv,
                     imagePath = it,
                     requestOptions = RequestOptions.centerCropTransform(),
-                    placeHolder = R.drawable.course_test
+                    placeHolder = R.drawable.course_test,
                 )
             }
-
 
             var coursePercentage: CoursePercentage? = null
             var valueString = "0"

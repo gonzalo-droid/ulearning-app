@@ -18,5 +18,5 @@ data class CategoryResponse(
     @SerializedName("parent_id")
     var parentId: Any = Any(),
     @SerializedName("type")
-    var type: String = ""
+    var type: String = "",
 )

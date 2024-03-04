@@ -12,12 +12,14 @@ import com.ulearning.ulearning_app.data.remote.entities.response.ProfileResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.TokenResponse
 
 interface AuthService {
-
     suspend fun login(body: LoginRequest): Either<Failure, LoginResponse>
 
     suspend fun profile(token: String): Either<Failure, ProfileResponse>
 
-    suspend fun fcmToken(token: String, body: FCMTokenRequest): Either<Failure, FCMTokenResponse>
+    suspend fun fcmToken(
+        token: String,
+        body: FCMTokenRequest,
+    ): Either<Failure, FCMTokenResponse>
 
     suspend fun selfAuthToken(token: String): Either<Failure, TokenResponse>
 

@@ -10,7 +10,6 @@ import com.ulearning.ulearning_app.data.remote.entities.response.MessageResponse
 import com.ulearning.ulearning_app.data.remote.entities.response.UserResponse
 
 interface ConversationService {
-
     suspend fun conversations(
         token: String,
         perPage: Int,
@@ -27,7 +26,7 @@ interface ConversationService {
 
     suspend fun participantsMessage(
         token: String,
-        ids: String
+        ids: String,
     ): Either<Failure, List<UserResponse>>
 
     suspend fun messages(
@@ -37,17 +36,17 @@ interface ConversationService {
 
     suspend fun sendMessage(
         token: String,
-        body: SendMessageRequest
+        body: SendMessageRequest,
     ): Either<Failure, MessageResponse>
 
     suspend fun sendConversation(
         token: String,
-        body: SendConversationRequest
+        body: SendConversationRequest,
     ): Either<Failure, ConversationResponse>
 
     suspend fun sendConversationSupport(
         token: String,
-        body: SendConversationSupportRequest
+        body: SendConversationSupportRequest,
     ): Either<Failure, ConversationResponse>
 
     suspend fun userByCourse(

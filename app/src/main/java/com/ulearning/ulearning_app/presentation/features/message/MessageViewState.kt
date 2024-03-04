@@ -5,7 +5,6 @@ import com.ulearning.ulearning_app.domain.model.Message
 import com.ulearning.ulearning_app.domain.model.User
 
 interface MessageViewState {
-
     fun messageFailure(failure: Failure)
 
     fun loading()

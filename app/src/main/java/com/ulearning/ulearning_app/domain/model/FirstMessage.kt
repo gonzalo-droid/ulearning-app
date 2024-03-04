@@ -13,5 +13,5 @@ data class FirstMessage(
     val subject: Any? = null,
     val type: String? = "",
     val userIds: List<String?>? = arrayListOf(),
-    val uuid: String? = ""
+    val uuid: String? = "",
 ) : Serializable

@@ -26,7 +26,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
-
     @Provides
     @Singleton
     fun provideCourseMapper(): CourseMapper = CourseMapperImpl()
@@ -52,7 +51,7 @@ object RepositoryModule {
     fun provideAuthRepository(
         service: AuthService,
         mapper: AuthMapper,
-        dataStore: DataStoreConfig
+        dataStore: DataStoreConfig,
     ): AuthRepository = AuthRepositoryImpl(service, mapper, dataStore)
 
     @Provides
@@ -60,7 +59,7 @@ object RepositoryModule {
     fun provideCourseRepository(
         service: CourseService,
         mapper: CourseMapper,
-        dataStore: DataStoreConfig
+        dataStore: DataStoreConfig,
     ): CourseRepository = CourseRepositoryImpl(service, mapper, dataStore)
 
     @Provides
@@ -68,7 +67,7 @@ object RepositoryModule {
     fun provideTopicRepository(
         service: TopicService,
         mapper: TopicMapper,
-        dataStore: DataStoreConfig
+        dataStore: DataStoreConfig,
     ): TopicRepository = TopicRepositoryImpl(service, mapper, dataStore)
 
     @Provides
@@ -76,7 +75,7 @@ object RepositoryModule {
     fun provideConversationRepository(
         service: ConversationService,
         mapper: ConversationMapper,
-        dataStore: DataStoreConfig
+        dataStore: DataStoreConfig,
     ): ConversationRepository = ConversationRepositoryImpl(service, mapper, dataStore)
 
     @Provides
@@ -84,6 +83,6 @@ object RepositoryModule {
     fun provideProfileRepository(
         service: ProfileService,
         mapper: ProfileMapper,
-        dataStore: DataStoreConfig
+        dataStore: DataStoreConfig,
     ): ProfileRepository = ProfileRepositoryImpl(service, mapper, dataStore)
 }

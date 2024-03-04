@@ -19,10 +19,10 @@ import kotlinx.coroutines.launch
 
 abstract class BaseActivity<VBinding : ViewDataBinding> :
     AppCompatActivity() {
-
     protected abstract val binding: VBinding
 
     private var loadingDialog: LoadingDialog? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         init()
@@ -71,7 +71,6 @@ abstract class BaseActivity<VBinding : ViewDataBinding> :
 
     @SuppressLint("ClickableViewAccessibility")
     open fun configureHideKeyboar(view: View) {
-
         // Set up touch listener for non-text box views to hide keyboard.
         if (view !is EditText) {
             view.setOnTouchListener { v, _ ->
@@ -112,6 +111,7 @@ abstract class BaseActivity<VBinding : ViewDataBinding> :
     open fun replaceFragment(fragment: Fragment) {
         pushFragment(fragment, R.id.mobile_navigation, false)
     }
+
     open fun pushFragment(
         fragment: Fragment,
         container: Int,

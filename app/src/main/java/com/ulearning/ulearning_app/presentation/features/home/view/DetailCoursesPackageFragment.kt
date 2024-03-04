@@ -16,9 +16,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DetailCoursesPackageFragment :
     BaseFragmentWithViewModel<FragmentDetailCoursePackageBinding, CoursePackageViewModel>() {
-
     override val binding: FragmentDetailCoursePackageBinding by dataBinding(
-        FragmentDetailCoursePackageBinding::inflate
+        FragmentDetailCoursePackageBinding::inflate,
     )
 
     override val viewModel: CoursePackageViewModel by viewModels()
@@ -28,7 +27,6 @@ class DetailCoursesPackageFragment :
     private lateinit var data: LearningPackage
 
     override fun onViewIsCreated(view: View) {
-
         arguments?.let {
             data = it.getSerializable(DETAIL_COURSES) as LearningPackage
         }
@@ -47,16 +45,15 @@ class DetailCoursesPackageFragment :
     }
 
     companion object {
-
         const val DETAIL_COURSES = "detailCourses"
 
         @JvmStatic
-        fun newInstance(
-            data: LearningPackage,
-        ): DetailCoursesPackageFragment = DetailCoursesPackageFragment().apply {
-            arguments = Bundle().apply {
-                putSerializable(DETAIL_COURSES, data)
+        fun newInstance(data: LearningPackage): DetailCoursesPackageFragment =
+            DetailCoursesPackageFragment().apply {
+                arguments =
+                    Bundle().apply {
+                        putSerializable(DETAIL_COURSES, data)
+                    }
             }
-        }
     }
 }

@@ -9,5 +9,5 @@ data class FileInfo(
     val rating: Int? = 0,
     val sendMail: Boolean? = false,
     val title: String? = "",
-    val topics: String? = ""
+    val topics: String? = "",
 )

@@ -27,9 +27,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class CourseCompletedActivity :
     BaseActivityWithViewModel<ActivityCourseCompletedBinding, CourseCompletedViewModel>(),
     CourseCompletedViewState {
-
     override val binding: ActivityCourseCompletedBinding by dataBinding(
-        ActivityCourseCompletedBinding::inflate
+        ActivityCourseCompletedBinding::inflate,
     )
 
     override val viewModel: CourseCompletedViewModel by viewModels()
@@ -94,22 +93,25 @@ class CourseCompletedActivity :
             binding.noDataInclude.root.visibility = View.VISIBLE
         } else {
             binding.noDataInclude.root.visibility = View.GONE
-            courseRecycler.adapter = CourseSubscriptionAdapter(courses = courses) { model, percentage ->
-                onItemSelected(model,percentage)
-            }
+            courseRecycler.adapter =
+                CourseSubscriptionAdapter(courses = courses) { model, percentage ->
+                    onItemSelected(model, percentage)
+                }
             binding.courseRecycler.visibility = View.VISIBLE
         }
     }
 
-    private fun onItemSelected(model: Subscription, percentage:Int) {
-
+    private fun onItemSelected(
+        model: Subscription,
+        percentage: Int,
+    ) {
         startActivity(
             Intent(this, DetailCourseActivity::class.java).apply {
                 putExtra(Config.COURSE_PUT, model.course)
                 putExtra(Config.SUBSCRIPTION_PUT, model)
                 putExtra(Config.ROLE, viewModel.typeRole)
                 putExtra(Config.PERCENTAGE_PUT, percentage)
-            }
+            },
         )
     }
 }

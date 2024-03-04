@@ -10,17 +10,17 @@ import javax.inject.Singleton
 
 @Singleton
 class TopicServiceImpl
-@Inject constructor(
-    private val api: TopicApi,
-    private val networkHandler: NetworkHandler
-) : TopicService {
-
-    override suspend fun topics(
-        token: String,
-        courseId: Int
-    ): Either<Failure, List<TopicResponse>> {
-        return networkHandler.callServiceBaseList {
-            api.topics(token, courseId)
+    @Inject
+    constructor(
+        private val api: TopicApi,
+        private val networkHandler: NetworkHandler,
+    ) : TopicService {
+        override suspend fun topics(
+            token: String,
+            courseId: Int,
+        ): Either<Failure, List<TopicResponse>> {
+            return networkHandler.callServiceBaseList {
+                api.topics(token, courseId)
+            }
         }
     }
-}

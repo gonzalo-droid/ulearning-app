@@ -1,7 +1,6 @@
 package com.ulearning.ulearning_app.presentation.features.search
 
 object SearchReducer {
-
     private lateinit var viewState: SearchViewState
 
     fun instance(viewState: SearchViewState) {

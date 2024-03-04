@@ -44,5 +44,5 @@ data class CreatedBy(
     @SerializedName("second_last_name")
     val secondLastName: String? = "",
     @SerializedName("suspended_at")
-    val suspendedAt: Any? = Any()
+    val suspendedAt: Any? = Any(),
 )

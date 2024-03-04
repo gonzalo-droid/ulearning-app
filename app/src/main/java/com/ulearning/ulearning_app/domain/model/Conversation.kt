@@ -10,5 +10,5 @@ data class Conversation(
     val isBroadcast: Boolean? = false,
     val replyToAuthor: Boolean? = false,
     val toSupport: Boolean? = false,
-    val uuid: String
+    val uuid: String,
 ) : Serializable

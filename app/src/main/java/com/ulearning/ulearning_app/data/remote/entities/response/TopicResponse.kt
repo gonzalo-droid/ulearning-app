@@ -16,5 +16,5 @@ data class TopicResponse(
     @SerializedName("title")
     val title: String? = "",
     @SerializedName("type")
-    val type: String? = ""
+    val type: String? = "",
 )

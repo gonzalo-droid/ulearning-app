@@ -9,5 +9,5 @@ data class Topic(
     val order: Int? = 0,
     val parentId: Int? = null,
     val title: String? = "",
-    val type: String? = ""
+    val type: String? = "",
 ) : Serializable

@@ -6,7 +6,6 @@ import javax.inject.Singleton
 
 @Singleton
 class TopicMapperImpl : TopicMapper {
-
     override suspend fun listTopicToDomain(data: List<TopicResponse>): List<Topic> {
         return data.map {
             Topic(

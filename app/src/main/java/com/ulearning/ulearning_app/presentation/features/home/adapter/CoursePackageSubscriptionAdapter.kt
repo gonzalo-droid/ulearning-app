@@ -17,25 +17,31 @@ class CoursePackageSubscriptionAdapter constructor(
     private val percentages: List<CoursePercentage>? = listOf(),
     private val onClickListener: (Subscription) -> Unit,
 ) : RecyclerView.Adapter<CoursePackageSubscriptionAdapter.CustomViewHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): CustomViewHolder {
         return CustomViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_route, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_route, parent, false),
         )
     }
 
-    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: CustomViewHolder,
+        position: Int,
+    ) {
         holder.bind(courses[position], onClickListener)
     }
 
     override fun getItemCount(): Int = courses.size
 
     inner class CustomViewHolder constructor(view: View) : RecyclerView.ViewHolder(view) {
-
         val binding = ItemRouteBinding.bind(view)
 
-        fun bind(model: Subscription, onClickListener: (Subscription) -> Unit) {
-
+        fun bind(
+            model: Subscription,
+            onClickListener: (Subscription) -> Unit,
+        ) {
             binding.progressSnackBar.visibility =
                 if (model.isFinished!!) View.INVISIBLE else View.VISIBLE
             binding.percentageText.visibility =
@@ -60,7 +66,7 @@ class CoursePackageSubscriptionAdapter constructor(
                     imageView = binding.imageIv,
                     imagePath = it,
                     requestOptions = RequestOptions.centerCropTransform(),
-                    placeHolder = R.drawable.course_test
+                    placeHolder = R.drawable.course_test,
                 )
             }
 

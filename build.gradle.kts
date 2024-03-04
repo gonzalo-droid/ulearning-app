@@ -12,20 +12,17 @@ plugins {
     id("com.google.firebase.appdistribution") version "4.0.0" apply false
 
     id("com.google.protobuf") version "0.9.4" apply false
-
 }
 buildscript {
     repositories {
-        google()  // Google's Maven repository
-        mavenCentral()  // Maven Central repository
+        google() // Google's Maven repository
+        mavenCentral() // Maven Central repository
     }
 
     dependencies {
         classpath("com.google.firebase:firebase-crashlytics-gradle:2.9.9")
     }
 }
-
-
 
 /*
 buildscript {

@@ -32,5 +32,5 @@ data class GroupResponse(
     @SerializedName("teachers_count")
     var teachersCount: Int? = 0,
     @SerializedName("vacancies")
-    var vacancies: Int? = 0
+    var vacancies: Int? = 0,
 )
