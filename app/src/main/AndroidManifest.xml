@@ -59,7 +59,8 @@
         <activity
             android:name=".presentation.features.validateCert.ValidateCertActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Ulearning.App"/>
         <activity
             android:name=".presentation.features.scanQr.ScanQrActivity"
             android:exported="false"

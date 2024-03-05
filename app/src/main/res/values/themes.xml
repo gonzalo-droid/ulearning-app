@@ -18,6 +18,10 @@
         <item name="android:statusBarColor" >@android:color/transparent</item>
     </style>
 
+    <style name="Theme.General" parent="Theme.Ulearning.App">
+        <item name="android:background" >@android:color/white</item>
+    </style>
+
     <style name="Theme.App.Transparent" parent="Theme.Ulearning.App">
         <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
     </style>

@@ -18,6 +18,11 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="CustomOutlinedExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <!-- Radio de las esquinas -->
+
+
+    </style>
 
     <style name="welcomeText">Te damos la Bienvenida</style>
 

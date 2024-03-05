@@ -6,6 +6,8 @@ import com.ulearning.ulearning_app.domain.model.Profile
 interface ProfileViewState {
     fun messageFailure(failure: Failure)
 
+    fun messageSuccess()
+
     fun loading()
 
     fun getProfile(data: Profile)

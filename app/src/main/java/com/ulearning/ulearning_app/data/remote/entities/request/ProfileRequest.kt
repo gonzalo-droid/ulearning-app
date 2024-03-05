@@ -4,40 +4,33 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class ProfileRequest(
-    @SerializedName("address")
-    val address: String? = "",
-    @SerializedName("avatar")
-    val avatar: Any? = null,
-    @SerializedName("country")
-    val country: Any? = null,
-    @SerializedName("country_id")
-    val countryId: Int? = 0,
+
     @SerializedName("date_of_birth")
-    val dateOfBirth: String? = "",
+    var dateOfBirth: String? = "",
     @SerializedName("document_number")
-    val documentNumber: String? = "",
+    var documentNumber: String? = "",
     @SerializedName("document_type")
-    val documentType: String? = "",
+    var documentType: String? = "",
     @SerializedName("email")
-    val email: String? = "",
+    var email: String? = "",
     @SerializedName("first_name")
-    val firstName: String? = "",
+    var firstName: String? = "",
     @SerializedName("gender")
-    val gender: String? = "",
+    var gender: String? = "",
     @SerializedName("id")
-    val id: Int? = 0,
+    var id: Int? = 0,
     @SerializedName("last_name")
-    val lastName: String? = "",
+    var lastName: String? = "",
     @SerializedName("name")
-    val name: String? = "",
+    var name: String? = "",
     @SerializedName("phone")
-    val phone: String? = "",
+    var phone: String? = "",
     @SerializedName("phone_code")
-    val phoneCode: String? = "",
+    var phoneCode: String? = "",
     @SerializedName("role")
-    val role: String? = "",
+    var role: String? = "",
     @SerializedName("second_last_name")
-    val secondLastName: String? = "",
+    var secondLastName: String? = "",
 ) : Serializable
 
 

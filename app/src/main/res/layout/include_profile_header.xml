@@ -5,15 +5,15 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageView39"
+        android:id="@+id/imageView"
         android:layout_width="@dimen/dimen80"
         android:layout_height="@dimen/dimen80"
         android:src="@drawable/ic_profile"
-        app:tint="@color/blue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/circleShapeAppearance" />
+        app:shapeAppearanceOverlay="@style/circleShapeAppearance"
+        app:tint="@color/blue" />
 
     <TextView
         android:id="@+id/nameText"
@@ -26,7 +26,7 @@
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView39" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
