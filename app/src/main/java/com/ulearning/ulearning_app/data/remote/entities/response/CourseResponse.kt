@@ -39,7 +39,7 @@ data class CourseResponse(
     @SerializedName("record") var record: Boolean? = false,
     @SerializedName("schedule_link") var scheduleLink: Any? = Any(),
     @SerializedName("secondary_images") var secondaryImages: List<SecondaryImage>? = arrayListOf(),
-    @SerializedName("self_study_hour") var selfStudyHour: String? = "",
+    @SerializedName("self_study_hour") var selfStudyHour: Int? = 0,
     @SerializedName("slug") var slug: String? = "",
     @SerializedName("students_count") var studentsCount: Int? = 0,
     @SerializedName("suspended_at") var suspendedAt: Any? = Any(),

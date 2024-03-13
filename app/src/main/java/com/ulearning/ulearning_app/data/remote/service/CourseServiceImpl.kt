@@ -50,6 +50,8 @@ class CourseServiceImpl
             perPage: Int,
             page: Int,
             isFinished: Boolean,
+            classification: String,
+            notInLearningPackage: Boolean,
         ): Either<Failure, List<SubscriptionResponse>> {
             return networkHandler.callServiceBaseList {
                 courseApi.subscription(
@@ -57,6 +59,8 @@ class CourseServiceImpl
                     perPage,
                     page,
                     isFinished,
+                    classification,
+                    notInLearningPackage
                 )
             }
         }

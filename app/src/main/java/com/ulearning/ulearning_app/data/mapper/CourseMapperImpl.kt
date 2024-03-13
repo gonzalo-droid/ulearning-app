@@ -22,81 +22,81 @@ class CourseMapperImpl : CourseMapper {
         return data.let {
             Subscription(
                 course =
-                    if (it.courseId != null) {
-                        Course(
-                            category =
-                                if (it.course?.category != null) {
-                                    Category(
-                                        color = it.course?.category?.color,
-                                        description = it.course?.category?.description,
-                                        id = it.course?.category?.id,
-                                        name = it.course?.category?.name,
-                                        type = it.course?.category?.type,
-                                    )
-                                } else {
-                                    null
-                                },
-                            categoryId = it.course?.categoryId,
-                            descriptionLarge = it.course?.descriptionLarge,
-                            descriptionShort = it.course?.descriptionShort,
-                            mainImage =
-                                if (it.course?.mainImage != null) {
-                                    MainImage(
-                                        originalUrl = it.course?.mainImage?.originalUrl,
-                                        previewUrl = it.course?.mainImage?.previewUrl,
-                                    )
-                                } else {
-                                    null
-                                },
-                            title = it.course?.title,
-                            id = it.course?.id,
-                            lessonsCount = it.course?.lessonsCount,
-                            modality = it.course?.modality,
-                            asynchronousHour = it.course?.asynchronousHour,
-                            amount = 0,
-                            benefits = null,
-                            certificate = it.course?.certificate,
-                            code = null,
-                            currency = null,
-                            duration = null,
-                            externalId = null,
-                            externalLink = null,
-                            groups = listOf(),
-                            instructions = null,
-                            languageId = null,
-                            methodology = null,
-                            nature = null,
-                            origin = null,
-                            politicsLink = null,
-                            presentationLink = null,
-                            ratingAverage = null,
-                            ratingCount = null,
-                            record = it.course?.record,
-                            selfStudyHour = it.course?.selfStudyHour,
-                            slug = null,
-                            studentsCount = null,
-                            syllabusLink = it.course?.syllabusLink,
-                            synchronousHour = it.course?.synchronousHour,
-                            target = null,
-                        )
-                    } else {
-                        null
-                    },
+                if (it.courseId != null) {
+                    Course(
+                        category =
+                        if (it.course?.category != null) {
+                            Category(
+                                color = it.course?.category?.color,
+                                description = it.course?.category?.description,
+                                id = it.course?.category?.id,
+                                name = it.course?.category?.name,
+                                type = it.course?.category?.type,
+                            )
+                        } else {
+                            null
+                        },
+                        categoryId = it.course?.categoryId,
+                        descriptionLarge = it.course?.descriptionLarge,
+                        descriptionShort = it.course?.descriptionShort,
+                        mainImage =
+                        if (it.course?.mainImage != null) {
+                            MainImage(
+                                originalUrl = it.course?.mainImage?.originalUrl,
+                                previewUrl = it.course?.mainImage?.previewUrl,
+                            )
+                        } else {
+                            null
+                        },
+                        title = it.course?.title,
+                        id = it.course?.id,
+                        lessonsCount = it.course?.lessonsCount,
+                        modality = it.course?.modality,
+                        asynchronousHour = it.course?.asynchronousHour,
+                        amount = 0,
+                        benefits = null,
+                        certificate = it.course?.certificate,
+                        code = null,
+                        currency = null,
+                        duration = null,
+                        externalId = null,
+                        externalLink = null,
+                        groups = listOf(),
+                        instructions = null,
+                        languageId = null,
+                        methodology = null,
+                        nature = null,
+                        origin = null,
+                        politicsLink = null,
+                        presentationLink = null,
+                        ratingAverage = null,
+                        ratingCount = null,
+                        record = it.course?.record,
+                        selfStudyHour = it.course?.selfStudyHour,
+                        slug = null,
+                        studentsCount = null,
+                        syllabusLink = it.course?.syllabusLink,
+                        synchronousHour = it.course?.synchronousHour,
+                        target = null,
+                    )
+                } else {
+                    null
+                },
                 user =
-                    User(
-                        name = it.userResponse?.name,
-                    ),
+                User(
+                    name = it.userResponse?.name,
+                ),
                 courseId = it.courseId,
                 group =
-                    if (it.groupId != null) {
-                        Group(
-                            id = it.group?.id,
-                            name = it.group?.name,
-                            teachers = if (!it.group?.teachers.isNullOrEmpty()) listTeacherToDomain(it.group?.teachers) else arrayListOf(),
-                        )
-                    } else {
-                        null
-                    },
+                if (it.groupId != null) {
+                    Group(
+                        id = it.group?.id,
+                        name = it.group?.name,
+                        teachers = if (!it.group?.teachers.isNullOrEmpty()) listTeacherToDomain(it.group?.teachers) else arrayListOf(),
+                    )
+                } else {
+                    null
+                },
                 groupId = it.groupId,
                 isFinished = it.isFinished,
                 amount = it.amount,
@@ -112,27 +112,28 @@ class CourseMapperImpl : CourseMapper {
                 userId = it.userId,
                 learningPackageId = it.learningPackageId,
                 learningPackage =
-                    LearningPackage(
-                        amount = null,
-                        code = null,
-                        descriptionLarge = it.learningPackage?.descriptionLarge,
-                        descriptionShort = it.learningPackage?.descriptionShort,
-                        id = it.learningPackage?.id,
-                        isShop = null,
-                        mainImage =
-                            it.learningPackage?.mainImage?.let { mainImage ->
-                                MainImage(
-                                    originalUrl = mainImage.originalUrl,
-                                    previewUrl = mainImage.previewUrl,
-                                )
-                            },
-                        title = it.learningPackage?.title,
-                        type = it.learningPackage?.type,
-                        items =
-                            it.learningPackage?.items?.let { items ->
-                                listCoursePackageItemToDomain(items)
-                            },
-                    ),
+                LearningPackage(
+                    amount = null,
+                    code = null,
+                    descriptionLarge = it.learningPackage?.descriptionLarge,
+                    descriptionShort = it.learningPackage?.descriptionShort,
+                    id = it.learningPackage?.id,
+                    isShop = null,
+                    mainImage =
+                    it.learningPackage?.mainImage?.let { mainImage ->
+                        MainImage(
+                            originalUrl = mainImage.originalUrl,
+                            previewUrl = mainImage.previewUrl,
+                        )
+                    },
+                    title = it.learningPackage?.title,
+                    type = it.learningPackage?.type,
+                    requiredHours = it.requiredHours,
+                    items =
+                    it.learningPackage?.items?.let { items ->
+                        listCoursePackageItemToDomain(items)
+                    },
+                ),
             )
         }
     }
@@ -141,81 +142,81 @@ class CourseMapperImpl : CourseMapper {
         return data.map {
             Subscription(
                 course =
-                    if (it.courseId != null) {
-                        Course(
-                            category =
-                                if (it.course?.category != null) {
-                                    Category(
-                                        color = it.course?.category?.color,
-                                        description = it.course?.category?.description,
-                                        id = it.course?.category?.id,
-                                        name = it.course?.category?.name,
-                                        type = it.course?.category?.type,
-                                    )
-                                } else {
-                                    null
-                                },
-                            categoryId = it.course?.categoryId,
-                            descriptionLarge = it.course?.descriptionLarge,
-                            descriptionShort = it.course?.descriptionShort,
-                            mainImage =
-                                if (it.course?.mainImage != null) {
-                                    MainImage(
-                                        originalUrl = it.course?.mainImage?.originalUrl,
-                                        previewUrl = it.course?.mainImage?.previewUrl,
-                                    )
-                                } else {
-                                    null
-                                },
-                            title = it.course?.title,
-                            id = it.course?.id,
-                            lessonsCount = it.course?.lessonsCount,
-                            modality = it.course?.modality,
-                            asynchronousHour = it.course?.asynchronousHour,
-                            amount = 0,
-                            benefits = null,
-                            certificate = it.course?.certificate,
-                            code = null,
-                            currency = null,
-                            duration = null,
-                            externalId = null,
-                            externalLink = null,
-                            groups = listOf(),
-                            instructions = null,
-                            languageId = null,
-                            methodology = null,
-                            nature = null,
-                            origin = null,
-                            politicsLink = null,
-                            presentationLink = null,
-                            ratingAverage = null,
-                            ratingCount = null,
-                            record = it.course?.record,
-                            selfStudyHour = it.course?.selfStudyHour,
-                            slug = null,
-                            studentsCount = null,
-                            syllabusLink = it.course?.syllabusLink,
-                            synchronousHour = it.course?.synchronousHour,
-                            target = null,
-                        )
-                    } else {
-                        null
-                    },
+                if (it.courseId != null) {
+                    Course(
+                        category =
+                        if (it.course?.category != null) {
+                            Category(
+                                color = it.course?.category?.color,
+                                description = it.course?.category?.description,
+                                id = it.course?.category?.id,
+                                name = it.course?.category?.name,
+                                type = it.course?.category?.type,
+                            )
+                        } else {
+                            null
+                        },
+                        categoryId = it.course?.categoryId,
+                        descriptionLarge = it.course?.descriptionLarge,
+                        descriptionShort = it.course?.descriptionShort,
+                        mainImage =
+                        if (it.course?.mainImage != null) {
+                            MainImage(
+                                originalUrl = it.course?.mainImage?.originalUrl,
+                                previewUrl = it.course?.mainImage?.previewUrl,
+                            )
+                        } else {
+                            null
+                        },
+                        title = it.course?.title,
+                        id = it.course?.id,
+                        lessonsCount = it.course?.lessonsCount,
+                        modality = it.course?.modality,
+                        asynchronousHour = it.course?.asynchronousHour,
+                        amount = 0,
+                        benefits = null,
+                        certificate = it.course?.certificate,
+                        code = null,
+                        currency = null,
+                        duration = null,
+                        externalId = null,
+                        externalLink = null,
+                        groups = listOf(),
+                        instructions = null,
+                        languageId = null,
+                        methodology = null,
+                        nature = null,
+                        origin = null,
+                        politicsLink = null,
+                        presentationLink = null,
+                        ratingAverage = null,
+                        ratingCount = null,
+                        record = it.course?.record,
+                        selfStudyHour = it.course?.selfStudyHour,
+                        slug = null,
+                        studentsCount = null,
+                        syllabusLink = it.course?.syllabusLink,
+                        synchronousHour = it.course?.synchronousHour,
+                        target = null,
+                    )
+                } else {
+                    null
+                },
                 user =
-                    User(
-                        name = it.userResponse?.name,
-                    ),
+                User(
+                    name = it.userResponse?.name,
+                ),
                 courseId = it.courseId,
                 group =
-                    if (it.groupId != null) {
-                        Group(
-                            id = it.group?.id,
-                            name = it.group?.name,
-                            teachers = if (!it.group?.teachers.isNullOrEmpty()) listTeacherToDomain(it.group?.teachers) else arrayListOf(),
-                        )
-                    } else {
-                        null
-                    },
+                if (it.groupId != null) {
+                    Group(
+                        id = it.group?.id,
+                        name = it.group?.name,
+                        teachers = if (!it.group?.teachers.isNullOrEmpty()) listTeacherToDomain(it.group?.teachers) else arrayListOf(),
+                    )
+                } else {
+                    null
+                },
                 groupId = it.groupId,
                 isFinished = it.isFinished,
                 amount = it.amount,
@@ -230,25 +231,26 @@ class CourseMapperImpl : CourseMapper {
                 type = it.status,
                 userId = it.userId,
                 learningPackage =
-                    it.learningPackage?.let { learningPackage ->
-                        LearningPackage(
-                            amount = learningPackage.amount,
-                            code = learningPackage.code,
-                            descriptionLarge = learningPackage.descriptionLarge,
-                            descriptionShort = learningPackage.descriptionShort,
-                            id = learningPackage.id,
-                            isShop = learningPackage.isShop,
-                            mainImage =
-                                learningPackage.mainImage?.let { mainImage ->
-                                    MainImage(
-                                        originalUrl = mainImage.originalUrl,
-                                        previewUrl = mainImage.previewUrl,
-                                    )
-                                },
-                            title = it.learningPackage.title,
-                            type = it.learningPackage.type,
-                        )
-                    },
+                it.learningPackage?.let { learningPackage ->
+                    LearningPackage(
+                        amount = learningPackage.amount,
+                        code = learningPackage.code,
+                        descriptionLarge = learningPackage.descriptionLarge,
+                        descriptionShort = learningPackage.descriptionShort,
+                        id = learningPackage.id,
+                        isShop = learningPackage.isShop,
+                        mainImage =
+                        learningPackage.mainImage?.let { mainImage ->
+                            MainImage(
+                                originalUrl = mainImage.originalUrl,
+                                previewUrl = mainImage.previewUrl,
+                            )
+                        },
+                        title = it.learningPackage.title,
+                        requiredHours = it.requiredHours,
+                        type = it.learningPackage.type,
+                    )
+                },
             )
         }
     }
@@ -257,29 +259,29 @@ class CourseMapperImpl : CourseMapper {
         return data.let {
             Course(
                 category =
-                    if (it.category != null) {
-                        Category(
-                            color = it.category?.color,
-                            description = it.category?.description,
-                            id = it.category?.id,
-                            name = it.category?.name,
-                            type = it.category?.type,
-                        )
-                    } else {
-                        null
-                    },
+                if (it.category != null) {
+                    Category(
+                        color = it.category?.color,
+                        description = it.category?.description,
+                        id = it.category?.id,
+                        name = it.category?.name,
+                        type = it.category?.type,
+                    )
+                } else {
+                    null
+                },
                 categoryId = it.categoryId,
                 descriptionLarge = it.descriptionLarge,
                 descriptionShort = it.descriptionShort,
                 mainImage =
-                    if (it.mainImage != null) {
-                        MainImage(
-                            originalUrl = it.mainImage?.originalUrl,
-                            previewUrl = it.mainImage?.previewUrl,
-                        )
-                    } else {
-                        null
-                    },
+                if (it.mainImage != null) {
+                    MainImage(
+                        originalUrl = it.mainImage?.originalUrl,
+                        previewUrl = it.mainImage?.previewUrl,
+                    )
+                } else {
+                    null
+                },
                 title = it.title,
                 id = it.id,
                 lessonsCount = it.lessonsCount,
@@ -318,29 +320,29 @@ class CourseMapperImpl : CourseMapper {
         return data.map {
             Course(
                 category =
-                    if (it.category != null) {
-                        Category(
-                            color = it.category?.color,
-                            description = it.category?.description,
-                            id = it.category?.id,
-                            name = it.category?.name,
-                            type = it.category?.type,
-                        )
-                    } else {
-                        null
-                    },
+                if (it.category != null) {
+                    Category(
+                        color = it.category?.color,
+                        description = it.category?.description,
+                        id = it.category?.id,
+                        name = it.category?.name,
+                        type = it.category?.type,
+                    )
+                } else {
+                    null
+                },
                 categoryId = it.categoryId,
                 descriptionLarge = it.descriptionLarge,
                 descriptionShort = it.descriptionShort,
                 mainImage =
-                    if (it.mainImage != null) {
-                        MainImage(
-                            originalUrl = it.mainImage?.originalUrl,
-                            previewUrl = it.mainImage?.previewUrl,
-                        )
-                    } else {
-                        null
-                    },
+                if (it.mainImage != null) {
+                    MainImage(
+                        originalUrl = it.mainImage?.originalUrl,
+                        previewUrl = it.mainImage?.previewUrl,
+                    )
+                } else {
+                    null
+                },
                 title = it.title,
                 id = it.id,
                 lessonsCount = it.lessonsCount,

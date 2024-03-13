@@ -8,6 +8,7 @@ data class LearningPackage(
     var descriptionLarge: String? = "",
     var descriptionShort: String? = "",
     var id: Int?,
+    var requiredHours: Int?,
     var isShop: Boolean?,
     var mainImage: MainImage? = null,
     var title: String? = "",

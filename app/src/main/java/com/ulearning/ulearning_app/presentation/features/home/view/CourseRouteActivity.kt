@@ -86,7 +86,7 @@ class CourseRouteActivity :
 
     override fun getCourseRoute(courses: List<Subscription>) {
         binding.skeletonInclude.root.visibility = View.INVISIBLE
-        if (courses.isNullOrEmpty()) {
+        if (courses.isEmpty()) {
             binding.courseRecycler.visibility = View.INVISIBLE
             binding.noDataInclude.root.visibility = View.VISIBLE
         } else {

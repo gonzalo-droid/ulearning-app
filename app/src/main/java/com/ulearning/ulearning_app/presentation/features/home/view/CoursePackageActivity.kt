@@ -44,6 +44,17 @@ class CoursePackageActivity :
 
     override val dataBindingViewModel = BR.coursePackageViewModel
 
+    private val courseIds: MutableList<Int> = mutableListOf()
+    private val courseIdsWithRequired: MutableList<CourseInfo> = mutableListOf()
+    lateinit var learningPackage: LearningPackage
+    var percentage: Int = 0
+
+    data class CourseInfo(
+        val courseId: Int,
+        val isRequired: Boolean,
+        val selfStudyHour: Int
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -58,6 +69,9 @@ class CoursePackageActivity :
         supportActionBar!!.setHomeAsUpIndicator(upArrow)
 
         CoursePackageReducer.instance(viewState = this@CoursePackageActivity)
+
+        binding.percentageText.text = "$percentage %"
+        binding.progressBar.progress = percentage.toInt()
 
         observeUiStates()
     }
@@ -105,6 +119,18 @@ class CoursePackageActivity :
         viewModel.setCoursePackage(course)
         viewModel.setPercentages(percentages)
 
+        learningPackage = course.learningPackage!!
+        course.learningPackage?.items?.forEach {
+            courseIds.add(it.courseId!!)
+            courseIdsWithRequired.add(
+                CourseInfo(
+                    courseId = it.courseId,
+                    isRequired = it.isRequired,
+                    selfStudyHour = it.course?.selfStudyHour ?: 0
+                )
+            )
+        }
+
         with(binding) {
             if (!course.learningPackage?.mainImage?.originalUrl.isNullOrEmpty()) {
                 ImageLoaderGlide().loadImage(
@@ -125,27 +151,76 @@ class CoursePackageActivity :
 
             initTabLayout(course.learningPackage!!, percentages?.let { ArrayList(it) })
 
-            calculatePercentage(viewModel.getPercentages())
+            calculatePercentage(percentages)
         }
     }
 
     @SuppressLint("SetTextI18n")
     private fun calculatePercentage(percentages: List<CoursePercentage>?) {
-        var resultText = "0"
-        var resultNumber = 0.0
-        percentages?.let {
-            if (it.isNotEmpty()) {
-                var result = 0.0
-                it.forEach { value ->
-                    result += if (value.percentage.toInt() < 100) value.percentage.toInt() else 100
+        if (courseIds.isEmpty()) return
+
+
+        if (learningPackage.id != null) {
+            percentages?.let {
+                val value = calculateCourseAdvances(
+                    courseAdvances = it,
+                    courseIdsWithRequired = courseIdsWithRequired
+                )
+                percentage = if (value > 100) 100 else value
+            }
+            return
+        }
+
+        var percentage = 0
+        percentages?.forEach { item ->
+            percentage += if (item.percentage.toInt() < 100) item.percentage.toInt() else 100
+        }
+        percentage /= courseIds.size
+
+
+        binding.percentageText.text = "$percentage %"
+        binding.progressBar.progress = percentage.toInt()
+    }
+
+    private fun calculateCourseAdvances(
+        courseAdvances: List<CoursePercentage>,
+        courseIdsWithRequired: MutableList<CourseInfo>
+    ): Int {
+        var requiredHoursCompleted = 0
+        var optionalHoursCompleted = 0
+        var requiredHoursToComplete = 0
+        val requiredHours = learningPackage.requiredHours ?: 0
+
+        courseIdsWithRequired.forEach { course ->
+            if (course.isRequired) {
+                requiredHoursToComplete += course.selfStudyHour
+            }
+        }
+        // Recorremos los avances para obtener las horas completadas
+        for (advance in courseAdvances) {
+            val course = courseIdsWithRequired.find { it.courseId == advance.courseId }
+            if (course != null) {
+                if (course.isRequired) {
+                    requiredHoursCompleted += course.selfStudyHour
+                } else {
+                    optionalHoursCompleted += course.selfStudyHour
                 }
-                resultNumber = result / percentages.size
-                resultText = result.toString()
             }
         }
 
-        binding.percentageText.text = "$resultText %"
-        binding.progressBar.progress = resultNumber.toInt()
+        var percentageAdvance = 0.0
+        val totalHoursCompleted = requiredHoursCompleted + optionalHoursCompleted
+        var residualHours = requiredHours - requiredHoursCompleted
+        if (residualHours < 0) residualHours = 0
+
+        percentageAdvance = if (requiredHoursToComplete == requiredHoursCompleted || requiredHours == 0) {
+            (totalHoursCompleted.toDouble() / requiredHours) * 100
+        } else {
+            (requiredHoursCompleted.toDouble() / requiredHours) * 100
+        }
+        if (percentageAdvance > 100) percentageAdvance = 100.0
+
+        return (percentageAdvance * 100).toInt() / 100
     }
 
     fun goToDetailCourse(

@@ -15,6 +15,8 @@ interface CourseApi {
         @Query("per_page") perPage: Int,
         @Query("page") page: Int,
         @Query("is_finished") isFinished: Boolean,
+        @Query("classification") classification: String = "course",
+        @Query("not_in_learning_package") notInLearningPackage: Boolean,
     ): Response<BaseResponse<List<SubscriptionResponse>>>
 
     @GET("subscriptions")

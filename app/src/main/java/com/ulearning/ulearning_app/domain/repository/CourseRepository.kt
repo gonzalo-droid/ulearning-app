@@ -15,6 +15,8 @@ interface CourseRepository {
     suspend fun getSubscriptions(
         page: Int,
         isFinished: Boolean,
+        classification: String = "course",
+        notInLearningPackage: Boolean,
     ): Either<Failure, List<Subscription>>
 
     suspend fun getCoursesTeacher(userId: Int): Either<Failure, List<Course>>

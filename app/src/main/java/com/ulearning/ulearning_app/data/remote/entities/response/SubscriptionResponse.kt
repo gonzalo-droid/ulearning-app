@@ -22,6 +22,7 @@ data class SubscriptionResponse(
     @SerializedName("rating") var rating: Any? = null,
     @SerializedName("registered_at") var registeredAt: Any? = null,
     @SerializedName("registered_by") var registeredBy: Int? = 0,
+    @SerializedName("required_hours") var requiredHours: Int? = 0,
     @SerializedName("status") var status: String? = "",
     @SerializedName("suspended_at") var suspendedAt: Any? = null,
     @SerializedName("suspended_by") var suspendedBy: Any? = null,

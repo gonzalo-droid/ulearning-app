@@ -12,45 +12,50 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CourseCompletedViewModel
-    @Inject
-    constructor(
-        private val getCoursesSubscriptionUseCase: GetCoursesSubscriptionUseCase,
-    ) : BaseViewModel<CourseCompletedEvent, CourseCompletedState, HomeEffect>() {
-        private val isFinished = true
+@Inject
+constructor(
+    private val getCoursesSubscriptionUseCase: GetCoursesSubscriptionUseCase,
+) : BaseViewModel<CourseCompletedEvent, CourseCompletedState, HomeEffect>() {
+    private val isFinished = true
 
-        private val page = 1
+    private val page = 1
 
-        var userId = 1
+    var userId = 1
 
-        var typeRole: String = ""
+    var typeRole: String = ""
 
-        override fun createInitialState(): CourseCompletedState {
-            return CourseCompletedState.Idle
-        }
-
-        override fun handleEvent(event: CourseCompletedEvent) {
-            when (event) {
-                CourseCompletedEvent.CourseCompleteClicked -> getCourseCompleted()
-            }
-        }
-
-        private fun getCourseCompleted() {
-            setState { CourseCompletedState.Loading }
-
-            getCoursesSubscriptionUseCase(
-                GetCoursesSubscriptionUseCase.Params(page = page, isFinished = isFinished),
-            ) {
-                it.either(::handleFailure, ::handleCourseCompleted)
-            }
-        }
-
-        private fun handleFailure(failure: Failure) {
-            setEffect { HomeEffect.ShowMessageFailure(failure = failure) }
-        }
-
-        private fun handleCourseCompleted(courses: List<Subscription>) {
-            setState { CourseCompletedState.CourseCompleted(courses = courses) }
-        }
-
-        companion object Events
+    override fun createInitialState(): CourseCompletedState {
+        return CourseCompletedState.Idle
     }
+
+    override fun handleEvent(event: CourseCompletedEvent) {
+        when (event) {
+            CourseCompletedEvent.CourseCompleteClicked -> getCourseCompleted()
+        }
+    }
+
+    private fun getCourseCompleted() {
+        setState { CourseCompletedState.Loading }
+
+        getCoursesSubscriptionUseCase(
+            GetCoursesSubscriptionUseCase.Params(
+                page = page,
+                isFinished = isFinished,
+                classification = "course",
+                notInLearningPackage = true
+            ),
+        ) {
+            it.either(::handleFailure, ::handleCourseCompleted)
+        }
+    }
+
+    private fun handleFailure(failure: Failure) {
+        setEffect { HomeEffect.ShowMessageFailure(failure = failure) }
+    }
+
+    private fun handleCourseCompleted(courses: List<Subscription>) {
+        setState { CourseCompletedState.CourseCompleted(courses = courses) }
+    }
+
+    companion object Events
+}

@@ -31,7 +31,7 @@ data class Course(
     var ratingAverage: Int? = 0,
     var ratingCount: Int? = 0,
     var record: Boolean? = false,
-    var selfStudyHour: String? = "",
+    var selfStudyHour: Int? = 0,
     var slug: String? = "",
     var studentsCount: Int? = 0,
     var syllabusLink: String? = "",

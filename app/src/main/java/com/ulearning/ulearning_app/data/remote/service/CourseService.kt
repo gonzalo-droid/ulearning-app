@@ -25,6 +25,8 @@ interface CourseService {
         perPage: Int,
         page: Int,
         isFinished: Boolean,
+        classification: String,
+        notInLearningPackage: Boolean,
     ): Either<Failure, List<SubscriptionResponse>>
 
     suspend fun coursesTeacher(
