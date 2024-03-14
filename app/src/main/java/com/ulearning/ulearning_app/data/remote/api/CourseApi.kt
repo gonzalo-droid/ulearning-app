@@ -33,7 +33,7 @@ interface CourseApi {
     suspend fun learningPackage(
         @Header(SettingRemote.AUTHORIZATION) token: String,
         @Path("learningPackageId") learningPackageId: Int,
-        @Query("includes") includes: String = "learning_package,learning_package_items,course",
+        @Query("includes") includes: String = "learning_package,learning_package_items,course,course_ids_by_learning_package",
     ): Response<BaseResponse<SubscriptionResponse>>
 
     @GET("courses")

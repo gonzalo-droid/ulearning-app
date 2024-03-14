@@ -13,4 +13,5 @@ data class LearningPackageResponse(
     @SerializedName("title") val title: String?,
     @SerializedName("type") val type: String?,
     @SerializedName("items") val items: List<LearningPackageItemResponse>?,
+    @SerializedName("required_hours") var requiredHours: Int? = 0,
 )

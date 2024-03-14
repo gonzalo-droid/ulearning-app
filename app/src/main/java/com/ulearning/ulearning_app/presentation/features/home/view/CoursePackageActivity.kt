@@ -152,6 +152,9 @@ class CoursePackageActivity :
             initTabLayout(course.learningPackage!!, percentages?.let { ArrayList(it) })
 
             calculatePercentage(percentages)
+
+            binding.percentageText.text = "$percentage %"
+            binding.progressBar.progress = percentage.toInt()
         }
     }
 
@@ -177,18 +180,15 @@ class CoursePackageActivity :
         }
         percentage /= courseIds.size
 
-
-        binding.percentageText.text = "$percentage %"
-        binding.progressBar.progress = percentage.toInt()
     }
 
     private fun calculateCourseAdvances(
         courseAdvances: List<CoursePercentage>,
         courseIdsWithRequired: MutableList<CourseInfo>
     ): Int {
-        var requiredHoursCompleted = 0
-        var optionalHoursCompleted = 0
-        var requiredHoursToComplete = 0
+        var requiredHoursCompleted = 0.0
+        var optionalHoursCompleted = 0.0
+        var requiredHoursToComplete = 0.0
         val requiredHours = learningPackage.requiredHours ?: 0
 
         courseIdsWithRequired.forEach { course ->
@@ -200,10 +200,11 @@ class CoursePackageActivity :
         for (advance in courseAdvances) {
             val course = courseIdsWithRequired.find { it.courseId == advance.courseId }
             if (course != null) {
+                val factor = advance.percentage.toDouble() / 100
                 if (course.isRequired) {
-                    requiredHoursCompleted += course.selfStudyHour
+                    requiredHoursCompleted += course.selfStudyHour * factor
                 } else {
-                    optionalHoursCompleted += course.selfStudyHour
+                    optionalHoursCompleted += course.selfStudyHour * factor
                 }
             }
         }
@@ -211,12 +212,12 @@ class CoursePackageActivity :
         var percentageAdvance = 0.0
         val totalHoursCompleted = requiredHoursCompleted + optionalHoursCompleted
         var residualHours = requiredHours - requiredHoursCompleted
-        if (residualHours < 0) residualHours = 0
+        if (residualHours < 0) residualHours = 0.0
 
         percentageAdvance = if (requiredHoursToComplete == requiredHoursCompleted || requiredHours == 0) {
-            (totalHoursCompleted.toDouble() / requiredHours) * 100
+            (totalHoursCompleted / requiredHours) * 100
         } else {
-            (requiredHoursCompleted.toDouble() / requiredHours) * 100
+            (requiredHoursCompleted / requiredHours) * 100
         }
         if (percentageAdvance > 100) percentageAdvance = 100.0
 

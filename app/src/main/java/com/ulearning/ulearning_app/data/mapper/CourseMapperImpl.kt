@@ -128,7 +128,7 @@ class CourseMapperImpl : CourseMapper {
                     },
                     title = it.learningPackage?.title,
                     type = it.learningPackage?.type,
-                    requiredHours = it.requiredHours,
+                    requiredHours = it.learningPackage?.requiredHours,
                     items =
                     it.learningPackage?.items?.let { items ->
                         listCoursePackageItemToDomain(items)
@@ -247,7 +247,7 @@ class CourseMapperImpl : CourseMapper {
                             )
                         },
                         title = it.learningPackage.title,
-                        requiredHours = it.requiredHours,
+                        requiredHours = it.learningPackage.requiredHours,
                         type = it.learningPackage.type,
                     )
                 },
