@@ -46,8 +46,8 @@ class CoursePackageItemAdapter(
             val valueString = if (value) coursePercentage?.percentage!! else "0"
             val valueInt = if (value) coursePercentage?.percentage?.toDouble()!!.toInt() else 0
 
-            binding.progressSnackBar.progress = valueInt
-            binding.percentageText.text = "$valueString %"
+            binding.progressSnackBar.visibility = View.GONE
+            binding.percentageText.visibility = View.GONE
 
             binding.requiredText.visibility = if (model.isRequired) View.VISIBLE else View.GONE
 
